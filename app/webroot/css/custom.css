@@ -1,0 +1,57 @@
+.spacer{
+    height: 12px;
+    width: 100%;
+}
+
+.logo-wrapper{
+    width: 100%;
+    text-align: center;
+    margin: 24px 0px;
+}
+
+.logo-wrapper h2{
+    display: inline;
+    vertical-align: bottom;
+    color: #717171;
+    margin-left: -12px;
+}
+
+.form-group{
+    margin:6px 0px;
+}
+
+.fullwidth{
+    width: 100%;
+}
+.well h2{
+    border-bottom: 1px solid #e3e3e3;
+    margin: 0px 0px 12px 0px;
+    padding-bottom: 12px;
+}
+
+.menu{
+    list-style-type: none;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.menuitem{
+    display: inline;
+    color: #fff;
+    text-transform: uppercase;
+    margin-left: 25px;
+}
+
+.menuitem a, .menuitem a:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.glyphcontrol{
+    font-size: 24px;
+}
+
+.first{
+    margin-top: 0px;
+}

@@ -1,0 +1,77 @@
+.null{
+    width: 100%;
+    margin: 0px;
+}
+header{
+    height: 60px;
+    padding: 12px;
+    margin: 0px 0px 24px 0px;
+    background-color: #428bca;
+}
+.input-group-addon{
+	width: 100px;
+} 
+
+.spaced{
+	margin: 3px 0px;
+}
+
+.flat{
+	border: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important; 
+}
+
+.darker{
+    background-color: #e7e7e7;
+}
+.profile{
+	height: 24px;
+}
+
+.emphasis{
+    text-align: center;
+}
+
+.emphasis h3{
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+.aligned-right{
+    text-align: right;
+}
+
+.aligned-center{
+    text-align: center;
+}
+
+.title, .title h1{
+    margin: 0px;
+    font-size: 24px;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title:hover{
+    text-decoration: none;
+}
+
+.maxed{
+    max-width: 150px;
+}
+
+.tripled{
+    max-width: 30%;
+}
+
+.inline{
+    display: inline;
+}
+
+.right{
+    text-align: right;
+}
+
