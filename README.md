@@ -19,3 +19,4 @@ I am going to create a CakePHP plugin for UiTID OAuth, but if you would like to 
 vendors folder into your project and you need to copy the app/Controller/UsersController.php. These will help you implement
 login by UiTID.
 
+If you want to read a walkthrough on how to configure UiTID for your CakePHP install, you can [read my blogpost](http://nielsvermaut.eu/using-uitid-oauth-to-login-in-cakephp/) about it.
