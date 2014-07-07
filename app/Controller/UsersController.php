@@ -1,10 +1,11 @@
 <?php
+App::import('Vendor', 'OAuth/OAuthClient');
 class UsersController extends AppController {
-
+    public $uses = array('User', 'Employee');
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('add', 'logout');
+        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled');
     }
 
     public function login() {
@@ -14,7 +15,7 @@ class UsersController extends AppController {
         }
         else {if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-               return $this->redirect(array('controller' => 'verlofs'));
+               return $this->redirect(array('controller' => 'CalendarItems'));
             }
             $this->Session->setFlash(__('Invalid username or password, try again'));
         }
@@ -22,6 +23,7 @@ class UsersController extends AppController {
     }
 
     public function logout() {
+        $this->Session->destroy();
         return $this->redirect($this->Auth->logout());
     }
 
@@ -35,28 +37,23 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        $this->set('user', $this->User->read(null, $id));
-        $this->set('users', $this->User->find('all', array('fields' => array('id', 'email', 'name', 'surname', 'group'), 'order' => 'User.id ASC', 'group' => 'User.id')));
+        //$this->set('user', $this->User->read(null, $id));
+        //$this->set('users', $this->User->find('all', array('fields' => array('id', 'email', 'name', 'surname', 'group'), 'order' => 'User.id ASC', 'group' => 'User.id')));
 
     }
 
     public function add() {
-        $userrole = $this->Session->read('Auth.User.role');
-        if($userrole !== 'admin'){
-            $this->Session->setFlash(__('You are not allowed to create new users!'));
-            return $this->redirect(array('controller' => 'users', 'action' => 'login'));
-        } else {
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
-                    return $this->redirect(array('action' => 'index'));
+                    var_dump();
+                    //$this->Session->setFlash(__('The user has been saved'));
+                    //return $this->redirect(array('action' => 'index'));
                 }
                 $this->Session->setFlash(
                     __('The user could not be saved. Please, try again.')
                 );
             }
-       }
     }
 
     public function edit($id = null) {
@@ -93,6 +90,68 @@ class UsersController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
+    public function uitid() {
+        $client = $this->createClient();
+        $requestToken = $client->getRequestToken('http://acc.uitid.be/uitid/rest/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
+        if ($requestToken) {
+            $this->Session->write('uitid_request_token', $requestToken);
+            $this->redirect('http://acc.uitid.be/uitid/rest/auth/authorize?oauth_token=' . $requestToken->key);
+        } else {
+
+        }
+    }
+
+    public function callback() {
+        $requestToken = $this->Session->read('uitid_request_token');
+        $client = $this->createClient();
+        $accessToken = $client->getAccessToken('http://acc.uitid.be/uitid/rest/accessToken', $requestToken);
+        if ($accessToken) {
+            $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
+            if(!empty($user)){
+                $this->Auth->login($user['User']['id']);
+                $employee = $this->Employee->find('first',
+                    array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
+                        'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.username', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser')
+                         ));
+                $this->Session->write('Auth.Employee', $employee);
+               $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+            } else {
+                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => $accessToken->userId));
+            }
+        }
+    }
+
+    public function error(){
+        //$this->layout = 'login';
+
+    }
 
 
+    private function createClient() {
+        return new OAuthClient('76163fc774cb42246d9de37cadeece8a', 'fff975c5a8c7ba19ce92969c1879b211');
+    }
+
+    public function associate(){
+        if($this->request->is('post')){
+            $this->User->create();
+            $incomingData = $this->request->data;
+            $newAssociation["User"]["employee_id"] = $incomingData["Employee"]["employeeId"];
+            $newAssociation["User"]["email"] = $incomingData["Employee"]["userEmail"];
+            $newAssociation["User"]["uitid"] = $incomingData["Employee"]["uitid"];
+            $newAssociation["User"]["status"] = "requested";
+            $this->User->save($newAssociation);
+            $this->Session->setFlash(__('The user has been saved'));
+            return $this->redirect(array('controller' => 'users', 'action' => 'requestHandled'));
+        }
+    }
+
+    public function requestHandled(){
+        $this->layout = 'login';
+    }
+
+    public function check(){
+        echo '<pre>';
+        var_dump($this->Session->read('Auth.Employee'));
+        echo '</pre>';
+    }
 }

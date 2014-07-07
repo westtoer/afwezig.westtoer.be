@@ -3,8 +3,11 @@ App::uses('AppModel', 'Model');
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 class User extends AppModel {
 
-    public $hasMany = array('Verlof');
-    public $hasOne = array('Acl');
+    public $belongsTo = array(
+        'Employee' => array(
+            'type' => 'INNER'
+        )
+    );
 
     public $validate = array(
     'username' => array(

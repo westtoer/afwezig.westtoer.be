@@ -15,6 +15,15 @@ header{
 .spaced{
 	margin: 3px 0px;
 }
+@media (min-width: 768px) {
+.formspaced-left{
+    padding-right:1px;
+}
+
+.formspaced-right{
+    padding-left: 1px;
+}
+}
 
 .flat{
 	border: none !important;

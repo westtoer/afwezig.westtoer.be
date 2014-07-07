@@ -22,8 +22,8 @@
         <div class="pull-right">
             <ul class="menu">
                 <?php
-                if($this->Session->read('Auth.User.role') == 'admin' or  $this->Session->read('Auth.User.role') == 'steward'){
-                   echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'verlofs', 'action' => 'allow')) . '</li>';
+                if($this->Session->read('Auth.Employee.Role.allow') == 'true'){
+                   echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'CalendarItems', 'action' => 'allow')) . '</li>';
                 }
                 echo '<li class="menuitem">' . $this->Html->link('Uitloggen', array('controller' => 'users', 'action' => 'logout')) . '</li>';
                 ;?>
@@ -31,12 +31,20 @@
         </div></div>
 </header>
 <div class="container">
+    <?php
+    if($this->Session->check('Message.flash')):?>
+    <div class="alert alert-info alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <?php echo $this->Session->flash(); ?>
+    </div>
+
+
+    <?php endif;?>
 
     <?php echo $this->fetch('content'); ?>
 
     <?php
-    if($this->Session->read('Auth.User.role') == 'admin' and isset($this->request->query['sql'])){
+    if(isset($this->request->query['sql'])){
         if($this->request->query['sql'] == true){
         echo $this->element('sql_dump');};
     }
