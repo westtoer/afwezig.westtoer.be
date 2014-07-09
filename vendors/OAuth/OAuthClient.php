@@ -31,6 +31,7 @@ class OAuthClient {
     public function get($accessTokenKey, $accessTokenSecret, $url, array $getData = array()) {
         $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret);
         $request = $this->createRequest('GET', $url, $accessToken, $getData);
+
         return $this->doGet($request->to_url());
     }
 
@@ -39,6 +40,7 @@ class OAuthClient {
         $queryStringParams = OAuthUtil::parse_parameters($_SERVER['QUERY_STRING']);
         $parameters['oauth_verifier'] = $queryStringParams['oauth_verifier'];
         $request = $this->createRequest($httpMethod, $accessTokenURL, $requestToken, $parameters);
+
         return $this->doRequest($request);
     }
 
@@ -164,9 +166,10 @@ class OAuthClient {
         } else {
             $data = $this->doGet($request->to_url());
         }
+
         $response = array();
         parse_str($data->body, $response);
-        return $this->createOAuthToken($response);
 
+        return $this->createOAuthToken($response);
     }
 }

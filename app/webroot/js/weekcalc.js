@@ -7,9 +7,9 @@ function weekcalculate(weekvalue){
     var valueYear = sanitisedweek[0];
     console.log(valueWeek + ' ' + valueYear);
     var start = new Date(firstDayOfWeek(valueWeek,valueYear));
-    var formattedstart = start.getDate() + '-' + start.getMonth() + '-' + start.getFullYear();
+    var formattedstart = start.getDate() + '-' + (start.getMonth() + 1) + '-' + start.getFullYear();
     var stop = start.addDays(6);
-    var formattedstop = stop.getDate() + '-' + stop.getMonth() + '-' + stop.getFullYear();
+    var formattedstop = stop.getDate() + '-' + (stop.getMonth() + 1) + '-' + stop.getFullYear();
     var splitdates = [formattedstart, formattedstop];
     return splitdates;
 

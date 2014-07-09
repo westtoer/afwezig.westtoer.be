@@ -55,3 +55,55 @@
 .first{
     margin-top: 0px;
 }
+
+.centerpiece{
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.hoverable{
+    transition: 1s;
+}
+
+.hoverable:hover{
+    background-color: #92BDE2;
+    transition: 1s;
+    color: #fff;
+}
+
+.closable{
+    width:100%;
+    height: -webkit-fit-content;
+}
+
+.grip{
+    border: 1px solid #e7e7e7;
+    padding: 12px;
+    min-height: 46px;
+    margin-bottom: 12px;
+}
+#button{
+    float:right;
+    cursor:pointer;
+}
+
+.nulled{
+    padding-left: 6px;
+    list-style-type: none;
+}
+
+.letters{
+    margin: 0px auto;
+    width: -webkit-fit-content;
+}
+
+.letters li{
+    display: inline;
+    list-style-type: none;
+    padding: 0px 6px;
+}
+
+.letters li a:hover{
+    text-decoration: none;
+}

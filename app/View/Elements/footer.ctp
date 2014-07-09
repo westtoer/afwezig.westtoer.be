@@ -1,0 +1,1 @@
+<a href="<?php echo $this->base;?>/users/management">Gebruikerspaneel</a>

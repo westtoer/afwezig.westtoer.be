@@ -3,15 +3,12 @@
 <head>
     <?php
     echo $this->Html->css('bootstrap');
-
     echo $this->Html->css('custom');
     echo $this->Html->css('paradigm/horizontal-tables');
     ?>
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+    <?php echo $this->Html->script('bootstrap');?>
 </head>
 <body onload="onbodyload()">
 <header>
@@ -49,6 +46,8 @@
         echo $this->element('sql_dump');};
     }
     ?>
+    <hr />
+    <?php echo $this->element('footer');?>
 </div>
 <?php echo $this->Html->script('bootstrap');?>
 </body>

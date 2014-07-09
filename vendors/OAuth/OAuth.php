@@ -31,7 +31,7 @@ class OAuthToken {
    * key = the token
    * secret = the token secret
    */
-  function __construct($key, $secret, $userId = 0) {
+  function __construct($key, $secret, $userId) {
     $this->key = $key;
     $this->secret = $secret;
     $this->userId = $userId;
@@ -835,7 +835,6 @@ class OAuthUtil {
   public static function parse_parameters( $input ) {
     if (!isset($input) || !$input) return array();
 
-      var_dump($input);
     $pairs = explode('&', $input);
 
     $parsed_parameters = array();

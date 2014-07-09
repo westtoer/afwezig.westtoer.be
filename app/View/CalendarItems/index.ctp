@@ -17,70 +17,74 @@
         };?>
     }
 </script>
+<div class="grip">
+    <div id="button">Sluiten</div>
+    <div class="closable">
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <?php echo $this->element('add-calendaritem'); ?>
+            </div>
+            <div class="col-md-8">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="<?php echo $this->base . '/?user=' . $this->Session->read('Auth.Employee.Employee.id');?>" class="btn btn-primary">Mijn Aanvragen</a>
+                        </div>
+                        <div class="col-md-10 right">
+                            <input type="week" class="form-control tripled inline" onChange="update()" id="weekselect">
+                            <select class="form-control tripled inline" onChange="update()" id="userselect">
+                                <?php
+                                    $x = $this->CalendarItem->selectorAllEmployees($employees, 'html', 1);
+                                    foreach($x as $employeeOption){
+                                        echo $employeeOption;
+                                    }
+                                ;?>
+                            </select>
+                            </select>
+                            <select class="form-control tripled inline" onChange="update()" id="groupselect">
+                               <?php
+                                   $x = $this->CalendarItem->selectorAllEmployeeDepartments($employeeDepartments);
+                                   foreach($x as $typeOption){
+                                       echo $typeOption;
+                                   }
+                               ;?>
+                            </select>
+                        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <?php echo $this->element('add-calendaritem'); ?>
-    </div>
-    <div class="col-md-8">
-        <div class="well">
-            <div class="row">
-                <div class="col-md-2">
-                    <a href="<?php echo $this->base . '/?user=' . $this->Session->read('Auth.User.id');?>" class="btn btn-primary">Mijn Aanvragen</a>
+
+                    </div>
                 </div>
-                <div class="col-md-10 right">
-                    <input type="week" class="form-control tripled inline" onChange="update()" id="weekselect">
-                    <select class="form-control tripled inline" onChange="update()" id="userselect">
-                        <option value="0">Gebruiker</option>
-                        <?php
-                        foreach($employees as $employee){
-                            $option .= '<option value="' .  $employee["Employee"]["id"] . '">' . $employee["Employee"]["name"] .   $employee["Employee"]["surname"].'</option>';
-                        }
-                        echo $option;
-                        unset($option);
-                        ;?>
-                    </select>
-                    </select>
-                    <select class="form-control tripled inline" onChange="update()" id="groupselect">
-                        <option value="0">Groep</option>
-                        <?php
-                        foreach($groups as $group){
-                            $option .= '<option>' . $group["User"]["group"] . '</option>';
-                        }
-                        echo $option;
-                        unset($option);
-                        ;?>
-                    </select>
+                <div class="well">
+                    <h3 class="first">Algemene feestdagen</h3>
+                    <?php if(!empty($CalendarItemsGlobal)){echo $this->CalendarItem->globalCalendarItems($CalendarItemsGlobal);};?>
                 </div>
-
-
             </div>
         </div>
-        <div class="well">Algemene Feestdagen</div>
     </div>
 </div>
+
 <!-- Iterative blocks-->
+<?php if(!empty($CalendarItemsToday)){echo $this->CalendarItem->tableCalendarItems($CalendarItemsToday, 'day', $employees);};?>
 <?php
-
-echo $calendarhtml[0];
-
-
-
-?>
+    if(!empty($CalendarItemsWeek)){
+        echo $this->CalendarItem->tableCalendarItems($CalendarItemsWeek, 'week', $employees);
+    }
+;?>
 
 
-    <?php
-
-
-    echo $calendarhtml[1];
-
-
-
-    ?>
 
 
 <?php echo $this->Html->script('groupselect');?>
 <?php echo $this->Html->script('weekcalc');?>
 <script>
-
+    $("#button").click(function(){
+        if($(this).html() == "Open Controlepaneel"){
+            $(this).html("Sluiten");
+        }
+        else{
+            $(this).html("Open Controlepaneel");
+        }
+        $(".closable").slideToggle();
+    });
 </script>

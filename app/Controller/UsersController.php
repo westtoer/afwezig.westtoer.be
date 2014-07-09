@@ -5,7 +5,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled');
+        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'forceLogin');
     }
 
     public function login() {
@@ -46,7 +46,6 @@ class UsersController extends AppController {
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    var_dump();
                     //$this->Session->setFlash(__('The user has been saved'));
                     //return $this->redirect(array('action' => 'index'));
                 }
@@ -108,13 +107,29 @@ class UsersController extends AppController {
         if ($accessToken) {
             $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
             if(!empty($user)){
-                $this->Auth->login($user['User']['id']);
-                $employee = $this->Employee->find('first',
-                    array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
-                        'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.username', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser')
-                         ));
-                $this->Session->write('Auth.Employee', $employee);
-               $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+                if($user["User"]["status"] == 'active'){
+                    $this->Auth->login($user['User']['id']);
+                    $employee = $this->Employee->find('first',
+                        array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
+                            'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.username', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
+                             ));
+                    $this->Session->write('Auth.Employee', $employee);
+                    $this->Session->write('Auth.User', $user);
+                    //$this->redirect('http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId . '?private=true');
+
+                    //$report = http_get('http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId);
+
+                    //OAUTH TEST
+
+
+
+
+
+
+                    $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+                } else {
+                    $this->redirect(array('action' => 'error'));
+                }
             } else {
                 $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => $accessToken->userId));
             }
@@ -135,10 +150,10 @@ class UsersController extends AppController {
         if($this->request->is('post')){
             $this->User->create();
             $incomingData = $this->request->data;
-            $newAssociation["User"]["employee_id"] = $incomingData["Employee"]["employeeId"];
-            $newAssociation["User"]["email"] = $incomingData["Employee"]["userEmail"];
-            $newAssociation["User"]["uitid"] = $incomingData["Employee"]["uitid"];
-            $newAssociation["User"]["status"] = "requested";
+                $newAssociation["User"]["employee_id"] = $incomingData["Employee"]["employeeId"];
+                $newAssociation["User"]["email"] = $incomingData["Employee"]["userEmail"];
+                $newAssociation["User"]["uitid"] = $incomingData["Employee"]["uitid"];
+                $newAssociation["User"]["status"] = "requested";
             $this->User->save($newAssociation);
             $this->Session->setFlash(__('The user has been saved'));
             return $this->redirect(array('controller' => 'users', 'action' => 'requestHandled'));
@@ -154,4 +169,72 @@ class UsersController extends AppController {
         var_dump($this->Session->read('Auth.Employee'));
         echo '</pre>';
     }
+
+    public function approve($id = null){
+        if(isset($id)){
+            $access = '';
+            if($access == 'verifyuser'){
+                $useraccount = $this->User->findById($id);
+                $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
+
+                if(!empty($useraccount)){
+                    if(!empty($employeeaccount)){
+                        $useraccount["User"]["status"] = 'active';
+                        $employeeaccount["Employee"]["linked"] = 1;
+
+                        //sets the User Role to standard, so people wont register account based on their influence
+                        $employeeaccount["Employee"]["role_id"] = 3;
+
+                        $this->User->save($useraccount);
+                        $this->Employee->save($employeeaccount);
+                    }
+                }
+            }
+        }
+    }
+
+    public function deny($id = null){
+        if(isset($id)){
+            $access = '';
+            if($access == 'verifyuser'){
+                $useraccount = $this->User->findById($id);
+                $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
+
+                if(!empty($useraccount)){
+                    if(!empty($employeeaccount)){
+                        $useraccount["User"]["status"] = 'denied';
+                        $employeeaccount["Employee"]["linked"] = 0;
+                        $this->User->save($useraccount);
+                        $this->Employee->save($employeeaccount);
+                    }
+                }
+            }
+        }
+    }
+
+    public function unlink($id = null){
+        if(isset($id)){
+            $useraccount = $this->User->findById($id);
+            $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
+            if($this->Session->read('Auth.User.User.id') == $useraccount["User"]["id"]){
+                $employeeaccount["Employee"]["linked"] = 0;
+                $this->Employee->save($employeeaccount);
+                $this->User->delete($useraccount);
+                $this->Session->destroy();
+                $this->Session->setFlash('De werknemersgegevens werden losgekoppelt van de aanmeldgegevens');
+                $this->redirect(array('action' => 'login'));
+            } elseif($this->Session->read('Auth.User.Role.edituser') == true){
+
+            }
+        }
+    }
+
+    public function forceLogin($id = null){
+        //THIS NEEDS TO BE DELETED
+        //NOT KIDDING
+
+        $this->Auth->login($id);
+
+        }
+
 }

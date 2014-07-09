@@ -25,10 +25,10 @@
                        </div>
                </div>
         <?php echo $this->Form->input('replacement_id', array('class' => 'form-control spaced', 'label' => false,
-            'options' => $employeesOptions))
+            'options' => $this->CalendarItem->selectorAllEmployees($employees, 'array')))
         ;?>
         <?php echo $this->Form->input('calendar_item_type_id', array('class' => 'form-control spaced', 'label' => false,
-                    'options' => $typesOptions))
+                    'options' => $this->CalendarItem->selectorAllTypes($types, 'array')))
                 ;?>
         <?php echo $this->Form->input('note', array('class' => 'form-control spaced', 'type' => 'textarea', 'label' => false, 'placeholder' => 'Notitie'));?>
         <?php echo $this->Form->hidden('employee_id', array('value' => $this->Session->read('Auth.Employee.Employee.id')));?>

@@ -84,3 +84,14 @@ header{
     text-align: right;
 }
 
+.table tr .name, .table tr .replacement{
+    width: 200px;
+}
+
+.table tr .start, .table tr .end{
+    width: 130px;
+}
+
+.table tr .reason{
+    width: calc(100% - 660px);
+}

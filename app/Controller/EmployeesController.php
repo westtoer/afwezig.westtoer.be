@@ -1,7 +1,8 @@
 <?php
+App::uses('CakeEmail', 'Network/Email');
 class EmployeesController extends AppController {
-
-    public $uses = array('Employee', 'User');
+    public $helpers = array('CalendarItem');
+    public $uses = array('Employee', 'User', 'CalendarItem');
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
@@ -9,35 +10,60 @@ class EmployeesController extends AppController {
     }
 
     public function index() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+        $this->set('employees', $this->Employee->find('all'));
     }
 
     public function view($id = null) {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+        if(isset($this->request->params["named"]["id"])){
+            $id = $this->request->params["named"]["id"];
         }
-        $this->set('user', $this->User->read(null, $id));
-        $this->set('users', $this->User->find('all', array('fields' => array('id', 'email', 'name', 'surname', 'group'), 'order' => 'User.id ASC', 'group' => 'User.id')));
 
+       if($id !== null){
+           $this->set('employees', $this->Employee->find('all', array('fields' => array('id', '3gram', 'name', 'surname', 'employee_department_id'), 'order' => 'Employee.id ASC', 'group' => 'Employee.id')));
+           $this->set('employeeCalendarItems', $this->Employee->CalendarItem->find('all', array('conditions' => array('employee_id' => $id))));
+           $this->set('employee', $this->Employee->findById($id));
+
+           if($this->Session->read('Auth.Employee.Role.edituser') == true){
+
+           } elseif($this->Session->read('Auth.Employee.Employee.id') == $id){
+
+           } else{
+
+           }
+       }
     }
 
-
-
     public function edit($id = null) {
+        $this->set('employee', $this->Employee->findById($id));
+        if($this->Session->read('Auth.Employee.Role.edituser') == true){
 
+        } elseif($this->Session->read('Auth.Employee.Employee.id') == $id){
+
+        } else{
+            $this->Session->setFlash('Je hebt geen rechten om gebruikers aan te passen');
+            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+        }
     }
 
     public function delete($id = null) {
+        $AuthItemController = new AuthItemController();
+        if($this->Session->read('Auth.Employee.Role.removeuser') == true){
+            $employee = $this->Employee->findById($id);
+            $this->User->delete($employee["User"]["id"]);
+            $this->Employee->delete($employee["Employee"]["id"]);
 
+        } else{
+            $this->Session->setFlash('Je hebt geen rechten om gebruikers te verwijderen');
+            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+        }
     }
 
     public function me(){
-
+        $this->redirect(array('action' => 'view', 'id' => $this->Session->read('Auth.Employee.Employee.id')));
     }
 
     public function associate(){
+        if($this->Session->read('Auth.User.User.status') !== "active"){
             if(isset($this->request->params["named"]["uitid"])){
                 if(isset($this->request->params["named"]["assoc"])){
                     $this->redirect(array('controller' => 'employees', 'action' => 'confirmEmail', 'assoc' => $this->request->params["named"]["assoc"], 'uitid' => $this->request->params["named"]["uitid"]));
@@ -49,6 +75,10 @@ class EmployeesController extends AppController {
             } else {
                 $this->redirect(array('controller' => 'users', 'action' => 'error'));
             }
+        } else {
+            $this->Session->setFlash('Je bent al gelinkt met een account');
+            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+        }
     }
 
     public function confirmEmail(){

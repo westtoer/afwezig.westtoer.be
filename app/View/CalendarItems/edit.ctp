@@ -1,30 +1,33 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Verlof Aanvragen</div>
-    <div class="panel-body">
-        <?php
-        foreach($users as $User){
+<div class="row">
+    <div class="col-md-6">
+        <div class="well flat">
+            <h3 class="first centerpiece">Oud</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><?php echo $CalendarItem["Employee"]["name"] . ' ' . $CalendarItem["Employee"]["surname"];?></h4>
+                    <p><?php echo $CalendarItem["CalendarItemType"]["name"];?>: <?php echo $CalendarItem["CalendarItem"]["note"];?><br />
+                    Start: <?php echo $CalendarItem["CalendarItem"]["start_date"] . ' ' . $CalendarItem["CalendarItem"]["start_time"];?><br />
+                    Einde: <?php echo $CalendarItem["CalendarItem"]["end_date"] . ' ' . $CalendarItem["CalendarItem"]["end_time"];?></p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Vervanging</h4>
+                    <p>
+                        <?php
+                        $replacement = $this->CalendarItem->replacementToName($CalendarItem["CalendarItem"]["replacement_id"], $employees);
+                        echo '<a href="' . $this->base . '/employees/view/'.$replacement["Employee"]["id"] . '">' .$replacement["Employee"]["name"] . ' ' . $replacement["Employee"]["surname"] .'</a>';
+                        ;?>
+                    </p>
 
-            $options[] = array('name' => $User["User"]["name"] . ' ' . $User["User"]["surname"], 'value' => $User["User"]["id"]);
-        }
-        ?>
-        <?php echo $this->Form->create(null, array(
-            'url' => array('controller' => 'verlofs', 'action' => 'add')
-        ))?>
-        <div class="input-group fullwidth spaced">
-            <span class="input-group-addon">Start</span>
-            <?php echo $this->Form->input('start', array('class' => 'form-control', 'type' => 'datetime-local', 'label' => false));?>
+                    <b>Goedgekeurd?</b>
+                    <p><?php echo $this->CalendarItem->isApproved($CalendarItem["CalendarItem"]["approved"]);?></p>
+                    <b>Vakantiewaarde</b>
+                    <p><?php echo $this->CalendarItem->valueOfCalendarItem($CalendarItem["CalendarItem"]["start_date"], $CalendarItem["CalendarItem"]["start_time"], $CalendarItem["CalendarItem"]["start_time"], $CalendarItem["CalendarItem"]["end_time"]);?></p>
+                </div>
+            </div>
+
         </div>
-        <div class="input-group fullwidth spaced">
-            <span class="input-group-addon">Einde</span>
-            <?php echo $this->Form->input('end', array('class' => 'form-control', 'type' => 'datetime-local', 'label' => false));?>
-        </div>
-        <?php echo $this->Form->input('replacement_id', array('class' => 'form-control spaced', 'label' => false,
-            'options' => $options))
-        ;?>
-        <?php echo $this->Form->input('note', array('class' => 'form-control spaced', 'type' => 'textarea', 'label' => false, 'placeholder' => 'Notitie'));?>
-        <?php echo $this->Form->hidden('user_id', array('value' => $this->Session->read('Auth.User.id')));?>
-        <?php echo $this->Form->hidden('allowed', array('value' => 0));?>
-        <?php echo $this->Form->submit('Vraag mijn verlof aan', array('class' => 'btn btn-primary fullwidth'));?>
-        <?php echo $this->Form->end();?>
+    </div>
+    <div class="col-md-6">
+        <div class="well flat"><h3 class="first centerpiece">Nieuw</h3></div>
     </div>
 </div>
