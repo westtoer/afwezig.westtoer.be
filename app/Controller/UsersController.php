@@ -5,7 +5,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'forceLogin');
+        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin');
     }
 
     public function login() {
@@ -15,7 +15,7 @@ class UsersController extends AppController {
         }
         else {if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-               return $this->redirect(array('controller' => 'CalendarItems'));
+               //return $this->redirect(array('controller' => 'CalendarItems'));
             }
             $this->Session->setFlash(__('Invalid username or password, try again'));
         }
@@ -28,8 +28,7 @@ class UsersController extends AppController {
     }
 
     public function index() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+        $this->set('users', $this->User->find('all'));
     }
 
     public function view($id = null) {
@@ -92,7 +91,7 @@ class UsersController extends AppController {
     public function uitid() {
         $client = $this->createClient();
         $requestToken = $client->getRequestToken('http://acc.uitid.be/uitid/rest/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
-        if ($requestToken) {
+        if (!empty($requestToken)) {
             $this->Session->write('uitid_request_token', $requestToken);
             $this->redirect('http://acc.uitid.be/uitid/rest/auth/authorize?oauth_token=' . $requestToken->key);
         } else {
@@ -113,7 +112,7 @@ class UsersController extends AppController {
                         array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
                             'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.username', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
                              ));
-                    $this->Session->write('Auth.Employee', $employee);
+                    $this->Session->write('Auth', $employee);
                     $this->Session->write('Auth.User', $user);
                     //$this->redirect('http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId . '?private=true');
 
@@ -126,7 +125,7 @@ class UsersController extends AppController {
 
 
 
-                    $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+                    $this->redirect('/');
                 } else {
                     $this->redirect(array('action' => 'error'));
                 }
@@ -229,12 +228,14 @@ class UsersController extends AppController {
         }
     }
 
-    public function forceLogin($id = null){
-        //THIS NEEDS TO BE DELETED
-        //NOT KIDDING
-
-        $this->Auth->login($id);
-
+    public function emergencyLogin(){
+            /*if($this->request->is('post')){
+                $user = $this->request->data;
+                $employee = $this->Employee->findById();
+                if($employee["Employee"]["password"] == decodePasswor()){
+                    //Log user in
+                }
+            }*/
         }
 
 }

@@ -15,15 +15,28 @@ header{
 .spaced{
 	margin: 3px 0px;
 }
-@media (min-width: 768px) {
-.formspaced-left{
-    padding-right:1px;
+@media (min-width: 992px) {
+    .formspaced-left{
+        padding-right:1px;
+    }
+
+    .formspaced-right{
+        padding-left: 1px;
+    }
+
+    .tripled{
+        width: 30%;
+    }
+}
+@media (max-width: 992px) {
+    .tripled{
+        width: 100%;
+        display: block;
+    }
 }
 
-.formspaced-right{
-    padding-left: 1px;
-}
-}
+
+
 
 .flat{
 	border: none !important;
@@ -72,10 +85,6 @@ header{
     max-width: 150px;
 }
 
-.tripled{
-    max-width: 30%;
-}
-
 .inline{
     display: inline;
 }
@@ -94,4 +103,61 @@ header{
 
 .table tr .reason{
     width: calc(100% - 660px);
+}
+
+.week{
+    width: 100%;
+    padding: 6px;
+    border-collapse: separate;
+}
+
+
+.week .titlerow th{
+    padding: 6px;
+    border: 1px solid #e7e7e7;
+    border-right: none;
+    width: 250px;
+}
+
+.week .titlerow th:first-child{
+    border-top-left-radius: 6px;
+}
+
+.week .titlerow th:last-child{
+    border-top-right-radius: 6px;
+    border-right: 1px solid #e7e7e7;
+}
+
+
+.week .am td{
+    border-left: 1px solid #e7e7e7;
+    height: 60px;
+
+}
+
+.week .am td:last-child{
+
+    border-right: 1px solid #e7e7e7;
+}
+
+
+
+.week .pm td{
+    border: 1px solid #e7e7e7;
+    border-right: none;
+    height: 60px;
+
+}
+
+.week .pm td:last-child{
+    border-right: 1px solid #e7e7e7;
+    border-bottom-right-radius: 6px;
+}
+
+.week .pm td:first-child{
+    border-bottom-left-radius: 6px;
+}
+
+.week tr:hover{
+    background-color:#FAFAFA;
 }

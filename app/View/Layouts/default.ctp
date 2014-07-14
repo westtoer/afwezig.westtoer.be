@@ -19,8 +19,8 @@
         <div class="pull-right">
             <ul class="menu">
                 <?php
-                if($this->Session->read('Auth.Employee.Role.allow') == 'true'){
-                   echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'CalendarItems', 'action' => 'allow')) . '</li>';
+                if($this->Session->read('Auth.Role.allow') == 'true'){
+                   echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'Requests', 'action' => 'index')) . '</li>';
                 }
                 echo '<li class="menuitem">' . $this->Html->link('Uitloggen', array('controller' => 'users', 'action' => 'logout')) . '</li>';
                 ;?>

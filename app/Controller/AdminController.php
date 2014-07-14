@@ -35,10 +35,10 @@ class AdminController extends AppController {
     }
     //Admin section for Calendar Items
     public function viewPendingCalendarItems(){
-        $this->set('toBeAllowed', $this->Employee->CalendarItem->find('all', array('conditions' => array(
+       /* $this->set('toBeAllowed', $this->Employee->CalendarItem->find('all', array('conditions' => array(
             'CalendarItem.approved' => 0,
             'CalendarItem.start_date >=' => date('Y-m-d')
-        ))));
+        ))));*/
         $this->set('employees', $this->Employee->find('all'));
     }
 

@@ -11,8 +11,8 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <a href="/CalendarItems/approve/<?php echo $query['CalendarItem']['id'];?>" class="btn btn-success fullwidth spaced">Goedkeuren</a>
-                    <a href="/CalendarItems/approve/<?php echo $query['CalendarItem']['id'];?>" class="btn btn-danger fullwidth spaced">Weigeren</a>
+                    <a href="<?php echo $this->base;?>/CalendarItems/approve/<?php echo $query['CalendarItem']['id'];?>" class="btn btn-success fullwidth spaced">Goedkeuren</a>
+                    <a href="<?php echo $this->base;?>/CalendarItems/approve/<?php echo $query['CalendarItem']['id'];?>" class="btn btn-danger fullwidth spaced">Weigeren</a>
                 </div>
             </div>
         </div>

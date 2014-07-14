@@ -96,12 +96,14 @@
 .letters{
     margin: 0px auto;
     width: -webkit-fit-content;
+    padding: 0;
 }
 
 .letters li{
     display: inline;
     list-style-type: none;
     padding: 0px 6px;
+    font-size: 20px !important;
 }
 
 .letters li a:hover{

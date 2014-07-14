@@ -21,7 +21,7 @@
                     <b>Goedgekeurd?</b>
                     <p><?php echo $this->CalendarItem->isApproved($CalendarItem["CalendarItem"]["approved"]);?></p>
                     <b>Vakantiewaarde</b>
-                    <p><?php echo $this->CalendarItem->valueOfCalendarItem($CalendarItem["CalendarItem"]["start_date"], $CalendarItem["CalendarItem"]["start_time"], $CalendarItem["CalendarItem"]["start_time"], $CalendarItem["CalendarItem"]["end_time"]);?></p>
+                    <p><?php echo $CalendarItem["CalendarItem"]["calculatedDays"];?> dagen</p>
                 </div>
             </div>
 

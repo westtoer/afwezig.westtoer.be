@@ -1,8 +1,8 @@
 <?php
 App::uses('CakeEmail', 'Network/Email');
 class EmployeesController extends AppController {
-    public $helpers = array('CalendarItem');
-    public $uses = array('Employee', 'User', 'CalendarItem');
+    public $helpers = array('Request');
+    public $uses = array('Employee', 'User', 'Request');
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
@@ -10,7 +10,7 @@ class EmployeesController extends AppController {
     }
 
     public function index() {
-        $this->set('employees', $this->Employee->find('all'));
+        $this->set('employees', $this->Employee->find('all', array('order' => 'Employee.surname DESC')));
     }
 
     public function view($id = null) {
@@ -19,8 +19,7 @@ class EmployeesController extends AppController {
         }
 
        if($id !== null){
-           $this->set('employees', $this->Employee->find('all', array('fields' => array('id', '3gram', 'name', 'surname', 'employee_department_id'), 'order' => 'Employee.id ASC', 'group' => 'Employee.id')));
-           $this->set('employeeCalendarItems', $this->Employee->CalendarItem->find('all', array('conditions' => array('employee_id' => $id))));
+           $this->set('requests', $this->Request->find('all', array('conditions' => array('employee_id' => $id))));
            $this->set('employee', $this->Employee->findById($id));
 
            if($this->Session->read('Auth.Employee.Role.edituser') == true){
@@ -41,7 +40,7 @@ class EmployeesController extends AppController {
 
         } else{
             $this->Session->setFlash('Je hebt geen rechten om gebruikers aan te passen');
-            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+            //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
         }
     }
 
@@ -54,7 +53,7 @@ class EmployeesController extends AppController {
 
         } else{
             $this->Session->setFlash('Je hebt geen rechten om gebruikers te verwijderen');
-            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+            //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
         }
     }
 
@@ -77,11 +76,15 @@ class EmployeesController extends AppController {
             }
         } else {
             $this->Session->setFlash('Je bent al gelinkt met een account');
-            $this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
+            //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
         }
     }
 
     public function confirmEmail(){
+
+    }
+
+    public function calendar(){
 
     }
 }

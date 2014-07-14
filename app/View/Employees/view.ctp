@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-9">
         <?php
-            echo $this->CalendarItem->tableCalendarItems($employeeCalendarItems, 'none', $employees);
+            echo $this->Request->tableRequests($requests);
         ;?>
     </div>
     <div class="col-md-3">
