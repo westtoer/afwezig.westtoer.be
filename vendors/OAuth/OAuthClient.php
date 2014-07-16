@@ -29,7 +29,7 @@ class OAuthClient {
      * Call API with a GET request. Returns either false on failure or an HttpResponse object.
      */
     public function get($accessTokenKey, $accessTokenSecret, $url, array $getData = array()) {
-        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret);
+        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret, '');
         $request = $this->createRequest('GET', $url, $accessToken, $getData);
 
         return $this->doGet($request->to_url());
@@ -41,7 +41,7 @@ class OAuthClient {
         $parameters['oauth_verifier'] = $queryStringParams['oauth_verifier'];
         $request = $this->createRequest($httpMethod, $accessTokenURL, $requestToken, $parameters);
 
-        return $this->doRequest($request);
+        return $this->getToken($request);
     }
 
     /**
@@ -54,9 +54,9 @@ class OAuthClient {
     /**
      * @param $requestTokenURL
      * @param $callback An absolute URL to which the server will redirect the resource owner back when the Resource Owner
-     *                  Authorization step is completed. If the client is unable to receive callbacks or a callback URL 
-     *                  has been established via other means, the parameter value MUST be set to oob (case sensitive), to 
-     *                  indicate an out-of-band configuration. Section 2.1 from http://tools.ietf.org/html/rfc5849
+     * Authorization step is completed. If the client is unable to receive callbacks or a callback URL
+     * has been established via other means, the parameter value MUST be set to oob (case sensitive), to
+     * indicate an out-of-band configuration. Section 2.1 from http://tools.ietf.org/html/rfc5849
      * @param $httpMethod 'POST' or 'GET'
      * @param $parameters
      */
@@ -65,14 +65,14 @@ class OAuthClient {
         $parameters['oauth_callback'] = $callback;
         $request = $this->createRequest($httpMethod, $requestTokenURL, null, $parameters);
 
-        return $this->doRequest($request);
+        return $this->getToken($request);
     }
 
     /**
      * Call API with a POST request. Returns either false on failure or an HttpResponse object.
      */
     public function post($accessTokenKey, $accessTokenSecret, $url, array $postData = array()) {
-        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret);
+        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret, '');
         $request = $this->createRequest('POST', $url, $accessToken, $postData);
 
         return $this->doPost($url, $request->to_postdata());
@@ -85,11 +85,34 @@ class OAuthClient {
      * Returns either false on failure or an HttpResponse object.
      */
     public function postMultipartFormData($accessTokenKey, $accessTokenSecret, $url, array $paths, array $postData = array()) {
-        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret);
+        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret, '');
         $request = $this->createRequest('POST', $url, $accessToken, array());
         $authorization = str_replace('Authorization: ', '', $request->to_header());
 
         return $this->doPostMultipartFormData($url, $authorization, $paths, $postData);
+    }
+
+    /**
+     * Call API with authorization header.
+     * $requestOptions array(
+     * 'method' => 'POST',
+     * 'uri' => 'http://example.com/api/',
+     * 'body' => 'some body text'
+     * );
+     */
+    public function request($accessTokenKey, $accessTokenSecret, $accessTokenUserId, array $requestOptions) {
+        if (!array_key_exists('uri', $requestOptions)) throw InvalidArgumentException('Key "uri" expected');
+
+        $defaultOptions = array('method' => 'POST');
+        $options = array_merge($defaultOptions, $requestOptions);
+
+        $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret, $accessTokenUserId);
+        $options['header'] = array('Authorization' => $this->createAuthorizationHeader($accessToken, $options));
+        $socket = new HttpSocket();
+        $result = $socket->request($options);
+        $this->fullResponse = $result;
+
+        return $result;
     }
 
     protected function createOAuthToken(array $response) {
@@ -100,11 +123,18 @@ class OAuthClient {
         return null;
     }
 
+    private function createAuthorizationHeader(OAuthToken $accessToken, array $options) {
+        $options['body'] = '';
+        $request = $this->createRequest($options['method'], $options['uri'], $accessToken, $options['body']);
+
+        return str_replace('Authorization: ', '', $request->to_header());
+    }
+
     private function createConsumer() {
         return new OAuthConsumer($this->consumerKey, $this->consumerSecret);
     }
 
-    private function createRequest($httpMethod, $url, $token, array $parameters) {
+    private function createRequest($httpMethod, $url, $token, $parameters) {
         $consumer = $this->createConsumer();
         $request = OAuthRequest::from_consumer_and_token($consumer, $token, $httpMethod, $url, $parameters);
         $request->sign_request(new OAuthSignatureMethod_HMAC_SHA1(), $consumer, $token);
@@ -150,17 +180,17 @@ class OAuthClient {
 
         $socket = new HttpSocket();
         $result = $socket->request(array('method' => 'POST',
-                                         'uri' => $url,
-                                         'header' => array(
-                                             'Authorization' => $authorization,
-                                             'Content-Type' => "multipart/form-data; boundary={$boundary}"),
-                                         'body' => $body));
+            'uri' => $url,
+            'header' => array(
+                'Authorization' => $authorization,
+                'Content-Type' => "multipart/form-data; boundary={$boundary}"),
+            'body' => $body));
         $this->fullResponse = $result;
 
         return $result;
     }
 
-    private function doRequest($request) {
+    private function getToken($request) {
         if ($request->get_normalized_http_method() == 'POST') {
             $data = $this->doPost($this->url, $request->to_postdata());
         } else {
@@ -171,5 +201,10 @@ class OAuthClient {
         parse_str($data->body, $response);
 
         return $this->createOAuthToken($response);
+    }
+
+    public function processResult($result){
+        $valuable = array('email' => strip_tags(preg_replace('/\s+/', '', $result[3])), 'username' => strip_tags(preg_replace('/\s+/', '', $result[9])), 'locale' => strip_tags(preg_replace('/\s+/', '', $result[12])), 'depiction' => 'http:' . strip_tags(preg_replace('/\s+/', '', $result[26])));
+        return $valuable;
     }
 }

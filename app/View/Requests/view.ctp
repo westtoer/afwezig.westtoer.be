@@ -11,18 +11,18 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <a href="<?php echo $this->base;?>/Requests/approve/<?php echo $query['Request']['id'];?>" class="btn btn-success fullwidth spaced">Goedkeuren</a>
-                    <a href="<?php echo $this->base;?>/Requests/approve/<?php echo $query['Request']['id'];?>" class="btn btn-danger fullwidth spaced">Weigeren</a>
+                    <a href="<?php echo $this->base;?>/Requests/allow/<?php echo $query['Request']['id'];?>" class="btn btn-success fullwidth spaced">Goedkeuren</a>
+                    <a href="<?php echo $this->base;?>/Requests/deny/<?php echo $query['Request']['id'];?>" class="btn btn-danger fullwidth spaced">Weigeren</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="well flat">
-            <h3 class="first">Vorige verlofdagen</h3>
+            <h3 class="first">Vorige verlofaanvragen</h3>
             <ul>
                 <?php foreach($previous as $p):?>
-                <li><?php echo $p["Request"]["start_date"] . ' ' . $p["Request"]["start_time"] . ' - ' . $p["Request"]["end_date"] . ' ' . $p["Request"]["end_time"];?>
+                <li><?php echo $p["CalendarItemType"]["name"] . ': ' . $p["Request"]["start_date"] . ' ' . $p["Request"]["start_time"] . ' - ' . $p["Request"]["end_date"] . ' ' . $p["Request"]["end_time"];?>
                     <?php endforeach;?>
             </ul>
         </div>

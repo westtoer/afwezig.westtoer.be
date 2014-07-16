@@ -3,7 +3,7 @@
     margin: 0px;
 }
 header{
-    height: 60px;
+    min-height: 60px;
     padding: 12px;
     margin: 0px 0px 24px 0px;
     background-color: #428bca;
@@ -32,6 +32,34 @@ header{
     .tripled{
         width: 100%;
         display: block;
+    }
+}
+
+@media (max-width: 690px) {
+    .menuitem{
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .menuitem:first-child{
+        margin-top: 12px;
+    }
+    header .container .pull-left, header .container .pull-right{
+        float: none;
+        width: 100%;
+    }
+
+    .pull-left h1{
+        text-align: center;
+        border-bottom: 1px solid #fff;
+        padding-bottom: 12px;
+    }
+
+    .menu{
+        padding:0;
     }
 }
 
@@ -160,4 +188,15 @@ header{
 
 .week tr:hover{
     background-color:#FAFAFA;
+}
+
+.striped li{
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.striped li:last-child{
+    padding-bottom: 0;
+    border-bottom: none;
 }

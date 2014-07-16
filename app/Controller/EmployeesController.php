@@ -19,7 +19,7 @@ class EmployeesController extends AppController {
         }
 
        if($id !== null){
-           $this->set('requests', $this->Request->find('all', array('conditions' => array('employee_id' => $id))));
+           $this->set('requests', $this->Request->find('all', array('conditions' => array('employee_id' => $id), 'order' => 'Request.timestamp DESC')));
            $this->set('employee', $this->Employee->findById($id));
 
            if($this->Session->read('Auth.Employee.Role.edituser') == true){
@@ -30,18 +30,6 @@ class EmployeesController extends AppController {
 
            }
        }
-    }
-
-    public function edit($id = null) {
-        $this->set('employee', $this->Employee->findById($id));
-        if($this->Session->read('Auth.Employee.Role.edituser') == true){
-
-        } elseif($this->Session->read('Auth.Employee.Employee.id') == $id){
-
-        } else{
-            $this->Session->setFlash('Je hebt geen rechten om gebruikers aan te passen');
-            //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
-        }
     }
 
     public function delete($id = null) {
@@ -65,10 +53,10 @@ class EmployeesController extends AppController {
         if($this->Session->read('Auth.User.User.status') !== "active"){
             if(isset($this->request->params["named"]["uitid"])){
                 if(isset($this->request->params["named"]["assoc"])){
-                    $this->redirect(array('controller' => 'employees', 'action' => 'confirmEmail', 'assoc' => $this->request->params["named"]["assoc"], 'uitid' => $this->request->params["named"]["uitid"]));
+                    $this->redirect(array('controller' => 'employees', 'action' => 'confirmEmail', 'assoc' => $this->request->params["named"]["assoc"], 'uitid' => $this->request->params["named"]["uitid"], 'email' => $this->request->params["named"]["email"]));
                 } else {
                     $unknownUitId = $this->request->params["named"]["uitid"];
-                    $nonActiveEmployees = $this->Employee->find('all', array('conditions' => array('linked' => 0)));
+                    $nonActiveEmployees = $this->Employee->find('all', array('conditions' => array('Employee.id <>' => 4)));
                     $this->set('nonActiveEmployees', $nonActiveEmployees);
                 }
             } else {
@@ -86,5 +74,26 @@ class EmployeesController extends AppController {
 
     public function calendar(){
 
+    }
+
+    public function edit(){
+        if($this->request->is('post')){
+            $employeeRequested = $this->request->data;
+            var_dump($employeeRequested);
+            if($this->Session->read('Auth.Employee.id') !== $employeeRequested["Employee"]["id"]){
+                if($this->Session->read('Auth.Role.adminpanel') !== true){
+
+                } else {
+                    $this->Session->setFlash('Je mag een andere gebruiker niet aanpassen! Alle illegale activiteit wordt gerapporteerd.');
+                    $this->redirect('/');
+                }
+            } else { // The user is updating his information
+                $employee = $this->Employee->findById($employeeRequested["Employee"]["id"]);
+                $employee["Employee"]["note"] = $employeeRequested["Employee"]["note"];
+                $this->Employee->save($employee);
+                $this->Session->setFlash('Je hebt je notitie aangepast.');
+                $this->redirect(array('controller' => 'users', 'action' => 'management'));
+            }
+        }
     }
 }

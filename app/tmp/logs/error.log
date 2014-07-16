@@ -7268,3 +7268,1803 @@ Stack Trace:
 #10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
 #11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #12 {main}
+2014-07-14 19:54:33 Error: Fatal Error (4): syntax error, unexpected '}' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 252]
+2014-07-14 19:54:33 Error: [FatalErrorException] syntax error, unexpected '}'
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 252)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 252, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 252, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-14 20:21:19 Error: Fatal Error (4): syntax error, unexpected ';' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 299]
+2014-07-14 20:21:19 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 299)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 299, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 299, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 08:45:34 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 08:45:44 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 08:46:39 Error: [MissingControllerException] Controller class 152Controller could not be found.
+Exception Attributes: array (
+  'class' => '152Controller',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/152
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-15 08:46:46 Error: [MissingControllerException] Controller class RequestController could not be found.
+Exception Attributes: array (
+  'class' => 'RequestController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/request/152
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-15 08:46:53 Error: [MissingActionException] Action RequestsController::152() could not be found.
+Exception Attributes: array (
+  'controller' => 'RequestsController',
+  'action' => '152',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/152
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:01:13 Error: Fatal Error (4): syntax error, unexpected ';' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 66]
+2014-07-15 09:01:13 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/view/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 66)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 66, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 66, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 09:16:30 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'where clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Employe...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Employe...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Employe...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(Employee), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('first', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(597): Model->find('first', Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(800): DboSource->query('findById', Array, Object(Employee))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(20): Model->__call('findById', Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(20): Employee->findById(Array)
+#10 [internal function]: RequestsController->index()
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#12 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#13 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#14 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#15 {main}
+2014-07-15 09:17:44 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Employee.authoriser_id' in 'where clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Request...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Request...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Request...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(Request), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(27): Model->find('all', Array)
+#7 [internal function]: RequestsController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-15 09:20:14 Error: [MissingActionException] Action RequestsController::overlap() could not be found.
+Exception Attributes: array (
+  'controller' => 'RequestsController',
+  'action' => 'overlap',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/overlap/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:25:34 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:26:03 Error: [MissingActionException] Action RequestsController::approve() could not be found.
+Exception Attributes: array (
+  'controller' => 'RequestsController',
+  'action' => 'approve',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/approve/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:26:43 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'where clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Employe...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Employe...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Employe...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(Employee), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('first', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(597): Model->find('first', Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(800): DboSource->query('findById', Array, Object(Employee))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(216): Model->__call('findById', Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(216): Employee->findById(Array)
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(96): RequestsController->authorize('151', 'allow')
+#11 [internal function]: RequestsController->allow('151')
+#12 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#13 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#14 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#15 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2014-07-15 09:28:24 Error: Fatal Error (1): Call to undefined method RequestsController::setFlash() in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 223]
+2014-07-15 09:28:24 Error: [FatalErrorException] Call to undefined method RequestsController::setFlash()
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 223)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 223, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 223, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 09:29:02 Error: Fatal Error (1): Call to undefined method RequestsController::setFlash() in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 223]
+2014-07-15 09:29:02 Error: [FatalErrorException] Call to undefined method RequestsController::setFlash()
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/151
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 223)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 223, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 223, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 09:31:48 Error: [MissingControllerException] Controller class RequestController could not be found.
+Exception Attributes: array (
+  'class' => 'RequestController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/request/view/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-15 09:39:48 Error: [MissingActionException] Action EmployeesController::³() could not be found.
+Exception Attributes: array (
+  'controller' => 'EmployeesController',
+  'action' => '³',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/%C2%B3
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:39:51 Error: [MissingActionException] Action EmployeesController::1() could not be found.
+Exception Attributes: array (
+  'controller' => 'EmployeesController',
+  'action' => '1',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/1
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:42:06 Error: Fatal Error (4): syntax error, unexpected '=>' (T_DOUBLE_ARROW) in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 27]
+2014-07-15 09:42:06 Error: [FatalErrorException] syntax error, unexpected '=>' (T_DOUBLE_ARROW)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 27)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 27, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 27, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 09:43:09 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 09:43:16 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 10:26:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 251]
+2014-07-15 10:26:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 10:27:07 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 251]
+2014-07-15 10:27:07 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 10:27:26 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 251]
+2014-07-15 10:27:26 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 251, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 10:27:37 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:29:05 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:32:18 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:34:16 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/154
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:36:23 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(207): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-15 10:37:06 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(207): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-15 10:38:03 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(207): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-15 10:42:14 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/162
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:50:14 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/167
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:52:41 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/169
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:55:02 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/170
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:57:10 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/170
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:58:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 10:59:58 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:02:08 Error: Fatal Error (4): syntax error, unexpected ')' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 260]
+2014-07-15 11:02:08 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 260)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 260, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 260, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 11:02:20 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:03:09 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:03:23 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:04:08 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:05:07 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:05:53 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:06:10 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:06:38 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:06:57 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:19:34 Error: Fatal Error (4): syntax error, unexpected '}' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 284]
+2014-07-15 11:19:34 Error: [FatalErrorException] syntax error, unexpected '}'
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 284)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 284, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 284, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 11:19:50 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:20:10 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:21:00 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:21:22 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:21:30 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:22:03 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:22:41 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:23:30 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:24:54 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:25:13 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:25:49 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/171
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:28:31 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/172
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:30:40 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/174
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:33:00 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/176
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:34:33 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/175
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 11:35:28 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/175
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:30:21 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/177
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:40:39 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/178
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:41:09 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/178
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:41:57 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/179
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:42:30 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/179
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:43:02 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/180
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:48:37 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/181
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 12:50:41 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/182
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 13:00:10 Error: [MissingActionException] Action UsersController::management() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'management',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-07-15 13:23:48 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/183
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 13:26:07 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Requests/allow.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/184
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 13:55:55 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/UsersController.php, line 246]
+2014-07-15 13:55:55 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 13:56:10 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/UsersController.php, line 246]
+2014-07-15 13:56:10 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 13:56:11 Error: Fatal Error (1): Call to a member function find() on a non-object in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/UsersController.php, line 246]
+2014-07-15 13:56:11 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', '/opt/lampp/htdo...', 246, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 13:56:23 Error: [MissingHelperException] Helper class RequestsHelper could not be found.
+Exception Attributes: array (
+  'class' => 'RequestsHelper',
+  'plugin' => false,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/management
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(886): HelperCollection->load('Requests', Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(354): View->loadHelpers()
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(1241): View->__construct(Object(UsersController))
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(940): Controller->_getViewObject()
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2014-07-15 14:31:46 Error: Fatal Error (1): Call to undefined method EmployeesController::setFlash() in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/EmployeesController.php, line 86]
+2014-07-15 14:31:46 Error: [FatalErrorException] Call to undefined method EmployeesController::setFlash()
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/edit
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 86)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 86, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 86, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-15 14:32:49 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/edit
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 14:33:43 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/edit
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 14:34:46 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Employees/edit.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/employees/edit
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-15 14:55:35 Error: Fatal Error (1): Call to undefined method RequestsController::setFlash() in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 105]
+2014-07-15 14:55:35 Error: [FatalErrorException] Call to undefined method RequestsController::setFlash()
+Request URL: /westtoer/dev/westtoer-op-verlof/Requests/allow/185
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 105)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 105, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 105, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 08:49:16 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php, line 338]
+2014-07-16 08:49:16 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 338)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 338, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 338, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 08:59:33 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(237): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-16 08:59:46 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(237): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-16 09:01:43 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(237): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-16 09:02:10 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'replacement_id' cannot be null
+Request URL: /westtoer/dev/westtoer-op-verlof/requests/add
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('INSERT INTO `we...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1012): DboSource->execute('INSERT INTO `we...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(1834): DboSource->create(Object(CalendarDay), Array, Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/RequestsController.php(237): Model->save(Array)
+#5 [internal function]: RequestsController->add()
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(RequestsController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(RequestsController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-16 09:34:29 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=9386c8ad650294fab9ded8bff7d9d4b2&oauth_verifier=f33f61cea6e42e19
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:37:33 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=9386c8ad650294fab9ded8bff7d9d4b2&oauth_verifier=f33f61cea6e42e19
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:37:37 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=8ee561fddaf9782e9bb1fc91d517a0d2&oauth_verifier=e6e29e3f3aa3bc71
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:39:57 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=d21be70157edf7aa3381e97724457615&oauth_verifier=b941c0e43479ec7c
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:42:18 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=15e8e32527a02f8715b0b57994af264c&oauth_verifier=12eca79e85b3b83f
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:43:56 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=32e684c842cc0b75d02a71c8d32b04c7&oauth_verifier=4daf3851e683be93
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:44:34 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=fa5d3df8cf059cfa87b4a383b0805e19&oauth_verifier=d788464937610571
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:47:02 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=2b19f14fac13658366ce0e6803b45484&oauth_verifier=f6e9e82c7f447465
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:47:49 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=aefb0092ee022c5622eec276db5ad769&oauth_verifier=64cfd7986a67a631
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:49:32 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=ae43d2aa278bf3d02abb4391a2c42c91&oauth_verifier=87fcdefd1809f5c7
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:50:39 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=1c2fa6048909c7977023f9b63bd4e150&oauth_verifier=2002bc906ebd89bc
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:51:50 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=5f947b0fbf7e71ea473456e1c7524433&oauth_verifier=178f4e4d13465022
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:52:13 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=c4b978937ac7b4e9d54c784154aa36fd&oauth_verifier=935d33fcaf4eaebc
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:54:04 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=a400cc35dbd0a55dde9cf6ce035e5b25&oauth_verifier=af4a726dfa336c51
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:54:37 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=8f46f9efe57b6ed80ee3cfdbd6cf7dc1&oauth_verifier=e38e532b235d5407
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:55:19 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=ecebe704210e33be10d93bcfc3954274&oauth_verifier=12ee61cf61e65c26
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:55:41 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=ecebe704210e33be10d93bcfc3954274&oauth_verifier=12ee61cf61e65c26
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 09:55:47 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=84136f5f669f94db12355593da36f375&oauth_verifier=8f3ba291f80c414b
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:01:23 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=84136f5f669f94db12355593da36f375&oauth_verifier=8f3ba291f80c414b
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:01:28 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=e7eed955c2f789271b4d23c381e92123&oauth_verifier=e2eb08dec6043c16
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:01:51 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=e7eed955c2f789271b4d23c381e92123&oauth_verifier=e2eb08dec6043c16
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:02:02 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=adbf244bf758edb3c9da0a17f97e3ce5&oauth_verifier=191ba2fd886dffd0
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:03:24 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=e024916a3e0f00a2a877b2d349840d83&oauth_verifier=66e8a7cf66f7e214
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:12:12 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=05372b187fb30da36fa3cb9c97d75f00&oauth_verifier=7f4469aa5eedacaf
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:12:36 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=162e60385c5777fc877c3a3da320a9b9&oauth_verifier=46975c824c9fb18c
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:13:34 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=1349ef71d23c2737b43ee879f9a5b9cf&oauth_verifier=39bf69b2e9ab0cad
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:14:17 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=9c680a6ac261add81eda3273c89fc49f&oauth_verifier=779c93caa69983ff
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:15:04 Error: [MissingViewException] View file "/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Users/callback.ctp',
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/users/callback?oauth_token=ce13d205bd77910ebedef6a060d73dbf&oauth_verifier=0ac3447cce12faf3
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-07-16 10:44:21 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Array' in 'where clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/users/unlink/15
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('DELETE `User` F...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/Database/Mysql.php(451): DboSource->execute('DELETE `User` F...')
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2592): Mysql->delete(Object(User), Array)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/UsersController.php(225): Model->delete(Array)
+#5 [internal function]: UsersController->unlink('15')
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-07-16 10:55:56 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Request.cal' in 'order clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Request...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Request...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Request...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(Request), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(14): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 11:06:25 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CalendarDay.CalendarDay.replacement_id' in 'on clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(20): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 11:13:36 Error: Fatal Error (4): syntax error, unexpected '{' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/General/index.ctp, line 27]
+2014-07-16 11:13:36 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 27)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 27, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 27, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 12:13:39 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ';) AS  `CalendarDay__count`, `Replacement`.`id`, `Replacement`.`username`, `Repl' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:14:43 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM calendar_days GROUP BY day_date;) AS  `CalendarDay__count`, `Replacement`.`' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:15:15 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM calendar_days GROUP BY day_date;) AS  `CalendarDay__count`, `Replacement`.`' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:15:37 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM calendar_days;) AS  `CalendarDay__count`, `Replacement`.`id`, `Replacement`' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:15:47 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ';) AS  `CalendarDay__count`, `Replacement`.`id`, `Replacement`.`username`, `Repl' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:16:00 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'CalendarItemType.id' in 'where clause'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:16:51 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COUNT(*)) AS  `CalendarDay__count`, `Replacement`.`id`, `Replacement`.`username`' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:17:00 Error: [PDOException] SQLSTATE[HY000]: General error: 1096 No tables used
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:19:50 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `CalendarDay`.`calendar_item_type_id` <> 9) AS  `CalendarDay__count`, `Rep' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:20:32 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `CalendarDay`.`calendar_item_type_id` <> 9) AS  `CalendarDay__count`, `Rep' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:20:37 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `CalendarDay`.`calendar_item_type_id` <> 9) AS  `CalendarDay__count`, `Rep' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:20:50 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE calendar_item_type_id <> 9) AS  `CalendarDay__count`, `Replacement`.`id`, ' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 12:21:04 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE calendar_item_type_id = 9) AS  `CalendarDay__count`, `Replacement`.`id`, `' at line 1
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(22): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 13:33:30 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'employee_id' in order clause is ambiguous
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Calenda...', Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Calenda...', Array, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Calenda...', false)
+#4 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2905): DboSource->read(Object(CalendarDay), Array)
+#5 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Model/Model.php(2877): Model->_readDataSource('all', Array)
+#6 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php(21): Model->find('all', Array)
+#7 [internal function]: GeneralController->index()
+#8 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(GeneralController), Array)
+#9 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(GeneralController), Object(CakeRequest))
+#11 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-07-16 14:07:28 Error: Fatal Error (4): syntax error, unexpected ')' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Helper/CalendarDayHelper.php, line 10]
+2014-07-16 14:07:28 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:08:23 Error: Fatal Error (4): syntax error, unexpected ')' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Helper/CalendarDayHelper.php, line 10]
+2014-07-16 14:08:23 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:01 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:01 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:06 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:06 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:06 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:06 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:06 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:06 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:19 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:19 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:19 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:19 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:19 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:19 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:38 Error: Fatal Error (64): Cannot use [] for reading in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/Controller/GeneralController.php, line 83]
+2014-07-16 14:11:38 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', '/opt/lampp/htdo...', 83, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-07-16 14:11:47 Error: Fatal Error (4): syntax error, unexpected ')', expecting variable (T_VARIABLE) or '$' in [/opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/View/Helper/CalendarDayHelper.php, line 10]
+2014-07-16 14:11:47 Error: [FatalErrorException] syntax error, unexpected ')', expecting variable (T_VARIABLE) or '$'
+Request URL: /westtoer/dev/westtoer-op-verlof/
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Error/ErrorHandler.php(204): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#2 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 10, Array)
+#3 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/lib/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

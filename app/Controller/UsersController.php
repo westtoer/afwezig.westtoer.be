@@ -1,7 +1,8 @@
 <?php
 App::import('Vendor', 'OAuth/OAuthClient');
 class UsersController extends AppController {
-    public $uses = array('User', 'Employee');
+    public $uses = array('User', 'Employee', 'Request');
+    public $helpers = array('Request');
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
@@ -130,7 +131,10 @@ class UsersController extends AppController {
                     $this->redirect(array('action' => 'error'));
                 }
             } else {
-                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => $accessToken->userId));
+                $result = $client->request($accessToken->key, $accessToken->secret, $accessToken->userId, array('method' => 'GET', 'uri' => 'http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId . '?private=true'));
+                $resultToArray =  preg_split ('/$\R?^/m', $result["body"]);
+                $result = $client->processResult($resultToArray);
+                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($result["email"])));
             }
         }
     }
@@ -150,8 +154,8 @@ class UsersController extends AppController {
             $this->User->create();
             $incomingData = $this->request->data;
                 $newAssociation["User"]["employee_id"] = $incomingData["Employee"]["employeeId"];
-                $newAssociation["User"]["email"] = $incomingData["Employee"]["userEmail"];
-                $newAssociation["User"]["uitid"] = $incomingData["Employee"]["uitid"];
+                $newAssociation["User"]["email"] =base64_decode($incomingData["Employee"]["userEmail"]);
+                $newAssociation["User"]["uitid"] = base64_decode($incomingData["Employee"]["uitid"]);
                 $newAssociation["User"]["status"] = "requested";
             $this->User->save($newAssociation);
             $this->Session->setFlash(__('The user has been saved'));
@@ -214,11 +218,8 @@ class UsersController extends AppController {
     public function unlink($id = null){
         if(isset($id)){
             $useraccount = $this->User->findById($id);
-            $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
             if($this->Session->read('Auth.User.User.id') == $useraccount["User"]["id"]){
-                $employeeaccount["Employee"]["linked"] = 0;
-                $this->Employee->save($employeeaccount);
-                $this->User->delete($useraccount);
+                $this->User->delete($useraccount["User"]["id"]);
                 $this->Session->destroy();
                 $this->Session->setFlash('De werknemersgegevens werden losgekoppelt van de aanmeldgegevens');
                 $this->redirect(array('action' => 'login'));
@@ -238,4 +239,14 @@ class UsersController extends AppController {
             }*/
         }
 
+    public function management(){
+        $currentYear = date("Y");
+        $this->set('linkedUsers', $this->User->find('all', array('conditions' => array(
+            'User.employee_id' => $this->Session->read('Auth.Employee.id')
+        ))));
+        $this->set('requestsVisible', $this->Request->find('all', array('conditions' => array(
+            'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
+            'Request.end_date >' => date('Y-m-d', strtotime($currentYear . '01-01'))
+        ))));
+    }
 }

@@ -14,5 +14,9 @@
                 <li>Email: <?php echo $employee["Employee"]["3gram"];?></li>
             </ul>
         </div>
+        <div class="well flat">
+            <h3 class="first">Notitie</h3>
+            <p><?php echo $employee["Employee"]["note"];?></p>
+        </div>
     </div>
 </div>
