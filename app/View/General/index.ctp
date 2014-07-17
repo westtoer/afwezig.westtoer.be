@@ -19,19 +19,23 @@
                 <h2 class="first">Vandaag</h2>
                 <ul class="list-group">
                 <?php
-                echo $this->General->absenceToList('AM', $absences);
-                echo $this->General->absenceToList('PM', $absences);
-                echo $this->General->absenceToList('Day', $absences);
-
-
-
+                if(!empty($absences)){
+                    echo $this->General->absenceToList('AM', $absences);
+                    echo $this->General->absenceToList('PM', $absences);
+                    echo $this->General->absenceToList('Day', $absences);
+                }
                 ;?>
                 </ul>
             </div>
             <div class="col-md-6">
                 <h2 class="first">Volgende afwezigheid</h2>
                 <div class="well flat">
-                    <p>Uw volgende afwezigheid die is goedgekeurd valt op <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["start_date"])) . ' ' . $nextRequest["Request"]["start_time"];?></strong> en duurt tot <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["end_date"])) . ' ' . $nextRequest["Request"]["end_time"];?></strong></p>
+                    <?php if($nextRequest){;?>
+                        <p>Uw volgende afwezigheid die is goedgekeurd valt op <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["start_date"])) . ' ' . $nextRequest["Request"]["start_time"];?></strong> en duurt tot <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["end_date"])) . ' ' . $nextRequest["Request"]["end_time"];?></strong></p>
+                    <?php }?>
+
+
+
                 </div>
             </div>
         </div>

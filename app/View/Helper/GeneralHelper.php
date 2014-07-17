@@ -5,13 +5,15 @@ class GeneralHelper extends AppHelper{
         $html = '';
         if(array_key_exists($type, $absences)){
             $html = '';
-            foreach($absences[$type] as $calendarDay){
-                $html .= '<li class="list-group-item">';
-                $html .= $calendarDay["Employee"]["name"] . ' ' . $calendarDay["Employee"]["surname"] . $this->typeToPhrase($type);
-                if($calendarDay["Replacement"]["name"] !== ''){
-                    $html .= ' <a href="' .$this->base . '/employees/view' . $calendarDay["Replacement"]["id"] . '">'.$calendarDay["Replacement"]["name"] . ' ' . $calendarDay["Replacement"]["surname"] . '</a> neemt alle taken over.';
+            if(!empty($absences)){
+                foreach($absences[$type] as $calendarDay){
+                    $html .= '<li class="list-group-item">';
+                    $html .= $calendarDay["Employee"]["name"] . ' ' . $calendarDay["Employee"]["surname"] . $this->typeToPhrase($type);
+                    if($calendarDay["Replacement"]["name"] !== ''){
+                        $html .= ' <a href="' .$this->base . '/employees/view' . $calendarDay["Replacement"]["id"] . '">'.$calendarDay["Replacement"]["name"] . ' ' . $calendarDay["Replacement"]["surname"] . '</a> neemt alle taken over.';
+                    }
+                    $html .= '</li>';
                 }
-                $html .= '</li>';
             }
         }
 

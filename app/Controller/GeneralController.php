@@ -62,6 +62,7 @@ class GeneralController extends AppController{
     }
 
     private function setAbsences($absences, $type = 'today'){
+        $absenceTable = array('');
         if($type == 'today'){
             foreach($absences as $key => $absence){
                 $next = false;
