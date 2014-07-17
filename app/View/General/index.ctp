@@ -29,14 +29,23 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h2 class="first">Volgend verlof</h2>
+                <h2 class="first">Volgende afwezigheid</h2>
+                <div class="well flat">
+                    <p>Uw volgende afwezigheid die is goedgekeurd valt op <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["start_date"])) . ' ' . $nextRequest["Request"]["start_time"];?></strong> en duurt tot <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["end_date"])) . ' ' . $nextRequest["Request"]["end_time"];?></strong></p>
+                </div>
             </div>
         </div>
         <hr />
         <?php
         echo $this->CalendarDay->tableCalendarDays($absencesThisWeek);
         ?>
+        <div class="row">
+            <div class="col-md-6"><a href="<?php echo $this->base;?>/?start=<?php echo $navigate["previous"];?>">Vorige week</a></div>
+            <div class="col-md-6 right"><a href="<?php echo $this->base;?>/?start=<?php echo $navigate["next"];?>">Volgende week</a></div>
+        </div>
     </div>
 </div>
 
-<?php var_dump($absencesThisWeek);?>
+
+
+

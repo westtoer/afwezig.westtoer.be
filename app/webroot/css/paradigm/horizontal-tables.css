@@ -159,8 +159,13 @@ header{
 
 .week .am td{
     border-left: 1px solid #e7e7e7;
-    height: 60px;
 
+}
+
+.week tr td .content{
+    width: 100%;
+    padding: 6px;
+    min-height: 60px;
 }
 
 .week .am td:last-child{
@@ -173,8 +178,6 @@ header{
 .week .pm td{
     border: 1px solid #e7e7e7;
     border-right: none;
-    height: 60px;
-
 }
 
 .week .pm td:last-child{
@@ -199,4 +202,13 @@ header{
 .striped li:last-child{
     padding-bottom: 0;
     border-bottom: none;
+}
+
+.week tr td .content .calendarline{
+    background-color: #428BCA;
+    padding: 3px;
+    color: #fff;
+    border-radius: 3px;
+    padding-left: 12px;
+    margin-bottom: 3px;
 }

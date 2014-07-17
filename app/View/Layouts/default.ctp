@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     echo $this->Html->css('bootstrap');
+    echo $this->Html->css('flipclock');
     echo $this->Html->css('custom');
     echo $this->Html->css('paradigm/horizontal-tables');
     ?>
@@ -53,5 +54,6 @@
     <?php echo $this->element('footer');?>
 </div>
 <?php echo $this->Html->script('bootstrap');?>
+<?php echo $this->Html->script('flipclock.min');?>
 </body>
 </html>

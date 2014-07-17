@@ -2,30 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf591ceb-30dd-479e-8c52-8d6bb0480a10" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Helper/GeneralHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Users/management.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/AuthItem.php" afterPath="$PROJECT_DIR$/app/Model/AuthItem.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/CalendarDay.php" afterPath="$PROJECT_DIR$/app/Model/CalendarDay.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/EmployeesController.php" afterPath="$PROJECT_DIR$/app/Controller/EmployeesController.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_default_nl" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/GeneralController.php" afterPath="$PROJECT_DIR$/app/Controller/GeneralController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/OAuth/OAuthClient.php" afterPath="$PROJECT_DIR$/vendors/OAuth/OAuthClient.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/RequestToCalendarDay.php" afterPath="$PROJECT_DIR$/app/Model/RequestToCalendarDay.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/RequestsController.php" afterPath="$PROJECT_DIR$/app/Controller/RequestsController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/UsersController.php" afterPath="$PROJECT_DIR$/app/Controller/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Employees/associate.ctp" afterPath="$PROJECT_DIR$/app/View/Employees/associate.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Employees/calendar.ctp" afterPath="$PROJECT_DIR$/app/View/Employees/calendar.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Employees/confirm_email.ctp" afterPath="$PROJECT_DIR$/app/View/Employees/confirm_email.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Layouts/default.ctp" afterPath="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/logs/error.log" afterPath="$PROJECT_DIR$/app/tmp/logs/error.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" afterPath="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Requests/index.ctp" afterPath="$PROJECT_DIR$/app/View/Requests/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/General/index.ctp" afterPath="$PROJECT_DIR$/app/View/General/index.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Users/management.ctp" afterPath="$PROJECT_DIR$/app/View/Users/management.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_dev_nl" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_dev_nl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_nl" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_nl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_file_map" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_file_map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_method_cache" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_method_cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_auth_items" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_auth_items" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_days" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_days" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_item_types" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_item_types" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employee_departments" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employee_departments" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employees" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employees" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_list" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_list" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_request_to_calendar_days" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_request_to_calendar_days" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_requests" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_requests" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_roles" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_roles" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_users" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_users" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Employees/view.ctp" afterPath="$PROJECT_DIR$/app/View/Employees/view.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Requests/view.ctp" afterPath="$PROJECT_DIR$/app/View/Requests/view.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="westtoer-op-verlof.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,10 +50,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/General/index.ctp">
+      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="36" selection-start="1394" selection-end="1394" vertical-scroll-proportion="-27.333334" vertical-offset="0" max-vertical-offset="846">
+            <state line="27" column="55" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-0.0" vertical-offset="486" max-vertical-offset="918">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="55" selection-start="2563" selection-end="2563" vertical-scroll-proportion="-0.0" vertical-offset="1026" max-vertical-offset="2322">
               <folding />
             </state>
           </provider>
@@ -60,39 +71,25 @@
       <file leaf-file-name="RequestsController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controller/RequestsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="362" column="21" selection-start="18377" selection-end="18377" vertical-scroll-proportion="4.6334624" vertical-offset="1725" max-vertical-offset="7380">
+            <state line="223" column="94" selection-start="13263" selection-end="13263" vertical-scroll-proportion="0.40457258" vertical-offset="3607" max-vertical-offset="7470">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalendarDayHelper.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php">
+      <file leaf-file-name="management.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="14" selection-start="788" selection-end="788" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="522">
-              <folding>
-                <marker date="1405512717975" expanded="true" signature="138:228" placeholder="..." />
-                <marker date="1405512717975" expanded="true" signature="225:228" placeholder="..." />
-                <marker date="1405512717975" expanded="true" signature="773:799" placeholder="..." />
-                <marker date="1405512717975" expanded="true" signature="773:799" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneralController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="0" selection-start="3492" selection-end="3492" vertical-scroll-proportion="-32.11111" vertical-offset="663" max-vertical-offset="1764">
+            <state line="35" column="69" selection-start="1837" selection-end="1837" vertical-scroll-proportion="-23.333334" vertical-offset="0" max-vertical-offset="846">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalendarDaysController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/CalendarDaysController.php">
+      <file leaf-file-name="default.ctp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
+            <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1152">
               <folding />
             </state>
           </provider>
@@ -111,7 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/View/Helper/AdminHelper.php" />
         <option value="$PROJECT_DIR$/app/webroot/js/weekcalc.js" />
         <option value="$PROJECT_DIR$/app/View/CalendarItems/index.ctp" />
         <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
@@ -144,24 +140,25 @@
         <option value="$PROJECT_DIR$/app/View/Helper/UsersHelper.php" />
         <option value="$PROJECT_DIR$/app/View/Helper/UserHelper.php" />
         <option value="$PROJECT_DIR$/app/View/Employees/view.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Users/management.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
         <option value="$PROJECT_DIR$/app/View/Requests/add.ctp" />
         <option value="$PROJECT_DIR$/app/Model/RequestToCalendarDay.php" />
         <option value="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" />
-        <option value="$PROJECT_DIR$/app/Controller/RequestsController.php" />
         <option value="$PROJECT_DIR$/app/View/Employees/associate.ctp" />
         <option value="$PROJECT_DIR$/app/View/Employees/confirm_email.ctp" />
         <option value="$PROJECT_DIR$/vendors/OAuth/OAuthClient.php" />
         <option value="$PROJECT_DIR$/app/Controller/EmployeesController.php" />
-        <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
-        <option value="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" />
         <option value="$PROJECT_DIR$/app/Model/CalendarDay.php" />
         <option value="$PROJECT_DIR$/app/View/Helper/GeneralHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/Employees/calendar.ctp" />
-        <option value="$PROJECT_DIR$/app/View/General/index.ctp" />
         <option value="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" />
+        <option value="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" />
+        <option value="$PROJECT_DIR$/app/View/Employees/calendar.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Users/management.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/GeneralController.php" />
+        <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
+        <option value="$PROJECT_DIR$/app/webroot/css/flipclock.css" />
+        <option value="$PROJECT_DIR$/app/View/General/index.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
+        <option value="$PROJECT_DIR$/app/Controller/RequestsController.php" />
       </list>
     </option>
   </component>
@@ -251,7 +248,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -316,6 +312,94 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="paradigm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="View" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -339,6 +423,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -422,8 +528,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -501,11 +626,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32940108" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -527,14 +652,11 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="55" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="576" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/CalendarItems/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="10" selection-start="0" selection-end="3450" vertical-scroll-proportion="-6.9259257" vertical-offset="677" max-vertical-offset="1728" />
+        <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1152">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/AuthItemController.php">
@@ -586,11 +708,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1656" column="19" selection-start="49487" selection-end="49491" vertical-scroll-proportion="-1.1505595" vertical-offset="30939" max-vertical-offset="67482">
-          <folding>
-            <element signature="e#6#752#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="1656" column="19" selection-start="49487" selection-end="49491" vertical-scroll-proportion="-1.1505595" vertical-offset="30939" max-vertical-offset="67482" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
@@ -665,61 +783,34 @@
         <state line="21" column="6" selection-start="823" selection-end="823" vertical-scroll-proportion="-14.0" vertical-offset="0" max-vertical-offset="486" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="2077" selection-end="2077" vertical-scroll-proportion="-28.0" vertical-offset="0" max-vertical-offset="936" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="72" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1116">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/webroot/css/custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="10" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="2088">
-          <folding />
-        </state>
+        <state line="38" column="10" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="2088" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Request.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="32" selection-start="573" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="414">
-          <folding />
-        </state>
+        <state line="12" column="32" selection-start="573" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="414" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Requests/add.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="50" selection-start="2848" selection-end="2848" vertical-scroll-proportion="-24.11111" vertical-offset="195" max-vertical-offset="1854">
-          <folding />
-        </state>
+        <state line="47" column="50" selection-start="2848" selection-end="2848" vertical-scroll-proportion="-24.11111" vertical-offset="195" max-vertical-offset="1854" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/Employee.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="1" selection-start="170" selection-end="170" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="198">
-          <folding />
-        </state>
+        <state line="5" column="1" selection-start="170" selection-end="170" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="198" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Employees/associate.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="764" selection-end="764" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="234">
-          <folding>
-            <marker date="1405499405303" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1405499405303" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="7" column="14" selection-start="764" selection-end="764" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="234" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Employees/confirm_email.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="932" selection-end="932" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="432">
-          <folding />
-        </state>
+        <state line="14" column="44" selection-start="932" selection-end="932" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="432" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendors/OAuth/OAuthClient.php">
@@ -733,119 +824,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/RequestToCalendarDay.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="1" selection-start="96" selection-end="96" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="180">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="24" selection-start="2842" selection-end="2842" vertical-scroll-proportion="0.0" vertical-offset="2585" max-vertical-offset="3726">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="0" selection-start="9400" selection-end="9400" vertical-scroll-proportion="0.5192878" vertical-offset="3615" max-vertical-offset="4626">
-          <folding>
-            <marker date="1405500535687" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="4" column="1" selection-start="96" selection-end="96" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="180" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/PagesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="10" selection-start="734" selection-end="749" vertical-scroll-proportion="-0.6666667" vertical-offset="36" max-vertical-offset="1188">
-          <folding />
-        </state>
+        <state line="20" column="10" selection-start="734" selection-end="749" vertical-scroll-proportion="-0.6666667" vertical-offset="36" max-vertical-offset="1188" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/CalendarDay.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="165" selection-start="207" selection-end="207" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="162">
-          <folding />
-        </state>
+        <state line="2" column="165" selection-start="207" selection-end="207" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="162" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Employees/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="42" selection-start="303" selection-end="400" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="792">
-          <folding />
-        </state>
+        <state line="11" column="42" selection-start="303" selection-end="400" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="792" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Layouts/calendar.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1051">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Employees/calendar.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1051" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/EmployeesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="35" selection-start="2998" selection-end="2998" vertical-scroll-proportion="-14.777778" vertical-offset="861" max-vertical-offset="1872">
-          <folding />
-        </state>
+        <state line="70" column="35" selection-start="2998" selection-end="2998" vertical-scroll-proportion="-14.777778" vertical-offset="861" max-vertical-offset="1872" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Helper/GeneralHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="298" selection-end="298" vertical-scroll-proportion="0.14243324" vertical-offset="0" max-vertical-offset="1011">
-          <folding />
-        </state>
+        <state line="8" column="52" selection-start="298" selection-end="298" vertical-scroll-proportion="0.14243324" vertical-offset="0" max-vertical-offset="1011" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="2102" selection-end="2102" vertical-scroll-proportion="0.8189911" vertical-offset="0" max-vertical-offset="1584">
+        <state line="46" column="13" selection-start="2102" selection-end="2102" vertical-scroll-proportion="0.8189911" vertical-offset="0" max-vertical-offset="1584" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Employees/calendar.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="283" selection-end="283" vertical-scroll-proportion="0.123046875" vertical-offset="0" max-vertical-offset="1024" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/CalendarDaysController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1074" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1152">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/General/index.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="36" selection-start="1394" selection-end="1394" vertical-scroll-proportion="-27.333334" vertical-offset="0" max-vertical-offset="846">
-          <folding />
-        </state>
+        <state line="33" column="364" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.5744681" vertical-offset="0" max-vertical-offset="1034" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="14" selection-start="788" selection-end="788" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="522">
-          <folding>
-            <marker date="1405512717975" expanded="true" signature="138:228" placeholder="..." />
-            <marker date="1405512717975" expanded="true" signature="225:228" placeholder="..." />
-            <marker date="1405512717975" expanded="true" signature="773:799" placeholder="..." />
-            <marker date="1405512717975" expanded="true" signature="773:799" placeholder="..." />
-          </folding>
+        <state line="49" column="36" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.8529981" vertical-offset="0" max-vertical-offset="1170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="212" column="23" selection-start="3064" selection-end="3064" vertical-scroll-proportion="0.96648043" vertical-offset="2778" max-vertical-offset="3942" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="55" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="16" selection-start="9490" selection-end="9490" vertical-scroll-proportion="3.3326886" vertical-offset="676" max-vertical-offset="4680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="69" selection-start="1837" selection-end="1837" vertical-scroll-proportion="-23.333334" vertical-offset="0" max-vertical-offset="846">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="0" selection-start="3492" selection-end="3492" vertical-scroll-proportion="-32.11111" vertical-offset="663" max-vertical-offset="1764">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CalendarDaysController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1074">
+        <state line="57" column="55" selection-start="2563" selection-end="2563" vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="2322">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/RequestsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="362" column="21" selection-start="18377" selection-end="18377" vertical-scroll-proportion="4.6334624" vertical-offset="1725" max-vertical-offset="7380">
+        <state line="223" column="94" selection-start="13263" selection-end="13263" vertical-scroll-proportion="0.40457258" vertical-offset="3607" max-vertical-offset="7470">
           <folding />
         </state>
       </provider>

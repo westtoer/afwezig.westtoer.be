@@ -7,7 +7,6 @@
             <li><a href="#Users">Aanmeldgegevens</a></li>
             <li><a href="#Profile">Profiel</a></li>
             <li><a href="#Requests">Aanvragen</a></li>
-            <li><a href="#Streams">Stramienen</a></li>
         </ul>
         <hr />
         <h2 class="first" id="Users">Aanmeldgegevens</h2>
@@ -35,10 +34,6 @@
         <h2 id="Requests">Aanvragen</h2>
         <br />
         <?php echo $this->Request->tableRequests($requestsVisible);?>
-
-        <hr />
-        <h2 id="Streams">Stramienen</h2>
-        <p>Stramienen dienen om herhaalde verloftypes zoals Deeltijds Werken in een herhaalde week of maand toe te passen</p>
 
 
 

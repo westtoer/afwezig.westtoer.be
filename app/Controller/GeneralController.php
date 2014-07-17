@@ -25,8 +25,21 @@ class GeneralController extends AppController{
         $this->set('absences', $absences);
 
         //This week's absences
-        $beginWeek = date('Y-m-d', strtotime('this week', time(date('Y-m-d'))));
-        $endWeek = date('Y-m-d', strtotime($beginWeek . ' + 4 Days'));
+        if(isset($this->request->query["start"])){
+            if(date('D', strtotime($this->request->query["start"])) !== 'Mon'){
+                $this->redirect('/');
+            } else {
+                $beginWeek = date('Y-m-d', strtotime($this->request->query["start"]));
+                $endWeek = date('Y-m-d', strtotime($beginWeek . ' + 4 Days'));
+            }
+        } else {
+            $beginWeek = date('Y-m-d', strtotime('this week', time(date('Y-m-d'))));
+            $endWeek = date('Y-m-d', strtotime($beginWeek . ' + 4 Days'));
+        }
+
+        $navigate = array('previous' => date('Y-m-d', strtotime($beginWeek . ' - 7 Days')), 'next' => date('Y-m-d', strtotime($beginWeek . ' + 7 Days')));
+
+        $this->set('navigate', $navigate);
 
         $absencesThisWeek = $this->CalendarDay->find('all', array(
             'conditions' => array(
@@ -38,6 +51,13 @@ class GeneralController extends AppController{
         ));
         $absencesThisWeek = $this->sortOverDay($absencesThisWeek, $beginWeek, $endWeek);
         $this->set('absencesThisWeek', $absencesThisWeek);
+
+        $this->set('nextRequest', $this->Request->find('first', array(
+            'conditions' => array(
+                'AuthItem.authorized' => 1,
+                'Request.start_date >' => date('Y-m-d')
+            ), 'order' => 'Request.start_date ASC'
+        )));
 
     }
 
@@ -78,16 +98,27 @@ class GeneralController extends AppController{
     }
 
     private function sortOverDay($calendarDays, $start, $end){
-        $sorted[date('Y-m-d', strtotime($start))] = '';
-        $sorted[date('Y-m-d', strtotime($start . ' + 1 Day'))] = '';
-        $sorted[date('Y-m-d', strtotime($start . ' + 2 Day'))] = '';
-        $sorted[date('Y-m-d', strtotime($start . ' + 3 Day'))] = '';
-        $sorted[date('Y-m-d', strtotime($end))] = '';
-
+        $range = $this->dateRange($start, $end);
+        foreach($range as $day){
+            $sorted[$day] = array('AM' => '', 'PM' => '');
+        }
         foreach($calendarDays as $calendarDay){
             $sorted[$calendarDay["CalendarDay"]["day_date"]][$calendarDay["CalendarDay"]["day_time"]][] = $calendarDay["Employee"];
         }
         $sorted["range"] = array('start' => $start, 'end' => $end);
         return $sorted;
+    }
+
+    private function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d' ){
+        $dates = '';
+        $current = strtotime( $first );
+        $last = strtotime( $last );
+
+            while( $current <= $last ) {
+                $dates[] = date( $format, $current );
+                $current = strtotime( $step, $current );
+            }
+
+        return $dates;
     }
 }

@@ -141,109 +141,109 @@ class RequestsController extends AppController {
 
                 //Create the request (with an empty AuthItem
                 $this->Request->create();
-                $this->Request->save($request);
+                $savedRequest = $this->Request->save($request);
 
-                //Get the request id
-                $requestId = $this->Request->getLastInsertId();
-
-                //Create auth item
-                $this->AuthItem->create();
-                $AuthItem = array("request_id" => $requestId, "supervisor_id" => $requester["Employee"]["supervisor_id"], "authorized" => 0, "authorization_date" => null);
-                $this->AuthItem->save($AuthItem);
-
-                //Get the auth item id
-                $authItemId = $this->AuthItem->getLastInsertId();
-
-                //Update the request with the auth item id
-                $request = $this->Request->findById($requestId);
-                $request["Request"]["auth_item_id"] = $authItemId;
-                $this->Request->save($request);
-
-                //Fill the CalendarDays
-                $range = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
-
-                $rangeDB = $this->CalendarDay->find('all',
-                    array('conditions' => array(
-                            'CalendarDay.day_date >=' => $request["Request"]["start_date"],
-                            'CalendarDay.day_date <=' => $request["Request"]["end_date"],
-                            'CalendarDay.employee_id' => $this->Session->read('Auth.Employee.id')
-                    ), 'order' => 'CalendarDay.day_date DESC')
-                );
-
-                foreach($rangeDB as $calendarDayRecord){
-                    $calendarDayRecords[$calendarDayRecord["CalendarDay"]["day_date"] . '/' . $calendarDayRecord["CalendarDay"]["day_time"]] = $calendarDayRecord["CalendarDay"];
-                }
-
-                var_dump($range);
-
-                foreach($range as $calendarDay){
-                    //Format the date
-                    $date = explode('/', $calendarDay);
-                    if(!empty($calendarDayRecords)){
-                        if(array_key_exists($calendarDay, $calendarDayRecords)){
-                        //Update
-                            $existingCalendarDay["CalendarDay"] = $calendarDayRecords[$calendarDay];
-
-                            //Create the request to calendar day
-                            $this->RequestToCalendarDay->create();
-                            $requestToCalendarDay = array('request_id' => $requestId, 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $existingCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $authItemId);
-                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                            $insertCalendarDay = array(
-                                'id' => $existingCalendarDay["CalendarDay"]["id"],
-                                'day_date' => $date[0], // Could be removed
-                                'day_time' => $date[1], // Could be removed
-                                'calendar_item_type_id' => $existingCalendarDay["CalendarDay"]["calendar_item_type_id"],
-                                'replacement_id' => $existingCalendarDay["CalendarDay"]["replacement_id"], // Could be removed
-                                'request_to_calendar_days_id' => $savedRequestToCalendarDay["RequestToCalendarDay"]["id"], // Could be removed in Model
-                                'auth_item_id' => $authItemId
+                if(!empty($savedRequest)){
+                    $this->AuthItem->create();
+                    $AuthItem = array("request_id" => $savedRequest["Request"]["id"], "supervisor_id" => $requester["Employee"]["supervisor_id"], "authorized" => 0, "authorization_date" => null);
+                    $savedAuthItem = $this->AuthItem->save($AuthItem);
+                    if(!empty($savedAuthItem)){
+                        //Update the request with the auth item id
+                        $request = $this->Request->findById($savedRequest["Request"]["id"]);
+                        $request["Request"]["auth_item_id"] = $savedAuthItem["AuthItem"]["id"];
+                        $savedRequest = $this->Request->save($request);
+                        if(!$savedRequest["Request"]["auth_item_id"] == 0){
+                            //Range
+                            $range = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
+                            
+                            $rangeDB = $this->CalendarDay->find('all',
+                                array('conditions' => array(
+                                    'CalendarDay.day_date >=' => $request["Request"]["start_date"],
+                                    'CalendarDay.day_date <=' => $request["Request"]["end_date"],
+                                    'CalendarDay.employee_id' => $this->Session->read('Auth.Employee.id')
+                                ), 'order' => 'CalendarDay.day_date DESC')
                             );
-                            $this->CalendarDay->save($insertCalendarDay);
+
+                            if(!empty($range)){
+                                foreach($rangeDB as $calendarDayRecord){
+                                    $calendarDayRecords[$calendarDayRecord["CalendarDay"]["day_date"] . '/' . $calendarDayRecord["CalendarDay"]["day_time"]] = $calendarDayRecord["CalendarDay"];
+                                }
+
+                                foreach($range as $calendarDay){
+                                    //Format the date
+                                    $date = explode('/', $calendarDay);
+                                    if(!empty($calendarDayRecords)){
+                                        if(array_key_exists($calendarDay, $calendarDayRecords)){
+                                            //Update
+                                            $existingCalendarDay["CalendarDay"] = $calendarDayRecords[$calendarDay];
+
+                                            //Create the request to calendar day
+                                            $this->RequestToCalendarDay->create();
+                                            $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $existingCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
+                                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
+                                            $insertCalendarDay = array(
+                                                'id' => $existingCalendarDay["CalendarDay"]["id"],
+                                                'day_date' => $date[0], // Could be removed
+                                                'day_time' => $date[1], // Could be removed
+                                                'calendar_item_type_id' => $existingCalendarDay["CalendarDay"]["calendar_item_type_id"],
+                                                'replacement_id' => $existingCalendarDay["CalendarDay"]["replacement_id"], // Could be removed
+                                                'request_to_calendar_days_id' => $savedRequestToCalendarDay["RequestToCalendarDay"]["id"], // Could be removed in Model
+                                                'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
+                                            );
+                                            $this->CalendarDay->save($insertCalendarDay);
+                                        } else {
+                                            //Create the calendar day
+                                            $calendarDay = array("CalendarDay" => array(
+                                                'employee_id' => $this->Session->read('Auth.Employee.id'),
+                                                'replacement_id' => $request["Request"]["replacement_id"],
+                                                'calendar_item_type_id' => 0,
+                                                'day_date' => $date[0], 'day_time' => $date[1],
+                                                'request_to_calendar_days_id' => 1,
+                                                'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
+
+                                            ));
+                                            $savedCalendarDay = $this->CalendarDay->save($calendarDay);
+
+                                            //Create the request to calendar day
+                                            $this->RequestToCalendarDay->create();
+                                            $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
+                                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
+                                            $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
+                                            $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
+                                            unset($savedCalendarDay);
+                                        }
+                                    } else {
+                                        //Create the calendar day
+                                        $this->CalendarDay->create();
+                                        $calendarDay = array("CalendarDay" => array(
+                                            'employee_id' => $this->Session->read('Auth.Employee.id'),
+                                            'replacement_id' => $request["Request"]["replacement_id"],
+                                            'calendar_item_type_id' => 0,
+                                            'day_date' => $date[0], 'day_time' => $date[1],
+                                            'request_to_calendar_days_id' => 1,
+                                            'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
+
+                                        ));
+                                        $savedCalendarDay = $this->CalendarDay->save($calendarDay);
+
+                                        //Create the request to calendar day
+                                        $this->RequestToCalendarDay->create();
+                                        $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
+                                        $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
+                                        $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
+                                        $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
+                                        unset($savedCalendarDay);
+                                    }
+                                }
+                            }
                         } else {
-                            //Create the calendar day
-                            $this->CalendarDay->create();
-                            $calendarDay = array("CalendarDay" => array(
-                                'employee_id' => $this->Session->read('Auth.Employee.id'),
-                                'replacement_id' => $request["Request"]["replacement_id"],
-                                'calendar_item_type_id' => 0,
-                                'day_date' => $date[0], 'day_time' => $date[1],
-                                'request_to_calendar_days_id' => 1,
-                                'auth_item_id' => $authItemId
-
-                            ));
-                            $savedCalendarDay = $this->CalendarDay->save($calendarDay);
-
-                            //Create the request to calendar day
-                            $this->RequestToCalendarDay->create();
-                            $requestToCalendarDay = array('request_id' => $requestId, 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $authItemId);
-                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                            $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
-                            $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
-                            unset($savedCalendarDay);
+                            $this->Request->delete($savedRequest["Request"]["id"]);
+                            $this->AuthItem->delete($savedAuthItem["AuthItem"]["id"]);
                         }
                     } else {
-                            //Create the calendar day
-                            $this->CalendarDay->create();
-                            $calendarDay = array("CalendarDay" => array(
-                                'employee_id' => $this->Session->read('Auth.Employee.id'),
-                                'replacement_id' => $request["Request"]["replacement_id"],
-                                'calendar_item_type_id' => 0,
-                                'day_date' => $date[0], 'day_time' => $date[1],
-                                'request_to_calendar_days_id' => 1,
-                                'auth_item_id' => $authItemId
-
-                            ));
-                            $savedCalendarDay = $this->CalendarDay->save($calendarDay);
-
-                            //Create the request to calendar day
-                            $this->RequestToCalendarDay->create();
-                            $requestToCalendarDay = array('request_id' => $requestId, 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $authItemId);
-                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                            $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
-                            $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
-                            unset($savedCalendarDay);
-                        }
+                        $this->Request->delete($savedRequest["Request"]["id"]);
                     }
-
+                }
             //End
                 $this->Session->setFlash('Uw aanvraag is ingedient. Uw aanvraag moet enkel nog goedgekeurd worden.');
                 //$this->redirect('/');
@@ -343,8 +343,13 @@ class RequestsController extends AppController {
 
 
                 while( $current <= $last ) {
-                    $dates[] = date( $format, $current );
-                    $current = strtotime( $step, $current );
+                    if(date('D', $current) == 'Sat' or date('D', $current) == 'Sun'){
+                        $current = strtotime( $step, $current );
+                    } else {
+                        $dates[] = date( $format, $current );
+                        $current = strtotime( $step, $current );
+                    }
+
                 }
 
                 foreach($dates as $date){

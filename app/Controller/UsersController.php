@@ -218,13 +218,16 @@ class UsersController extends AppController {
     public function unlink($id = null){
         if(isset($id)){
             $useraccount = $this->User->findById($id);
-            if($this->Session->read('Auth.User.User.id') == $useraccount["User"]["id"]){
+            $employee = $this->Employee->findById($useraccount["Employee"]["id"]);
+            if($this->Session->read('Auth.Employee.id') == $employee["Employee"]["id"]){
                 $this->User->delete($useraccount["User"]["id"]);
                 $this->Session->destroy();
                 $this->Session->setFlash('De werknemersgegevens werden losgekoppelt van de aanmeldgegevens');
                 $this->redirect(array('action' => 'login'));
             } elseif($this->Session->read('Auth.User.Role.edituser') == true){
 
+            } else {
+                $this->redirect('/');
             }
         }
     }
@@ -246,7 +249,7 @@ class UsersController extends AppController {
         ))));
         $this->set('requestsVisible', $this->Request->find('all', array('conditions' => array(
             'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
-            'Request.end_date >' => date('Y-m-d', strtotime($currentYear . '01-01'))
+            'Request.end_date >=' => date('Y-m-d', strtotime($currentYear . '01-01'))
         ))));
     }
 }
