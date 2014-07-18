@@ -1,0 +1,4 @@
+<?php
+    $config["UiTID"]["public"] = '76163fc774cb42246d9de37cadeece8a';
+    $config["UiTID"]["private"] = 'fff975c5a8c7ba19ce92969c1879b211';
+//Ik verander dit om te testen
