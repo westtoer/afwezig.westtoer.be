@@ -8,7 +8,7 @@
             <?php echo $this->Form->hidden('timestamp', array('value' => 0));?>
             <div class="row">
                 <div class="col-md-8 formspaced-left spaced">
-                    <input class="form-control" name="data[Request][start_date]" type="text" value="" id="RequestStartDate">
+                    <input class="form-control" name="data[Request][start_date]" type="text" placeholder="Start" value="" id="RequestStartDate">
                 </div>
                 <div class="col-md-4 formspaced-right spaced">
                     <?php echo $this->Form->input('start_time', array('label' => false, 'class' => 'form-control', 'options' => array(
@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-8 formspaced-left spaced">
-                    <input class="form-control" name="data[Request][end_date]" type="text" value="" id="RequestEndDate">
+                    <input class="form-control" name="data[Request][end_date]" type="text" placeholder="Einde" value="" id="RequestEndDate">
                 </div>
                 <div class="col-md-4 formspaced-right spaced">
                     <?php echo $this->Form->input('end_time',  array('label' => false, 'class' => 'form-control', 'options' => array(
