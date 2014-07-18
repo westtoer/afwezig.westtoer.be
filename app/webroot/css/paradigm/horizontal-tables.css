@@ -204,11 +204,22 @@ header{
     border-bottom: none;
 }
 
-.week tr td .content .calendarline{
+.week tr td .content .calendarline {
     background-color: #428BCA;
     padding: 3px;
     color: #fff;
     border-radius: 3px;
     padding-left: 12px;
     margin-bottom: 3px;
+}
+
+.week tr td .content .red{
+    background-color: #d9534f !important;
+    text-align: center;
+    padding-left: 0;
+}
+
+.week tr td .content .red a, .week tr td .content .red a:hover{
+    color: #fff;
+    text-decoration: none;
 }

@@ -146,7 +146,7 @@ class UsersController extends AppController {
 
 
     private function createClient() {
-        return new OAuthClient('76163fc774cb42246d9de37cadeece8a', 'fff975c5a8c7ba19ce92969c1879b211');
+        return new OAuthClient(Configure::read('UiTID.public'), Configure::read('UiTID.private'));
     }
 
     public function associate(){
