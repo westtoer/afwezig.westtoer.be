@@ -55,6 +55,7 @@ class GeneralController extends AppController{
         $this->set('nextRequest', $this->Request->find('first', array(
             'conditions' => array(
                 'AuthItem.authorized' => 1,
+                'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
                 'Request.start_date >' => date('Y-m-d')
             ), 'order' => 'Request.start_date ASC'
         )));
