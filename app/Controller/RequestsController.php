@@ -400,6 +400,12 @@ class RequestsController extends AppController {
             if($request["Request"]["calendar_item_type_id"] == 0){
                 $error .= "Je hebt geen reden van afwezigheid aangeduidt. <br />";
             }
+            if(date('D', strtotime($request["Request"]["start_date"])) == 'Sat' or date('D', strtotime($request["Request"]["start_date"])) == 'Sun'){
+                $error .= "Je afwezigheid kan niet beginnen in het weekend";
+            }
+            if(date('D', strtotime($request["Request"]["end_date"])) == 'Sat' or date('D', strtotime($request["Request"]["end_date"])) == 'Sun'){
+                $error .= "Je afwezigheid kan niet eindigen in het weekend";
+            }
             if($error !== ''){
                 $error = '<strong>Fout</strong><br />' . $error;
             }
