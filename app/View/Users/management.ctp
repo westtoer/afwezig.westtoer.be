@@ -23,7 +23,16 @@
         ));?>
         <!-- Don't try to be smart, you can't edit this value and expect to update someone elses note -->
         <?php echo $this->Form->hidden('id', array('value' => $this->Session->read('Auth.Employee.id')));?>
-        <?php echo $this->Form->textarea('note', array('value' => $this->Session->read('Auth.Employee.note'), 'class' => 'form-control spaced'));?>
+        <div class="row">
+            <div class="col-md-7 formspaced-left">
+                <?php echo $this->Form->textarea('note', array('value' => $employee["Employee"]["note"], 'class' => 'form-control spaced', 'style' => 'height: 72px;'));?>
+            </div>
+            <div class="col-md-5 formspaced-right">
+                <?php echo $this->Form->input('telephone', array('label' => false,'value' => $employee["Employee"]["telephone"], 'class' => 'form-control spaced', 'placeholder' => 'Uw telefoonnummer'));?>
+                <?php echo $this->Form->input('gsm', array('label' => false, 'value' => $employee["Employee"]["gsm"], 'class' => 'form-control spaced', 'placeholder' => 'Uw gsm nummer'));?>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4 right"><?php echo $this->Form->submit('Opslaan', array('class' => 'btn btn-primary right'));?></div>

@@ -14,7 +14,9 @@ class EmployeesController extends AppController {
     }
 
     public function view($id = null) {
-        if(isset($this->request->params["named"]["id"])){
+        if($id == "me"){
+            $id = $this->Session->read('Auth.Employee.id');
+        } elseif(isset($this->request->params["named"]["id"])){
             $id = $this->request->params["named"]["id"];
         }
 
@@ -90,8 +92,10 @@ class EmployeesController extends AppController {
             } else { // The user is updating his information
                 $employee = $this->Employee->findById($employeeRequested["Employee"]["id"]);
                 $employee["Employee"]["note"] = $employeeRequested["Employee"]["note"];
+                $employee["Employee"]["telephone"] = $employeeRequested["Employee"]["telephone"];
+                $employee["Employee"]["gsm"] = $employeeRequested["Employee"]["gsm"];
                 $this->Employee->save($employee);
-                $this->Session->setFlash('Je hebt je notitie aangepast.');
+                $this->Session->setFlash('Je hebt je gegevens aangepast.');
                 $this->redirect(array('controller' => 'users', 'action' => 'management'));
             }
         }

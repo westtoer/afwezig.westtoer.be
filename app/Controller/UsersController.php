@@ -243,6 +243,7 @@ class UsersController extends AppController {
         }
 
     public function management(){
+        $this->set('employee', $this->Employee->findById($this->Session->read('Auth.Employee.id')));
         $currentYear = date("Y");
         $this->set('linkedUsers', $this->User->find('all', array('conditions' => array(
             'User.employee_id' => $this->Session->read('Auth.Employee.id')
