@@ -111,7 +111,7 @@ class UsersController extends AppController {
                     $this->Auth->login($user['User']['id']);
                     $employee = $this->Employee->find('first',
                         array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
-                            'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.username', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
+                            'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
                              ));
                     $this->Session->write('Auth', $employee);
                     $this->Session->write('Auth.User', $user);

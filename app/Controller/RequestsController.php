@@ -175,10 +175,11 @@ class RequestsController extends AppController {
                                     if(!empty($calendarDayRecords)){
                                         if(array_key_exists($calendarDay, $calendarDayRecords)){
                                             //Update
-                                            $existingCalendarDay["CalendarDay"] = $calendarDayRecords[$calendarDay];
+
 
                                             //Create the request to calendar day
                                             $this->RequestToCalendarDay->create();
+                                            $existingCalendarDay["CalendarDay"] = $calendarDayRecords[$calendarDay];
                                             $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $existingCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
                                             $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
                                             $insertCalendarDay = array(
@@ -203,7 +204,7 @@ class RequestsController extends AppController {
 
                                             ));
                                             $savedCalendarDay = $this->CalendarDay->save($calendarDay);
-
+                                            $savedCalendarDay["CalendarDay"]["id"] = $this->CalendarDay->getLastInsertID();
                                             //Create the request to calendar day
                                             $this->RequestToCalendarDay->create();
                                             $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
