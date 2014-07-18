@@ -18,7 +18,7 @@
 <header>
     <div class="container">
         <div class="pull-left">
-            <a href="<?php echo $this->base;?>" class="title"><h1 >Westtoer Op Verlof</h1></a>
+            <a href="<?php echo $this->webroot;?>" class="title"><h1 >Westtoer Op Verlof</h1></a>
         </div>
         <div class="pull-right">
             <ul class="menu">
