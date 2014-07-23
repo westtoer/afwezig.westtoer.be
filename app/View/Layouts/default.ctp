@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     echo $this->Html->css('bootstrap');
-    echo $this->Html->css('flipclock');
+    echo $this->Html->css('filtergrid');
     echo $this->Html->css('custom');
     echo $this->Html->css('paradigm/horizontal-tables');
     ?>
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
     <?php echo $this->Html->script('bootstrap');?>
+    <?php echo $this->Html->script('tablefilter.js');?>
 </head>
 <body onload="onbodyload()">
 <header>
@@ -23,11 +24,17 @@
         <div class="pull-right">
             <ul class="menu">
                 <?php
+                $employee = $this->Session->read('Auth.Employee');
+                if($this->Session->read('Auth.Role.id') == 1 OR  $this->Session->read('Auth.Role.id') == 2){
+                    echo '<li class="menuitem">' . $this->Html->link('Administratie', array('controller' => 'Admin', 'action' => 'index')) . '</li>';
+                }
                 if($this->Session->read('Auth.Role.allow') == 'true'){
                    echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'Requests', 'action' => 'index')) . '</li>';
                 }
-                echo '<li class="menuitem">' . $this->Html->link('Mijn profiel', array('controller' => 'employees', 'action' => 'view', 'me')) . '</li>';
-                echo '<li class="menuitem">' . $this->Html->link('Uitloggen', array('controller' => 'users', 'action' => 'logout')) . '</li>';
+                if(!empty($employee)){
+                    echo '<li class="menuitem">' . $this->Html->link('Mijn profiel', array('controller' => 'employees', 'action' => 'view', 'me')) . '</li>';
+                    echo '<li class="menuitem">' . $this->Html->link('Uitloggen', array('controller' => 'users', 'action' => 'logout')) . '</li>';
+                }
                 ;?>
             </ul>
         </div></div>
@@ -55,6 +62,5 @@
     <?php echo $this->element('footer');?>
 </div>
 <?php echo $this->Html->script('bootstrap');?>
-<?php echo $this->Html->script('flipclock.min');?>
 </body>
 </html>

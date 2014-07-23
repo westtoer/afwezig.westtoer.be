@@ -6,7 +6,7 @@ class EmployeesController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow();
+        $this->Auth->allow('associate', 'confirmEmail');
     }
 
     public function index() {

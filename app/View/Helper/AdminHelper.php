@@ -1,36 +1,49 @@
 <?php
 class AdminHelper extends AppHelper {
-    public function tableUsers($users){
+    public function tableUsers($users, $type){
         $html = '<table class="table">';
         $html .= '<tr><th>UiTID</th><th>Gekoppelt aan</th><th>Status</th><th>Acties</th></tr><tr>';
         foreach($users as $user){
             $html .= '<td>' . $user["User"]["uitid"] . '</td>';
             $html .= '<td>' . $user["Employee"]["name"] . ' ' . $user["Employee"]["surname"] . '</td>';
             $html .= '<td>' . $this->checkIntegrityStatus($user['User']["status"], $user["Employee"]["linked"]) . '</td>';
-            $html .= '<td>' . '<a href="' . $this->base . '/users/unlink/' . $user["Employee"]["id"] .'">Unlink</a>  |  <a href="' . $this->base . '/employees/view/' . $user["Employee"]["id"] .'">Profiel</a></tr>';
+            if($type == 'active'){
+                $html .= '<td>' . '<a href="' . $this->base . '/users/unlink/' . $user["User"]["id"] .'">Unlink</a>  |  <a href="' . $this->base . '/employees/view/' . $user["Employee"]["id"] .'">Profiel</a></td></tr>';
+            } else if ($type == 'pending'){
+                $html .= '<td>' . '<a href="' . $this->base . '/users/approve/' . $user["User"]["id"] .'">Goedkeuren</a> | '   . '<a href="' . $this->base . '/users/deny/' . $user["User"]["id"] .'">Weigeren</a></td></tr>';
+            } else if ($type == 'denied'){
+                $html .= '<td></td></tr>';
+            }
         }
         $html .= '</table>';
         return $html;
     }
 
-    public function tableCalendarItems($CalendarItems, $employees){
-        $replacement = $this->replacementToName($CalendarItem["CalendarItem"]["replacement_id"], $employees);
+    public function tableRequests($Requests, $actions = 1){
         $html = '<table class="table">';
-        $html .= '<tr><th>Naam</th><th>Start</th><th>Einde</th><th>Type Verlof</th><th>Verlofdagen over</th><th>Vervanger</th><th>Acties</th></tr><tr>';
-        foreach($CalendarItems as $CalendarItem){
-            $html .= '<td>' . $CalendarItem["Employee"]["name"] . ' ' . $CalendarItem["Employee"]["surname"] . '</td>';
-            $html .= '<td>' . $CalendarItem["CalendarItem"]["start_date"] . ' ' . $CalendarItem["CalendarItem"]["start_time"] . '</td>';
-            $html .= '<td>' . $CalendarItem["CalendarItem"]["end_date"] . ' ' . $CalendarItem["CalendarItem"]["end_time"] . '</td>';
-            $html .= '<td>' . $CalendarItem["CalendarItemType"]["name"] . '</td>';
-            $html .= '<td>' . $CalendarItem["Employee"]["daysleft"] . '</td>';
-            $html .= '<td><a href="' . $this->base . '/employees/view/' . $CalendarItem["CalendarItem"]["replacement_id"] . '">' . $replacement["Employee"]["name"] . ' ' . $replacement["Employee"]["surname"] . '</a></td>';
-            $html .= '<td><a href="' . $this->base . '/CalendarItems/allow/' . $CalendarItem["CalendarItem"]["id"] .'">Goedkeuren</a>  |  <a href="' . $this->base . '/CalendarItems/deny/' . $CalendarItem["CalendarItem"]["id"] . '">Weigeren</a>';
+        $html .= '<tr><th>Naam</th><th>Start</th><th>Einde</th><th>Type Verlof</th><th>Verlofdagen over</th>';
+        if($actions == 1){
+            $html .= '<th>Acties</th><th>Vervanger</th>';
+        }
+        $html .= '</tr><tr>';
+        foreach($Requests as $Request){
+            $html .= '<td>' . $Request["Employee"]["name"] . ' ' . $Request["Employee"]["surname"] . '</td>';
+            $html .= '<td>' . $Request["Request"]["start_date"] . ' ' . $Request["Request"]["start_time"] . '</td>';
+            $html .= '<td>' . $Request["Request"]["end_date"] . ' ' . $Request["Request"]["end_time"] . '</td>';
+            $html .= '<td>' . $Request["CalendarItemType"]["name"] . '</td>';
+            $html .= '<td>' . $Request["Employee"]["daysleft"] . '</td>';
+            if($actions == 1){
+                $html .= '<td><a href="' . $this->base . '/employees/view/' . $Request["Request"]["replacement_id"] . '">' . $Request["Replacement"]["name"] . ' ' . $Request["Replacement"]["surname"] . '</a></td>';
+                $html .= '<td><a href="' . $this->base . '/Requests/allow/' . $Request["Request"]["id"] .'">Goedkeuren</a>  |  <a href="' . $this->base . '/Requests/deny/' . $Request["Request"]["id"] . '">Weigeren</a></td></tr>';
+            } else {
+                $html .= '</tr>';
+            }
         }
         $html .= '</table>';
         return $html;
     }
 
-    private function replacementToName($replacementId, $employees){
+    /*private function replacementToName($replacementId, $employees){
         do {
             foreach($employees as $possiblereplacement){
                 if($replacementId == $possiblereplacement['Employee']['id']){
@@ -39,7 +52,7 @@ class AdminHelper extends AppHelper {
             };
         } while(empty($replacement));
         return $replacement;
-    }
+    }*/
 
     private function checkIntegrityStatus($status, $linked){
         $x = '';

@@ -20,9 +20,9 @@ class RequestsController extends AppController {
         $supervisor = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
         if($access["allow"] == true){
             if($supervisor["Role"]["name"] == 'admin'){
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null);
+                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Request.start_date >=' => date('Y-m-d'));
             } else {
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"]);
+                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"], 'Request.start_date >=' => date('Y-m-d'));
             }
             $this->set('requests', $this->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
         }
@@ -102,8 +102,9 @@ class RequestsController extends AppController {
             if(!empty($request)){
                 $this->authorize($id, 'allow');
                 $this->updateRequest($request, 'allow');
-                $this->Session->setFlash('Deze aanvraag is goedgekeurd');
-                $this->redirect('/');
+                var_dump($this->createICS('10', $request["Request"]["start_date"], $request["Request"]["end_date"], $request["CalendarItemType"]["name"], 'http://afwezig.westtoer.be/', "Verlof"));
+                //$this->Session->setFlash('Deze aanvraag is goedgekeurd');
+                //$this->redirect('/');
             }
         } else {
             $this->Session->setFlash('Dit is een ongeldig request.');
@@ -412,5 +413,4 @@ class RequestsController extends AppController {
             }
         return $error;
     }
-
 }

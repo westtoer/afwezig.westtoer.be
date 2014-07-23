@@ -95,8 +95,10 @@ Configure::write('Dispatcher.filters', array(
 /**
  * Configures default file logging options
  */
+
+
 App::uses('CakeLog', 'Log');
-Configure::load('UiTID')
+Configure::load('UiTID');
 CakeLog::config('debug', array(
 	'engine' => 'File',
 	'types' => array('notice', 'info', 'debug'),
@@ -107,3 +109,5 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+CakePlugin::loadAll();

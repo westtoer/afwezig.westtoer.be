@@ -2,6 +2,12 @@
 App::uses('AppController', 'Controller');
 class GeneralController extends AppController{
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        // Allow users to register and logout.
+        $this->Auth->allow('');
+    }
+
     public $helpers = array('Employee', 'CalendarDay');
     public $uses = array('Employee', 'Request', 'CalendarDay');
     public function index(){

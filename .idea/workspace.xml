@@ -2,21 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf591ceb-30dd-479e-8c52-8d6bb0480a10" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Model/AdminBookingdate.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/webroot/css/filtergrid.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/general_calendar_items.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/icaltest.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/lock_dates.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/register_employee.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/roles.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/webroot/js/tablefilter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/webroot/files/test.ical" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/view_edits_after_lock.ctp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/View/Admin/view_employees.ctp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/CalendarItemsController.php.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Controller/scratch.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/View/Admin/employee_register.ctp" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AdminController.php" afterPath="$PROJECT_DIR$/app/Controller/AdminController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/AdminHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/AdminHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AppController.php" afterPath="$PROJECT_DIR$/app/Controller/AppController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/AuthItemController.php" afterPath="$PROJECT_DIR$/app/Controller/AuthItemController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/CalendarDaysController.php" afterPath="$PROJECT_DIR$/app/Controller/CalendarDaysController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/EmployeesController.php" afterPath="$PROJECT_DIR$/app/Controller/EmployeesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/GeneralController.php" afterPath="$PROJECT_DIR$/app/Controller/GeneralController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/GeneralHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/GeneralHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Helper/RequestHelper.php" afterPath="$PROJECT_DIR$/app/View/Helper/RequestHelper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/RequestsController.php" afterPath="$PROJECT_DIR$/app/Controller/RequestsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/RolesController.php" afterPath="$PROJECT_DIR$/app/Controller/RolesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/UsersController.php" afterPath="$PROJECT_DIR$/app/Controller/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Config/bootstrap.php" afterPath="$PROJECT_DIR$/app/Config/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Layouts/default.ctp" afterPath="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Users/error.ctp" afterPath="$PROJECT_DIR$/app/View/Users/error.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/logs/error.log" afterPath="$PROJECT_DIR$/app/tmp/logs/error.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/General/index.ctp" afterPath="$PROJECT_DIR$/app/View/General/index.ctp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_dev_nl" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_dev_nl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_nl" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_cake_nl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Elements/footer.ctp" afterPath="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Admin/index.ctp" afterPath="$PROJECT_DIR$/app/View/Admin/index.ctp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_file_map" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_file_map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_method_cache" afterPath="$PROJECT_DIR$/app/tmp/cache/persistent/myapp_cake_core_method_cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_auth_items" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_auth_items" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_days" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_days" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_item_types" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_calendar_item_types" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employee_departments" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employee_departments" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employees" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_employees" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_list" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_list" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_request_to_calendar_days" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_request_to_calendar_days" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_requests" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_requests" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_roles" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_roles" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_users" afterPath="$PROJECT_DIR$/app/tmp/cache/models/myapp_cake_model_default_westtoer-op-verlof_users" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Admin/view_pending_calendar_items.ctp" afterPath="$PROJECT_DIR$/app/View/Admin/view_pending_calendar_items.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Admin/view_users.ctp" afterPath="$PROJECT_DIR$/app/View/Admin/view_users.ctp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="westtoer-op-verlof.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,37 +72,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+      <file leaf-file-name="AdminController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="55" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-0.0" vertical-offset="486" max-vertical-offset="918">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneralController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="58" selection-start="3030" selection-end="3030" vertical-scroll-proportion="0.31232092" vertical-offset="951" max-vertical-offset="2340">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestsController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controller/RequestsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="223" column="94" selection-start="13263" selection-end="13263" vertical-scroll-proportion="-7.4" vertical-offset="3607" max-vertical-offset="7470">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="management.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="69" selection-start="1837" selection-end="1837" vertical-scroll-proportion="-23.333334" vertical-offset="0" max-vertical-offset="846">
+            <state line="17" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="-0.6666667" vertical-offset="288" max-vertical-offset="3474">
               <folding />
             </state>
           </provider>
@@ -78,25 +84,63 @@
       <file leaf-file-name="default.ctp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="-26.777779" vertical-offset="105" max-vertical-offset="1152">
+            <state line="63" column="46" selection-start="2809" selection-end="2809" vertical-scroll-proportion="-29.814816" vertical-offset="329" max-vertical-offset="1278">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmployeeHelper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="41" selection-start="3415" selection-end="3415" vertical-scroll-proportion="-19.333334" vertical-offset="846" max-vertical-offset="2106">
+              <folding>
+                <marker date="1406103531916" expanded="true" signature="4608:4630" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_employees.ctp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/View/Admin/view_employees.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="366" selection-end="366" vertical-scroll-proportion="0.6741573" vertical-offset="0" max-vertical-offset="288">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filtergrid.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/webroot/css/filtergrid.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="4" selection-start="499" selection-end="587" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="1062">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="60" selection-start="989" selection-end="989" vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="2466">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.ctp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/General/index.ctp">
+        <entry file="file://$PROJECT_DIR$/app/View/Admin/index.ctp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="372" selection-start="1725" selection-end="1725" vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="1098">
+            <state line="42" column="91" selection-start="1997" selection-end="1997" vertical-scroll-proportion="-16.0" vertical-offset="324" max-vertical-offset="1404">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GeneralHelper.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/View/Helper/GeneralHelper.php">
+      <file leaf-file-name="AdminHelper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/View/Helper/AdminHelper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="17" selection-start="865" selection-end="865" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="828">
+            <state line="35" column="214" selection-start="2361" selection-end="2361" vertical-scroll-proportion="-0.0" vertical-offset="630" max-vertical-offset="1602">
               <folding />
             </state>
           </provider>
@@ -115,57 +159,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/webroot/js/weekcalc.js" />
-        <option value="$PROJECT_DIR$/app/View/CalendarItems/index.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/Component/OAuthConsumers/UiTIDConsumer.php" />
-        <option value="$PROJECT_DIR$/app/Controller/Component/OAuthConsumerComponent.php" />
-        <option value="$PROJECT_DIR$/vendors/OAuth/OAuth.php" />
-        <option value="$PROJECT_DIR$/app/View/Helper/CalendarItemHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/CalendarItems/edit.ctp" />
-        <option value="$PROJECT_DIR$/app/Config/email.php" />
-        <option value="$PROJECT_DIR$/app/View/CalendarItems/overlap.ctp" />
-        <option value="$PROJECT_DIR$/app/Controller/CalendarItemsController.php" />
-        <option value="$PROJECT_DIR$/app/Model/CalendarItem.php" />
-        <option value="$PROJECT_DIR$/app/Controller/CalendarItemsController.php.bak" />
-        <option value="$PROJECT_DIR$/app/Controller/AdminController.php" />
-        <option value="$PROJECT_DIR$/app/Controller/AuthItemController.php" />
-        <option value="$PROJECT_DIR$/app/Config/routes.php" />
-        <option value="$PROJECT_DIR$/app/View/Elements/add-calendaritem.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Employees/index.ctp" />
-        <option value="$PROJECT_DIR$/app/webroot/css/custom.css" />
-        <option value="$PROJECT_DIR$/app/View/Requests/create.ctp" />
-        <option value="$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php" />
-        <option value="$PROJECT_DIR$/app/Controller/scratch.php" />
-        <option value="$PROJECT_DIR$/app/Model/Request.php" />
-        <option value="$PROJECT_DIR$/app/View/Helper/RequestHelper.php" />
-        <option value="$PROJECT_DIR$/app/Model/AuthItem.php" />
-        <option value="$PROJECT_DIR$/app/Model/Employee.php" />
-        <option value="$PROJECT_DIR$/app/View/Requests/view.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Requests/index.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Elements/user_sidebar.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Helper/UsersHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/Helper/UserHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/Employees/view.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Requests/add.ctp" />
-        <option value="$PROJECT_DIR$/app/Model/RequestToCalendarDay.php" />
-        <option value="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" />
-        <option value="$PROJECT_DIR$/app/View/Employees/associate.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Employees/confirm_email.ctp" />
-        <option value="$PROJECT_DIR$/vendors/OAuth/OAuthClient.php" />
-        <option value="$PROJECT_DIR$/app/Controller/EmployeesController.php" />
         <option value="$PROJECT_DIR$/app/Model/CalendarDay.php" />
-        <option value="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" />
-        <option value="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" />
         <option value="$PROJECT_DIR$/app/View/Employees/calendar.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Users/management.ctp" />
-        <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
         <option value="$PROJECT_DIR$/app/webroot/css/flipclock.css" />
-        <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
-        <option value="$PROJECT_DIR$/app/Controller/RequestsController.php" />
         <option value="$PROJECT_DIR$/app/View/Helper/GeneralHelper.php" />
+        <option value="$PROJECT_DIR$/app/Config/database.php" />
         <option value="$PROJECT_DIR$/app/View/General/index.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Requests/add.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Users/management.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Employees/view.ctp" />
+        <option value="$PROJECT_DIR$/app/Config/core.php" />
+        <option value="$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css" />
+        <option value="$PROJECT_DIR$/app/Config/routes.php" />
+        <option value="$PROJECT_DIR$/app/View/CalendarDays/absences.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php" />
+        <option value="$PROJECT_DIR$/app/Config/UiTID.php.default" />
+        <option value="$PROJECT_DIR$/app/Controller/CalendarItemsController.php.bak" />
+        <option value="$PROJECT_DIR$/app/Config/UiTID.php" />
+        <option value="$PROJECT_DIR$/app/Controller/RolesController.php" />
+        <option value="$PROJECT_DIR$/app/Controller/CalendarDaysController.php" />
+        <option value="$PROJECT_DIR$/app/Controller/AuthItemController.php" />
+        <option value="$PROJECT_DIR$/app/Controller/EmployeesController.php" />
+        <option value="$PROJECT_DIR$/vendors/DryXML/DryXML.php" />
+        <option value="$PROJECT_DIR$/app/View/Users/error.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/view_users.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/employee_register.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Elements/footer.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/view_pending_calendar_items.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/employees.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/register_employees.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/register_employee.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/UsersController.php" />
+        <option value="$PROJECT_DIR$/app/Model/AdminBookingdates.php" />
+        <option value="$PROJECT_DIR$/app/View/Admin/lockDates.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/lock_dates.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/view_edits_after_lock.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Helper/AdminHelper.php" />
+        <option value="$PROJECT_DIR$/app/Controller/AppController.php" />
+        <option value="$PROJECT_DIR$/app/Config/bootstrap.php" />
+        <option value="$PROJECT_DIR$/app/Controller/RequestsController.php" />
+        <option value="$PROJECT_DIR$/app/View/Admin/icaltest.ctp" />
         <option value="$PROJECT_DIR$/app/Controller/GeneralController.php" />
+        <option value="$PROJECT_DIR$/app/View/Admin/add_general_calendar_items.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Helper/RequestHelper.php" />
+        <option value="$PROJECT_DIR$/app/View/Admin/general_calendar_items.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/index.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Admin/roles.ctp" />
+        <option value="$PROJECT_DIR$/app/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/app/View/Layouts/default.ctp" />
+        <option value="$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php" />
+        <option value="$PROJECT_DIR$/app/View/Admin/view_employees.ctp" />
+        <option value="$PROJECT_DIR$/app/webroot/css/filtergrid.css" />
       </list>
     </option>
   </component>
@@ -255,6 +299,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -288,6 +333,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="OAuth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DryXML" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -363,7 +426,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="files" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -388,8 +451,22 @@
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="paradigm" />
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -411,25 +488,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Users" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="westtoer-op-verlof" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="westtoer-op-verlof" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
+              <option name="myItemId" value="Requests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -495,7 +554,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="General" />
+              <option name="myItemId" value="Elements" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -517,7 +576,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Employees" />
+              <option name="myItemId" value="Elements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="westtoer-op-verlof" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Plugin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,18 +680,22 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Config/UiTID.php" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="preferences.fileTypes" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="SearchEverywhereHistory" value="&#10;Ra" />
+    <property name="SearchEverywhereHistory" value="&#10;P&#10;Ra" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -640,26 +747,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1366" y="-1" width="1920" height="1204" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.70212764" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.70212764" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17916666" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18743344" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32940108" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32940108" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -681,179 +790,76 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+    <entry file="file://$PROJECT_DIR$/app/Config/database.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1152">
-          <folding />
-        </state>
+        <state line="69" column="30" selection-start="2673" selection-end="2673" vertical-scroll-proportion="-29.444445" vertical-offset="177" max-vertical-offset="1224" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AuthItemController.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="7" selection-start="495" selection-end="495" vertical-scroll-proportion="0.13753581" vertical-offset="0" max-vertical-offset="1047" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/CalendarItemType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1051" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/EmployeeDepartment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1051" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/CalendarItems/allow.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="1690" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="486" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/CalendarItems/overlap.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="17" selection-start="0" selection-end="2611" vertical-scroll-proportion="-20.666666" vertical-offset="0" max-vertical-offset="1026" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CalendarItemsController.php.bak">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="28" selection-start="3899" selection-end="3919" vertical-scroll-proportion="-1.9879518" vertical-offset="1455" max-vertical-offset="5616">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/RequestToCalendarDaysController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="588" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1047" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="864" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1656" column="19" selection-start="49487" selection-end="49491" vertical-scroll-proportion="-1.1505595" vertical-offset="30939" max-vertical-offset="67482" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/AppModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="378" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/ModelBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="182" column="51" selection-start="6492" selection-end="6498" vertical-scroll-proportion="1.7409638" vertical-offset="1542" max-vertical-offset="4428" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Cake/Model/ModelValidator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="28" selection-start="1107" selection-end="1107" vertical-scroll-proportion="-4.2545457" vertical-offset="0" max-vertical-offset="10602" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/scratch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1933" selection-end="1933" vertical-scroll-proportion="-23.333334" vertical-offset="0" max-vertical-offset="936" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="9" selection-start="7908" selection-end="7908" vertical-scroll-proportion="-13.259259" vertical-offset="3782" max-vertical-offset="19584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/AuthItem.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="48" selection-start="210" selection-end="210" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="234" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Requests/view.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="49" selection-start="1295" selection-end="1295" vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="1026" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Requests/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="98" selection-end="98" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="648" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.8080229" vertical-offset="0" max-vertical-offset="1476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Elements/user_sidebar.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="40" selection-start="382" selection-end="382" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="198" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/RequestHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="74" selection-start="120" selection-end="120" vertical-scroll-proportion="26.666666" vertical-offset="756" max-vertical-offset="1944" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/UserHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="108" selection-start="593" selection-end="593" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="396" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/AdminHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1368" />
+        <state line="27" column="161" selection-start="1529" selection-end="1529" vertical-scroll-proportion="-14.074074" vertical-offset="106" max-vertical-offset="1008" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Employees/view.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="6" selection-start="823" selection-end="823" vertical-scroll-proportion="-14.0" vertical-offset="0" max-vertical-offset="486" />
+        <state line="14" column="191" selection-start="812" selection-end="812" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="558" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/css/custom.css">
+    <entry file="file://$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="10" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="2088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="32" selection-start="573" selection-end="584" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="414" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Requests/add.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="50" selection-start="2848" selection-end="2848" vertical-scroll-proportion="-24.11111" vertical-offset="195" max-vertical-offset="1854" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Employee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="1" selection-start="170" selection-end="170" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="198" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Employees/associate.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="764" selection-end="764" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="234" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Employees/confirm_email.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="932" selection-end="932" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="432" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendors/OAuth/OAuthClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="36" selection-start="6742" selection-end="6742" vertical-scroll-proportion="-19.745455" vertical-offset="1956" max-vertical-offset="3870">
-          <folding>
-            <element signature="e#6#310#0" expanded="false" />
-          </folding>
+        <state line="186" column="0" selection-start="2598" selection-end="2598" vertical-scroll-proportion="0.0" vertical-offset="3143" max-vertical-offset="4140">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/RequestToCalendarDay.php">
+    <entry file="file://$PROJECT_DIR$/app/View/CalendarDays/absences.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="1" selection-start="96" selection-end="96" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="180" />
+        <state line="3" column="24" selection-start="146" selection-end="146" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="288" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="24" selection-start="1410" selection-end="1410" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="1458" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/UiTID.php.default">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="35" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="11" selection-start="5435" selection-end="5435" vertical-scroll-proportion="-42.925926" vertical-offset="1163" max-vertical-offset="6768" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="25" selection-start="1735" selection-end="1735" vertical-scroll-proportion="-13.333333" vertical-offset="0" max-vertical-offset="594" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/General/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="25" selection-start="897" selection-end="943" vertical-scroll-proportion="-14.666667" vertical-offset="0" max-vertical-offset="1098" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/UiTID.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="66" selection-start="211" selection-end="211" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="198" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/RolesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="31" selection-start="120" selection-end="120" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="288" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/RequestToCalendarDaysController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/CalendarDaysController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="5" selection-start="212" selection-end="212" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="1278" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/PagesController.php">
@@ -861,103 +867,226 @@
         <state line="20" column="10" selection-start="734" selection-end="749" vertical-scroll-proportion="-0.6666667" vertical-offset="36" max-vertical-offset="1188" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/CalendarDay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="165" selection-start="207" selection-end="207" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="162" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Employees/index.ctp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="42" selection-start="303" selection-end="400" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="792" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/calendar.ctp">
+    <entry file="file://$PROJECT_DIR$/app/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1051" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/OAuth/OAuthClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="20" selection-start="2344" selection-end="2344" vertical-scroll-proportion="0.925816" vertical-offset="0" max-vertical-offset="3690" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/OAuth/OAuth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.94921875" vertical-offset="972" max-vertical-offset="16200" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/DryXML/DryXML.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="162" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Users/error.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="2" selection-start="619" selection-end="619" vertical-scroll-proportion="0.33827892" vertical-offset="0" max-vertical-offset="1011" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AuthItemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="208" selection-end="208" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="378" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/view_users.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="35" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/footer.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1053" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/view_pending_calendar_items.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="18" selection-start="63" selection-end="63" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="252" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Elements/admin/base_admin_menu.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="343" selection-end="343" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="180" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="953" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/UserHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="108" selection-start="593" selection-end="593" vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/view_registrations.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="940" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/register_employee.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="224" selection-start="1680" selection-end="1680" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="504" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/EmployeesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="35" selection-start="2998" selection-end="2998" vertical-scroll-proportion="-14.777778" vertical-offset="861" max-vertical-offset="1872" />
+        <state line="15" column="38" selection-start="555" selection-end="555" vertical-scroll-proportion="-1.8148148" vertical-offset="221" max-vertical-offset="1944" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php">
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/view_edits_after_lock.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="2102" selection-end="2102" vertical-scroll-proportion="0.8189911" vertical-offset="0" max-vertical-offset="1584" />
+        <state line="2" column="18" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="252">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Employees/calendar.ctp">
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/lock_dates.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="283" selection-end="283" vertical-scroll-proportion="0.123046875" vertical-offset="0" max-vertical-offset="1024" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controller/CalendarDaysController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1074" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Helper/CalendarDayHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="36" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.8529981" vertical-offset="0" max-vertical-offset="1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/webroot/css/paradigm/horizontal-tables.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="23" selection-start="3064" selection-end="3064" vertical-scroll-proportion="0.96648043" vertical-offset="2778" max-vertical-offset="3942" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="55" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="918">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="16" selection-start="9490" selection-end="9490" vertical-scroll-proportion="3.3326886" vertical-offset="676" max-vertical-offset="4680">
+        <state line="180" column="43" selection-start="7924" selection-end="7924" vertical-scroll-proportion="0.0" vertical-offset="3011" max-vertical-offset="6462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AppController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="18" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1116">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Config/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="0" selection-start="5337" selection-end="5337" vertical-scroll-proportion="0.0" vertical-offset="1998" max-vertical-offset="2124">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/icaltest.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Requests/add.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="2241" selection-end="2285" vertical-scroll-proportion="0.7097481" vertical-offset="0" max-vertical-offset="1854">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/RequestsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="223" column="94" selection-start="13263" selection-end="13263" vertical-scroll-proportion="-7.4" vertical-offset="3607" max-vertical-offset="7470">
+        <state line="415" column="1" selection-start="22770" selection-end="22770" vertical-scroll-proportion="5.6977" vertical-offset="2268" max-vertical-offset="7578">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Users/management.ctp">
+    <entry file="file://$PROJECT_DIR$/app/webroot/files/test.ical">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="69" selection-start="1837" selection-end="1837" vertical-scroll-proportion="-23.333334" vertical-offset="0" max-vertical-offset="846">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="953">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/RequestHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="9" selection-start="1927" selection-end="1927" vertical-scroll-proportion="-26.777779" vertical-offset="105" max-vertical-offset="1152">
+        <state line="73" column="49" selection-start="3096" selection-end="3108" vertical-scroll-proportion="0.77350426" vertical-offset="590" max-vertical-offset="2142">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/View/General/index.ctp">
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/general_calendar_items.ctp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="372" selection-start="1725" selection-end="1725" vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="1098">
+        <state line="5" column="53" selection-start="198" selection-end="198" vertical-scroll-proportion="0.09483667" vertical-offset="0" max-vertical-offset="1728">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/View/Helper/GeneralHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="17" selection-start="865" selection-end="865" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="828">
+        <state line="3" column="20" selection-start="66" selection-end="80" vertical-scroll-proportion="0.057692308" vertical-offset="0" max-vertical-offset="936">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/AdminHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="214" selection-start="2361" selection-end="2361" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1602">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/roles.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="949">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Layouts/default.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="46" selection-start="2809" selection-end="2809" vertical-scroll-proportion="-29.814816" vertical-offset="329" max-vertical-offset="1278">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/webroot/css/filtergrid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="4" selection-start="499" selection-end="587" vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="1062">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="-0.6666667" vertical-offset="288" max-vertical-offset="3474">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/GeneralController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="58" selection-start="3030" selection-end="3030" vertical-scroll-proportion="0.31232092" vertical-offset="951" max-vertical-offset="2340">
+        <state line="24" column="60" selection-start="989" selection-end="989" vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="2466">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/index.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="91" selection-start="1997" selection-end="1997" vertical-scroll-proportion="-16.0" vertical-offset="324" max-vertical-offset="1404">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Helper/EmployeeHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="41" selection-start="3415" selection-end="3415" vertical-scroll-proportion="-19.333334" vertical-offset="846" max-vertical-offset="2106">
+          <folding>
+            <marker date="1406103531916" expanded="true" signature="4608:4630" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/View/Admin/view_employees.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="366" selection-end="366" vertical-scroll-proportion="0.6741573" vertical-offset="0" max-vertical-offset="288">
           <folding />
         </state>
       </provider>

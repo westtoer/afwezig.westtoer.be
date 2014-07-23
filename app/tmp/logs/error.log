@@ -9880,3 +9880,57 @@ Request URL: /westtoer/dev/westtoer-op-verlof/js/flipclock.min.js
 Stack Trace:
 #0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2014-07-17 16:19:32 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/css/flipclock.css
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-17 16:19:32 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/js/flipclock.min.js
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-17 16:19:35 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/css/flipclock.css
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-17 16:19:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/js/flipclock.min.js
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-17 16:19:49 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/css/flipclock.css
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-07-17 16:19:49 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /westtoer/dev/westtoer-op-verlof/js/flipclock.min.js
+Stack Trace:
+#0 /opt/lampp/htdocs/westtoer/dev/westtoer-op-verlof/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

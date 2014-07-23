@@ -18,7 +18,7 @@
                     <h2 class="centerpiece">Verlofaanvragen</h2>
                     <ul>
                         <li>Verlofaanvragen goedkeuren</li>
-                        <li>Partiële lock inschakelen</li>
+                        <li>Partiële sluitingsdagen</li>
                         <li>Mutaties bekijken</li>
                     </ul>
                 </div>
@@ -27,9 +27,10 @@
                 <div class="well flat hoverable">
                     <h2 class="centerpiece">Gebruikers</h2>
                         <ul>
-                            <li>Nieuwe werknemer toevoegen</li>
-                            <li>Nieuwe registraties goedkeuren</li>
-                            <li>Alle gebruikers</li>
+                            <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Nieuwe werknemer toevoegen</a></li>
+                            <li><a href="<?php echo $this->base;?>/employees/">Alle werknemers</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Nieuwe registraties goedkeuren</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Alle gebruikers</a></li>
                         </ul>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                 <div class="well flat hoverable">
                     <h2 class="centerpiece">Kalender</h2>
                     <ul>
-                        <li>Nieuwe algemene feestdagen toevoegen</li>
+                        <li><a href="<?php echo $this->base;?>/Admin/GeneralCalendarItems">Algemene feestdagen beheren</a></li>
                         <li>Einde van het jaar boeken</li>
                         <li>Personeelskalenders</li>
                     </ul>
@@ -49,8 +50,7 @@
                 <div class="well flat hoverable">
                     <h2 class="centerpiece">Rechten</h2>
                         <ul>
-                            <li>Rechten van gebruikers wijzigen</li>
-                            <li>Nieuwe administrators</li>
+                            <li>Rechten beheren</li>
                             <li>Maintenance mode instellen</li>
                         </ul>
                 </div>

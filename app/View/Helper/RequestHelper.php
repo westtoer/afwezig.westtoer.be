@@ -52,16 +52,27 @@ class RequestHelper extends AppHelper {
     }
 
 
-    public function tableRequests($requests){
+    public function tableRequests($requests, $type = 0){
         $html = '<table class="table">';
-        $html .= '<tr><th>Start</th><th>Einde</th><th>Reden</th><th>Vervanger</th><th>Goedgekeurd?</th></tr>';
+        $html .= '<tr><th>Start</th><th>Einde</th>';
+        if($type == 0){
+            $html .= '<th>Reden</th><th>Vervanger</th><th>Goedgekeurd?</th></tr>';
+        } else {
+            $html .= '<th>Naam</th><th>Acties</th></tr>';
+        }
+
         foreach($requests as $request){
             $html .= '<tr>';
             $html .= '<td>' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . '</td>';
             $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
-            $html .= '<td>' . $request["CalendarItemType"]["name"] . '</td>';
-            $html .= '<td><a href="' . $this->base . '/employees/view/' .$request["Replacement"]["id"] . '">' . $request["Replacement"]["name"] . " " . $request["Replacement"]["surname"] . '</a></td>';
-            $html .= '<td>' . $this->isApproved($request["AuthItem"]["authorized"], $request["AuthItem"]["authorization_date"], true) . '</td></tr>';
+            if($type == 0){
+                $html .= '<td>' . $request["CalendarItemType"]["name"] . '</td>';
+                $html .= '<td><a href="' . $this->base . '/employees/view/' .$request["Replacement"]["id"] . '">' . $request["Replacement"]["name"] . " " . $request["Replacement"]["surname"] . '</a></td>';
+                $html .= '<td>' . $this->isApproved($request["AuthItem"]["authorized"], $request["AuthItem"]["authorization_date"], true) . '</td></tr>';
+            } else {
+                $html .= '<td>' . $request["Request"]["name"] . '</td>';
+                $html .= '<td><a href="' . $this->base .'/Admin/GeneralCalendarItems/action:delete/id:'. $request["Request"]["id"] .'">Verwijder</a></td></tr>';
+            }
         }
         $html .= '</table>';
         return $html;

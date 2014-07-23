@@ -33,6 +33,7 @@ class EmployeeHelper extends AppHelper {
         $html .= '</div>';
         return $html;
     }
+
     public function selectorAllEmployees($employees, $datatype = 'html', $placement = 0){
         //Give a standard null option
         if($datatype == 'html'){
@@ -47,7 +48,11 @@ class EmployeeHelper extends AppHelper {
             }
         } elseif($datatype == 'array'){
             //Give a standard null option
-            $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => 4);
+            if($placement == 1){
+                $employeesOptions[] = array('name' => 'Verantwoordelijke', 'value' => 0);
+            } else {
+                $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => 4);
+            }
             //Fill with all Employees
             foreach($employees as $employee){
                 $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
@@ -79,5 +84,29 @@ class EmployeeHelper extends AppHelper {
         }
 
         return $employeesOptions;
+    }
+
+    public function tableEmployees($employees, $tableid = '1'){
+        $html = '<table id="' . $tableid . '" class="table" >';
+        $html .= '<tr><th>Naam</th><th>3gram</th><th>Rol</th><th>Acties</th></tr>';
+        foreach($employees as $employee){
+            $html .= '<tr>';
+            $html .= '<td>' . $employee["Employee"]["name"] . ' ' .$employee["Employee"]["surname"] . '</td>';
+            $html .= '<td>' . $employee["Employee"]["3gram"] . '</td>';
+            $html .= '<td>' . $employee["Role"]["name"] . '</td>';
+            $html .= '<td>';
+
+            if($employee["Role"]["id"] == 1 or $employee["Role"]["id"] == 2 or $employee["Role"]["id"] == 4){
+                $html .= '<a href="">Degradeer</a>';
+            } else {
+
+            }
+
+            $html .= '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+
+        return $html;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-App::import('Vendor', 'OAuth/OAuthClient');
+App::import('Vendor', 'OAuth/OAuthClient', 'DryXML/DryXML.php');
 class UsersController extends AppController {
     public $uses = array('User', 'Employee', 'Request');
     public $helpers = array('Request');
@@ -91,10 +91,10 @@ class UsersController extends AppController {
 
     public function uitid() {
         $client = $this->createClient();
-        $requestToken = $client->getRequestToken('http://acc.uitid.be/uitid/rest/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
+        $requestToken = $client->getRequestToken(Configure::read('UiTID.server') . '/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
         if (!empty($requestToken)) {
             $this->Session->write('uitid_request_token', $requestToken);
-            $this->redirect('http://acc.uitid.be/uitid/rest/auth/authorize?oauth_token=' . $requestToken->key);
+            $this->redirect(Configure::read('UiTID.server') . '/auth/authorize?oauth_token=' . $requestToken->key);
         } else {
 
         }
@@ -103,7 +103,7 @@ class UsersController extends AppController {
     public function callback() {
         $requestToken = $this->Session->read('uitid_request_token');
         $client = $this->createClient();
-        $accessToken = $client->getAccessToken('http://acc.uitid.be/uitid/rest/accessToken', $requestToken);
+        $accessToken = $client->getAccessToken(Configure::read('UiTID.server') .'/accessToken', $requestToken);
         if ($accessToken) {
             $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
             if(!empty($user)){
@@ -115,37 +115,28 @@ class UsersController extends AppController {
                              ));
                     $this->Session->write('Auth', $employee);
                     $this->Session->write('Auth.User', $user);
-                    //$this->redirect('http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId . '?private=true');
-
-                    //$report = http_get('http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId);
-
-                    //OAUTH TEST
-
-
-
-
-
-
                     $this->redirect('/');
                 } else {
                     $this->redirect(array('action' => 'error'));
                 }
             } else {
-                $result = $client->request($accessToken->key, $accessToken->secret, $accessToken->userId, array('method' => 'GET', 'uri' => 'http://acc.uitid.be/uitid/rest/user/' . $accessToken->userId . '?private=true'));
-                $resultToArray =  preg_split ('/$\R?^/m', $result["body"]);
-                $result = $client->processResult($resultToArray);
-                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($result["email"])));
+                $result = $client->request($accessToken->key, $accessToken->secret, $accessToken->userId, array('method' => 'GET', 'uri' =>  Configure::read('UiTID.server')  .'/user/' . $accessToken->userId . '?private=true'));
+                $resultToArray = simplexml_load_string($result["body"]);
+                $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
+                //$result = $client->processResult($resultToArray);
+                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
             }
         }
     }
 
     public function error(){
-        //$this->layout = 'login';
+        $this->layout = 'login';
 
     }
 
 
     private function createClient() {
+        var_dump(Configure::read('UiTID.private'));
         return new OAuthClient(Configure::read('UiTID.public'), Configure::read('UiTID.private'));
     }
 
@@ -157,7 +148,14 @@ class UsersController extends AppController {
                 $newAssociation["User"]["email"] =base64_decode($incomingData["Employee"]["userEmail"]);
                 $newAssociation["User"]["uitid"] = base64_decode($incomingData["Employee"]["uitid"]);
                 $newAssociation["User"]["status"] = "requested";
-            $this->User->save($newAssociation);
+                $existingUser = $this->User->find('first', array('conditions' => array('email' => $newAssociation["User"]["email"])));
+                if(!empty($existingUser)){
+                    $this->Session->setFlash('Iemand heeft zich al met dit email adres aangemeld');
+                    $this->redirect(array('action' => 'error','error' => 1));
+                } else {
+                    $this->User->save($newAssociation);
+                }
+
             $this->Session->setFlash(__('The user has been saved'));
             return $this->redirect(array('controller' => 'users', 'action' => 'requestHandled'));
         }
@@ -175,22 +173,32 @@ class UsersController extends AppController {
 
     public function approve($id = null){
         if(isset($id)){
-            $access = '';
-            if($access == 'verifyuser'){
-                $useraccount = $this->User->findById($id);
-                $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
+            $access = $this->Session->read('Auth.Role.verifyuser');
+            if($access == 1){
+                    $useraccount = $this->User->findById($id);
+                    if(!empty($useraccount)){
+                        if($useraccount["User"]["status"] !== 'active'){
+                            if($useraccount["User"]["status"] !== 'denied'){
+                                if(!empty($useraccount["Employee"])){
+                                    $useraccount["User"]["status"] = 'active';
+                                    $useraccount["Employee"]["linked"] = 1;
 
-                if(!empty($useraccount)){
-                    if(!empty($employeeaccount)){
-                        $useraccount["User"]["status"] = 'active';
-                        $employeeaccount["Employee"]["linked"] = 1;
+                                    //sets the User Role to standard, so people wont register account based on their influence
+                                    $useraccount["Employee"]["role_id"] = 3;
 
-                        //sets the User Role to standard, so people wont register account based on their influence
-                        $employeeaccount["Employee"]["role_id"] = 3;
+                                    $this->User->save($useraccount);
 
-                        $this->User->save($useraccount);
-                        $this->Employee->save($employeeaccount);
+                                    $this->Session->setFlash('Je hebt toegang verschaft tot het systeem aan ' . $useraccount["User"]["email"]);
+                                    $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
+                                }
+                            }
+                    } else {
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
+                } else {
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->redirect('/');
                 }
             }
         }
@@ -198,18 +206,30 @@ class UsersController extends AppController {
 
     public function deny($id = null){
         if(isset($id)){
-            $access = '';
-            if($access == 'verifyuser'){
+            $access = $this->Session->read('Auth.Role.verifyuser');
+            if($access == 1){
                 $useraccount = $this->User->findById($id);
-                $employeeaccount = $this->User->findById($useraccount["Employee"]["id"]);
-
                 if(!empty($useraccount)){
-                    if(!empty($employeeaccount)){
-                        $useraccount["User"]["status"] = 'denied';
-                        $employeeaccount["Employee"]["linked"] = 0;
-                        $this->User->save($useraccount);
-                        $this->Employee->save($employeeaccount);
+                    if($useraccount["User"]["status"] !== 'active'){
+                        if(!empty($useraccount["Employee"])){
+                            $useraccount["User"]["status"] = 'denied';
+                            $useraccount["Employee"]["linked"] = 1;
+
+                            //sets the User Role to standard, so people wont register account based on their influence
+                            $useraccount["Employee"]["role_id"] = 3;
+
+                            $this->User->save($useraccount);
+
+                            $this->Session->setFlash('Je hebt toegang verschaft tot het systeem aan ' . $useraccount["User"]["email"]);
+                            $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
+                        }
+                    } else {
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
+                } else {
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->redirect('/');
                 }
             }
         }
@@ -217,15 +237,16 @@ class UsersController extends AppController {
 
     public function unlink($id = null){
         if(isset($id)){
+            var_dump($id);
             $useraccount = $this->User->findById($id);
             $employee = $this->Employee->findById($useraccount["Employee"]["id"]);
-            if($this->Session->read('Auth.Employee.id') == $employee["Employee"]["id"]){
+            if($this->Session->read('Auth.Employee.id') == $employee["Employee"]["id"] or $this->Session->read('Auth.Role.edituser') == true){
                 $this->User->delete($useraccount["User"]["id"]);
-                $this->Session->destroy();
+                if($this->Session->read('Auth.Role.edituser') !== true){
+                    $this->Session->destroy();
+                }
                 $this->Session->setFlash('De werknemersgegevens werden losgekoppelt van de aanmeldgegevens');
                 $this->redirect(array('action' => 'login'));
-            } elseif($this->Session->read('Auth.User.Role.edituser') == true){
-
             } else {
                 $this->redirect('/');
             }
@@ -252,5 +273,82 @@ class UsersController extends AppController {
             'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
             'Request.end_date >=' => date('Y-m-d', strtotime($currentYear . '01-01'))
         ))));
+    }
+
+    private function xmlToArray($xml, $options = array()) {
+        $defaults = array(
+            'namespaceSeparator' => ':',//you may want this to be something other than a colon
+            'attributePrefix' => '@',   //to distinguish between attributes and nodes with the same name
+            'alwaysArray' => array(),   //array of xml tag names which should always become arrays
+            'autoArray' => true,        //only create arrays for tags which appear more than once
+            'textContent' => '$',       //key used for the text content of elements
+            'autoText' => true,         //skip textContent key if node has no attributes or child nodes
+            'keySearch' => false,       //optional search and replace on tag and attribute names
+            'keyReplace' => false       //replace values for above search values (as passed to str_replace())
+        );
+        $options = array_merge($defaults, $options);
+        $namespaces = $xml->getDocNamespaces();
+        $namespaces[''] = null; //add base (empty) namespace
+
+        //get attributes from all namespaces
+        $attributesArray = array();
+        foreach ($namespaces as $prefix => $namespace) {
+            foreach ($xml->attributes($namespace) as $attributeName => $attribute) {
+                //replace characters in attribute name
+                if ($options['keySearch']) $attributeName =
+                    str_replace($options['keySearch'], $options['keyReplace'], $attributeName);
+                $attributeKey = $options['attributePrefix']
+                    . ($prefix ? $prefix . $options['namespaceSeparator'] : '')
+                    . $attributeName;
+                $attributesArray[$attributeKey] = (string)$attribute;
+            }
+        }
+
+        //get child nodes from all namespaces
+        $tagsArray = array();
+        foreach ($namespaces as $prefix => $namespace) {
+            foreach ($xml->children($namespace) as $childXml) {
+                //recurse into child nodes
+                $childArray = $this->xmlToArray($childXml, $options);
+                list($childTagName, $childProperties) = each($childArray);
+
+                //replace characters in tag name
+                if ($options['keySearch']) $childTagName =
+                    str_replace($options['keySearch'], $options['keyReplace'], $childTagName);
+                //add namespace prefix, if any
+                if ($prefix) $childTagName = $prefix . $options['namespaceSeparator'] . $childTagName;
+
+                if (!isset($tagsArray[$childTagName])) {
+                    //only entry with this key
+                    //test if tags of this type should always be arrays, no matter the element count
+                    $tagsArray[$childTagName] =
+                        in_array($childTagName, $options['alwaysArray']) || !$options['autoArray']
+                            ? array($childProperties) : $childProperties;
+                } elseif (
+                    is_array($tagsArray[$childTagName]) && array_keys($tagsArray[$childTagName])
+                    === range(0, count($tagsArray[$childTagName]) - 1)
+                ) {
+                    //key already exists and is integer indexed array
+                    $tagsArray[$childTagName][] = $childProperties;
+                } else {
+                    //key exists so convert to integer indexed array with previous value in position 0
+                    $tagsArray[$childTagName] = array($tagsArray[$childTagName], $childProperties);
+                }
+            }
+        }
+
+        //get text content of node
+        $textContentArray = array();
+        $plainText = trim((string)$xml);
+        if ($plainText !== '') $textContentArray[$options['textContent']] = $plainText;
+
+        //stick it all together
+        $propertiesArray = !$options['autoText'] || $attributesArray || $tagsArray || ($plainText === '')
+            ? array_merge($attributesArray, $tagsArray, $textContentArray) : $plainText;
+
+        //return node as array
+        return array(
+            $xml->getName() => $propertiesArray
+        );
     }
 }

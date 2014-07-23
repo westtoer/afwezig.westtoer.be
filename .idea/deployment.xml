@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Localhost">
+  <component name="PublishConfigData" autoUpload="Always" serverName="afwezig.westtoer.be">
     <serverData>
       <paths name="Localhost">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="westtoer/dev/westtoer-op-verlof" />
+            <mapping local="" />
           </mappings>
         </serverdata>
       </paths>
+      <paths name="afwezig.westtoer.be">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/app/Config/database.php" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/Config/database.php" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/Config/UiTID.php" />
+            <excludedPath path="/app/Config/UiTID.php" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
 

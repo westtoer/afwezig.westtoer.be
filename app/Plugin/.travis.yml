@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+env:
+  - CAKE_VERSION=2.2.9
+  - CAKE_VERSION=2.3.10
+  - CAKE_VERSION=master
+  - CAKE_VERSION=2.5
+
+before_script:
+  - git clone --depth 1 --branch $CAKE_VERSION git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp
+  - cp -R ../CakePdf plugins/CakePdf
+  - sudo touch /usr/bin/wkhtmltopdf && sudo chmod +x /usr/bin/wkhtmltopdf
+
+script:
+  - ./lib/Cake/Console/cake test CakePdf AllCakePdf
+
+
+notifications:
+  email: false

@@ -1,6 +1,12 @@
 <?php
 class CalendarDaysController extends AppController{
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        // Allow users to register and logout.
+        $this->Auth->allow('');
+    }
+
     public $helpers = array('General');
 
     public function absences($day = null){
