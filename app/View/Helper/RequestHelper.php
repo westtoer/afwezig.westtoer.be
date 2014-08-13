@@ -52,23 +52,33 @@ class RequestHelper extends AppHelper {
     }
 
 
-    public function tableRequests($requests, $type = 0){
+    public function tableRequests($requests, $type = 'user'){
         $html = '<table class="table">';
-        $html .= '<tr><th>Start</th><th>Einde</th>';
-        if($type == 0){
+        if($type == 'user'){
+            $html .= '<tr><th>Start</th><th>Einde</th>';
             $html .= '<th>Reden</th><th>Vervanger</th><th>Goedgekeurd?</th></tr>';
+        } elseif($type == 'admin'){
+            $html .= '<th>Naam</th><th>Type</th><th>Vervanger</th><th>Start</th><th>Einde</th><th>Acties</th></tr>';
         } else {
+            $html .= '<tr><th>Start</th><th>Einde</th>';
             $html .= '<th>Naam</th><th>Acties</th></tr>';
         }
 
         foreach($requests as $request){
             $html .= '<tr>';
-            $html .= '<td>' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . '</td>';
-            $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
-            if($type == 0){
+            if($type == 'user'){
+                $html .= '<td>' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . '</td>';
+                $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
                 $html .= '<td>' . $request["CalendarItemType"]["name"] . '</td>';
                 $html .= '<td><a href="' . $this->base . '/employees/view/' .$request["Replacement"]["id"] . '">' . $request["Replacement"]["name"] . " " . $request["Replacement"]["surname"] . '</a></td>';
                 $html .= '<td>' . $this->isApproved($request["AuthItem"]["authorized"], $request["AuthItem"]["authorization_date"], true) . '</td></tr>';
+            } elseif($type == 'admin'){
+                $html .= '<td>' . $request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . '</td>';
+                $html .= '<td>' . $request["CalendarItemType"]["name"] . '</td>';
+                $html .= '<td><a href="' . $this->base . '/employees/view/' .$request["Replacement"]["id"] . '">' . $request["Replacement"]["name"] . " " . $request["Replacement"]["surname"] . '</a></td>';
+                $html .= '<td>' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . '</td>';
+                $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
+                $html .= '<td><a href="' . $this->base .'/Request/overlap/' . $request["Request"]["id"] . '">Overlap</a>  |  <a href="' . $this->base .'/Request/allow/' . $request["Request"]["id"] . '">Goedkeuren</a>  |  <a href="' . $this->base .'/Request/deny/' . $request["Request"]["id"] . '">Weigeren</a>';
             } else {
                 $html .= '<td>' . $request["Request"]["name"] . '</td>';
                 $html .= '<td><a href="' . $this->base .'/Admin/GeneralCalendarItems/action:delete/id:'. $request["Request"]["id"] .'">Verwijder</a></td></tr>';

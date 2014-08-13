@@ -99,6 +99,7 @@ Configure::write('Dispatcher.filters', array(
 
 App::uses('CakeLog', 'Log');
 Configure::load('UiTID');
+Configure::load('Administrator');
 CakeLog::config('debug', array(
 	'engine' => 'File',
 	'types' => array('notice', 'info', 'debug'),
@@ -110,4 +111,19 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-CakePlugin::loadAll();
+//***** Plugins *****\\
+
+// Pdf generation
+CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
+
+Configure::write('CakePdf', array(
+    'engine' => 'CakePdf.Tcpdf',
+    'margin' => array(
+        'bottom' => 15,
+        'left' => 50,
+        'right' => 30,
+        'top' => 45
+    ),
+    'encoding'=>'UTF-8',
+    'download' => true
+));

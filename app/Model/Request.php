@@ -7,7 +7,8 @@ class Request extends AppModel {
                                 'Replacement' => array(
                                     'type' => 'INNER',
                                     'className' => 'Employee',
-                                    'foreignKey' => 'replacement_id'
+                                    'foreignKey' => false,
+                                    'conditions' => array('Request.replacement_id = Replacement.internal_id')
                                 ),
                                 'CalendarItemType',
                                 'AuthItem',

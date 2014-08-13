@@ -1,26 +1,36 @@
 <?php
 App::import('Vendor', 'OAuth/OAuthClient', 'DryXML/DryXML.php');
+App::uses('CakeEmail', 'Network/Email');
 class UsersController extends AppController {
-    public $uses = array('User', 'Employee', 'Request');
+    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment');
     public $helpers = array('Request');
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin');
+        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin', 'locked');
     }
 
     public function login() {
-        $this->layout = 'login';
-        if($this->Auth->loggedIn()){
-            $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
-        }
-        else {if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-               //return $this->redirect(array('controller' => 'CalendarItems'));
+            $this->layout = 'login';
+            if(isset($this->request->query['router'])){
+                $this->set('router', $this->request->query['router']);
+
             }
-            $this->Session->setFlash(__('Invalid username or password, try again'));
-        }
-    }
+            if($this->Auth->loggedIn()){
+                if(isset($this->request->query['router'])){
+                    $this->redirect($this->request->query['router']);
+                } else {
+                    $this->redirect('/');
+                }
+            }
+            else {
+                if ($this->request->is('post')) {
+                        if ($this->Auth->login()) {
+                           //return $this->redirect(array('controller' => 'CalendarItems'));
+                        }
+                    $this->Session->setFlash(__('Invalid username or password, try again'));
+                }
+            }
     }
 
     public function logout() {
@@ -90,6 +100,10 @@ class UsersController extends AppController {
     }
 
     public function uitid() {
+        if(isset($this->request->query['router'])){
+            $this->Session->write('router', $this->request->query['router']);
+        }
+
         $client = $this->createClient();
         $requestToken = $client->getRequestToken(Configure::read('UiTID.server') . '/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
         if (!empty($requestToken)) {
@@ -115,7 +129,13 @@ class UsersController extends AppController {
                              ));
                     $this->Session->write('Auth', $employee);
                     $this->Session->write('Auth.User', $user);
-                    $this->redirect('/');
+                    if($this->Session->read('router') == null){
+                        $this->redirect('/');
+
+                    } else {
+                        $this->redirect($this->Session->read('router'));
+                    }
+
                 } else {
                     $this->redirect(array('action' => 'error'));
                 }
@@ -156,7 +176,8 @@ class UsersController extends AppController {
                     $this->User->save($newAssociation);
                 }
 
-            $this->Session->setFlash(__('The user has been saved'));
+            //$this->Session->setFlash(__('The user has been saved'));
+            $this->sendMailToHR();
             return $this->redirect(array('controller' => 'users', 'action' => 'requestHandled'));
         }
     }
@@ -189,6 +210,7 @@ class UsersController extends AppController {
                                     $this->User->save($useraccount);
 
                                     $this->Session->setFlash('Je hebt toegang verschaft tot het systeem aan ' . $useraccount["User"]["email"]);
+                                    $this->sendMail($this->trigramToMail($useraccount["Employee"]["3gram"]), 'Je bent toegelaten op Westtoer Afwezig. Vanaf nu kun je gewoon surfen naar ' . Configure::read('Administrator.base_fallback_url') . ' en je aanmelden met je UiTID.');
                                     $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                                 }
                             }
@@ -220,7 +242,8 @@ class UsersController extends AppController {
 
                             $this->User->save($useraccount);
 
-                            $this->Session->setFlash('Je hebt toegang verschaft tot het systeem aan ' . $useraccount["User"]["email"]);
+                            $this->Session->setFlash('Je hebt toegang geweigerd tot het systeem aan ' . $useraccount["User"]["email"]);
+                            $this->sendMail($this->trigramToMail($useraccount["Employee"]["3gram"]), 'Je bent niet toegelaten op Westtoer Afwezig');
                             $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                         }
                     } else {
@@ -253,18 +276,9 @@ class UsersController extends AppController {
         }
     }
 
-    public function emergencyLogin(){
-            /*if($this->request->is('post')){
-                $user = $this->request->data;
-                $employee = $this->Employee->findById();
-                if($employee["Employee"]["password"] == decodePasswor()){
-                    //Log user in
-                }
-            }*/
-        }
-
     public function management(){
         $this->set('employee', $this->Employee->findById($this->Session->read('Auth.Employee.id')));
+        $this->set('departments', $this->EmployeeDepartment->find('all'));
         $currentYear = date("Y");
         $this->set('linkedUsers', $this->User->find('all', array('conditions' => array(
             'User.employee_id' => $this->Session->read('Auth.Employee.id')
@@ -350,5 +364,48 @@ class UsersController extends AppController {
         return array(
             $xml->getName() => $propertiesArray
         );
+    }
+
+    public function checkAuth(){
+        echo '<pre>';
+        var_dump($this->Employee->find('all'));
+        echo '</pre>';
+        var_dump($this->Employee->findById("1"));
+    }
+    public function locked(){
+        $this->layout = 'login';
+    }
+
+    private function sendMailToHR($type = "newuser"){
+        $allHR = $this->Employee->find('all', array('conditions' => array('Employee.role_id <' => 3)));
+        foreach($allHR as $HR){
+            $Email = new CakeEmail('westtoer');
+            $Email->to($this->trigramToMail($HR["Employee"]["3gram"]));
+            $Email->subject('Er is een nieuwe gebruiker geregistreerd op Westtoer Afwezig.');
+            $Email->replyTo('noreply@westtoer.be');
+            $Email->from ('noreply@westtoer.be');
+            $Email->send('Er is een nieuwe gebruiker die zich heeft aangemeld op Afwezig. Om dit te bekijken, ga je naar http://afwezig.westtoer.be/Admin/ViewRegistrations');
+        }
+    }
+
+    private function trigramToMail($trigram){
+        if(strpos($trigram, '@')){
+            return $trigram;
+        } else {
+            return $trigram . '@westtoer.be';
+        }
+    }
+
+    private function sendMail($receiver, $body, $subject = "Westtoer Afwezig"){
+        if(strpos($receiver, '@') !== false){
+            if(strpos($receiver, 'westtoer.be') !== false){
+                $Email = new CakeEmail('westtoer');
+                $Email->to($receiver);
+                $Email->subject($subject);
+                $Email->replyTo('noreply@westtoer.be');
+                $Email->from ('noreply@westtoer.be');
+                $Email->send($body);
+            }
+        }
     }
 }

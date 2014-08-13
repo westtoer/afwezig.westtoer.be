@@ -16,29 +16,20 @@
     <?php echo $this->Html->script('tablefilter.js');?>
 </head>
 <body onload="onbodyload()">
+
 <header>
     <div class="container">
-        <div class="pull-left">
-            <a href="<?php echo $this->webroot;?>" class="title"><h1 >Westtoer Op Verlof</h1></a>
-        </div>
+        <div class="pull-left"><a href="http://intranet.westtoer.be/" class="title">Westtoer</a></div>
         <div class="pull-right">
             <ul class="menu">
-                <?php
-                $employee = $this->Session->read('Auth.Employee');
-                if($this->Session->read('Auth.Role.id') == 1 OR  $this->Session->read('Auth.Role.id') == 2){
-                    echo '<li class="menuitem">' . $this->Html->link('Administratie', array('controller' => 'Admin', 'action' => 'index')) . '</li>';
-                }
-                if($this->Session->read('Auth.Role.allow') == 'true'){
-                   echo '<li class="menuitem">' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'Requests', 'action' => 'index')) . '</li>';
-                }
-                if(!empty($employee)){
-                    echo '<li class="menuitem">' . $this->Html->link('Mijn profiel', array('controller' => 'employees', 'action' => 'view', 'me')) . '</li>';
-                    echo '<li class="menuitem">' . $this->Html->link('Uitloggen', array('controller' => 'users', 'action' => 'logout')) . '</li>';
-                }
-                ;?>
+                <li class="menuitem"><a href="http://intranet.westtoer.be">Intranet</li>
+                <li class="menuitem"><a href="http://afwezig.westtoer.be">Afwezig</li>
             </ul>
-        </div></div>
+        </div>
 </header>
+<?php echo $this->element('menubar');?>
+
+
 <div class="container">
     <?php
     if($this->Session->check('Message.flash')):?>

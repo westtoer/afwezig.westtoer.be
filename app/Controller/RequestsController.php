@@ -102,9 +102,8 @@ class RequestsController extends AppController {
             if(!empty($request)){
                 $this->authorize($id, 'allow');
                 $this->updateRequest($request, 'allow');
-                var_dump($this->createICS('10', $request["Request"]["start_date"], $request["Request"]["end_date"], $request["CalendarItemType"]["name"], 'http://afwezig.westtoer.be/', "Verlof"));
-                //$this->Session->setFlash('Deze aanvraag is goedgekeurd');
-                //$this->redirect('/');
+                $this->Session->setFlash('Deze aanvraag is goedgekeurd');
+                $this->redirect('/');
             }
         } else {
             $this->Session->setFlash('Dit is een ongeldig request.');
@@ -114,14 +113,17 @@ class RequestsController extends AppController {
 
     public function add(){
         $employeeId = $this->Session->read('Auth.Employee.id');
+        $employee = $this->Employee->findById($employeeId);
+
 
         //Fill the view information
         $this->set('requests', $this->Request->find('all', array('conditions' => array(
             'Request.employee_id' => $employeeId,
             'Request.start_date >= ' => date('Y-m-d')
         ), 'order' => 'Request.timestamp DESC')));
+
         $this->set('employees', $this->Employee->find('all', array('conditions' => array(
-            'Employee.linked' => 1,
+            'Employee.internal_id <>' => '-1',
         ))));
         $this->set('types', $this->CalendarItemType->find('all', array('conditions' => array('CalendarItemType.user_allowed' => 1))));
 
@@ -132,199 +134,224 @@ class RequestsController extends AppController {
             //Validation
             $validation = $this->insertValidation($request);
 
-
             if($validation == ''){
-                // If no errors are found
+                //Create a compliant request by adding a timestamp, employee_id
+                $cr = $this->completeRequest($request);
 
-                $requester = $this->Employee->findById($employeeId);
-                $request["Request"]["employee_id"] = $employeeId;
-                $request["Request"]["timestamp"] = date('Y-m-d H:i:s');
-
-                //Create the request (with an empty AuthItem
+                //Create the request in the database
                 $this->Request->create();
-                $savedRequest = $this->Request->save($request);
+                $cr = $this->Request->save($cr);
 
-                if(!empty($savedRequest)){
+                if(!empty($cr)){
+
+                    //Allow us to access the users data
+                    $cr["Employee"] = $this->Employee->findById($cr["Request"]["employee_id"])["Employee"];
+
+                    //Get all the workdays that are inside the requested range by the employee
+                    $requestRange = $this->dateRange($cr["Request"]["start_date"], $cr["Request"]["end_date"], $cr["Request"]["start_time"], $cr["Request"]["end_time"]);
+
+                    //Get all the records in the database that could overlap with the range requested by the employee
+                    $existingInRange = $this->CalendarDay->find('all', array('conditions' => array(
+                        'CalendarDay.day_date >=' => $cr["Request"]["start_date"],
+                        'CalendarDay.day_date <=' => $cr["Request"]["end_date"],
+                        'CalendarDay.employee_id' => $cr["Request"]["employee_id"]
+                    )));
+
+                    //Convert the array to an associative array
+                    if(!empty($existingInRange)){
+                        $hashInRange = $this->convertToHashTable($existingInRange);
+                    } else {
+                        $hashInRange = array();
+                    }
+
+
+                    //Check where the CalendarDays overlap with the requested range
+                    foreach($requestRange as $requestDate){
+                        if(array_key_exists($requestDate, $hashInRange)){
+                            //The CalendarDay already exists
+                            $exists[] = $hashInRange[$requestDate];
+                        } else {
+                            //The CalendarDay doesn't exist
+                            $notexist[] = $requestDate;
+                        }
+                    }
+
+                    //Create an Auth Item to authenticate against
                     $this->AuthItem->create();
-                    $AuthItem = array("request_id" => $savedRequest["Request"]["id"], "supervisor_id" => $requester["Employee"]["supervisor_id"], "authorized" => 0, "authorization_date" => null);
-                    $savedAuthItem = $this->AuthItem->save($AuthItem);
-                    if(!empty($savedAuthItem)){
-                        //Update the request with the auth item id
-                        $request = $this->Request->findById($savedRequest["Request"]["id"]);
-                        $request["Request"]["auth_item_id"] = $savedAuthItem["AuthItem"]["id"];
-                        $savedRequest = $this->Request->save($request);
-                        if(!$savedRequest["Request"]["auth_item_id"] == 0){
-                            //Range
-                            $range = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
-                            
-                            $rangeDB = $this->CalendarDay->find('all',
-                                array('conditions' => array(
-                                    'CalendarDay.day_date >=' => $request["Request"]["start_date"],
-                                    'CalendarDay.day_date <=' => $request["Request"]["end_date"],
-                                    'CalendarDay.employee_id' => $this->Session->read('Auth.Employee.id')
-                                ), 'order' => 'CalendarDay.day_date DESC')
+                    $preAuthItem = array('request_id' => $cr["Request"]["id"], 'supervisor_id' => $cr["Employee"]["supervisor_id"], 'authorized' => 0);
+                    $ai = $this->AuthItem->save($preAuthItem);
+
+                    //Update the request with the new AuthItem
+                    $request = $this->Request->findById($cr["Request"]["id"]);
+                    $request["Request"]["auth_item_id"] = $ai["AuthItem"]["id"];
+                    $this->Request->save($request);
+
+                    //All the dates that don't exist may be created
+                    if(!empty($notexist)){
+                        foreach($notexist as $ne){
+
+                            //Creating an Request To Calendar Days-record
+                            $this->RequestToCalendarDay->create();
+                            $rtcd = array(
+                                'RequestToCalendarDay' => array(
+                                    'request_id' => $cr["Request"]["id"],
+                                    'calendar_day_id' => $ne . '/' . $cr["Employee"]["id"],
+                                    'auth_item_id' => $cr["Employee"]["id"]
+                                )
+                            );
+                            $rtcd = $this->RequestToCalendarDay->save($rtcd);
+
+                            //Add the calendar days to one array to later be added to the db
+                            $cd[] = array('CalendarDay' =>
+                                array(
+                                    'employee_id' => $cr["Request"]["employee_id"],
+                                    'day_date' => explode('/', $ne)[0],
+                                    'day_time' => explode('/', $ne)[1],
+                                    'calendar_item_type_id' => 9,
+                                    'replacement_id' => $cr["Request"]["replacement_id"],
+                                    'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
+                                    'auth_item_id' => $ai["AuthItem"]["id"]
+                                )
                             );
 
-                            if(!empty($range)){
-                                foreach($rangeDB as $calendarDayRecord){
-                                    $calendarDayRecords[$calendarDayRecord["CalendarDay"]["day_date"] . '/' . $calendarDayRecord["CalendarDay"]["day_time"]] = $calendarDayRecord["CalendarDay"];
-                                }
-
-                                foreach($range as $calendarDay){
-                                    //Format the date
-                                    $date = explode('/', $calendarDay);
-                                    if(!empty($calendarDayRecords)){
-                                        if(array_key_exists($calendarDay, $calendarDayRecords)){
-                                            //Update
-
-
-                                            //Create the request to calendar day
-                                            $this->RequestToCalendarDay->create();
-                                            $existingCalendarDay["CalendarDay"] = $calendarDayRecords[$calendarDay];
-                                            $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $existingCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
-                                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                                            $insertCalendarDay = array(
-                                                'id' => $existingCalendarDay["CalendarDay"]["id"],
-                                                'day_date' => $date[0], // Could be removed
-                                                'day_time' => $date[1], // Could be removed
-                                                'calendar_item_type_id' => $existingCalendarDay["CalendarDay"]["calendar_item_type_id"],
-                                                'replacement_id' => $existingCalendarDay["CalendarDay"]["replacement_id"], // Could be removed
-                                                'request_to_calendar_days_id' => $savedRequestToCalendarDay["RequestToCalendarDay"]["id"], // Could be removed in Model
-                                                'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
-                                            );
-                                            $this->CalendarDay->save($insertCalendarDay);
-                                        } else {
-                                            //Create the calendar day
-                                            $calendarDay = array("CalendarDay" => array(
-                                                'employee_id' => $this->Session->read('Auth.Employee.id'),
-                                                'replacement_id' => $request["Request"]["replacement_id"],
-                                                'calendar_item_type_id' => 0,
-                                                'day_date' => $date[0], 'day_time' => $date[1],
-                                                'request_to_calendar_days_id' => 1,
-                                                'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
-
-                                            ));
-                                            $savedCalendarDay = $this->CalendarDay->save($calendarDay);
-                                            $savedCalendarDay["CalendarDay"]["id"] = $this->CalendarDay->getLastInsertID();
-                                            //Create the request to calendar day
-                                            $this->RequestToCalendarDay->create();
-                                            $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
-                                            $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                                            $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
-                                            $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
-                                            unset($savedCalendarDay);
-                                        }
-                                    } else {
-                                        //Create the calendar day
-                                        $this->CalendarDay->create();
-                                        $calendarDay = array("CalendarDay" => array(
-                                            'employee_id' => $this->Session->read('Auth.Employee.id'),
-                                            'replacement_id' => $request["Request"]["replacement_id"],
-                                            'calendar_item_type_id' => 0,
-                                            'day_date' => $date[0], 'day_time' => $date[1],
-                                            'request_to_calendar_days_id' => 1,
-                                            'auth_item_id' => $savedAuthItem["AuthItem"]["id"]
-
-                                        ));
-                                        $savedCalendarDay = $this->CalendarDay->save($calendarDay);
-
-                                        //Create the request to calendar day
-                                        $this->RequestToCalendarDay->create();
-                                        $requestToCalendarDay = array('request_id' => $savedRequest["Request"]["id"], 'employee_id' => $request["Request"]["employee_id"], 'calendar_day_id' => $savedCalendarDay["CalendarDay"]["id"], 'auth_item_id' => $savedAuthItem["AuthItem"]["id"]);
-                                        $savedRequestToCalendarDay = $this->RequestToCalendarDay->save($requestToCalendarDay);
-                                        $savedCalendarDay["CalendarDay"]["request_to_calendar_days_id"] = $savedRequestToCalendarDay["RequestToCalendarDay"]["id"];
-                                        $savedCalendarDay = $this->CalendarDay->save($savedCalendarDay);
-                                        unset($savedCalendarDay);
-                                    }
-                                }
-                            }
-                        } else {
-                            $this->Request->delete($savedRequest["Request"]["id"]);
-                            $this->AuthItem->delete($savedAuthItem["AuthItem"]["id"]);
                         }
+                    }
+
+                    if(!empty($exists)){
+                        foreach($exists as $e){
+
+                            //Creating an Request To Calendar Days-record
+                            $this->RequestToCalendarDay->create();
+                            $rtcd = array(
+                                'RequestToCalendarDay' => array(
+                                    'request_id' => $cr["Request"]["id"],
+                                    'calendar_day_id' => $e["CalendarDay"]["day_date"] . '/' . $e["CalendarDay"]["day_time"] . '/' . $cr["Employee"]["id"],
+                                    'auth_item_id' => $cr["Employee"]["id"]
+                                )
+                            );
+                            $rtcd = $this->RequestToCalendarDay->save($rtcd);
+
+                            //Add the calendar days to one array to later be added to the db
+                            $cd[] = array('CalendarDay' =>
+                                array(
+                                    'id' => $e["CalendarDay"]["id"],
+                                    'employee_id' => $cr["Request"]["employee_id"],
+                                    'day_date' => $e["CalendarDay"]["day_date"],
+                                    'day_time' => $e["CalendarDay"]["day_time"],
+                                    'calendar_item_type_id' => $e["CalendarDay"]["calendar_item_type_id"],
+                                    'replacement_id' => $cr["Request"]["replacement_id"],
+                                    'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
+                                    'auth_item_id' => $ai["AuthItem"]["id"]
+                                )
+                            );
+                        }
+                    }
+
+                    if(empty($cd)){
+                        $this->sendMailToHR("new", $cr);
+                        $this->redirect($this->here);
                     } else {
-                        $this->Request->delete($savedRequest["Request"]["id"]);
+                        if($this->CalendarDay->saveMany($cd)){
+                            $this->sendMailToHR("new", $cr);
+                            $this->redirect($this->here);
+                        }
                     }
                 }
-            //End
-                $this->Session->setFlash('Uw aanvraag is ingedient. Uw aanvraag moet enkel nog goedgekeurd worden.');
-                //$this->redirect('/');
-            } else {
-                $this->Session->setFlash($validation);
-                $this->redirect(array('controller' => 'requests', 'action' => 'add'));
             }
         }
     }
 
     private function authorize($id, $type){
-            $access = $this->Session->read('Auth.Role');
-            $authoriser = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
-            $request = $this->Request->findById($id);
-            $authorisation = $request["AuthItem"];
-            if($access["allow"] == true){
-                if($authoriser["Role"]["name"] !== 'admin'){
-                    if($request["Employee"]["supervisor_id"] == $authoriser["Employee"]["id"]){
-                    } else {
-                        $this->setFlash('U kunt geen verlof goedkeuren voor deze gebruiker');
-                        return $this->redirect('/');
-                    }
-                }
-                if($type == "allow"){
-                    $authorisation["authorized"] = 1;
-                    $notification = "Dit verlof is succesvol goedgekeurd";
-                } else {
-                    $notification = "Dit verlof is succesvol geweigerd";
-                }
-                $authorisation["authorization_date"] = date('Y-m-d H:i:s');
+        $author = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
+        $request = $this->Request->findById($id);
 
-                $authorisation["supervisor_id"] = $authoriser["Employee"]["id"];
-                $this->AuthItem->save($authorisation);
-                $this->Session->setFlash($notification);
-                //$this->redirect('/');
-            } else {
-                $this->Session->setFlash('U hebt geen toegang tot deze pagina.');
-                return $this->redirect('/');
+        $genericBody = 'Je aanvraag voor ' . $request["CalendarItemType"]["name"] . ' vanaf '
+            . $request["Request"]["start_date"] . '-' . $request["Request"]["start_time"] .
+            ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"];
+
+        if($author["Role"]["allow"] == true){
+
+            if($author["Role"]["name"] !== "admin"){
+                if($request["Employee"]["supervisor_id"] !== $author["Employee"]["internal_id"]){
+                    $this->Session->setFlash('Voor deze gebruiker kan je geen verlof goedkeuren.');
+                }
             }
+
+            if($type == 'allow'){
+                if($this->AuthItemUpdate($request)){
+                    $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is goedgekeurd', 'Je afwezigheid is goedgekeurd');
+                    $this->sendMailToHR('allowed', $request);
+                }
+            } else {
+                $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is geweigerd', 'Je afwezigheid is geweigerd');
+                $this->sendMailToHR('denied', $request);
+            }
+
+        } else {
+            $this->redirect('/');
+        }
     }
 
-    private function updateRequest($request, $status = "deny"){
-        $x = '';
-        $requestToCalendarDays = $this->RequestToCalendarDay->find('all', array(
-            'conditions' => array(
-                'RequestToCalendarDay.request_id' => $request["Request"]["id"],
-            )
-        ));
+    private function AuthItemUpdate($request){
+        $authorization["AuthItem"] = $request["AuthItem"];
+        $authorization["AuthItem"]["authorized"] = 1;
+        $authorization["AuthItem"]["authorization_date"] = date('Y-m-d H:i:s');
+        $range = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
+        $employee["Employee"] = $request["Employee"];
+        $cp = array();
 
-        foreach($requestToCalendarDays as $requestToCalendarDay){
-            $calendarDaysQuery[] = array('CalendarDay.id' => $requestToCalendarDay["RequestToCalendarDay"]["calendar_day_id"]);
+        foreach($range as $date){
+            $conditions[] = array('day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
         }
-        if(!empty($calendarDaysQuery)){
-            $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('OR' => $calendarDaysQuery)));
-            foreach($calendarDays as $calendarDay){
-                $data[$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay;
-                $currentCalendarItemType = $data[$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]]["CalendarDay"]["calendar_item_type_id"];
-                    if($request["Request"]["calendar_item_type_id"] == 9){
-                        $execute = true;
-                    } elseif($currentCalendarItemType == 0) {
-                        $execute = true;
-                    } elseif($currentCalendarItemType == 9){
-                        $execute = true;
-                    } else {
-                        $execute = false;
-                    }
 
-                    if($execute){
-                        if($this->Session->read('Auth.Role.allow') == true){
-                            if($this->Session->read('Auth.Role.adminpanel') == true){
-                                $data[$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
-                                $x = $this->CalendarDay->saveMany($data);
-                            } else {
-                            }
+        $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('OR' => $conditions)));
+        if($this->AuthItem->save($authorization)){
+            if($request["Request"]["calendar_item_type_id"] <> 9){
+                if($request["Request"]["calendar_item_type_id"] == 23){
+                    foreach($calendarDays as $key => $calendarDay){
+                        if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){
+                            $cp[$key] = $calendarDay;
+                            $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
                         }
                     }
+                }
+            } else {
+                foreach($calendarDays as $key => $calendarDay){
+                    $cp[$key] = $calendarDay;
+                    $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
+                }
+            }
+            $calculatedCost = $employee["Employee"]["daysleft"] - count($cp);
+            if($calculatedCost >= 0){
+                if($this->CalendarDay->saveMany($cp)){
+
+                }
+            } else {
+                $this->Session->setFlash("Deze gebruiker heeft niet genoeg vakantiedagen meer");
+                $this->redirect('/');
+            }
+
+        }
+    }
+
+    private function updateRequest($request, $status = 'deny'){
+        if($status == 'allow'){
+            $range = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
+
+            foreach($range as $date){
+                $or[] = array('day_date' => explode('/',$date)[0], 'day_time' => explode('/',$date)[1]);
+            }
+
+            $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('OR' => $or), array('calendar_item_type_id' => $request["Request"]["calendar_item_type_id"])));
+
+            foreach($calendarDays as $calendarDay){
+                if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){ //Type 9 is workday
+                    $execution[] = $calendarDay;
+                } else {
+
+                }
             }
         }
-        return $x;
     }
 
     private function dateRange( $first, $last, $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d' ){
@@ -386,6 +413,8 @@ class RequestsController extends AppController {
     private function insertValidation($request){
         //Validation
         $nulldate = '1970-01-01';
+        $request["Employee"] = $this->Employee->findById($this->Session->read('Auth.Employee.id'))["Employee"];
+        $dateRange = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
             $error = '';
             if(date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d') or date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d')){
                 $error .= 'U kunt niet retroactief verlof inplannen. <br />';
@@ -408,9 +437,78 @@ class RequestsController extends AppController {
             if(date('D', strtotime($request["Request"]["end_date"])) == 'Sat' or date('D', strtotime($request["Request"]["end_date"])) == 'Sun'){
                 $error .= "Je afwezigheid kan niet eindigen in het weekend";
             }
-            if($error !== ''){
-                $error = '<strong>Fout</strong><br />' . $error;
+            if($request["Request"]["calendar_item_type_id"] == 23){
+                var_dump($request["Employee"]);
+                $count = 0;
+                if(($request["Employee"]["daysleft"] - count($dateRange)) < 0){
+                    foreach($dateRange as $date){
+                        $conditions["OR"] = array('day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
+                    }
+                    foreach($this->CalendarDay->find("all", array('conditions' => $conditions)) as $calendarDay){
+                        if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){
+                            $count++;
+                        }
+                    }
+
+                    if($count > $request["Employee"]["daysleft"]){
+                        $error .="Je hebt te weinig verlofdagen om deze aanvraag in te dienen. Om dit toch in te dienen, neem je contact op met HR.";
+                    }
+                }
             }
         return $error;
+    }
+
+    private function sendMail($receiver, $body, $subject = "Westtoer afwezig"){
+        $Email = new CakeEmail('westtoer');
+        $Email->to($receiver);
+        $Email->subject($subject);
+        $Email->replyTo('noreply@westtoer.be');
+        $Email->from ('noreply@westtoer.be');
+        $Email->send($body);
+    }
+
+    private function trigramToMail($trigram){
+        if(strpos($trigram, '@')){
+            return $trigram;
+        } else {
+            return $trigram . '@westtoer.be';
+        }
+    }
+
+    private function completeRequest($request){
+        $compliantRequest = $request;
+        $compliantRequest["Request"]["employee_id"] = $this->Session->read('Auth.Employee.id');
+        $compliantRequest["Request"]["timestamp"] = date('Y-m-d H:i:s');
+        $compliantRequest["Request"]["timestamp"] = date('Y-m-d H:i:s');
+
+        return $compliantRequest;
+    }
+
+    private function convertToHashTable($unhashed){
+        foreach($unhashed as $u){
+            $hashed[$u["CalendarDay"]["day_date"] . '/' . $u["CalendarDay"]["day_time"]] = $u;
+        }
+
+        return $hashed;
+    }
+
+    private function sendMailToHR($type = "new", $request = array()){
+        $allHR = $this->Employee->find('all', array('conditions' => array('Employee.role_id <' => 3)));
+        foreach($allHR as $HR){
+            $Email = new CakeEmail('westtoer');
+            $Email->to($this->trigramToMail($HR["Employee"]["3gram"]));
+            $Email->subject('Er is een nieuwe gebruiker geregistreerd op Westtoer Afwezig.');
+            $Email->replyTo('noreply@westtoer.be');
+            $Email->from ('noreply@westtoer.be');
+
+            if($type == "new"){
+                var_dump($request);
+                $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' heeft een nieuwe aanvraag gedaan die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Om dit te bekijken ga je naar http://afwezig.westtoer.be/Requests/overlap/' . $request["Request"]["id"]);
+            } elseif($type == "allowed") {
+                $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' had een aanvraag gedaan voor die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Deze aanvraag is goedgekeurd.');
+            } elseif($type == "denied"){
+                $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' had een aanvraag gedaan voor die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Deze aanvraag is geweigerd.');
+            }
+        }
     }
 }

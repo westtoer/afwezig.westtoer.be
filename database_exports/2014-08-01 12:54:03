@@ -1,0 +1,339 @@
+-- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: afwezig
+-- ------------------------------------------------------
+-- Server version	5.5.38-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admin_bookingdates`
+--
+
+DROP TABLE IF EXISTS `admin_bookingdates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_bookingdates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `month` int(11) NOT NULL,
+  `day_of_month` int(11) NOT NULL,
+  `year` int(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_bookingdates`
+--
+
+LOCK TABLES `admin_bookingdates` WRITE;
+/*!40000 ALTER TABLE `admin_bookingdates` DISABLE KEYS */;
+INSERT INTO `admin_bookingdates` VALUES (1,1,16,2014),(2,2,16,2014),(3,3,16,2014),(4,4,16,2014),(5,6,16,2014),(6,5,16,2014),(7,7,16,2014),(8,8,16,2014),(9,9,16,2014),(10,10,16,2014),(11,11,16,2014),(12,12,16,2014);
+/*!40000 ALTER TABLE `admin_bookingdates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admin_variables`
+--
+
+DROP TABLE IF EXISTS `admin_variables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_variables` (
+  `name` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_variables`
+--
+
+LOCK TABLES `admin_variables` WRITE;
+/*!40000 ALTER TABLE `admin_variables` DISABLE KEYS */;
+INSERT INTO `admin_variables` VALUES ('lockApp','true',1);
+/*!40000 ALTER TABLE `admin_variables` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_items`
+--
+
+DROP TABLE IF EXISTS `auth_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_id` int(11) NOT NULL,
+  `supervisor_id` int(11) NOT NULL,
+  `authorized` tinyint(1) NOT NULL,
+  `authorization_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_items`
+--
+
+LOCK TABLES `auth_items` WRITE;
+/*!40000 ALTER TABLE `auth_items` DISABLE KEYS */;
+INSERT INTO `auth_items` VALUES (99,224,1,1,'2014-07-17 12:20:58'),(100,225,1,1,'2014-07-17 14:02:00'),(101,226,1,1,'2014-07-22 06:20:14'),(102,227,1,1,'2014-07-17 14:16:26'),(103,228,1,0,'2014-07-17 14:16:30'),(104,229,0,0,NULL),(105,230,1,1,'2014-07-17 14:24:37'),(106,231,0,0,NULL),(107,232,0,0,NULL),(108,233,0,0,NULL),(109,234,0,0,NULL),(110,235,0,0,NULL),(111,236,0,0,NULL),(112,237,0,0,NULL),(113,238,0,0,NULL),(114,239,0,0,NULL),(115,240,0,0,NULL),(116,241,0,0,NULL),(117,242,0,0,NULL),(118,243,1,0,'2014-07-22 06:20:24'),(119,244,1,1,'2014-07-22 13:35:37'),(120,245,1,1,'2014-07-18 09:04:20'),(121,246,1,1,'2014-07-22 13:36:17'),(122,247,1,1,'2014-07-22 13:55:53'),(123,250,1,1,'2014-07-25 14:36:52');
+/*!40000 ALTER TABLE `auth_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `calendar_days`
+--
+
+DROP TABLE IF EXISTS `calendar_days`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calendar_days` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `day_date` date NOT NULL,
+  `day_time` varchar(3) NOT NULL,
+  `calendar_item_type_id` int(11) NOT NULL,
+  `replacement_id` int(11) NOT NULL,
+  `request_to_calendar_days_id` int(11) NOT NULL,
+  `auth_item_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=585 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `calendar_days`
+--
+
+LOCK TABLES `calendar_days` WRITE;
+/*!40000 ALTER TABLE `calendar_days` DISABLE KEYS */;
+INSERT INTO `calendar_days` VALUES (514,1,'2014-07-21','PM',0,4,189,117),(515,1,'2014-07-22','PM',0,4,1,116),(516,1,'2014-07-20','AM',5,3,144,100),(517,1,'2014-07-20','PM',5,3,145,100),(518,1,'2014-12-01','AM',6,3,146,101),(519,1,'2014-12-01','PM',6,3,147,101),(520,1,'2014-12-02','AM',6,3,148,101),(521,1,'2014-12-02','PM',6,3,149,101),(522,3,'2014-07-17','PM',23,1,151,103),(523,1,'2014-07-17','PM',0,3,1,104),(524,1,'2014-07-25','AM',19,3,212,121),(525,1,'2014-07-25','PM',19,3,213,121),(526,1,'2014-07-28','AM',19,3,155,105),(527,1,'2014-07-28','PM',19,3,156,105),(528,1,'2014-07-21','AM',0,4,188,117),(529,1,'2014-07-18','PM',0,4,187,117),(530,1,'2014-07-22','PM',0,4,185,116),(531,1,'2014-07-18','AM',0,3,186,117),(532,1,'2014-08-04','AM',1,4,214,122),(533,1,'2014-08-04','PM',1,4,215,122),(534,1,'2014-08-05','AM',1,4,216,122),(535,1,'2014-08-05','PM',1,4,217,122),(536,1,'2014-08-06','AM',5,4,218,122),(537,1,'2014-08-06','PM',5,4,219,122),(538,1,'2014-08-07','AM',5,4,220,122),(539,1,'2014-08-07','PM',5,4,221,122),(540,1,'2014-08-08','AM',5,4,198,118),(541,1,'2014-08-08','PM',5,4,199,118),(542,2,'2014-07-25','AM',7,1,204,120),(543,2,'2014-07-25','PM',7,1,205,120),(544,2,'2014-07-28','AM',7,1,206,120),(545,2,'2014-07-28','PM',7,1,207,120),(546,1,'2014-07-24','PM',5,3,211,121),(547,2,'2014-08-15','AM',4,3,222,123),(548,2,'2014-08-15','PM',4,3,223,123),(549,2,'2014-08-18','AM',4,3,224,123),(550,2,'2014-08-18','PM',4,3,225,123),(551,2,'2014-08-19','AM',4,3,226,123),(552,2,'2014-08-19','PM',4,3,227,123),(553,2,'2014-08-20','AM',4,3,228,123),(554,2,'2014-08-20','PM',4,3,229,123),(555,2,'2014-08-21','AM',4,3,230,123),(556,2,'2014-08-21','PM',4,3,231,123),(557,2,'2014-08-22','AM',4,3,232,123),(558,2,'2014-08-22','PM',4,3,233,123),(559,2,'2014-08-25','AM',4,3,234,123),(560,2,'2014-08-25','PM',4,3,235,123),(561,2,'2014-08-26','AM',4,3,236,123),(562,2,'2014-08-26','PM',4,3,237,123),(563,2,'2014-08-27','AM',4,3,238,123),(564,2,'2014-08-27','PM',4,3,239,123),(565,2,'2014-08-28','AM',4,3,240,123),(566,2,'2014-08-28','PM',4,3,241,123),(567,2,'2014-08-29','AM',4,3,242,123),(568,2,'2014-08-29','PM',4,3,243,123),(569,2,'2014-09-01','AM',4,3,244,123),(570,2,'2014-09-01','PM',4,3,245,123),(571,2,'2014-09-02','AM',4,3,246,123),(572,2,'2014-09-02','PM',4,3,247,123),(573,2,'2014-09-03','AM',4,3,248,123),(574,2,'2014-09-03','PM',4,3,249,123),(575,2,'2014-09-04','AM',4,3,250,123),(576,2,'2014-09-04','PM',4,3,251,123),(577,2,'2014-09-05','AM',4,3,252,123),(578,2,'2014-09-05','PM',4,3,253,123),(579,2,'2014-09-08','AM',4,3,254,123),(580,2,'2014-09-08','PM',4,3,255,123),(581,2,'2014-09-09','AM',4,3,256,123),(582,2,'2014-09-09','PM',4,3,257,123),(583,2,'2014-09-10','AM',4,3,258,123),(584,2,'2014-09-10','PM',4,3,259,123);
+/*!40000 ALTER TABLE `calendar_days` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `calendar_item_types`
+--
+
+DROP TABLE IF EXISTS `calendar_item_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calendar_item_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(4) NOT NULL,
+  `user_allowed` tinyint(1) NOT NULL,
+  `dinner_cheque` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `calendar_item_types`
+--
+
+LOCK TABLES `calendar_item_types` WRITE;
+/*!40000 ALTER TABLE `calendar_item_types` DISABLE KEYS */;
+INSERT INTO `calendar_item_types` VALUES (1,'Adoptieverlof','AD',1,0),(2,'Arbeidsongeval','AO',1,0),(3,'Betaalde Feestdag','F',0,0),(4,'Bloedafgifte','BL',1,0),(5,'Co-moederschapsverlof','CMV',1,0),(6,'Dienstvrijstelling','DV',1,0),(7,'Erkende Staking','ES',1,0),(8,'Europese Vakantie','EV',1,0),(9,'Gewerkt','G',1,1),(10,'Jeugdvakantie','JV',1,0),(11,'Loopbaanonderbreking','LO',1,0),(12,'Niet Gewerkt','X',0,0),(13,'Omstandigheidsverlof Bezoldigd','OM',1,0),(14,'Onbezoldigd Verlof','ON',1,0),(15,'Onwettig Afwezig','OA',1,0),(16,'Ouderschapsverlof','OU',1,0),(17,'Politiek Verlof Bezoldigd','PV',1,0),(18,'Recuperatieverlof','R',1,1),(19,'Seniorverlof','SV',1,0),(20,'Sollicitatieverlof','SOL',1,0),(21,'Syndicaal Verlof Bezoldigd','SY',1,1),(22,'Vaderschapsverlof','VV',1,0),(23,'Verlof','V',1,0),(24,'Ziek','Z',1,0),(25,'Ziek >1 Maand','Z>1M',1,0),(26,'Zwangerschapsverlof','ZW',1,0);
+/*!40000 ALTER TABLE `calendar_item_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee_departments`
+--
+
+DROP TABLE IF EXISTS `employee_departments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee_departments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee_departments`
+--
+
+LOCK TABLES `employee_departments` WRITE;
+/*!40000 ALTER TABLE `employee_departments` DISABLE KEYS */;
+INSERT INTO `employee_departments` VALUES (1,'PAF');
+/*!40000 ALTER TABLE `employee_departments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employees` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) DEFAULT NULL,
+  `employee_department_id` int(11) NOT NULL,
+  `3gram` varchar(255) NOT NULL,
+  `telephone` text NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `note` mediumtext NOT NULL,
+  `daysleft` decimal(10,0) NOT NULL,
+  `status` varchar(9) NOT NULL,
+  `linked` tinyint(1) NOT NULL,
+  `supervisor_id` int(11) NOT NULL,
+  `gsm` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employees`
+--
+
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+INSERT INTO `employees` VALUES (1,1,1,'niels.vermaut@westtoer.be','5569','Niels','Vermaut','Hallo, dit is een geÃ¼pdatet profiel. Voor de tweede keer',0,'0',1,3,'0472499286'),(2,3,1,'mooi@email.com','5511','Test','Persoon','Dit is mijn hoogstpersoonlijke notitie </body>',0,'0',1,4,'+32-476-473633'),(3,3,1,'','','Tim','Vanholle','Test Profiel',0,'',1,4,''),(4,3,0,'','','','','',0,'',0,4,''),(32,3,1,'test','5500','John','Wayne','0',12,'0',0,4,'0');
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `request_to_calendar_days`
+--
+
+DROP TABLE IF EXISTS `request_to_calendar_days`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `request_to_calendar_days` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `calendar_day_id` int(11) NOT NULL,
+  `auth_item_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `request_to_calendar_days`
+--
+
+LOCK TABLES `request_to_calendar_days` WRITE;
+/*!40000 ALTER TABLE `request_to_calendar_days` DISABLE KEYS */;
+INSERT INTO `request_to_calendar_days` VALUES (142,225,1,514,100),(143,225,1,515,100),(144,225,1,516,100),(145,225,1,517,100),(146,226,1,518,101),(147,226,1,519,101),(148,226,1,520,101),(149,226,1,521,101),(150,227,3,522,102),(151,228,3,522,103),(152,229,1,523,104),(153,230,1,524,105),(154,230,1,525,105),(155,230,1,526,105),(156,230,1,527,105),(157,231,1,514,106),(158,231,1,515,106),(159,232,1,514,107),(160,233,1,528,108),(161,233,1,514,108),(162,233,1,515,108),(163,234,1,528,109),(164,234,1,514,109),(165,235,1,528,110),(166,236,1,529,111),(167,236,1,528,111),(168,236,1,514,111),(169,236,1,515,111),(170,237,1,529,112),(171,237,1,528,112),(172,237,1,514,112),(173,237,1,515,112),(174,238,1,529,113),(175,238,1,528,113),(176,238,1,514,113),(177,239,1,529,114),(178,239,1,528,114),(179,240,1,529,115),(180,241,1,530,116),(181,241,1,529,116),(182,241,1,528,116),(183,241,1,514,116),(184,241,1,515,116),(185,241,1,530,116),(186,242,1,531,117),(187,242,1,529,117),(188,242,1,528,117),(189,242,1,514,117),(190,243,1,532,118),(191,243,1,533,118),(192,243,1,534,118),(193,243,1,535,118),(194,243,1,536,118),(195,243,1,537,118),(196,243,1,538,118),(197,243,1,539,118),(198,243,1,540,118),(199,243,1,541,118),(200,244,1,532,119),(201,244,1,533,119),(202,244,1,534,119),(203,244,1,535,119),(204,245,2,542,120),(205,245,2,543,120),(206,245,2,544,120),(207,245,2,545,120),(208,246,1,546,121),(209,246,1,546,121),(210,246,1,546,121),(211,246,1,546,121),(212,246,1,524,121),(213,246,1,525,121),(214,247,1,532,122),(215,247,1,533,122),(216,247,1,534,122),(217,247,1,535,122),(218,247,1,536,122),(219,247,1,537,122),(220,247,1,538,122),(221,247,1,539,122),(222,250,2,547,123),(223,250,2,548,123),(224,250,2,549,123),(225,250,2,550,123),(226,250,2,551,123),(227,250,2,552,123),(228,250,2,553,123),(229,250,2,554,123),(230,250,2,555,123),(231,250,2,556,123),(232,250,2,557,123),(233,250,2,558,123),(234,250,2,559,123),(235,250,2,560,123),(236,250,2,561,123),(237,250,2,562,123),(238,250,2,563,123),(239,250,2,564,123),(240,250,2,565,123),(241,250,2,566,123),(242,250,2,567,123),(243,250,2,568,123),(244,250,2,569,123),(245,250,2,570,123),(246,250,2,571,123),(247,250,2,572,123),(248,250,2,573,123),(249,250,2,574,123),(250,250,2,575,123),(251,250,2,576,123),(252,250,2,577,123),(253,250,2,578,123),(254,250,2,579,123),(255,250,2,580,123),(256,250,2,581,123),(257,250,2,582,123),(258,250,2,583,123),(259,250,2,584,123);
+/*!40000 ALTER TABLE `request_to_calendar_days` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `requests`
+--
+
+DROP TABLE IF EXISTS `requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `requests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `auth_item_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `start_time` varchar(2) NOT NULL,
+  `end_date` date NOT NULL,
+  `end_time` varchar(2) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `calendar_item_type_id` int(11) NOT NULL,
+  `replacement_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `requests`
+--
+
+LOCK TABLES `requests` WRITE;
+/*!40000 ALTER TABLE `requests` DISABLE KEYS */;
+INSERT INTO `requests` VALUES (224,1,99,'','2014-07-18','AM','2014-07-20','PM','2014-07-16 14:16:53',5,3),(225,1,100,'','2014-07-18','AM','2014-07-20','PM','2014-07-16 14:17:43',5,3),(226,1,101,'','2014-12-01','AM','2014-12-02','PM','2014-07-17 12:21:31',6,3),(227,3,102,'','2014-07-17','PM','2014-07-17','PM','2014-07-17 14:04:16',23,1),(228,3,103,'','2014-07-17','PM','2014-07-17','PM','2014-07-17 14:04:22',23,1),(229,1,104,'','2014-07-17','AM','2014-07-21','PM','2014-07-17 14:17:37',7,3),(230,1,105,'','2014-07-25','AM','2014-07-28','PM','2014-07-17 14:24:16',19,3),(231,1,106,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:39:39',6,4),(232,1,107,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:42:10',6,4),(233,1,108,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:43:47',6,4),(234,1,109,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:45:41',6,4),(235,1,110,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:47:13',6,4),(236,1,111,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:47:52',6,4),(237,1,112,'','2014-07-18','AM','2014-07-22','PM','2014-07-18 08:48:30',13,4),(238,1,113,'','2014-07-18','AM','2014-07-22','PM','2014-07-18 08:48:44',13,4),(239,1,114,'','2014-07-18','AM','2014-07-22','PM','2014-07-18 08:49:32',13,4),(240,1,115,'','2014-07-18','AM','2014-07-22','PM','2014-07-18 08:51:37',13,4),(241,1,116,'','2014-07-18','AM','2014-07-22','PM','2014-07-18 08:52:21',13,4),(242,1,117,'','2014-07-18','AM','2014-07-21','PM','2014-07-18 08:52:42',22,3),(243,1,118,'','2014-08-04','AM','2014-08-08','PM','2014-07-18 08:53:32',5,4),(244,2,119,'','2014-08-04','AM','2014-08-05','PM','2014-07-18 08:54:07',9,4),(245,2,120,'','2014-07-25','AM','2014-07-28','PM','2014-07-18 09:04:11',7,1),(246,1,121,'','2014-07-23','AM','2014-07-25','PM','2014-07-22 13:36:00',5,3),(247,1,122,'','2014-08-04','AM','2014-08-07','PM','2014-07-22 13:37:05',1,2),(249,4,4,'Nationale feestdag','2014-08-15','AM','2014-08-15','PM','2014-07-24 13:17:22',3,4),(250,2,123,'','2014-08-15','AM','2014-09-10','PM','2014-07-25 14:36:23',4,3);
+/*!40000 ALTER TABLE `requests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(12) NOT NULL,
+  `adminpanel` tinyint(1) NOT NULL,
+  `allow` tinyint(1) NOT NULL,
+  `verifyuser` tinyint(1) NOT NULL,
+  `edituser` tinyint(1) NOT NULL,
+  `removeuser` tinyint(1) NOT NULL,
+  `editcalendaritem` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'admin',1,1,1,1,1,1),(2,'hr',1,1,1,1,1,1),(3,'standard',0,0,0,1,0,0),(4,'supervisor',0,1,0,1,0,0);
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `uitid` varchar(50) NOT NULL,
+  `status` varchar(9) NOT NULL DEFAULT 'requested',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (10,2,'marc.portier@gmail.com','0e8ff3bb-43a1-4b18-ac6c-6172f9ae4961','active'),(11,3,'tim.vanholle@westtoer.be','fcd13164-ccaf-49ea-aa74-3123ce44359f','active'),(15,1,'nielsvermaut@gmail.com','ca856f72-36ce-4ff3-bbb4-7a9c8c47d08a','active');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-08-01 12:54:03

@@ -29,24 +29,7 @@
     padding-bottom: 12px;
 }
 
-.menu{
-    list-style-type: none;
-	text-decoration: none;
-	font-weight: bold;
-	line-height: 30px;
-}
 
-.menuitem{
-    display: inline;
-    color: #fff;
-    text-transform: uppercase;
-    margin-left: 25px;
-}
-
-.menuitem a, .menuitem a:hover{
-	text-decoration: none;
-	color: #fff;
-}
 
 .glyphcontrol{
     font-size: 24px;
@@ -108,4 +91,9 @@
 
 .letters li a:hover{
     text-decoration: none;
+}
+
+tr .selectbox-td{
+    text-align:center;
+    width: 120px;
 }

@@ -1,5 +1,8 @@
 <?php
 class EmployeeHelper extends AppHelper {
+
+    public $helpers = array('Form');
+
     public function iterateOverEmployees($employees){
         $alphabet = range('a', 'z');
         $employeesSorted = '';
@@ -37,14 +40,16 @@ class EmployeeHelper extends AppHelper {
     public function selectorAllEmployees($employees, $datatype = 'html', $placement = 0){
         //Give a standard null option
         if($datatype == 'html'){
-            if($placement== 1){
+            if($placement == 1){
                 $employeesOptions[] = '<option value="4">Gebruiker</option>';
+            } elseif($placement == 2) {
+                $employeesOptions[] = '<option value="0">voor</option>';
             } else {
                 $employeesOptions[] = '<option value="4">Kies een vervanger</option>';
             }
             //Fill with all Employees
             foreach($employees as $employee){
-                $employeesOptions[] = '<option value="' .$employee["Employee"]["id"] . '">' . $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '</option>';
+                $employeesOptions[] = '<option value="' .$employee["Employee"]["internal_id"] . '">' . $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '</option>';
             }
         } elseif($datatype == 'array'){
             //Give a standard null option
@@ -88,25 +93,45 @@ class EmployeeHelper extends AppHelper {
 
     public function tableEmployees($employees, $tableid = '1'){
         $html = '<table id="' . $tableid . '" class="table" >';
-        $html .= '<tr><th>Naam</th><th>3gram</th><th>Rol</th><th>Acties</th></tr>';
+        $html .= '<tr><th width="20px"></th><th>Naam</th><th>3gram</th><th>Acties</th></tr>';
         foreach($employees as $employee){
             $html .= '<tr>';
+            $html .= '<td><input class="employeesSelector" type="checkbox" id="Select' . $employee["Employee"]["id"].'" data-employee-id="'. $employee["Employee"]["id"] .'"></td>';
             $html .= '<td>' . $employee["Employee"]["name"] . ' ' .$employee["Employee"]["surname"] . '</td>';
             $html .= '<td>' . $employee["Employee"]["3gram"] . '</td>';
-            $html .= '<td>' . $employee["Role"]["name"] . '</td>';
-            $html .= '<td>';
-
-            if($employee["Role"]["id"] == 1 or $employee["Role"]["id"] == 2 or $employee["Role"]["id"] == 4){
-                $html .= '<a href="">Degradeer</a>';
-            } else {
-
-            }
-
-            $html .= '</td>';
+            $html .= '<td><a href="' .$this->base .'/admin/editEmployee/' . $employee["Employee"]["id"] . '">Pas aan</a>  |  <a href="' .$this->base .'/Employees/view/' . $employee["Employee"]["id"] . '">Bekijk</a></td>';
             $html .= '</tr>';
         }
         $html .= '</table>';
 
         return $html;
     }
+
+
+
+    public function tableEndOfYear($employees, $type = 'mutate', $tableid = "1", $chainstep){
+        $html = $this->Form->create('Employee', array('url' => '/admin/endOfYear?step=' . $chainstep));
+        $html .= '<table id="' . $tableid . '" class="table" >';
+        $html .= '<tr><th>Naam</th><th>Halve dagen over dit jaar</th>';
+
+        if($type == 'new'){
+            $html .= '<th>Aantal halve dagen dit jaar</th></tr>';
+            $html .= '<tr><td></td><td></td><td><input id="director" type="text" class="form-control" placeholder="Standaard aantal halve dagen" onChange="updateFields()"></td>';
+        } else {
+            $html .= '<th>Mutatie</th></tr>';
+        }
+        foreach($employees as $key => $employee){
+            $html .= '<tr>';
+            $html .= '<td>' . $employee["Employee"]["name"] . ' ' .$employee["Employee"]["surname"] . '</td>';
+            $html .= '<td>' . $employee["Employee"]["daysleft"] .'</td>';
+            $html .= '<td width="200px">'. '<input name="data[Employee][' . $key .'][id]" value="' . $employee["Employee"]["id"] .'" id="Employee'. $key .'id" type="hidden">' . '<input name="data[Employee]['. $key .'][daysleft]" data-' . $key .'-daysleft="' . $employee["Employee"]["daysleft"] .'" class="form-control listener" id="Employee'. $key.'Daysleft">' .'</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+        $html .= '<script>var amountOfRows = ' . $key . ' + 1</script>';
+        $html .= $this->Form->submit('Volgende', array('class' => 'btn btn-primary fullwidth'));
+        $html .= $this->Form->end();
+        return $html;
+    }
+
 }

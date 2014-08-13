@@ -4,7 +4,7 @@
             <h2 class="first">Verlof aanvragen</h2>
             <?php echo $this->Form->create('Request');?>
             <?php echo $this->Form->hidden('employee_id', array('value' => 0));?>
-            <?php echo $this->Form->hidden('auth_id', array('value' => 0));?>
+            <?php echo $this->Form->hidden('auth_item_id', array('value' => 0));?>
             <?php echo $this->Form->hidden('timestamp', array('value' => 0));?>
             <div class="row">
                 <div class="col-md-8 formspaced-left spaced">

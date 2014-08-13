@@ -1,10 +1,13 @@
 <?php
 class AdminHelper extends AppHelper {
+
+    public $helpers = array('Form');
+
     public function tableUsers($users, $type){
         $html = '<table class="table">';
         $html .= '<tr><th>UiTID</th><th>Gekoppelt aan</th><th>Status</th><th>Acties</th></tr><tr>';
         foreach($users as $user){
-            $html .= '<td>' . $user["User"]["uitid"] . '</td>';
+            $html .= '<td>' . $user["User"]["email"] . '</td>';
             $html .= '<td>' . $user["Employee"]["name"] . ' ' . $user["Employee"]["surname"] . '</td>';
             $html .= '<td>' . $this->checkIntegrityStatus($user['User']["status"], $user["Employee"]["linked"]) . '</td>';
             if($type == 'active'){
@@ -38,6 +41,17 @@ class AdminHelper extends AppHelper {
             } else {
                 $html .= '</tr>';
             }
+        }
+        $html .= '</table>';
+        return $html;
+    }
+
+    public function tableDinnerCheques($employees){
+        $html = '<table class="table">';
+        $html .= '<tr><th>Naam</th><th>Maaltijdcheques</th></tr>';
+        foreach($employees as $employee){
+            $html .= '<tr><td>' . $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '</td>';
+            $html .= '<td>' . $employee["Employee"]["dinner_cheques"] . '</td></tr>';
         }
         $html .= '</table>';
         return $html;
@@ -78,7 +92,95 @@ class AdminHelper extends AppHelper {
         return $x;
     }
 
-    private function actionsBuilder(){
+    public function tableHolidays($holidays){
+        $html = $this->Form->create('Request', array('url' => '/admin/endOfYear?step=7'));
+        $html .= '<table class="table">';
+        $html .= '<tr><th>Naam</th><th>Datum</th><th class="selectbox-td"><input type="checkbox" id="selectAll" onChange="changeState()"></th></tr>';
+        foreach($holidays as $key => $holiday){
+            $html .= '<tr>';
+            $html .= '<td>' . $holiday["Request"]["name"] .'</td>';
+            $html .= '<td>';
+                if($holiday["Request"]["start_date"] == $holiday["Request"]["end_date"]){
+                    $html .= $holiday["Request"]["start_date"];
+                } else {
+                    $html .= $holiday["Request"]["start_date"] . '  -  ' . $holiday["Request"]["end_date"];
+                }
+            $html .= '</td>';
+            $html .= '<td class="selectbox-td"><input type="hidden" name="data[Request]['. $key .'][id]" value="' . $holiday["Request"]["id"] . '"><input type="checkbox" class="selectbox" name="data[Request][' . $key .'][request_copy]"></td>';
+        }
+        $html .= '</table>';
+        $html .= $this->Form->submit("Feestdagen overzetten", array('class' => 'btn btn-primary fullwidth'));
+        $html .= $this->Form->end();
+        return $html;
+    }
+
+    public function tableCalendarItemTypes($calendarTypes){
+        $html = $this->Form->create('CalendarItemType', array('url' => $this->here));
+        $html .= '<table class="table">';
+        $html .= '<tr><th>Naam</th><th>Code</th><th width="20px">Zichtbaar</th><th width="20px">Maaltijdcheque</th><th>Schaubroek Code</th><th>Schaubroek aard</th><th>Schaubroek Extensie</th></tr>';
+        foreach($calendarTypes as $key => $calendarType){
+            $html .= '<tr><td><input type="text" name="data['.$key.'][CalendarItemType][name]" value="' . $calendarType["CalendarItemType"]["name"] .'" class="form-control"></td>';
+            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][code]" value="' . $calendarType["CalendarItemType"]["code"] .'" class="form-control"></td>';
+            $html .= '<td width="20px"><select name="data['.$key.'][CalendarItemType][user_allowed]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["user_allowed"]) .'</select></td>';
+            $html .= '<td><select name="data['.$key.'][CalendarItemType][dinner_cheque]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["dinner_cheque"]) .'</select></td>';
+            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][code_schaubroek]" value="' . $calendarType["CalendarItemType"]["code_schaubroek"] .'" class="form-control"></td>';
+            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][aard_schaubroek]" value="' . $calendarType["CalendarItemType"]["aard_schaubroek"] .'" class="form-control"></td>';
+            $html .= '<input type="hidden" name="data['.$key.'][CalendarItemType][id]" value="'.  $calendarType["CalendarItemType"]["id"]  .'">';
+            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][ext_schaubroek]" value="' . $calendarType["CalendarItemType"]["ext_schaubroek"] .'" class="form-control"></td></tr>';
+        }
+        $html .= '</table>';
+        $html .= $this->Form->submit("Dagcodes opslaan", array('class' => 'btn btn-primary fullwidth'));
+        $html .= $this->Form->end();
+        return $html;
+    }
+
+    private function currentlySelected($value){
+        if($value == true){
+            $html ='<option value="1">Ja</option><option value="0">Nee</option>';
+        } elseif($value == false) {
+            $html ='<option value="0">Nee</option><option value="1">Ja</option>';
+        }
+        return $html;
+    }
+
+    public function webview($data){
+
+    $html = '';
+        foreach($data as $employee => $dateObjects){
+            $html .= '<h3 class="first">' . $employee . '</h3>';
+            foreach($dateObjects as $dateObject => $type){
+                $dates[explode('/', $dateObject)[0]][explode('/', $dateObject)[1]] = $type;
+            }
+            $html .= '<table class="table table-bordered overview"><tr>';
+
+            foreach($dates as $date => $time){
+                $html .= '<th colspan=2 class="date">' . explode('-',$date)[2] . '</th>';
+            }
+            $html .= '</tr><tr>';
+            foreach($dates as $time){
+                foreach($time as $timeblocks){
+                    if(is_array($timeblocks)){
+                        if($timeblocks[1] == "G"){
+                            $html .= '<td></td>';
+                        } else {
+                            $html .= '<td>' . $timeblocks[1] . '</td>';
+                        }
+                    } else {
+                        if($timeblocks == "G"){
+                            $html .= '<td></td>';
+                        } elseif($timeblocks == "ZA" or $timeblocks == "ZO"){
+                            $html .= '<td class="black"></td>';
+                        }else {
+                            $html .= '<td>' . $timeblocks . '</td>';
+                        }
+                    }
+                }
+            }
+            $html .= '</tr></table>';
+        }
+
+
+        return $html;
 
     }
 }

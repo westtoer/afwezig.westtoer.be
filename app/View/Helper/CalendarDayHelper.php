@@ -34,17 +34,62 @@ class CalendarDayHelper extends AppHelper{
         return $html;
     }
 
-    private function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d' ){
-        $dates = '';
+    private function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d', $starttime = 'AM', $endtime = 'PM'){
+        $dates = array();
         $current = strtotime( $first );
         $last = strtotime( $last );
+        $datestime = array();
 
-        while( $current <= $last ) {
-            $dates[] = date( $format, $current );
-            $current = strtotime( $step, $current );
+        if(strtotime($first) == $last AND $starttime == $endtime){
+            $datestime[] = $first . '/' . $starttime;
+        } else {
+            if($starttime !== 'PM'){
+                $datestime[] = $first . '/AM';
+            }
+
+            $datestime[] = $first . '/PM';
+
+
+
+            while( $current <= $last ) {
+                if(date('D', $current) == 'Sat'){
+                    $current = strtotime( $step, $current );
+                } elseif(date('D', $current) == 'Sun'){
+                    $current = strtotime( $step, $current );
+                }else {
+                    $dates[] = date( $format, $current );
+                    $current = strtotime( $step, $current );
+                }
+
+            }
+
+            foreach($dates as $date){
+                if($date == $first){
+                    if($starttime == 'PM'){
+                        $datestime[] = $date . '/PM';
+
+                    }
+                } elseif(strtotime($date) == $last){
+                    if($endtime == 'AM'){
+                        $datestime[] = $date . '/AM';
+                    }
+                } else{
+                    $datestime[] = $date . '/AM';
+                    $datestime[] = $date . '/PM';
+                }
+            }
+
+            $datestime[] = date('Y-m-d', $last) . '/AM';
+            if($endtime !== 'AM'){
+                $datestime[] = date('Y-m-d', $last) . '/PM';
+            }
+
+            if($datestime[0] == $datestime[2]){
+                unset($datestime[2]);
+                unset($datestime[3]);
+            }
         }
-
-        return $dates;
+        return $datestime;
     }
 
     private function fillBlock($key, $externalKey, $section, $day = null, $limit = 20){
@@ -69,6 +114,79 @@ class CalendarDayHelper extends AppHelper{
             $html .= '</td>';
         }
         return $html;
+    }
+
+    public function report($calendarDays, $range){
+        $complex = $this->generateReportStructure($calendarDays, $range["start"], $range["end"]);
+        $html = '<table class="table">';
+        $count = 0;
+        foreach($complex["items"] as $key => $date){
+            $count++;
+            if(date('D', strtotime(explode('/',$key)[0])) == 'Mon' or $count < 2){
+                if(explode('/',$key)[1] == 'AM'){
+                    if(explode('-', explode('/',$key)[0])[2] == '01'){
+
+                    } else {
+                        $html .= '<tr class="newweek"><td></td><td></td><td></td></tr>';
+                    }
+                }
+                }
+
+                if(explode('/',$key)[1] == 'AM'){
+                    $html .= '<tr class="daystart">';
+                    $html .= '<td width="150px">' . explode('/',$key)[0] . '</td>';
+                } else {
+                    $html .= '<tr class="dayend">';
+                    $html .= '<td></td>';
+                }
+
+                $html .= '<td>' . explode('/',$key)[1] . '</td>';
+                if($date !== ''){
+                    $html .= '<td>' . $date["CalendarItemType"]["name"] .'</td>';
+                } else {
+                    $html .= '<td>Gewerkt</td>';
+                }
+                $html .= '</tr>';
+            }
+        $html .= '</table>';
+
+        return array('size' => $complex["size"], 'html' => $html);
+    }
+
+    public function reportAll($calendarDays, $range){
+
+    }
+
+    private function generateReportStructure($calendarDays, $start, $end){
+        $dateRange = $this->dateRange($start, $end);
+        $convertedCalendar = array();
+        $structure = array();
+        $size = sizeof($calendarDays);
+        foreach($calendarDays as $calendarDay){
+            $convertedCalendar[$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay;
+        }
+
+
+
+        if(isset($this->request->query["type"])){
+           if($this->request->query["type"] == 'off'){
+               $convertedCalendar = array('size' => $size, 'items' => $convertedCalendar);
+               return $convertedCalendar;
+           }
+        } else {
+            foreach($dateRange as $date){
+                $structure[$date] = '';
+            }
+
+            $merged = array_merge($structure, $convertedCalendar);
+            $data = array('size' => $size, 'items' => $merged);
+            return $data;
+        }
+    }
+
+    public function toMonthLocale($id){
+        $months = array('','Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December');
+        return $months[$id];
     }
 
 }

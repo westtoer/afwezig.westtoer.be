@@ -8,6 +8,26 @@ header{
     margin: 0px 0px 24px 0px;
     background-color: #428bca;
 }
+
+.menu{
+    list-style-type: none;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.menuitem{
+    display: inline;
+    color: #fff;
+    text-transform: uppercase;
+    margin-left: 25px;
+}
+
+.menuitem a, .menuitem a:hover{
+    text-decoration: none;
+    color: #fff;
+}
+
 .input-group-addon{
 	width: 100px;
 } 
@@ -222,4 +242,40 @@ header{
 .week tr td .content .red a, .week tr td .content .red a:hover{
     color: #fff;
     text-decoration: none;
+}
+
+.daysleft{
+    width: 100%;
+    text-align: center;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 26px;
+    margin-bottom: 12px;
+}
+
+.daysleft h2{
+    margin: 0;
+    margin-bottom: -6px;
+}
+.daysleft p{
+    margin: 0;
+}
+
+.table .newweek{
+    background-color: #e7e7e7;
+}
+
+tr .black{
+    background-color: #000000;
+    height: 40px;
+}
+
+tr .date{
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.overview tr td{
+    font-size: 10px;
 }

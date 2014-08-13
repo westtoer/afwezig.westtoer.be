@@ -32,6 +32,8 @@ App::uses('Controller', 'Controller', 'CakeEmail', 'Network/Email');
  */
 class AppController extends Controller {
 
+    public $uses = array('AdminVariable');
+
     public $components = array(
         'Session',
         'RequestHandler',
@@ -50,7 +52,30 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         //$this->Auth->allow('index', 'view');
+        if($this->admin_variable('lockApp') == 'true'){
+            if($this->Session->read('Auth.Role.adminpanel') == false){
+                if($this->params['controller'] !== 'users'){
+                    if($this->here !== '/'){
+                        $this->Session->destroy();
+                        $this->Auth->logout();
+                        $this->redirect(array('controller' => 'users', 'action' => 'locked'));
+                    }
+                }
+            }
+        }
     }
 
+    private function admin_variable($name, $type = 'find'){
+        $adminVar = $this->AdminVariable->find('first', array('conditions' => array('name' => $name)));
+        if($type == 'find'){
+            if(!empty($adminVar)){
+                $x = $adminVar["AdminVariable"]["value"];
+            } else {
+                $x = null;
+            }
 
+        }
+
+        return $x;
+    }
 }

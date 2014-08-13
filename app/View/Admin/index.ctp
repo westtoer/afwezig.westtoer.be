@@ -1,69 +1,49 @@
 <div class="row">
     <div class="col-md-3">
-        <div class="list-group">
-          <a href="#" class="list-group-item active"><span class="badge">12</span>Verlofaanvragen</a>
-          <a href="#" class="list-group-item">
-            <span class="badge">2</span>
-            Gebruikers
-          </a>
-          <a href="#" class="list-group-item">Kalender</a>
-          <a href="#" class="list-group-item">Rechten</a>
-          <a href="#" class="list-group-item">Rapporten</a>
-        </div>
+        <?php echo $this->element('admin/base_admin_menu');?>
     </div>
     <div class="col-md-9">
         <div class="row">
             <div class="col-md-6">
-                <div class="well flat hoverable">
-                    <h2 class="centerpiece">Verlofaanvragen</h2>
+                <div class="well flat">
+                    <h2 class="centerpiece">Afwezigheidsaanvragen</h2>
                     <ul>
-                        <li>Verlofaanvragen goedkeuren</li>
-                        <li>Partiële sluitingsdagen</li>
-                        <li>Mutaties bekijken</li>
+                        <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Goedkeuren</a></li>
+                        <li><a href="">Bekijk maandoverzicht</a></li>
+                        <li><a href="">Bekijk gedeeltelijk maandoverzicht</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="well flat hoverable">
-                    <h2 class="centerpiece">Gebruikers</h2>
+                <div class="well flat">
+                    <h2 class="centerpiece">Werknemers & Gebruikers</h2>
                         <ul>
                             <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Nieuwe werknemer toevoegen</a></li>
-                            <li><a href="<?php echo $this->base;?>/employees/">Alle werknemers</a></li>
-                            <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Nieuwe registraties goedkeuren</a></li>
-                            <li><a href="<?php echo $this->base;?>/Admin/registerEmployee">Alle gebruikers</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/viewEmployees">Alle werknemers/rapporten genereren</a></li>
+                            <li><a href="<?php echo $this->base;?>/Employees/import">Werknemers importeren via CSV</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/viewRegistrations">Nieuwe registraties goedkeuren</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/viewUsers">Alle gebruikers</a></li>
                         </ul>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="well flat hoverable">
-                    <h2 class="centerpiece">Kalender</h2>
+                <div class="well flat">
+                    <h2 class="centerpiece">Algemene instellingen</h2>
                     <ul>
                         <li><a href="<?php echo $this->base;?>/Admin/GeneralCalendarItems">Algemene feestdagen beheren</a></li>
-                        <li>Einde van het jaar boeken</li>
-                        <li>Personeelskalenders</li>
+                        <li><a href="<?php echo $this->base;?>/Admin/endOfYear">Einde van het jaar boeken</a></li>
+                        <li><a href="<?php echo $this->base;?>/Admin/lockApp">Applicatie openen/sluiten</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="well flat hoverable">
-                    <h2 class="centerpiece">Rechten</h2>
-                        <ul>
-                            <li>Rechten beheren</li>
-                            <li>Maintenance mode instellen</li>
-                        </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
                 <div class="col-md-6">
-                    <div class="well flat hoverable">
-                        <h2 class="centerpiece">Rapporten</h2>
+                    <div class="well flat">
+                        <h2 class="centerpiece">Stramienen</h2>
                         <ul>
-                            <li>Rapporten genereren</li>
-                            <li>LinkBack database</li>
-                            <li>Rapporten versturen</li>
+                            <li><a href="<?php echo $this->base;?>/Admin/addStreams">Toevoegen</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/viewStreams">Alle Stramienen</a></li>
                         </ul>
                     </div>
                 </div>
