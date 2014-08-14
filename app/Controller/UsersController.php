@@ -144,7 +144,11 @@ class UsersController extends AppController {
                 $resultToArray = simplexml_load_string($result["body"]);
                 $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
                 //$result = $client->processResult($resultToArray);
-                $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
+                if($this->Employees->find('count') > 1){
+                    $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
+                } else {
+                    $this->redirect(array("controller" => "Employees", "action" => "claimAdmin", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
+                }
             }
         }
     }
@@ -287,6 +291,34 @@ class UsersController extends AppController {
             'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
             'Request.end_date >=' => date('Y-m-d', strtotime($currentYear . '01-01'))
         ))));
+    }
+
+    public function claimAdmin(){
+        if($this->Employee->find('count') > 1){
+            if($this->User->find('count') > 0){
+                if($this->request->is('post')){
+
+                    $this->Employee->create();
+                    $incomingData = $this->request->data;
+                    $employeeTemplate = array('Employee' => array('role_id' => 1, 'telephone' => '0000', 'note' => '', 'daysleft' => 4, 'status' => '1', 'supervisor_id' => '-1', 'gsm' => '0'));
+                    $employee = array_merge($incomingData, $employeeTemplate);
+                    $employee = $this->Employee->save($employee);
+
+                    $this->User->create();
+                    $userTemplate = array('User' => array('employee_id' => $employee["Employee"]["id"], 'email' => base64_decode($this->request->query['email'])), 'uitid' => base64_decode($this->request->query['uitid']), 'status' => 'active');
+                    $this->User->save($userTemplate);
+
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
+
+                } else {
+                    $this->redirect('/');
+                }
+            } else {
+                $this->redirect('/');
+            }
+        } else {
+            $this->redirect('/');
+        }
     }
 
     private function xmlToArray($xml, $options = array()) {
