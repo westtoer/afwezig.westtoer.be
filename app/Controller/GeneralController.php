@@ -9,10 +9,12 @@ class GeneralController extends AppController{
     }
 
     public $helpers = array('Employee', 'CalendarDay');
-    public $uses = array('Employee', 'Request', 'CalendarDay');
+    public $uses = array('Employee', 'Request', 'CalendarDay', 'RequestToCalendarDay');
     public function index(){
+
         $this->set('holidays', $this->Request->find('all', array(
             'conditions' => array(
+                'AuthItem.authorized' => 1,
                 'Request.start_date >=' => date('Y-m-d'),
                 'Request.calendar_item_type_id' => 3,
                 'Request.employee_id' => 4
@@ -21,7 +23,6 @@ class GeneralController extends AppController{
         $absences = $this->CalendarDay->find('all', array(
             'conditions' => array(
                 'CalendarDay.day_date' => date('Y-m-d'),
-                'AuthItem.authorized' => 1,
                 'CalendarDay.calendar_item_type_id <> ' => 9
             ), 'order' => 'day_date ASC, CalendarDay.employee_id ASC'
         ));
@@ -51,7 +52,6 @@ class GeneralController extends AppController{
             'conditions' => array(
                 'CalendarDay.day_date >=' => $beginWeek,
                 'CalendarDay.day_date <=' => $endWeek,
-                'AuthItem.authorized' => 1,
                 'CalendarDay.calendar_item_type_id <> ' => 9
             ), 'order' => 'day_date ASC'
         ));

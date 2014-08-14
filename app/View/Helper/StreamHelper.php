@@ -3,7 +3,7 @@ class StreamHelper extends AppHelper{
 
     public function tableStreams($streams){
         $html = '<table class="table">';
-        $html .= '<tr><th>Gekoppelt aan</th><th>Type</th><th>Reden</th><th>Acties</th></tr>';
+        $html .= '<tr><th>Gekoppeld aan</th><th>Type</th><th>Reden</th><th>Acties</th></tr>';
         foreach($streams as $stream){
             $html .= '<tr>';
             $html .= '<td>' . $stream["Employee"]["name"] . ' ' . $stream["Employee"]["surname"] . '</td>';

@@ -1,5 +1,4 @@
 <?php
 class RequestToCalendarDay extends AppModel {
-    public $belongsTo = array('Request');
-
+    public $belongsTo = array('CalendarDay','Request');
 }

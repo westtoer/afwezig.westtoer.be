@@ -113,6 +113,7 @@ class AdminController extends AppController {
         )));
         $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1')));
         $authorizer = $this->Session->read('Auth.Employee.id');
+
         if($this->request->is('post')){
             $request = $this->request->data;
                 $request["Request"]["employee_id"] = 4;
@@ -123,7 +124,7 @@ class AdminController extends AppController {
                 }
 
                 $request["Request"]["timestamp"] = date('Y-m-d H:i:s');
-                $request["Request"]["replacement_id"] = 4;
+                $request["Request"]["replacement_id"] = '-1';
                 $request["Request"]["auth_item_id"] = 4;
                 $this->Request->create();
                 if($request["Request"]["start_date"] < date('Y-m-d', strtotime(date('Y') . '-12-31'))){

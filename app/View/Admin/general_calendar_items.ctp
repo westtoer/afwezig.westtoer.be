@@ -7,7 +7,7 @@
         <?php echo $this->Form->create('Request', array('url' => array('controller' => 'admin', 'action' => 'GeneralCalendarItems')));?>
         <div class="row">
             <div class="col-md-8">
-                <?php if(!empty($requests)){echo $this->Request->tableRequests($requests, 1);};?>
+                <?php if(!empty($requests)){echo $this->Request->tableRequests($requests, 'general');};?>
             </div>
             <div class="col-md-4">
                 <div class="well flat">

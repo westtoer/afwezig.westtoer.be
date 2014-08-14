@@ -11,9 +11,8 @@ class Request extends AppModel {
                                     'conditions' => array('Request.replacement_id = Replacement.internal_id')
                                 ),
                                 'CalendarItemType',
-                                'AuthItem',
        );
-   public $hasMany = array('RequestToCalendarDays');
 
-
+   public $hasMany = array('RequestToCalendarDay');
+   public $hasOne = array('AuthItem');
 }

@@ -41,7 +41,7 @@ class EmployeeHelper extends AppHelper {
         //Give a standard null option
         if($datatype == 'html'){
             if($placement == 1){
-                $employeesOptions[] = '<option value="4">Gebruiker</option>';
+                $employeesOptions[] = '<option value="-1">Gebruiker</option>';
             } elseif($placement == 2) {
                 $employeesOptions[] = '<option value="0">voor</option>';
             } else {
@@ -56,12 +56,14 @@ class EmployeeHelper extends AppHelper {
             if($placement == 1){
                 $employeesOptions[] = array('name' => 'Verantwoordelijke', 'value' => 0);
             } else {
-                $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => 4);
+                $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => -1);
             }
             //Fill with all Employees
             foreach($employees as $employee){
-                $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
-                    'value' => $employee["Employee"]["id"]);
+                if($employee["Employee"]["internal_id"] !== ''){
+                    $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
+                        'value' => $employee["Employee"]["internal_id"]);
+                }
             }
         }
 

@@ -5,11 +5,11 @@ class AdminHelper extends AppHelper {
 
     public function tableUsers($users, $type){
         $html = '<table class="table">';
-        $html .= '<tr><th>UiTID</th><th>Gekoppelt aan</th><th>Status</th><th>Acties</th></tr><tr>';
+        $html .= '<tr><th>UiTID</th><th>Gekoppeld aan</th><th>Status</th><th>Acties</th></tr><tr>';
         foreach($users as $user){
             $html .= '<td>' . $user["User"]["email"] . '</td>';
             $html .= '<td>' . $user["Employee"]["name"] . ' ' . $user["Employee"]["surname"] . '</td>';
-            $html .= '<td>' . $this->checkIntegrityStatus($user['User']["status"], $user["Employee"]["linked"]) . '</td>';
+            $html .= '<td>' . $this->checkIntegrityStatus($user['User']["status"]) . '</td>';
             if($type == 'active'){
                 $html .= '<td>' . '<a href="' . $this->base . '/users/unlink/' . $user["User"]["id"] .'">Unlink</a>  |  <a href="' . $this->base . '/employees/view/' . $user["Employee"]["id"] .'">Profiel</a></td></tr>';
             } else if ($type == 'pending'){
@@ -68,26 +68,14 @@ class AdminHelper extends AppHelper {
         return $replacement;
     }*/
 
-    private function checkIntegrityStatus($status, $linked){
+    private function checkIntegrityStatus($status){
         $x = '';
         if($status == 'active'){
-            if($linked == 1){
                 $x = 'Actief';
-            } else{
-                $x = 'Data mismatch, manueel overschreven';
-            }
         } elseif($status == 'requested'){
-            if($linked == 0){
                 $x = 'Aangevraagd';
-            } else{
-                $x = 'Data mismatch, manueel overschreven';
-            }
         } elseif($status == 'denied'){
-            if($linked == 0){
                 $x = 'Geweigerd';
-            } else{
-                $x = 'Data mismatch, manueel overschreven';
-            }
         }
         return $x;
     }

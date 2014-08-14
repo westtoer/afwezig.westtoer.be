@@ -80,6 +80,8 @@ class RequestHelper extends AppHelper {
                 $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
                 $html .= '<td><a href="' . $this->base .'/Request/overlap/' . $request["Request"]["id"] . '">Overlap</a>  |  <a href="' . $this->base .'/Request/allow/' . $request["Request"]["id"] . '">Goedkeuren</a>  |  <a href="' . $this->base .'/Request/deny/' . $request["Request"]["id"] . '">Weigeren</a>';
             } else {
+                $html .= '<td>' . $request["Request"]["start_date"] . '</td>';
+                $html .= '<td>' . $request["Request"]["end_date£"] . '</td>';
                 $html .= '<td>' . $request["Request"]["name"] . '</td>';
                 $html .= '<td><a href="' . $this->base .'/Admin/GeneralCalendarItems/action:delete/id:'. $request["Request"]["id"] .'">Verwijder</a></td></tr>';
             }
@@ -117,6 +119,10 @@ class RequestHelper extends AppHelper {
         } else {
             return 'Geen algemene feestdagen';
         }
+    }
+
+    public function tableOverlap($overlap){
+
     }
 
 

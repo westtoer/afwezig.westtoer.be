@@ -24,7 +24,7 @@ class RequestsController extends AppController {
             } else {
                 $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"], 'Request.start_date >=' => date('Y-m-d'));
             }
-            $this->set('requests', $this->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
+            $this->set('requests', $this->RequestToCalendarDay->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
         }
     }
 
@@ -39,25 +39,23 @@ class RequestsController extends AppController {
                             $this->set('query', $query);
                             $previous = $this->Request->find('all', array(
                                 'conditions' => array(
-                                    'AuthItem.authorized' => 1
+                                    'AuthItem.authorized' => 1,
+                                    'Employee.id' => $query["Employee"]["id"]
                                 ), 'limit' => 5,
                             ));
-                            $overlap = $this->Request->find('all', array(
+                            $overlap = $this->CalendarDay->find('all', array(
                                 'conditions' => array(
-                                    'OR' => array(
-                                        'Request.start_date <= ' => date('Y-m-d', strtotime($query["Request"]["start_date"])),
-                                        'Request.end_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"]))
-                                    ),
-                                    'OR' => array(
-                                        'AuthItem.authorized' => true,
-                                        'AuthItem.authorization_date' => null
-                                    ),
-                                    'Request.id <>' => $query["Request"]["id"]
-                                )
+                                        'day_date >= ' => date('Y-m-d', strtotime($query["Request"]["start_date"] . ' - 1 Day')),
+                                        'day_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' + 1 Day'))
+                                ), 'order' => 'day_date ASC'
                             ));
 
                             $this->set('previous', $previous);
-                            $this->set('overlap', $overlap);
+                            foreach($overlap as $key => $overlapitem){
+                                $oo[$overlapitem["CalendarDay"]["day_date"]][$overlapitem["CalendarDay"]["day_time"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
+                            }
+
+                            $this->set('overlap', $oo);
 
                         } else {
                             $this->Session->setFlash('Deze request is al voorbij');
@@ -130,7 +128,6 @@ class RequestsController extends AppController {
         //If the request is sent
         if(($this->request->is('post'))){
             $request = $this->request->data;
-
             //Validation
             $validation = $this->insertValidation($request);
 
@@ -497,13 +494,13 @@ class RequestsController extends AppController {
         foreach($allHR as $HR){
             $Email = new CakeEmail('westtoer');
             $Email->to($this->trigramToMail($HR["Employee"]["3gram"]));
-            $Email->subject('Er is een nieuwe gebruiker geregistreerd op Westtoer Afwezig.');
+            $Email->subject('Westtoer Afwezig');
             $Email->replyTo('noreply@westtoer.be');
             $Email->from ('noreply@westtoer.be');
 
             if($type == "new"){
                 var_dump($request);
-                $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' heeft een nieuwe aanvraag gedaan die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Om dit te bekijken ga je naar http://afwezig.westtoer.be/Requests/overlap/' . $request["Request"]["id"]);
+                $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' heeft een nieuwe aanvraag gedaan die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Om dit te bekijken ga je naar http://afwezig.westtoer.be/Requests/view/' . $request["Request"]["id"]);
             } elseif($type == "allowed") {
                 $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' had een aanvraag gedaan voor die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Deze aanvraag is goedgekeurd.');
             } elseif($type == "denied"){

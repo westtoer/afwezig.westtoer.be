@@ -9,8 +9,7 @@
                     <h2 class="centerpiece">Afwezigheidsaanvragen</h2>
                     <ul>
                         <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Goedkeuren</a></li>
-                        <li><a href="">Bekijk maandoverzicht</a></li>
-                        <li><a href="">Bekijk gedeeltelijk maandoverzicht</a></li>
+                        <li><a href="<?php echo $this->base;?>/Admin/export">Overzicht/Export</a></li>
                     </ul>
                 </div>
             </div>
@@ -48,6 +47,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
