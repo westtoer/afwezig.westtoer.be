@@ -535,9 +535,14 @@ class AdminController extends AppController {
     public function departments(){
         if($this->request->is('post')){
             $department = $this->request->data;
-            if($department["Department"]["name"] !== ''){
-                $this->EmployeeDepartment->create();
-                $savedDepartment = $this->EmployeeDepartment->save($department);
+            if($department["EmployeeDepartment"]["name"] !== ''){
+                if($department["EmployeeDepartment"]["id"] == 0){
+                    $this->EmployeeDepartment->create();
+                    unset($department["EmployeeDepartment"]["id"]);
+                    $savedDepartment = $this->EmployeeDepartment->save($department);
+                } else {
+                    $savedDepartment = $this->EmployeeDepartment->save($department);
+                }
                 if(!empty($savedDepartment)){
                     $this->Session->setFlash('De dienst ' . $savedDepartment["Department"]["name"] . ' is succesvol opgeslagen.');
                     $this->redirect($this->here);
@@ -556,10 +561,10 @@ class AdminController extends AppController {
                         $department = $this->EmployeeDepartment->findById($id);
                         if(!empty($department)){
                             if($this->EmployeeDepartment->delete($id)){
-                                $this->Session->setFlash('De dienst ' . $department["Department"]["name"] . ' is succesvol verwijderd.');
+                                $this->Session->setFlash('De dienst ' . $department["EmployeeDepartment"]["name"] . ' is succesvol verwijderd.');
                                 $this->redirect($this->here);
                             } else {
-                                $this->Session->setFlash('Er liep iets mis bij het verwijderen een diensts.');
+                                $this->Session->setFlash('Er liep iets mis bij het verwijderen een dienst.');
                                 $this->redirect($this->here);
                             }
                         } else {

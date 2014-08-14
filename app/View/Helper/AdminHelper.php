@@ -171,4 +171,20 @@ class AdminHelper extends AppHelper {
         return $html;
 
     }
+
+    public function tableDepartments($departments){
+        $html = '<table class="table">';
+        $html .= '<tr><th>Naam</th><th># werknemers</th><th>Acties</th></tr>';
+
+        foreach($departments as $department){
+            $html .= '<tr>';
+            $html .= '<td id="name-' . $department["EmployeeDepartment"]["id"] .'">' . $department["EmployeeDepartment"]["name"] . '</td>';
+            $html .= '<td>' . count($department["Employees"]) . '</td>';
+            $html .= '<td id="action-'.$department["EmployeeDepartment"]["id"] .'"><a href="' .$this->here .'?id=' . $department["EmployeeDepartment"]["id"] . '&action=delete">Verwijder</a>  |  <a href="' . $this->here . '?id='. $department["EmployeeDepartment"]["id"].'&action=edit">Wijzig</a></td>';
+            $html .= '</tr>';
+        }
+
+        $html .= '</table>';
+        return $html;
+    }
 }
