@@ -144,7 +144,7 @@ class UsersController extends AppController {
                 $resultToArray = simplexml_load_string($result["body"]);
                 $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
                 //$result = $client->processResult($resultToArray);
-                if($this->Employees->find('count') > 1){
+                if($this->Employee->find('count') > 1){
                     $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
                 } else {
                     $this->redirect(array("controller" => "Employees", "action" => "claimAdmin", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
