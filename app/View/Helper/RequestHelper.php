@@ -142,14 +142,17 @@ class RequestHelper extends AppHelper {
             $count = count($timeblock);
 
             foreach($timeblock as $day => $date_desc){
-                $html .= '<td width="' . (98 / $count) . '%">';
+
+                if(!empty($date_desc["Query"])){
+                    $html .= '<td class="overlap" width="' . (98 / $count) . '%">';
+                } else {
+                    $html .= '<td width="' . (98 / $count) . '%">';
+                }
                 foreach($date_desc as $employeeKey => $employee){
+
                     if($employee["CalendarItemType"]["id"] != 9){
                         $html .= '<div class="content">';
-                        if($employeeKey == 'Query'){
-                            $html .= '<div class="calendarline red">';
-                            $html .= 'Aanvraag';
-                        } else {
+                        if($employeeKey !== 'Query'){
                             $html .= '<div class="calendarline">';
                             $html .= $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '  -  ' . $employee["CalendarItemType"]["name"];
                         }

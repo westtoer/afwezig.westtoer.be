@@ -276,6 +276,10 @@ tr .date{
     font-size: 12px;
 }
 
+.week tr .overlap{
+    background-color: #8fb2ff;
+}
+
 .overview tr td{
     font-size: 10px;
 }
