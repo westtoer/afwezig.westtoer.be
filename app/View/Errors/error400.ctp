@@ -3,27 +3,7 @@
 <p>Error code 400</p>
 
 
-<script>
-    $(document).ready(function(){
-        $('#hidden').css('display', 'none');
-    });
-
-    $(document).keypress((function(e) {
-        var pass = "jedi";
-        var typed = "";
-
-        return function(e) {
-            typed += String.fromCharCode(e.which);
-
-            console.log(typed);
-            if (typed === pass) {
-                alert('Do or do not, there is not try');
-                $('#hidden').css('display', 'block');
-                console.log('Fired');
-            }
-        };
-    })());
-</script>
+<?php echo $this->Html->script('error.js');?>
 
 <div id="hidden">
    <pre style="font: 4px/2px monospace;">###@@@@@@@@####@@@#######;::;;;:;;;;;;;;;:;::    ``'#@@@@@@@@@@@@@@@@@@@@@@@#########################+####+++++#++++++:````````````````````````````````.``.```.....,,,,.,,,,:;;;+++++++++++++++####+####
