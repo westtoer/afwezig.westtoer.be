@@ -283,3 +283,9 @@ tr .date{
 .overview tr td{
     font-size: 10px;
 }
+
+.scroll-container{
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}

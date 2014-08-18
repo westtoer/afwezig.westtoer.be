@@ -30,4 +30,6 @@
 </div>
 <hr />
 
-<?php echo $this->Request->tableOverlap($overlap, $queryRange);?>
+<div class="scroll-container">
+    <?php echo $this->Request->tableOverlap($overlap, $queryRange);?>
+</div>

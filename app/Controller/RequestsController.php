@@ -48,7 +48,7 @@ class RequestsController extends AppController {
                             $overlap = $this->CalendarDay->find('all', array(
                                 'conditions' => array(
                                         'day_date >= ' => date('Y-m-d', strtotime($query["Request"]["start_date"] . ' - 1 Day')),
-                                        'day_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' +10 Days'))
+                                        'day_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' + 1 Day'))
                                 ), 'order' => 'day_date ASC'
                             ));
 

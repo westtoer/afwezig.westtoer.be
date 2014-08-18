@@ -127,44 +127,45 @@ class RequestHelper extends AppHelper {
             $query[explode('/', $date)[1]][explode('/', $date)[0]]["Query"] = array('Employee' => array('name' => 'Desbetreffende persoon', 'surname' => ''), 'CalendarItemType' => array('id' => 23));
         }
 
+        $count = count($overlap["AM"]);
+
         $overlap = array_merge_recursive($query, $overlap);
-        $html = '<div class="week"><table class="week">';
-        foreach($overlap as $key => $timeblock){
-            ksort($timeblock);
-            if($key == 'AM'){
-                $html .= '<tr class="titlerow"><th></th>';
+
+            $html = '<div class="week"><table class="week">';
+            foreach($overlap as $key => $timeblock){
+                ksort($timeblock);
+                if($key == 'AM'){
+                    $html .= '<tr class="titlerow"><th></th>';
+                    foreach($timeblock as $day => $date_desc){
+                        $html .= '<th><strong>' . $day . '</strong></th>';
+                    }
+                    $html .= '</tr>';
+                }
+                $html .= '<tr class="' . strtolower($key) . '"><td width="50px"><center>' . $key .'</center></td>';
                 foreach($timeblock as $day => $date_desc){
-                    $html .= '<th><strong>' . $day . '</strong></th>';
+
+                    if(!empty($date_desc["Query"])){
+                        $html .= '<td class="overlap" width="' . (98 / $count) . '%">';
+                    } else {
+                        $html .= '<td width="' . (98 / $count) . '%">';
+                    }
+                    foreach($date_desc as $employeeKey => $employee){
+
+                        if($employee["CalendarItemType"]["id"] != 9){
+                            $html .= '<div class="content">';
+                            if($employeeKey !== 'Query'){
+                                $html .= '<div class="calendarline">';
+                                $html .= $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '  -  ' . $employee["CalendarItemType"]["name"];
+                            }
+                            $html .= '</div></div>';
+                        }
+                    }
+                    $html .= '</td>';
                 }
                 $html .= '</tr>';
             }
-            $html .= '<tr class="' . strtolower($key) . '"><td width="50px"><center>' . $key .'</center></td>';
-            $count = count($timeblock);
+            $html .= '</table></div>';
 
-            foreach($timeblock as $day => $date_desc){
-
-                if(!empty($date_desc["Query"])){
-                    $html .= '<td class="overlap" width="' . (98 / $count) . '%">';
-                } else {
-                    $html .= '<td width="' . (98 / $count) . '%">';
-                }
-                foreach($date_desc as $employeeKey => $employee){
-
-                    if($employee["CalendarItemType"]["id"] != 9){
-                        $html .= '<div class="content">';
-                        if($employeeKey !== 'Query'){
-                            $html .= '<div class="calendarline">';
-                            $html .= $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '  -  ' . $employee["CalendarItemType"]["name"];
-                        }
-                        $html .= '</div></div>';
-                    }
-                }
-                $html .= '</td>';
-            }
-            $html .= '</tr>';
-        }
-
-        $html .= '</table></div>';
         return $html;
 
     }
