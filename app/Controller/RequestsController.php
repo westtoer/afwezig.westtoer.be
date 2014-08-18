@@ -37,6 +37,8 @@ class RequestsController extends AppController {
                     if($query["AuthItem"]["authorized"] !== true){
                         if($query["Request"]["start_date"] >= date('Y-m-d')){
                             $this->set('query', $query);
+
+                            $this->set('queryRange', $this->dateRange($query["Request"]["start_date"], $query["Request"]["end_date"], $query["Request"]["start_time"], $query["Request"]["end_time"]));
                             $previous = $this->Request->find('all', array(
                                 'conditions' => array(
                                     'AuthItem.authorized' => 1,
@@ -46,13 +48,13 @@ class RequestsController extends AppController {
                             $overlap = $this->CalendarDay->find('all', array(
                                 'conditions' => array(
                                         'day_date >= ' => date('Y-m-d', strtotime($query["Request"]["start_date"] . ' - 1 Day')),
-                                        'day_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' + 1 Day'))
+                                        'day_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' +10 Days'))
                                 ), 'order' => 'day_date ASC'
                             ));
 
                             $this->set('previous', $previous);
                             foreach($overlap as $key => $overlapitem){
-                                $oo[$overlapitem["CalendarDay"]["day_date"]][$overlapitem["CalendarDay"]["day_time"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
+                                $oo[$overlapitem["CalendarDay"]["day_time"]][$overlapitem["CalendarDay"]["day_date"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
                             }
 
                             $this->set('overlap', $oo);

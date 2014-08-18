@@ -30,4 +30,4 @@
 </div>
 <hr />
 
-<?php echo $this->Request->tableOverlap($overlap);?>
+<?php echo $this->Request->tableOverlap($overlap, $queryRange);?>
