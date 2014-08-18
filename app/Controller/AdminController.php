@@ -524,9 +524,6 @@ class AdminController extends AppController {
                 $eo[] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1])));
             }
             $this->set('employees', $eo);
-        } else {
-            $this->Session->setFlash('Maaltijdcheques kunnen enkel per maand berekend worden.');
-            $this->redirect('/admin');
         }
 
 
