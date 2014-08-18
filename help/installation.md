@@ -2,13 +2,16 @@ Installation
 ============
 1. Clone the git directory onto your server
 2. Look for the MySQL-dump that is present. Import it into a database.
-3. There will be one user and one employee already defined.
-This administrator account is vital to your installation. Change the UiTID of that User to your UiTID (this is a long string of text, split in blocks delimited with -).
 and you'll see your UiTID in an XML-format under rdf:id.
-4. Go to app/Config/database.php and change the credentials to match to your database's.
-5. Go to app/Config/core.php and change line 225 and line 230 to a random string matching the format. More on that can be found on the CakePHP documentation.
-6. Go to app/Config/UiTID.php or mv UiTID.php.default to UiTID.php. Change the test keys to your production keys.
-7. You now should be able to run Afwezig.
+3. Go to app/Config/database.php and change the credentials to match to your database's.
+4. Go to app/Config/core.php and change line 225 and line 230 to a random string matching the format. More on that can be found on the CakePHP documentation.
+5. Go to app/Config/UiTID.php or mv UiTID.php.default to UiTID.php. Change the test keys to your production keys.
+6. You now should be able to run Afwezig.
+7. 
+
+Whoa?! What about my Administrator account?
+===========================================
+The first time you will log on, Afwezig will detect that there isn't a Administrator. It then will create a User and Employee account, and bind them to the first UiTID that connects with it.
 
 Troubleshooting
 ===============
