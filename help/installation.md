@@ -7,7 +7,6 @@ and you'll see your UiTID in an XML-format under rdf:id.
 4. Go to app/Config/core.php and change line 225 and line 230 to a random string matching the format. More on that can be found on the CakePHP documentation.
 5. Go to app/Config/UiTID.php or mv UiTID.php.default to UiTID.php. Change the test keys to your production keys.
 6. You now should be able to run Afwezig.
-7. 
 
 Whoa?! What about my Administrator account?
 ===========================================
