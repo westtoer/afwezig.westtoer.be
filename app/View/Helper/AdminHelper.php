@@ -105,7 +105,7 @@ class AdminHelper extends AppHelper {
     public function tableCalendarItemTypes($calendarTypes){
         $html = $this->Form->create('CalendarItemType', array('url' => $this->here));
         $html .= '<table class="table">';
-        $html .= '<tr><th>Naam</th><th>Code</th><th width="20px">Zichtbaar</th><th width="20px">Maaltijdcheque</th><th>Schaubroek Code</th><th>Schaubroek aard</th><th>Schaubroek Extensie</th></tr>';
+        $html .= '<tr><th width="200px">Naam</th><th>Code</th><th width="20px">Zichtbaar</th><th width="20px">Maaltijdcheque</th><th>Schaubroek Code</th><th>Schaubroek aard</th><th>Schaubroek Extensie</th></tr>';
         foreach($calendarTypes as $key => $calendarType){
             $html .= '<tr><td><input type="text" name="data['.$key.'][CalendarItemType][name]" value="' . $calendarType["CalendarItemType"]["name"] .'" class="form-control"></td>';
             $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][code]" value="' . $calendarType["CalendarItemType"]["code"] .'" class="form-control"></td>';
