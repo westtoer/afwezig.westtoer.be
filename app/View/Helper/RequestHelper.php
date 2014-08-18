@@ -78,10 +78,10 @@ class RequestHelper extends AppHelper {
                 $html .= '<td><a href="' . $this->base . '/employees/view/' .$request["Replacement"]["id"] . '">' . $request["Replacement"]["name"] . " " . $request["Replacement"]["surname"] . '</a></td>';
                 $html .= '<td>' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . '</td>';
                 $html .= '<td>' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '</td>';
-                $html .= '<td><a href="' . $this->base .'/Request/overlap/' . $request["Request"]["id"] . '">Overlap</a>  |  <a href="' . $this->base .'/Request/allow/' . $request["Request"]["id"] . '">Goedkeuren</a>  |  <a href="' . $this->base .'/Request/deny/' . $request["Request"]["id"] . '">Weigeren</a>';
+                $html .= '<td><a href="' . $this->base .'/Request/view/' . $request["Request"]["id"] . '">Overlap</a>  |  <a href="' . $this->base .'/Requests/allow/' . $request["Request"]["id"] . '">Accepteer</a>  |  <a href="' . $this->base .'/Requests/deny/' . $request["Request"]["id"] . '">Weigeren</a>';
             } else {
                 $html .= '<td>' . $request["Request"]["start_date"] . '</td>';
-                $html .= '<td>' . $request["Request"]["end_date£"] . '</td>';
+                $html .= '<td>' . $request["Request"]["end_date"] . '</td>';
                 $html .= '<td>' . $request["Request"]["name"] . '</td>';
                 $html .= '<td><a href="' . $this->base .'/Admin/GeneralCalendarItems/action:delete/id:'. $request["Request"]["id"] .'">Verwijder</a></td></tr>';
             }
