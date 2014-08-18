@@ -1,6 +1,5 @@
 <h2>Whoops</h2>
 <small>This is not the page you are looking for</small>
-<p>Error code 400</p>
 
 
 <script>
