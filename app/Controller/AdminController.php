@@ -326,11 +326,61 @@ class AdminController extends AppController {
     }
 
     public function editStream($id = null){
-        if($id != null){
-            $this->Employee->find($id);
+        $this->set('calendaritemtypes', $this->CalendarItemType->find('all'));
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
+
+        if($this->request->is('post')){
+            $incomingStream = $this->request->data;
+            if($this->Stream->deleteAll(array('employee_id' => $incomingStream["Stream"]["employee_id"]))){
+
+                $incomingStream = $this->request->data;
+                if(count($incomingStream["Stream"]["elements"]) < 20){
+                    foreach($incomingStream["Stream"]["elements"] as $key => $element){
+                        $key = explode('-', $key);
+                        $incomingStream["Stream"]["elements"][$key[0] . '-' . ($key[1] + 5) . '-' . $key[2]] = $element;
+
+                    }
+                }
+
+                if($incomingStream["Stream"]["employee_id"] != '-1'){
+                    foreach($incomingStream["Stream"]["elements"] as $date => $element){
+                        $date = explode('-', $date);
+                        $streamObjects[] = array('Stream' => array(
+                            'employee_id' => $incomingStream["Stream"]["employee_id"],
+                            'calendar_item_type_id' => $element,
+                            'relative_nr' => $date[1],
+                            'day_time' => $date[2],
+                            'day_nr' => date('N', strtotime($date[0]))
+                        ));
+                    }
+
+                    if($this->Stream->saveMany($streamObjects)){
+                        $this->Session->setFlash('Stramien gewijzigd.');
+                        $this->redirect('/Admin/viewStreams');
+                    }
+
+                } else {
+                    $this->Session->setFlash('Je moet een geldige gebruiker opgeven.');
+                    $this->redirect('/Admin/viewStreams');
+                }
+
+            }
         } else {
-            $this->Session->setFlash('Je moet een geldig stramien opgeven');
-            $this->redirect($this->here);
+            if($id != null){
+                $this->set('employee', $employee);
+                if(!empty($employee)){
+                    $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
+
+                    foreach($streams as $stream){
+                        $streamsSorted[strtolower($this->intToDay($stream["Stream"]["day_nr"])) . '-' . $stream["Stream"]["relative_nr"] . '-' . $stream["Stream"]["day_time"]] = array('id' => $stream["Stream"]["id"], 'calendar_item_type_id' => $stream["Stream"]["calendar_item_type_id"], 'element' => strtolower($this->intToDay($stream["Stream"]["day_nr"])) . '-' . $stream["Stream"]["relative_nr"] . '-' . $stream["Stream"]["day_time"]);
+                    }
+
+                    $this->set('streams', $streamsSorted);
+                }
+            } else {
+                $this->Session->setFlash('Je moet een geldig stramien opgeven');
+                $this->redirect($this->here);
+            }
         }
     }
 
@@ -818,5 +868,11 @@ class AdminController extends AppController {
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
         $range = array(date('Y-m-d', strtotime(date('Y') .'-' . $month .'-01')), date('Y-m-d', strtotime(date('Y') .'-' . $month .'-' . $daysInMonth)));
         return $range;
+    }
+
+    private function intToDay($key){
+        $key = $key -1;
+        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday');
+        return $days[$key];
     }
 }
