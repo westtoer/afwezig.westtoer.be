@@ -261,6 +261,29 @@ CREATE TABLE `users` (
   KEY `fk_users_employee_id` (`employee_id`),
   CONSTRAINT `fk_users_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `streams`
+--
+
+DROP TABLE IF EXISTS `streams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `streams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` varchar(12) DEFAULT NULL,
+  `calendar_item_type_id` int(11) DEFAULT NULL,
+  `relative_nr` int(11) DEFAULT NULL,
+  `day_nr` int(11) DEFAULT NULL,
+  `day_time` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stream_natural_key` (`employee_id`,`calendar_item_type_id`,`relative_nr`,`day_nr`,`day_time`),
+  KEY `calendar_item_type_id` (`calendar_item_type_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `fk_st_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`internal_id`),
+  CONSTRAINT `fk_st_calendarItem` FOREIGN KEY (`calendar_item_type_id`) REFERENCES `calendar_item_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
