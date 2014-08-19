@@ -48,7 +48,7 @@ if(isset($this->request->query["month"])){
                    } else {
                         foreach($day as $dateObject){
                             $value = 3.7999999;
-                            $type = $day[0]["type"];
+                            $type = $dateObject["type"];
                             $this->xls->openRow();
                             $this->xls->writeString(752);
                             $this->xls->writeString(explode('/', $employee)[2]);
