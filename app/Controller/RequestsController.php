@@ -300,36 +300,43 @@ class RequestsController extends AppController {
         $cp = array();
 
         foreach($range as $date){
-            $conditions[] = array('day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
+            $conditions[] = array('employee_id' => $employee["Employee"]["id"], 'day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
         }
 
         $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('OR' => $conditions)));
-        if($this->AuthItem->save($authorization)){
-            if($request["Request"]["calendar_item_type_id"] <> 9){
-                if($request["Request"]["calendar_item_type_id"] == 23){
-                    foreach($calendarDays as $key => $calendarDay){
-                        if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){
-                            $cp[$key] = $calendarDay;
-                            $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
+
+        if($request["Request"]["calendar_item_type_id"] == 23){
+            foreach($calendarDays as $key => $calendarDay){
+                $cp[$key] = $calendarDay;
+                $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
+            }
+        }
+
+        $calculatedCost = $employee["Employee"]["daysleft"] - count($cp);
+
+        if($calculatedCost >= 0){
+            if($this->AuthItem->save($authorization)){
+                if($request["Request"]["calendar_item_type_id"] <> 9){
+                    if($request["Request"]["calendar_item_type_id"] == 23){
+                        foreach($calendarDays as $key => $calendarDay){
+                            if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){
+                                $cp[$key] = $calendarDay;
+                                $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
+                            }
                         }
                     }
                 }
-            } else {
-                foreach($calendarDays as $key => $calendarDay){
-                    $cp[$key] = $calendarDay;
-                    $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
-                }
-            }
-            $calculatedCost = $employee["Employee"]["daysleft"] - count($cp);
-            if($calculatedCost >= 0){
                 if($this->CalendarDay->saveMany($cp)){
-
+                    $employee["Employee"]["daysleft"] = $calculatedCost;
+                    if($this->Employee->save($employee)){
+                        $this->Session->setFlash("Aanvraag is goedgekeurd.");
+                        $this->redirect('/');
+                    }
                 }
-            } else {
-                $this->Session->setFlash("Deze gebruiker heeft niet genoeg vakantiedagen meer");
-                $this->redirect('/');
             }
-
+        } else {
+            $this->Session->setFlash("Deze gebruiker heeft niet genoeg vakantiedagen meer.");
+            $this->redirect('/');
         }
     }
 
