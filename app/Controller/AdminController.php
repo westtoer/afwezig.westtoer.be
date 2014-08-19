@@ -302,7 +302,14 @@ class AdminController extends AppController {
     }
 
     public function viewStreams(){
+        $hasStream = $this->Stream->find('list', array('fields' => array('employee_id'), 'group' => 'employee_id'));
+        $this->Employee->unbindModel(array('hasMany' => array('User', 'CalendarDay'), 'belongsTo' => array('Role', 'EmployeeDepartment')));
 
+        foreach($hasStream as $employee){
+            $employees[] = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $employee)));
+        }
+
+        $this->set('employees', $employees);
     }
 
     public function removeStream($id = null){
