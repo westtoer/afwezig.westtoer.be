@@ -43,7 +43,7 @@
                     <div class="well flat">
                         <h2 class="centerpiece">Stramienen</h2>
                         <ul>
-                            <li><a href="<?php echo $this->base;?>/Admin/addStreams">Toevoegen</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/addStream">Toevoegen</a></li>
                             <li><a href="<?php echo $this->base;?>/Admin/viewStreams">Alle Stramienen</a></li>
                         </ul>
                     </div>
