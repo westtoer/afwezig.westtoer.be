@@ -51,6 +51,7 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
+        $this->set('title_for_layout', 'Westtoer Afwezig');
         //$this->Auth->allow('index', 'view');
         if($this->admin_variable('lockApp') == 'true'){
             if($this->Session->read('Auth.Role.adminpanel') == false){

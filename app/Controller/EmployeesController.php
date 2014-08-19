@@ -9,6 +9,7 @@ class EmployeesController extends AppController {
         parent::beforeFilter();
         // Allow users to register and logout.
         $this->Auth->allow('associate', 'confirmEmail');
+        $this->set('title_for_layout', 'Westtoer Afwezig - Werknemers');
     }
 
     public function index() {

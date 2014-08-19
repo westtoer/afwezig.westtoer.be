@@ -15,6 +15,7 @@ class AdminController extends AppController {
                 $this->redirect('/');
             }
         }
+        $this->set('title_for_layout', 'Westtoer Afwezig - Administratie');
     }
 
     public function index(){

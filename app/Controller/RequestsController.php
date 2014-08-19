@@ -12,6 +12,7 @@ class RequestsController extends AppController {
         if(empty($the_session)){
             $this->redirect(array('controller' => 'users', 'action' => 'login'));
         }
+        $this->set('title_for_layout', 'Westtoer Afwezig - Aanvragen');
     }
 
     //page functions

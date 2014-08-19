@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Westtoer Afwezig - Login</title>
     <?php
     echo $this->Html->css('bootstrap');
     echo $this->Html->css('custom');
