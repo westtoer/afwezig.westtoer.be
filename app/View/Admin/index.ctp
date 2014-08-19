@@ -10,6 +10,7 @@
                     <ul>
                         <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Goedkeuren</a></li>
                         <li><a href="<?php echo $this->base;?>/Admin/export">Overzicht/Export</a></li>
+                        <li><a href="<?php echo $this->base;?>/Admin/dinnerCheques">Maaltijdcheques</a></li>
                     </ul>
                 </div>
             </div>
