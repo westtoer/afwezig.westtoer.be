@@ -256,79 +256,75 @@ class AdminController extends AppController {
         //}
     }
 
-    public function addStreams(){
-        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.id <> 4'))));
+
+    //Section for streams
+
+    public function addStream(){
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'), 'order' => 'Employee.name ASC')));
         $this->set('calendaritemtypes', $this->CalendarItemType->find('all'));
 
-        $incomingStreams = $this->request->data;
-        foreach($incomingStreams as $incomingStream){
-            $this->Stream->create();
-            $savedStream = $this->Stream->save($incomingStream);
-            $authorizer = $this->Session->read('Auth.Employee.id');
+        if($this->request->is('post')){
+            $streamObjects = array();
+            $incomingStream = $this->request->data;
+            if(count($incomingStream["Stream"]["elements"]) < 20){
+                foreach($incomingStream["Stream"]["elements"] as $key => $element){
+                    $key = explode('-', $key);
+                    $incomingStream["Stream"]["elements"][$key[0] . '-' . ($key[1] + 5) . '-' . $key[2]] = $element;
 
-            $calendarDays = $this->createManyCalendarDays(
-                $this->getRange($this->getNOfYear($savedStream["Stream"]["day_relative"], 'first'),  $this->getNOfYear($savedStream["Stream"]["day_relative"], 'last'), $incomingStream["Stream"]["rule_type"]),
-                $savedStream["Stream"]["calendar_item_type_id"], $savedStream["Stream"]["employee_id"], $authorizer, $savedStream["Stream"]["id"], $incomingStream["Stream"]["day_time"]);
-            if($this->CalendarDay->saveMany($calendarDays)){
-                $this->Session->setFlash('Stramienen zijn successvol opgeslagen');
-                $this->redirect('/admin');
+                }
+            }
+
+            if($incomingStream["Stream"]["employee_id"] != '-1'){
+                foreach($incomingStream["Stream"]["elements"] as $date => $element){
+                    $date = explode('-', $date);
+                    $streamObjects[] = array('Stream' => array(
+                        'employee_id' => $incomingStream["Stream"]["employee_id"],
+                        'calendar_item_type_id' => $element,
+                        'relative_nr' => $date[1],
+                        'day_time' => $date[2],
+                        'day_nr' => date('N', strtotime($date[0]))
+                    ));
+                }
+
+                if($this->Stream->saveMany($streamObjects)){
+                    $this->Session->setFlash('Stramien opgeslagen.');
+                    $this->redirect($this->here);
+                } else {
+                    $this->Session->setFlash('Het stramien kon niet worden opgeslagen.');
+                    $this->redirect($this->here);
+                }
             } else {
-                $this->Session->setFlash('Er liep iets mis bij het opslaan van de stramienen. Probeer het later nog eens');
-                $this->redirect('/admin');
-            };
+                $this->Session->setFlash('Je moet een geldige gebruiker opgeven');
+                $this->redirect($this->here);
+            }
+
         }
     }
 
     public function viewStreams(){
-        $this->set('streams', $this->Stream->find('all'));
+
     }
 
     public function removeStream($id = null){
-        if($id !== null){
-            $stream = $this->Stream->findById($id);
-            if(!empty($stream)){
-                $range = $this->getRange($this->getNOfYear($stream["Stream"]["day_relative"], 'first'),  $this->getNOfYear($stream["Stream"]["day_relative"], 'last'), $stream["Stream"]["rule_type"]);
-                $calendarDays = array('');
-
-                foreach($range as $date){
-                    $loader = array('day_date' => $date);
-                    $or[] = $loader;
-                }
-
-                if($stream["Stream"]["day_time"] == 'day' or $stream["Stream"]["day_time"] == null){
-                    $conditions = array('CalendarDay.employee_id' => $stream["Stream"]["employee_id"], 'calendar_item_type_id' => $stream["Stream"]["calendar_item_type_id"], 'OR' => $or);
-                } else {
-                    $conditions = array('CalendarDay.employee_id' => $stream["Stream"]["employee_id"], 'calendar_item_type_id' => $stream["Stream"]["calendar_item_type_id"], 'day_time' => $stream["Stream"]["day_time"], 'OR' => $or);
-                }
-
-                $calendarDays = $this->CalendarDay->find('all', array('conditions' => $conditions));
-                if(!empty($calendarDays)){
-                    foreach($calendarDays as $calendarDay){
-                        $calendarDay["CalendarDay"]["calendar_item_type_id"] = 9;
-                        $changedCalendarDays[] = $calendarDay;
-                    }
-
-                    if($this->CalendarDay->saveMany($changedCalendarDays)){
-                        if($this->Stream->delete($id)){
-                            $this->Session->setFlash('Het stramien is succesvol verwijderd.');
-                            $this->redirect('/admin');
-                        } else {
-                            $this->Session->setFlash('Er liep iets mis bij het verwijderen van het stramien.');
-                            $this->redirect('/admin');
-                        }
-                    } else {
-                        $this->Session->setFlash('Er liep iets mis bij het wijzigen van de kalendardagen van deze gebruiker.');
-                        $this->redirect('/admin');
-                    };
-                } else {
-                    $this->Session->setFlash('Dit stramien heeft geen dagen gekoppelt.');
-                    $this->redirect('/admin');
-                }
-            }
+        if($id != null){
+            $this->Employee->find($id);
         } else {
-            $this->Session->setFlash('Er is geen geldige Stramien-id opgegeven.');
-            $this->redirect('/admin');
+            $this->Session->setFlash('Je moet een geldig stramien opgeven');
+            $this->redirect($this->here);
         }
+    }
+
+    public function editStream($id = null){
+        if($id != null){
+            $this->Employee->find($id);
+        } else {
+            $this->Session->setFlash('Je moet een geldig stramien opgeven');
+            $this->redirect($this->here);
+        }
+    }
+
+    public function applyStream(){
+
     }
 
 

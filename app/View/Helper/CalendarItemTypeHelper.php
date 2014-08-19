@@ -5,11 +5,13 @@ class CalendarItemTypeHelper extends AppHelper{
         //Give a standard null option
         if($datatype == 'html'){
 
-            $CITOptions[] = '<option value="0">vanwege</option>';
+            $CITOptions[] = '<option value="9">Gewerkt</option>';
 
-            //Fill with all Employees
+            //Fill with all CalendarItemTypes
             foreach($calendaritemtypes as $calendaritemtype){
-                $CITOptions[] = '<option value="' .$calendaritemtype["CalendarItemType"]["id"] . '">' . $calendaritemtype["CalendarItemType"]["name"] . '</option>';
+                if($calendaritemtype["CalendarItemType"]["id"] != 9){
+                    $CITOptions[] = '<option value="' .$calendaritemtype["CalendarItemType"]["id"] . '">' . $calendaritemtype["CalendarItemType"]["name"] . '</option>';
+                }
             }
         }
 
