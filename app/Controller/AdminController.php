@@ -307,10 +307,21 @@ class AdminController extends AppController {
 
     public function removeStream($id = null){
         if($id != null){
-            $this->Employee->find($id);
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
+            if(!empty($employee)){
+                if($this->Stream->deleteAll(array('employee_id' => $employee["Employee"]["internal_id"]))){
+                    $this->Session->setFlash('Stramien succesvol verwijderd. De kalenderdagen zijn echter niet gewijzigd. Wilt u dat doen, maakt u een nieuw stramien op.');
+                    $this->redirect('/Admin/viewStreams');
+                } else {
+                    $this->Session->setFlash('Verwijderen van stramien mislukt.');
+                    $this->redirect('/Admin/viewStreams');
+                }
+
+            }
+
         } else {
             $this->Session->setFlash('Je moet een geldig stramien opgeven');
-            $this->redirect($this->here);
+            $this->redirect('/Admin/viewStreams');
         }
     }
 
