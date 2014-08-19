@@ -27,7 +27,7 @@ Keep in mind you'll need an UiTID to login! You can patch this out fairly easily
 Can we use this?
 ================
 
-We encourage the use of this code, and therefore we are releasing this cod under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). 
+We encourage the use of this code, and therefore we are releasing the code under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). 
 
 
 How can I contact you?
