@@ -453,8 +453,7 @@ class AdminController extends AppController {
 
             $this->set('dateRange', $dateRange);
             if(!empty($data)){
-
-                $data = array_merge_recursive($employeeTemplate, $data);
+                $data = array_replace_recursive($employeeTemplate, $data);
                 $this->set('data', $data);
             } else {
                 $this->Session->setFlash('Er is geen data om te exporteren');
@@ -467,7 +466,11 @@ class AdminController extends AppController {
                     $employee = $this->Employee->findById(explode('/', $employeeQuery)[1]);
 
                     foreach($days as $day => $type){
-                        $daysFull[explode('/',$day)[0]][$employeeQuery . '/' . $employee["Employee"]["internal_id"]][] =  array('time' => explode('/',$day)[1],'type' => $type[0]);
+                        if(!is_array($type)){
+                        $daysFull[explode('/',$day)[0]][$employeeQuery . '/' . $employee["Employee"]["internal_id"]][] =  array('time' => explode('/',$day)[1],'type' => $type);
+                        } else {
+                        $daysFull[explode('/',$day)[0]][$employeeQuery . '/' . $employee["Employee"]["internal_id"]][] =  array('time' => explode('/',$day)[1],'type' => $type["CalendarItemType"]["code"]);
+                        }
                     }
                 }
 

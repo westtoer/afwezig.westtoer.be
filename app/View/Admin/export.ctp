@@ -27,13 +27,24 @@ if(isset($this->request->query["month"])){
                        $this->xls->writeString(752);
                        $this->xls->writeString(explode('/', $employee)[2]);
                        $this->xls->writeString($date);
-                       $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"]);
-                       $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["code_schaubroek"]);
-                       $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"]);
+                       if($type != 'ZO' and $type != 'ZA'){
+                           echo $type;
+                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"]);
+                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["code_schaubroek"]);
+                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"]);
+                       } else {
+                           $this->xls->writeString("Weekend");
+                           $this->xls->writeString("Weekend");
+                           $this->xls->writeString("Weekend");
+                       }
+
                        $this->xls->writeString($value);
-                       $this->xls->writeString(752 . ';' . explode('/', $employee)[2] . ';' . $date . ';' . $calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["code_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"] . ';' . $value);
+                       if($type != 'ZO' and $type != 'ZA'){
+                           $this->xls->writeString(752 . ';' . explode('/', $employee)[2] . ';' . $date . ';' . $calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["code_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"] . ';' . $value);
+                       } else {
+                           $this->xls->writeString("Weekend");
+                       }
                        $this->xls->closeRow();
-                        echo '<br />';
                    } else {
                         foreach($day as $dateObject){
                             $value = 3.7999999;
