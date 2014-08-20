@@ -276,26 +276,33 @@ class AdminController extends AppController {
             }
 
             if($incomingStream["Stream"]["employee_id"] != '-1'){
-                foreach($incomingStream["Stream"]["elements"] as $date => $element){
-                    $date = explode('-', $date);
-                    $streamObjects[] = array('Stream' => array(
-                        'employee_id' => $incomingStream["Stream"]["employee_id"],
-                        'calendar_item_type_id' => $element,
-                        'relative_nr' => $date[1],
-                        'day_time' => $date[2],
-                        'day_nr' => date('N', strtotime($date[0]))
-                    ));
-                }
+                $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $incomingStream["Stream"]["employee_id"])));
+                $streams = $this->Stream->find('first', array('conditions' => array('employee.id' => $employee["Employee"]["internal_id"])));
+                if(empty($stream)){
+                    foreach($incomingStream["Stream"]["elements"] as $date => $element){
+                        $date = explode('-', $date);
+                        $streamObjects[] = array('Stream' => array(
+                            'employee_id' => $incomingStream["Stream"]["employee_id"],
+                            'calendar_item_type_id' => $element,
+                            'relative_nr' => $date[1],
+                            'day_time' => $date[2],
+                            'day_nr' => date('N', strtotime($date[0]))
+                        ));
+                    }
 
-                if($this->Stream->saveMany($streamObjects)){
-                    $this->Session->setFlash('Stramien opgeslagen.');
-                    $this->redirect($this->here);
+                    if($this->Stream->saveMany($streamObjects)){
+                        $this->Session->setFlash('Stramien opgeslagen.');
+                        $this->redirect($this->here);
+                    } else {
+                        $this->Session->setFlash('Het stramien kon niet worden opgeslagen.');
+                        $this->redirect($this->here);
+                    }
                 } else {
-                    $this->Session->setFlash('Het stramien kon niet worden opgeslagen.');
+                    $this->Session->setFlash('Deze gebruiker heeft al een stramien.');
                     $this->redirect($this->here);
                 }
             } else {
-                $this->Session->setFlash('Je moet een geldige gebruiker opgeven');
+                $this->Session->setFlash('Je moet een geldige gebruiker opgeven.');
                 $this->redirect($this->here);
             }
 
@@ -392,8 +399,49 @@ class AdminController extends AppController {
         }
     }
 
-    public function applyStream(){
+    public function applyStream($id = null){
+        if($id != null){
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
+            $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
 
+            if(!empty($employee)){
+                if(isset($this->request->query['apply'])){
+                    foreach($streams as $key =>$stream){
+                        if($stream["Stream"]["calendar_item_type_id"] == 9){
+                            unset($streams[$key]);
+                        }
+                    }
+
+                    foreach($streams as $stream){
+                        if($stream["Stream"]["relative_nr"] > 5){
+                            $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+                        } else {
+                            $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+
+                        }
+
+                        $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $employee["Employee"]["id"], $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
+
+                    }
+
+                    $finished = 0;
+                    $size = count($inserts);
+
+                    foreach($inserts as $insert){
+                        if($this->CalendarDay->saveMany($insert)){
+                            $finished++;
+                        }
+                    }
+
+                    if($size != $finished){
+                        $this->Session->setFlash('Niet alle kalendardagen konden worden opgeslagen');
+                    }
+
+                    $this->redirect('/Admin/viewStreams');
+
+                }
+            }
+        }
     }
 
 
@@ -745,10 +793,10 @@ class AdminController extends AppController {
         $this->Employee->saveMany($employees);
     }
 
-    private function getNOfYear($daynr, $type){
+    private function getNOfYear($daynr, $type, $year=1){
         $daysofweek = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday');
         $month = array('first' => 'January', 'last' => 'December');
-        $n = date("Y-m-d", strtotime($type . " " . $daysofweek[$daynr-1] ." of " . $month[$type] ." ". (date('Y') + 1).""));
+        $n = date("Y-m-d", strtotime($type . " " . $daysofweek[$daynr-1] ." of " . $month[$type] ." ". (date('Y') + $year).""));
         return $n;
     }
 
@@ -765,19 +813,16 @@ class AdminController extends AppController {
         return $dateRange;
     }
 
-    private function createManyCalendarDays($dateArray, $calendaritemtype, $employeeId, $supervisorId, $streamId, $type = 'day'){
+    private function createManyCalendarDays($dateArray, $calendaritemtype, $employeeId, $supervisorId, $type = 'day'){
+        $items = array();
+        $this->Request->create();
+        $request = $this->Request->save(array('employee_id' => $employeeId, 'name' => 'Stramien', 'start_date' => date('Y-m-d', strtotime(date('Y') . '-01-01')), 'start_time' => 'AM', 'end_date' => date('Y-m-d', strtotime(date('Y') . '-01-01')), 'end_time' => 'AM','timestamp' => date('Y-m-d'), 'calendar_item_type_id' => $calendaritemtype, 'replacement_id' => '-1'));
         $this->AuthItem->create();
-        var_dump($type);
-        $authItem = array('AuthItem' => array('request_id' => '0', 'supervisor_id' => '0', 'authorized' => 1, 'authorization_date' => date('Y-m-d H:i:s'), 'message' => 'Stream ' . $streamId));
+        $authItem = array('AuthItem' => array('request_id' => $request["Request"]["id"], 'supervisor_id' => $supervisorId, 'authorized' => 1, 'authorization_date' => date('Y-m-d H:i:s'), 'message' => 'Stream '));
         $savedAuthItem = $this->AuthItem->save($authItem);
         if(!empty($savedAuthItem)){
             foreach($dateArray as $date){
-                if($type == 'day'){
-                    $items[] = array('CalendarDay' => array('employee_id' => $employeeId, 'calendar_item_type_id' => $calendaritemtype, 'auth_item_id' => $savedAuthItem["AuthItem"]["id"], 'replacement_id' => 4, 'request_to_calendar_days_id' => 0, 'day_date' => $date, 'day_time' => 'AM'));
-                    $items[] = array('CalendarDay' => array('employee_id' => $employeeId, 'calendar_item_type_id' => $calendaritemtype, 'auth_item_id' => $savedAuthItem["AuthItem"]["id"], 'replacement_id' => 4, 'request_to_calendar_days_id' => 0, 'day_date' => $date, 'day_time' => 'PM'));
-                } elseif($type == 'AM' or $type == 'PM') {
-                    $items[] = array('CalendarDay' => array('employee_id' => $employeeId, 'calendar_item_type_id' => $calendaritemtype, 'auth_item_id' => $savedAuthItem["AuthItem"]["id"], 'replacement_id' => 4, 'request_to_calendar_days_id' => 0, 'day_date' => $date, 'day_time' => $type));
-                }
+                $items[]['CalendarDay'] = array('employee_id' => $employeeId, 'calendar_item_type_id' => $calendaritemtype, 'replacement_id' => 4, 'day_date' => $date, 'day_time' => $type);
             }
         }
         return $items;
