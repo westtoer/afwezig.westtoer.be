@@ -17,6 +17,17 @@ class StreamHelper extends AppHelper{
         return $html;
     }
 
+    public function copyStreams($streams){
+        $html = '<table class="table">';
+        $html .= '<tr><th width="20px"></th><th>Naam</th></tr>';
+        foreach($streams as $stream){
+            $html .= '<tr><td><input type="checkbox" id="copy-' . $stream["Stream"]["employee_id"] . '" name="data[Stream][' . $stream["Employee"]["internal_id"] . ']"></td><td>' . $stream["Employee"]["name"] . ' ' . $stream["Employee"]["surname"] . '</td></tr>';
+        }
+        $html .= '</table>';
+
+        return $html;
+    }
+
     public function addStream($calendaritemtypes, $type = 0, $employee = '-1'){
         //Building blocks
         $elements = array('weekOne' => array('monday-1',  'tuesday-2',  'wednesday-3',  'thursday-4',  'friday-5'), 'weekTwo' => array('monday-6', 'tuesday-7', 'wednesday-8', 'thursday-9', 'friday-10'));
@@ -39,7 +50,13 @@ class StreamHelper extends AppHelper{
                     $html .= '<tr class="'. strtolower($hour) .'"><td>'. strtoupper($hour) .'</td>';
                     foreach($elements[$week] as $element){
                         $html .= '<td>';
-                        $html .= '<select id="' . $element . '-' . strtoupper($hour) .'" name="data[Stream][elements][' . ucfirst($element) . '-' . strtoupper($hour) .']" class="form-control ' . $week .'"';
+                        $html .= '<select id="' . $element . '-' . strtoupper($hour) .'" name="data';
+                        if($type == 1){
+                            if($employee !== '-1'){
+                                $html .= '[' . $employee .']';
+                            }
+                        }
+                        $html .= '[Stream][elements][' . ucfirst($element) . '-' . strtoupper($hour) .']" class="form-control ' . $week .'"';
                         if($week == 'weekOne'){
                             $html .= 'OnChange="updateSecondWeek()">';
                         } else{
