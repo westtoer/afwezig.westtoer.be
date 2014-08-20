@@ -411,6 +411,12 @@ class AdminController extends AppController {
         if($id != null){
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
             $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
+            $this->set('employee', $employee);
+                if(isset($this->request->query["start"])){
+                    $departDate = date('Y-m-d', strtotime($this->request->query["start"]));
+                } else {
+                    $departDate = date('Y-m-d');
+                }
 
             if(!empty($employee)){
                 if(isset($this->request->query['apply'])){
@@ -428,7 +434,13 @@ class AdminController extends AppController {
 
                         }
 
-                        $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $employee["Employee"]["id"], $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
+                        foreach($dateArray as $key => $date){
+                            if($date < $departDate){
+                                unset($dateArray[$key]);
+                            }
+                        }
+
+                        $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $employee["Employee"]["internal_id"], $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
 
                     }
 
@@ -721,6 +733,40 @@ class AdminController extends AppController {
             } else{
                 $this->Session->setFlash("Het opslaan is mislukt");
                 $this->redirect($this->here);
+            }
+        }
+    }
+
+    public function editCalendarDays(){
+        $this->set('crud', false);
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1' ))));
+        if($this->request->is('post')){
+            $incomingCalendarDays = $this->request->data;
+            if($this->CalendarDay->saveMany($incomingCalendarDays)){
+                $this->Sesion->setFlash('Kalenderdagen opgeslagen.');
+            } else {
+                $this->Session->setFlash('Kalenderdagen konden niet worden opgeslagen.');
+            }
+            $this->redirect('/Admin');
+        } else {
+            if(isset($this->request->query['month'])){
+                $month = $this->request->query['month'];
+                $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
+                if(isset($this->request->query['employee'])){
+                    if(isset($this->request->query['year'])){
+                        $year = $this->request->query['year'];
+                    } else {
+                        $year = date('Y');
+                    }
+                    $employee = $this->request->query['employee'];
+                    $this->set('crud', true);
+
+                    $this->set('calendarDays', $this->CalendarDay->find('all', array('conditions' => array(
+                        'day_date >=' => date('Y-m-d', strtotime($year . '-' . $month .'-01')),
+                        'day_date <=' => date('Y-m-d', strtotime($year . '-' . $month  . '-' . $daysInMonth)),
+                        'employee_id' => $employee
+                    ))));
+                }
             }
         }
     }

@@ -187,4 +187,28 @@ class AdminHelper extends AppHelper {
         $html .= '</table>';
         return $html;
     }
+
+    public function crudCalendarDays($calendarDays){
+        $html = '<table class="table table-bordered">';
+        $html .= '<tr><th>Dag</th><th>Uur</th><th>Type</th>';
+        foreach($calendarDays as $calendarDay){
+            $html .= '<tr>';
+            $html .= '<td>';
+            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][id]" value="'. $calendarDay["CalendarDay"]["id"] .'">';
+            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][employee_id]" value="'. $calendarDay["CalendarDay"]["employee_id"] .'">';
+            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][replacement_id]" value="'. $calendarDay["CalendarDay"]["replacement_id"] .'">';
+            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["day_date"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][day_date]">';
+            $html .= '</td>';
+            $html .= '<td>';
+            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["day_time"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][day_time]">';
+            $html .= '</td>';
+            $html .= '<td>';
+            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["calendar_item_type_id"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][calendar_item_type_id]">';
+            $html .= '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+
+        return $html;
+    }
 }

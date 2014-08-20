@@ -44,6 +44,8 @@ class EmployeeHelper extends AppHelper {
                 $employeesOptions[] = '<option value="-1">Gebruiker</option>';
             } elseif($placement == 2) {
                 $employeesOptions[] = '<option value="0">voor</option>';
+            } elseif($placement == 3) {
+                $employeesOptions[] = '<option value="0">Gebruiker</option>';
             } else {
                 $employeesOptions[] = '<option value="4">Kies een vervanger</option>';
             }
@@ -59,12 +61,22 @@ class EmployeeHelper extends AppHelper {
                 $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => -1);
             }
             //Fill with all Employees
-            foreach($employees as $employee){
-                if($employee["Employee"]["internal_id"] !== ''){
-                    $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
-                        'value' => $employee["Employee"]["internal_id"]);
+            if($placement != 3){
+                foreach($employees as $employee){
+                    if($employee["Employee"]["internal_id"] !== ''){
+                        $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
+                            'value' => $employee["Employee"]["internal_id"]);
+                    }
+                }
+            } else {
+                foreach($employees as $employee){
+                    if($employee["Employee"]["internal_id"] !== ''){
+                        $employeesOptions[] = array('name' => $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"],
+                            'value' => $employee["Employee"]["id"]);
+                    }
                 }
             }
+
         }
 
         return $employeesOptions;
