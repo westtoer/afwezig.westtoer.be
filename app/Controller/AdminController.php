@@ -50,7 +50,7 @@ class AdminController extends AppController {
         if($this->request->is('post')){
             $employee = $this->request->data;
             $this->Employee->save($employee);
-            $this->redirect(array('action' => 'viewUsers'));
+            $this->redirect(array('action' => 'viewEmployees'));
         } else {
             if($id !== null){
                 $this->set('employee', $this->Employee->findById($id));
@@ -231,10 +231,11 @@ class AdminController extends AppController {
                        $savedStream = $this->Stream->save($incomingStream);
                        $authorizer = $this->Session->read('Auth.Employee.id');
 
-                       $calendarDays = $this->createManyCalendarDays(
-                                $this->getRange($this->getNOfYear($savedStream["Stream"]["day_relative"], 'first'),  $this->getNOfYear($savedStream["Stream"]["day_relative"], 'last'), $incomingStream["Stream"]["rule_type"]),
-                                    $savedStream["Stream"]["calendar_item_type_id"], $savedStream["Stream"]["employee_id"], $authorizer, $savedStream["Stream"]["id"], $incomingStream["Stream"]["day_time"]);
-                       $this->CalendarDay->saveMany($calendarDays);
+
+
+
+
+
                        $this->redirect('/admin/endOfYear?step=10');
                    }
                 } elseif($step == '10'){
