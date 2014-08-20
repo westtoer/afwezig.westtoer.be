@@ -16,6 +16,7 @@
         <hr />
         <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), )));?>
         <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal verlofdagen'));?>
+        <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer'));?>
         <?php echo $this->Form->submit('Aanmaken', array('class' => 'btn btn-primary fullwidth'));?>
         <?php echo $this->Form->end();?>
 
