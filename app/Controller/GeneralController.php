@@ -80,11 +80,13 @@ class GeneralController extends AppController{
                         $next = true;
                     } else {
                         if($absence["CalendarDay"]["day_time"] == 'AM'){
-                            if($absences[$key + 1]["CalendarDay"]["day_time"] == 'PM'){
-
-                            } else {
-                                $absenceTable["AM"][] = $absence;
+                            if(isset($absences[$key + 1]["CalendarDay"]["day_time"])){
+                                if($absences[$key + 1]["CalendarDay"]["day_time"]== 'PM'){
+                                } else {
+                                    $absenceTable["AM"][] = $absence;
+                                }
                             }
+
                         } else {
                             $absenceTable["PM"][] = $absence;
                         }
