@@ -21,7 +21,7 @@ if(isset($this->request->query["month"])){
             foreach($daysFull as $date => $days){
                foreach($days as $employee => $day){
                    if($day[0]["type"] == $day[1]["type"]){
-                       $value = 7.5999999;
+                       $value = 7.6;
                        $type = $day[0]["type"];
                        $this->xls->openRow();
                        $this->xls->writeString(752);
@@ -47,7 +47,7 @@ if(isset($this->request->query["month"])){
                        $this->xls->closeRow();
                    } else {
                         foreach($day as $dateObject){
-                            $value = 3.7999999;
+                            $value = 3.8;
                             $type = $dateObject["type"];
                             $this->xls->openRow();
                             $this->xls->writeString(752);
