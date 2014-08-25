@@ -23,6 +23,7 @@
                             <li><a href="<?php echo $this->base;?>/Employees/import">Werknemers importeren via CSV</a></li>
                             <li><a href="<?php echo $this->base;?>/Admin/viewRegistrations">Nieuwe registraties goedkeuren</a></li>
                             <li><a href="<?php echo $this->base;?>/Admin/viewUsers">Alle gebruikers</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/editCalendarDays">Ingrijpen op kalender</a></li>
                         </ul>
                 </div>
             </div>
