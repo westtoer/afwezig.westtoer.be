@@ -57,9 +57,9 @@ class RequestsController extends AppController {
                             foreach($overlap as $key => $overlapitem){
                                 $oo[$overlapitem["CalendarDay"]["day_time"]][$overlapitem["CalendarDay"]["day_date"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
                             }
-
-                            $this->set('overlap', $oo);
-
+                            if(isset($oo)){
+                                $this->set('overlap', $oo);
+                            }
                         } else {
                             $this->Session->setFlash('Deze request is al voorbij');
                             $this->redirect('/');
