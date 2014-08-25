@@ -12,7 +12,7 @@
             </td>
             <td width="33%">
                 <h2><?php echo $workingDays - ($notDinnerCheque/2);?></h2>
-                <p>Maaltijdcheques verdient</p>
+                <p>Maaltijdcheques verdiend</p>
             </td>
         </tr>
     </table>

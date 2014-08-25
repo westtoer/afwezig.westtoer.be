@@ -42,7 +42,7 @@
             <?php }?>
             <?php if($step == 4){?>
                 <h1 class="first">Database opruimen?</h1>
-                <p>Mag de database opgeruimt worden? Dit betekent dat alle vakantieaanvragen en dagen die ouder zijn dan twee jaar verwijderd worden.</p>
+                <p>Mag de database opgeruimd worden? Dit betekent dat alle vakantieaanvragen en dagen die ouder zijn dan twee jaar verwijderd worden.</p>
                 <div class="row">
                     <div class="col-md-6"><a href="/admin/endOfYear?step=5" class="btn btn-success fullwidth">Ja, ruim de database op</a></div>
                     <div class="col-md-6"><a href="/admin/endOfYear?step=6" class="btn btn-danger fullwidth">Neen, hou alles bij</a></div>
