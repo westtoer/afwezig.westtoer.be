@@ -257,6 +257,9 @@ class RequestsController extends AppController {
                         }
                     }
                 }
+            } else {
+                $this->Session->setFlash($validation);
+                $this->redirect($this->here);
             }
         }
     }
@@ -443,11 +446,13 @@ class RequestsController extends AppController {
                 $error .= "Je hebt geen reden van afwezigheid aangeduidt. <br />";
             }
             if(date('D', strtotime($request["Request"]["start_date"])) == 'Sat' or date('D', strtotime($request["Request"]["start_date"])) == 'Sun'){
-                $error .= "Je afwezigheid kan niet beginnen in het weekend";
+                $error .= "Je afwezigheid kan niet beginnen in het weekend <br />";
             }
+
             if(date('D', strtotime($request["Request"]["end_date"])) == 'Sat' or date('D', strtotime($request["Request"]["end_date"])) == 'Sun'){
-                $error .= "Je afwezigheid kan niet eindigen in het weekend";
+                $error .= "Je afwezigheid kan niet eindigen in het weekend <br />";
             }
+
             if($request["Request"]["calendar_item_type_id"] == 23){
                 var_dump($request["Employee"]);
                 $count = 0;
