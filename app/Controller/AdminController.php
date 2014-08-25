@@ -127,7 +127,7 @@ class AdminController extends AppController {
                         'day_date' => explode('/', $date)[0],
                         'day_time' => explode('/', $date)[1],
                         'calendar_item_type_id' => $request["Request"]["calendar_item_type_id"],
-                        'replacement_id' => 4,
+                        'replacement_id' => '-1',
                         'auth_item_id' => $authItem["AuthItem"]["id"]
                     ));
 
