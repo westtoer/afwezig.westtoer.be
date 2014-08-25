@@ -203,39 +203,40 @@ class AdminController extends AppController {
                     $this->set('streams', $this->Stream->find('all', array('group' => 'employee_id')));
                 } elseif($step == '9'){
                    $incomingStreams = $this->request->data;
-                    var_dump($incomingStreams);
+                    if(!empty($incomingStreams)){
 
-                    foreach($incomingStreams as $employee => $stream){
-                        if($stream == 'on'){
-                            $streams[$employee][] = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee)));
-                        }
-                    }
-
-                    foreach($streams as $employees){
-                        foreach($employees as $key =>$stream){
-                            if($stream["Stream"]["calendar_item_type_id"] == 9){
-                                unset($employees[$key]);
+                        foreach($incomingStreams as $employee => $stream){
+                            if($stream == 'on'){
+                                $streams[$employee][] = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee)));
                             }
                         }
 
-                        foreach($employees as $stream){
-                            if($stream["Stream"]["relative_nr"] > 5){
-                                $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
-                            } else {
-                                $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+                        foreach($streams as $employees){
+                            foreach($employees as $key =>$stream){
+                                if($stream["Stream"]["calendar_item_type_id"] == 9){
+                                    unset($employees[$key]);
+                                }
+                            }
+
+                            foreach($employees as $stream){
+                                if($stream["Stream"]["relative_nr"] > 5){
+                                    $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+                                } else {
+                                    $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+
+                                }
+
+                                $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $key, $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
 
                             }
 
-                            $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $key, $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
+                            $finished = 0;
+                            $size = count($inserts);
 
-                        }
-
-                        $finished = 0;
-                        $size = count($inserts);
-
-                        foreach($inserts as $insert){
-                            if($this->CalendarDay->saveMany($insert)){
-                                $finished++;
+                            foreach($inserts as $insert){
+                                if($this->CalendarDay->saveMany($insert)){
+                                    $finished++;
+                                }
                             }
                         }
                     }
