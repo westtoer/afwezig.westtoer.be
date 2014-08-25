@@ -427,6 +427,10 @@ class RequestsController extends AppController {
                 $error .= 'U kunt niet retroactief verlof inplannen. <br />';
             }
 
+            if(date('Y-m-d', strtotime($request["Request"]["start_date"])) > date('Y-m-d', strtotime($request["Request"]["end_date"]))){
+                $error .= 'De einddatum kan niet voor de begindatum komen. <br />';
+            }
+
             if(date('Y-m-d', strtotime($request["Request"]["start_date"])) == date('Y-m-d', strtotime($nulldate)) or date('Y-m-d', strtotime($request["Request"]["end_date"])) == date('Y-m-d', strtotime($nulldate))){
                 $error .= 'U hebt één of beide datums verkeerd ingegeven <br />';
             }

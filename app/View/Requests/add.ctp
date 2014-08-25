@@ -8,7 +8,7 @@
             <?php echo $this->Form->hidden('timestamp', array('value' => 0));?>
             <div class="row">
                 <div class="col-md-8 formspaced-left spaced">
-                    <input class="form-control" name="data[Request][start_date]" type="text" placeholder="Start" value="" id="RequestStartDate">
+                    <input class="form-control" name="data[Request][start_date]" type="text" placeholder="Start" value="" id="RequestStartDate" OnChange="onChangeBegin()">
                 </div>
                 <div class="col-md-4 formspaced-right spaced">
                     <?php echo $this->Form->input('start_time', array('label' => false, 'class' => 'form-control', 'options' => array(
@@ -52,6 +52,13 @@
 
 
 <script>
+    var beginDate = '-0';
+    function onChangeBegin(){
+        beginDate = $('#RequestStartDate').val();
+        $('#RequestEndDate').datepicker('option','minDate', beginDate);
+    }
+
+
     $(function(){
         $.datepicker.setDefaults(
         $.extend($.datepicker.regional['nl'])
@@ -78,7 +85,7 @@
             $.extend($.datepicker.regional['nl'])
         );
         $('#RequestEndDate').datepicker({
-            minDate: '-0',
+            minDate: beginDate,
             dateFormat: 'yy-mm-dd',
             closeText: 'Sluiten',
             prevText: '←',
