@@ -25,7 +25,7 @@ class AdminController extends AppController {
     //Admin section for Employees
     public function registerEmployee(){
         $this->set('departments', $this->EmployeeDepartment->find('all'));
-        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'))));
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'))));
         $this->set('');
         if($this->request->is('post')){
 
@@ -59,7 +59,7 @@ class AdminController extends AppController {
         } else {
             if($id !== null){
                 $this->set('employee', $this->Employee->findById($id));
-                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.name <>' => "" ))));
+                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id' => '-1', 'Employee.status' => 1))));
                 $this->set('departments', $this->EmployeeDepartment->find('all'));
             } else {
                 $this->Session->setFlash('Je hebt geen geldige gebruiker geselecteerd.');
@@ -556,9 +556,9 @@ class AdminController extends AppController {
             }
 
             if(!isset($this->request->query["webview"])){
-                $options = array('Employee' => array('Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
+                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
             } else {
-                $options = array('Employee' => array('Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
+                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
             }
 
             $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));

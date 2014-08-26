@@ -61,7 +61,7 @@ class EmployeesController extends AppController {
                     $this->redirect(array('controller' => 'employees', 'action' => 'confirmEmail', 'assoc' => $this->request->params["named"]["assoc"], 'uitid' => $this->request->params["named"]["uitid"], 'email' => $this->request->params["named"]["email"]));
                 } else {
                     $unknownUitId = $this->request->params["named"]["uitid"];
-                    $nonActiveEmployees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1')));
+                    $nonActiveEmployees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1)));
                     $this->set('nonActiveEmployees', $nonActiveEmployees);
                 }
             } else {

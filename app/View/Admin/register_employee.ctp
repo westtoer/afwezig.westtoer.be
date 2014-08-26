@@ -17,7 +17,9 @@
         <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), )));?>
         <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal verlofdagen'));?>
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer'));?>
+        <hr />
         <?php echo $this->Form->input('indexed_on_schaubroeck', array('options' => array(array('value' => 1, 'name' => 'Wordt verstuurd naar Schaubroeck'), array('value' => 0, 'name' => 'Wordt niet verstuurd naar Schaubroeck')), 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
+        <?php echo $this->Form->input('status', array('label' => false, 'class' => 'form-control', 'options' => array(array('value' => 1, 'name' => 'Actief'), array('value' => 0, 'name' => 'Niet actief'))));?>
         <?php echo $this->Form->submit('Aanmaken', array('class' => 'btn btn-primary fullwidth'));?>
         <?php echo $this->Form->end();?>
 

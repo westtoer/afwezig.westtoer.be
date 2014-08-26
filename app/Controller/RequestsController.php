@@ -125,6 +125,7 @@ class RequestsController extends AppController {
 
         $this->set('employees', $this->Employee->find('all', array('conditions' => array(
             'Employee.internal_id <>' => '-1',
+            'Employee.status' => 1
         ))));
         $this->set('types', $this->CalendarItemType->find('all', array('conditions' => array('CalendarItemType.user_allowed' => 1))));
 

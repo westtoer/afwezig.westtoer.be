@@ -122,21 +122,31 @@ class UsersController extends AppController {
             $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
             if(!empty($user)){
                 if($user["User"]["status"] == 'active'){
-                    $this->Auth->login($user['User']['id']);
                     $employee = $this->Employee->find('first',
                         array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
                             'fields' => array('Employee.id', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
-                             ));
-                    $this->Session->write('Auth', $employee);
-                    $this->Session->write('Auth.User', $user);
-                    if($this->Session->read('router') == null){
-                        $this->redirect('/');
+                        ));
+                    if(!empty($employee)){
+                        if($employee["Employee"]["status"] == true){
+                            $this->Auth->login($user['User']['id']);
+                            $this->Session->write('Auth', $employee);
+                            $this->Session->write('Auth.User', $user);
 
-                    } else {
-                        $this->redirect($this->Session->read('router'));
+                            if($this->Session->read('router') == null){
+                                $this->redirect('/');
+
+                            } else {
+                                $this->redirect($this->Session->read('router'));
+                            }
+                        } else {
+                            $this->redirect(array('action' => 'deactivatedEmployee'));
+                        }
                     }
 
                 } else {
+                    if($user["User"]["status"] == 'deactivated'){
+                        $this->redirect(array('action' => 'deactivatedUser'));
+                    }
                     $this->redirect(array('action' => 'error'));
                 }
             } else {
@@ -155,7 +165,14 @@ class UsersController extends AppController {
 
     public function error(){
         $this->layout = 'login';
+    }
 
+    public function deactivatedUser(){
+        $this->layout = 'login';
+    }
+
+    public function deactivatedEmployee(){
+        $this->layout = 'login';
     }
 
 
