@@ -110,7 +110,7 @@ class EmployeesController extends AppController {
                 $data = $this->Csv->import($this->request->data["Employee"]["CsvFile"]["tmp_name"]);
                 $this->Employee->create();
                 foreach($data as $key => $datarecord){
-                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["Employee"]["name"], 'Employee.surname' => $datarecord["Employee"]["surname"], 'Employee.telephone' => $datarecord["Employee"]["telephone"])));
+                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["Employee"]["name"], 'Employee.surname' => $datarecord["Employee"]["surname"], 'Employee.internal_id' => $datarecord["Employee"]["internal_id"])));
                     if(!empty($employee)){
                         unset($data[$key]);
                     } else {
@@ -127,7 +127,13 @@ class EmployeesController extends AppController {
                     unset($employee);
 
                 }
-                $this->Employee->saveMany($data);
+                if($this->Employee->saveMany($data)){
+                    $this->Session->setFlash('Het importeren is geslaagd');
+
+                } else {
+                    $this ->Session->setFlash('Er is iets misgelopen. Waarschijnlijk heb je dubbele werknemers of werknemers die al in het systeem zitten proberen toevoegen.');
+                }
+                $this->redirect($this->here);
             }
         } else {
             $this->redirect('/');
