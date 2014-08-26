@@ -51,7 +51,7 @@ CREATE TABLE `auth_items` (
   KEY `fk_ai_supervisor_id` (`supervisor_id`),
   CONSTRAINT `fk_ai_request_id` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
   CONSTRAINT `fk_ai_supervisor_id` FOREIGN KEY (`supervisor_id`) REFERENCES `employees` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `calendar_days` (
   CONSTRAINT `fk_cd_calendar_item_type_id` FOREIGN KEY (`calendar_item_type_id`) REFERENCES `calendar_item_types` (`id`),
   CONSTRAINT `fk_cd_employe_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`),
   CONSTRAINT `fk_cd_replacement_id` FOREIGN KEY (`replacement_id`) REFERENCES `employees` (`internal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,10 +110,10 @@ DROP TABLE IF EXISTS `employee_departments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee_departments` (
-  `id` int(11) NOT NULL,
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   UNIQUE KEY `employee_department_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,20 +137,23 @@ CREATE TABLE `employees` (
   `supervisor_id` int(11) NOT NULL,
   `gsm` varchar(16) NOT NULL,
   `internal_id` varchar(12) NOT NULL COMMENT 'The code for Schaubroeck to identify the employee',
+  `indexed_on_schaubroeck` tinyint(1) DEFAULT NULL,
+  `dinner_cheques` tinyint(1) NOT NULL,
+  `dinner_cheques_counter` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `employee_internal_id` (`internal_id`),
   KEY `role_id` (`role_id`),
   KEY `departement_id` (`employee_department_id`),
   KEY `supervisor_id` (`supervisor_id`),
+  KEY `indexed_on_schaubroeck` (`indexed_on_schaubroeck`),
   CONSTRAINT `fk_em_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1251 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /* Insert a null user*/
 LOCK TABLES `employees` WRITE;
 INSERT INTO `employees` VALUES (1,3,1,'','','','','',0,'1','-1','0','-1');
 UNLOCK TABLES;
-
 
 --
 -- Table structure for table `request_to_calendar_days`
@@ -170,7 +173,7 @@ CREATE TABLE `request_to_calendar_days` (
   KEY `fk_rtcd_employee` (`employee_id`),
   CONSTRAINT `fk_request` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
   CONSTRAINT `fk_rtcd_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +202,7 @@ CREATE TABLE `requests` (
   CONSTRAINT `fk_type` FOREIGN KEY (`calendar_item_type_id`) REFERENCES `calendar_item_types` (`id`),
   CONSTRAINT `fk_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`),
   CONSTRAINT `fk_replacement` FOREIGN KEY (`replacement_id`) REFERENCES `employees` (`internal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,13 +235,18 @@ DROP TABLE IF EXISTS `streams`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `streams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rule_type` varchar(2) DEFAULT NULL,
-  `day_relative` int(2) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL,
+  `employee_id` varchar(12) DEFAULT NULL,
   `calendar_item_type_id` int(11) DEFAULT NULL,
-  `day_time` varchar(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `relative_nr` int(11) DEFAULT NULL,
+  `day_nr` int(11) DEFAULT NULL,
+  `day_time` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stream_natural_key` (`employee_id`,`calendar_item_type_id`,`relative_nr`,`day_nr`,`day_time`),
+  KEY `calendar_item_type_id` (`calendar_item_type_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `fk_st_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`internal_id`),
+  CONSTRAINT `fk_st_calendarItem` FOREIGN KEY (`calendar_item_type_id`) REFERENCES `calendar_item_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,30 +268,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `user_uitid` (`uitid`),
   KEY `fk_users_employee_id` (`employee_id`),
   CONSTRAINT `fk_users_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
-
---
--- Table structure for table `streams`
---
-
-DROP TABLE IF EXISTS `streams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `streams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(12) DEFAULT NULL,
-  `calendar_item_type_id` int(11) DEFAULT NULL,
-  `relative_nr` int(11) DEFAULT NULL,
-  `day_nr` int(11) DEFAULT NULL,
-  `day_time` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `stream_natural_key` (`employee_id`,`calendar_item_type_id`,`relative_nr`,`day_nr`,`day_time`),
-  KEY `calendar_item_type_id` (`calendar_item_type_id`),
-  KEY `employee_id` (`employee_id`),
-  CONSTRAINT `fk_st_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`internal_id`),
-  CONSTRAINT `fk_st_calendarItem` FOREIGN KEY (`calendar_item_type_id`) REFERENCES `calendar_item_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -294,3 +279,5 @@ CREATE TABLE `streams` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-08-26 14:52:06
