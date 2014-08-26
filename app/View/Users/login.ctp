@@ -17,8 +17,8 @@
                 Westtoer op Verlof is de verloftoepassing van Westtoer. Hiermee kun je bekijken wie er wanneer op verlof is, en wie je moet contacteren, alsook je eigen verlof aanvragen.
                 <div class="spacer"></div>
                 <div class="row">
-                    <div class="col-md-6"><a href="">Keer terug naar het Intranet</a></div>
-                    <div class="col-md-6"><a href="">Lees de documentatie over 'Op Verlof' </a></div>
+                    <div class="col-md-6"><a href="http://intranet.westtoer.be/">Keer terug naar het Intranet</a></div>
+                    <div class="col-md-6"><a href="http://intranet.westtoer.be/node/100">Lees de documentatie over 'Afwezig' </a></div>
                 </div>
             </div>
 
