@@ -285,7 +285,7 @@ class AdminController extends AppController {
 
             if($incomingStream["Stream"]["employee_id"] != '-1'){
                 $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $incomingStream["Stream"]["employee_id"])));
-                $streams = $this->Stream->find('first', array('conditions' => array('employee.id' => $employee["Employee"]["internal_id"])));
+                $streams = $this->Stream->find('first', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
                 if(empty($stream)){
                     foreach($incomingStream["Stream"]["elements"] as $date => $element){
                         $date = explode('-', $date);
@@ -416,7 +416,7 @@ class AdminController extends AppController {
     public function applyStream($id = null){
         if($id != null){
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
-            $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
+            $streams = $this->Stream->find('all', array('conditions' => array('Employee_id' => $employee["Employee"]["internal_id"])));
             $this->set('employee', $employee);
                 if(isset($this->request->query["start"])){
                     $departDate = date('Y-m-d', strtotime($this->request->query["start"]));
