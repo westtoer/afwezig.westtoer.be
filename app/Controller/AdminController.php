@@ -103,8 +103,10 @@ class AdminController extends AppController {
                 $request["Request"]["employee_id"] = 4;
                 if($request["Request"]["type"] == 0){
                     $request["Request"]["calendar_item_type_id"] = 3;
-                } else {
+                } elseif($request["Request"]["type"] == 1){
                     $request["Request"]["calendar_item_type_id"] = 23;
+                } elseif($request["Request"]["type"] == 2) {
+                    $request["Request"]["calendar_item_type_id"] = 6;
                 }
 
                 $request["Request"]["timestamp"] = date('Y-m-d H:i:s');
@@ -120,7 +122,6 @@ class AdminController extends AppController {
             $this->AuthItem->create();
             $authItem = array('request_id' => $savedRequest["Request"]["id"], 'supervisor_id' => $authorizer, 'authorization_date' => date('Y-m-d H:i:s'), 'message' => "Holiday at request " . $savedRequest["Request"]["id"]);
             $authItem = $this->AuthItem->save($authItem);
-            var_dump($authItem);
             $savedRequest["Request"]["auth_item_id"] = $authItem["AuthItem"]["id"];
             $savedRequest = $this->Request->save($savedRequest);
 
@@ -434,7 +435,9 @@ class AdminController extends AppController {
 
                     foreach($streams as $stream){
                         if($stream["Stream"]["relative_nr"] > 5){
-                            $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+                            if(isset($count)){
+                                $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
+                            }
                         } else {
                             $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
 

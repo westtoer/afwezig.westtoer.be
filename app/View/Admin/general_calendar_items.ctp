@@ -37,6 +37,7 @@
                     <?php echo $this->Form->input('type',  array('label' => false, 'class' => 'form-control spaced', 'options' => array(
                         array('name' => 'Feestdag', 'value' => '0'),
                         array('name' => 'Brugdag', 'value' => '1'),
+                        array('name' => 'Dienstvrijstelling', 'value' => 2)
                     )));?>
                     <?php echo $this->Form->submit('Verstuur', array('class' => 'btn btn-primary fullwidth'));?>
                     <?php echo $this->Form->end();?>
