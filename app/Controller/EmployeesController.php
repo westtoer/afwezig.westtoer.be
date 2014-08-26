@@ -115,9 +115,13 @@ class EmployeesController extends AppController {
                         unset($data[$key]);
                     } else {
                         $datarecord["Employee"]["role_id"] = 3;
-                        $datarecord["Employee"]["department_id"] = 1;
+                        if(!isset($datarecord["Employee"]["department_id"])){
+                            $datarecord["Employee"]["department_id"] = 1;
+                        }
                         $datarecord["Employee"]["status"] = 1;
-                        $datarecord["Employee"]["supervisor_id"] = '-1';
+                        if(!isset($datarecord["Employee"]["status"])){
+                            $datarecord["Employee"]["supervisor_id"] = '-1';
+                        }
                         $cleanData[] = $datarecord;
                     }
                     unset($employee);

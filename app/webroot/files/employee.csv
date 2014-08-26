@@ -1,2 +1,1 @@
-role_id,employee_department_id,3gram,telephone,name,surname,note,daysleft,status,linked,supervisor_id,gsm
-3,1,aanpassen,aanpassen,aanpassen,aanpassen,leeglaten,aanpassen,1,0,4,leeglaten
+3gram, telephone, name, surname, daysleft, supervisor_id, internal_id, employee_department_ids
