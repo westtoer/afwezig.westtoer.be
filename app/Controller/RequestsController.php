@@ -426,9 +426,14 @@ class RequestsController extends AppController {
         $request["Employee"] = $this->Employee->findById($this->Session->read('Auth.Employee.id'))["Employee"];
         $dateRange = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
             $error = '';
-            if(date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d') or date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d')){
-                $error .= 'U kunt niet retroactief verlof inplannen. <br />';
-            }
+            /*
+             * Issue #33
+             *
+             * if(date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d') or date('Y-m-d', strtotime($request["Request"]["start_date"])) < date('Y-m-d')){
+             *   $error .= 'U kunt niet retroactief verlof inplannen. <br />';
+             * }
+             *
+            */
 
             if(date('Y-m-d', strtotime($request["Request"]["start_date"])) > date('Y-m-d', strtotime($request["Request"]["end_date"]))){
                 $error .= 'De einddatum kan niet voor de begindatum komen. <br />';
