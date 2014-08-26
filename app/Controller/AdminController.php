@@ -741,17 +741,41 @@ class AdminController extends AppController {
     public function editCalendarDays(){
         $this->set('crud', false);
         $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1' ))));
+        $this->set('cit', $this->CalendarItemType->find('all'));
         if($this->request->is('post')){
-            $incomingCalendarDays = $this->request->data;
-            if($this->CalendarDay->saveMany($incomingCalendarDays)){
-                $this->Sesion->setFlash('Kalenderdagen opgeslagen.');
-            } else {
-                $this->Session->setFlash('Kalenderdagen konden niet worden opgeslagen.');
+            $icd = $this->request->data["items"]; // Incoming Calendar Days
+            $employee = $this->Employee->findById($this->request->data["Crud"]["employee_id"]);
+
+            foreach($icd as $date => $cd){
+                foreach($cd as $hour => $type){
+                    if(is_array($type)){
+                        foreach($type as $id => $object){
+                            if($id != 0){
+                                $vcd[] = array('CalendarDay' => array('id' => $id, 'employee_id' => $employee["Employee"]["id"],'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $object["type"])); //Verified Calendar Days
+                            } else {
+                                if($object['type'] != 0){
+                                    $ncd[] = array('CalendarDay' => array('employee_id' => $employee["Employee"]["id"],'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $object["type"])); //New Calendar Days
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            $this->redirect('/Admin');
+
+            if($this->CalendarDay->saveMany($vcd)){
+                if($this->CalendarDay->saveMany($ncd)){
+                    $this->Session->setFlash('Het opslaan van de kalender is geslaagd.');
+                } else {
+                    $this->Session->setFlash('Het opslaan van de nieuwe kalenderdagen is mislukt.');
+                }
+            } else {
+                $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
+            }
+            $this->redirect($this->here);
         } else {
             if(isset($this->request->query['month'])){
                 $month = $this->request->query['month'];
+                if($month < 10){$niceMonth = '0' . $month;} else {$niceMonth = $month;}
                 $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
                 if(isset($this->request->query['employee'])){
                     if(isset($this->request->query['year'])){
@@ -762,11 +786,31 @@ class AdminController extends AppController {
                     $employee = $this->request->query['employee'];
                     $this->set('crud', true);
 
-                    $this->set('calendarDays', $this->CalendarDay->find('all', array('conditions' => array(
-                        'day_date >=' => date('Y-m-d', strtotime($year . '-' . $month .'-01')),
-                        'day_date <=' => date('Y-m-d', strtotime($year . '-' . $month  . '-' . $daysInMonth)),
-                        'employee_id' => $employee
-                    ))));
+                    $date = array('start' => $year . '-' . $niceMonth .'-01', 'end' => $year . '-' . $niceMonth  . '-' . $daysInMonth);
+
+                    $ucd = $this->CalendarDay->find('all', array('conditions' => array(
+                        'day_date >=' => date('Y-m-d', strtotime($date["start"])),
+                        'day_date <=' => date('Y-m-d', strtotime($date["end"])),
+                        'employee_id' => $employee),
+                        'order' => 'day_date ASC'
+                    ));
+
+                    $template = $this->dateRange($date["start"], $date["end"]);
+
+                    foreach($template as $cd){
+                        $ocd[explode('/',$cd)[0]][explode('/',$cd)[1]] = array('id' => 0, 'name' => '', 'type_id' => 0);
+                    }
+
+                    foreach($ucd as $calendarDay){
+                        $ocd[$calendarDay["CalendarDay"]["day_date"]][$calendarDay["CalendarDay"]["day_time"]] = array('id' => $calendarDay["CalendarDay"]["id"], 'type_id' => $calendarDay["CalendarDay"]["calendar_item_type_id"], 'name' => $calendarDay["CalendarItemType"]["name"]);
+                    }
+
+                    if(isset($ocd)){
+                        $this->set('calendarDays', $ocd);
+                    } else {
+                        $this->set('calendarDays', 'Er is geen resultaat gevonden');
+                    }
+
                 }
             }
         }

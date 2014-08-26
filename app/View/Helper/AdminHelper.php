@@ -1,7 +1,7 @@
 <?php
 class AdminHelper extends AppHelper {
 
-    public $helpers = array('Form');
+    public $helpers = array('Form', 'CalendarItemType');
 
     public function tableUsers($users, $type){
         $html = '<table class="table">';
@@ -189,26 +189,30 @@ class AdminHelper extends AppHelper {
         return $html;
     }
 
-    public function crudCalendarDays($calendarDays){
+    public function crudCalendarDays($calendarDays, $cit){
+        $types = $this->CalendarItemType->selectorAllCalendarItemTypes($cit, 'mixed');
         $html = '<table class="table table-bordered">';
-        $html .= '<tr><th>Dag</th><th>Uur</th><th>Type</th>';
-        foreach($calendarDays as $calendarDay){
+        $html .= '<tr><th width="200px">Dag</th><th>AM</th><th>PM</th>';
+
+        foreach($calendarDays as $date =>$cd){
             $html .= '<tr>';
-            $html .= '<td>';
-            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][id]" value="'. $calendarDay["CalendarDay"]["id"] .'">';
-            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][employee_id]" value="'. $calendarDay["CalendarDay"]["employee_id"] .'">';
-            $html .= '<input type="hidden" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][replacement_id]" value="'. $calendarDay["CalendarDay"]["replacement_id"] .'">';
-            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["day_date"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][day_date]">';
-            $html .= '</td>';
-            $html .= '<td>';
-            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["day_time"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][day_time]">';
-            $html .= '</td>';
-            $html .= '<td>';
-            $html .= '<input type="text" class="form-control" value="' . $calendarDay["CalendarDay"]["calendar_item_type_id"] . '" name="data[' . $calendarDay["CalendarDay"]["id"] .'][CalendarDay][calendar_item_type_id]">';
-            $html .= '</td>';
+            $html .= '<td>' . $date .'</td>';
+            foreach($cd as $hour => $desc){
+                $html .= '<td>';
+                $html .= '<select class="form-control" name="data[items][' . $date . '][' . $hour . '][' . $cd[$hour]["id"] . '][type]">';
+                $html .= '<option value="' . $cd[$hour]["type_id"] . '">' .$cd[$hour]["name"]  .'</option>';
+                foreach($types as $type){
+                    if($type["id"] !== $cd[$hour]["type_id"]){
+                        $html .= $type["html"];
+                    }
+                }
+                $html .= '</select>';
+                $html .= '</td>';
+            }
             $html .= '</tr>';
         }
         $html .= '</table>';
+
 
         return $html;
     }
