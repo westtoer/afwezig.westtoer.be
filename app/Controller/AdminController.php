@@ -31,7 +31,7 @@ class AdminController extends AppController {
 
             $this->Employee->create();
             $employee = $this->request->data;
-            $existing = $this->Employee->find('first', array('conditions' => array('Employee.name' => $employee["Employee"]["name"], 'Employee.surname' => $employee["Employee"]["surname"], 'Employee.telephone' => $employee["Employee"]["telephone"])));
+            $existing = $this->Employee->find('first', array('conditions' => array('Employee.name' => $employee["Employee"]["name"], 'Employee.surname' => $employee["Employee"]["surname"], 'Employee.internal_id' => $employee["Employee"]["internal_id"])));
             if(empty($existing)){
                 $this->Employee->save($employee);
             } else {
@@ -535,7 +535,7 @@ class AdminController extends AppController {
 
     public function export() {
 
-        $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'), 'order' => 'Employee.name ASC'));
+        $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'order' => 'Employee.name ASC'));
 
         if(isset($this->request->query["month"])){
             $month = $this->request->query["month"];
