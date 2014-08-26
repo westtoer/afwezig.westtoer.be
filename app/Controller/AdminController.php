@@ -766,7 +766,7 @@ class AdminController extends AppController {
                                 $vcd[] = array('CalendarDay' => array('id' => $id, 'employee_id' => $employee["Employee"]["id"],'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $object["type"])); //Verified Calendar Days
                             } else {
                                 if($object['type'] != 0){
-                                    $ncd[] = array('CalendarDay' => array('employee_id' => $employee["Employee"]["id"],'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $object["type"])); //New Calendar Days
+                                    $ncd[] = array('CalendarDay' => array('employee_id' => $employee["Employee"]["id"],'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $object["type"], 'replacement_id' => '-1')); //New Calendar Days
                                 }
                             }
                         }
