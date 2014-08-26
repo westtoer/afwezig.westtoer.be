@@ -797,6 +797,16 @@ class AdminController extends AppController {
 
                     $date = array('start' => $year . '-' . $niceMonth .'-01', 'end' => $year . '-' . $niceMonth  . '-' . $daysInMonth);
 
+                    if(date('D', strtotime($date["start"])) == "Sat" or date('D', strtotime($date["start"])) == "Sun"){
+                        $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+                        $date["start"] = date('Y-m-d', strtotime('first monday of ' . $months[$month] . ' ' . date('Y')));
+                    }
+
+                    if(date('D', strtotime($date["end"])) == "Sat" or date('D', strtotime($date["end"])) == "Sun"){
+                        $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+                        $date["end"] = date('Y-m-d', strtotime('last Friday of ' . $months[$month] . ' ' . date('Y')));
+                    }
+
                     $ucd = $this->CalendarDay->find('all', array('conditions' => array(
                         'day_date >=' => date('Y-m-d', strtotime($date["start"])),
                         'day_date <=' => date('Y-m-d', strtotime($date["end"])),
