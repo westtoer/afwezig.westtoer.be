@@ -152,8 +152,8 @@ class RequestsController extends AppController {
 
                     //Get all the records in the database that could overlap with the range requested by the employee
                     $existingInRange = $this->CalendarDay->find('all', array('conditions' => array(
-                        'CalendarDay.day_date >=' => $cr["Request"]["start_date"],
-                        'CalendarDay.day_date <=' => $cr["Request"]["end_date"],
+                        'CalendarDay.day_date >=' => (string)$cr["Request"]["start_date"],
+                        'CalendarDay.day_date <=' => (string)$cr["Request"]["end_date"],
                         'CalendarDay.employee_id' => $cr["Request"]["employee_id"]
                     )));
 
@@ -163,7 +163,6 @@ class RequestsController extends AppController {
                     } else {
                         $hashInRange = array();
                     }
-
 
                     //Check where the CalendarDays overlap with the requested range
                     foreach($requestRange as $requestDate){
@@ -185,6 +184,7 @@ class RequestsController extends AppController {
                     $request = $this->Request->findById($cr["Request"]["id"]);
                     $request["Request"]["auth_item_id"] = $ai["AuthItem"]["id"];
                     $this->Request->save($request);
+
 
                     //All the dates that don't exist may be created
                     if(!empty($notexist)){
@@ -454,7 +454,6 @@ class RequestsController extends AppController {
             }
 
             if($request["Request"]["calendar_item_type_id"] == 23){
-                var_dump($request["Employee"]);
                 $count = 0;
                 if(($request["Employee"]["daysleft"] - count($dateRange)) < 0){
                     foreach($dateRange as $date){
@@ -518,7 +517,6 @@ class RequestsController extends AppController {
             $Email->from ('noreply@westtoer.be');
 
             if($type == "new"){
-                var_dump($request);
                 $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' heeft een nieuwe aanvraag gedaan die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Om dit te bekijken ga je naar http://afwezig.westtoer.be/Requests/view/' . $request["Request"]["id"]);
             } elseif($type == "allowed") {
                 $Email->send($request["Employee"]["name"] . ' ' . $request["Employee"]["surname"] . ' had een aanvraag gedaan voor die zou beginnen op ' . $request["Request"]["start_date"] . ' ' . $request["Request"]["start_time"] . ' en zou eindigen op ' . $request["Request"]["end_date"] . ' ' . $request["Request"]["end_time"] . '. Deze aanvraag is goedgekeurd.');
