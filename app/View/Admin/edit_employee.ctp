@@ -1,6 +1,14 @@
 <div class="row">
     <div class="col-md-3">
         <?php echo $this->element('admin/base_admin_menu');?>
+        <?php
+            $options = array();
+        if($employee["Employee"]["indexed_on_schaubroeck"] == 0){
+            $options = array(array('value' => 0, 'name' => 'Wordt niet verstuurd naar Schaubroeck'), array('value' => 1, 'name' => 'Wordt verstuurd naar Schaubroeck'));
+        } else {
+            $options = array(array('value' => 1, 'name' => 'Wordt verstuurd naar Schaubroeck'), array('value' => 0, 'name' => 'Wordt niet verstuurd naar Schaubroeck'));
+        }
+        ?>
     </div>
     <div class="col-md-9">
         <h2 class="first">Een werknemer aanpassen</h2>
@@ -18,6 +26,7 @@
         <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'value' => $employee["Employee"]["role_id"], 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), array("name" => "Administrator", "value" => 1) )));?>
         <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal halve verlofdagen', 'value' => $employee["Employee"]["daysleft"]));?>
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer', 'value' => $employee["Employee"]["internal_id"]));?>
+        <?php echo $this->Form->input('indexed_on_schaubroeck', array('options' => $options, 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
         <?php echo $this->Form->submit('Opslaan', array('class' => 'btn btn-primary fullwidth'));?>
         <?php echo $this->Form->end();?>
 

@@ -33,11 +33,15 @@ class AdminController extends AppController {
             $employee = $this->request->data;
             $existing = $this->Employee->find('first', array('conditions' => array('Employee.name' => $employee["Employee"]["name"], 'Employee.surname' => $employee["Employee"]["surname"], 'Employee.internal_id' => $employee["Employee"]["internal_id"])));
             if(empty($existing)){
-                $this->Employee->save($employee);
+                if($this->Employee->save($employee)){
+                    $this->Session->setFlash('Gebruiker is opgeslagen.');
+                } else {
+                    $this->Session->setFlash('Het opslaan van de gebruiker is mislukt.');
+                }
             } else {
                 $this->Session->setFlash("Er bestaat al een gebruiker met dezelfde naam en telefoonnummer");
-                $this->redirect('/Admin/viewEmployees');
             }
+            $this->redirect('/Admin/viewEmployees');
         }
     }
 
@@ -50,6 +54,7 @@ class AdminController extends AppController {
         if($this->request->is('post')){
             $employee = $this->request->data;
             $this->Employee->save($employee);
+            $this->Session->setFlash('Gebruiker gewijzigd.');
             $this->redirect(array('action' => 'viewEmployees'));
         } else {
             if($id !== null){
@@ -534,9 +539,6 @@ class AdminController extends AppController {
     }
 
     public function export() {
-
-        $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'order' => 'Employee.name ASC'));
-
         if(isset($this->request->query["month"])){
             $month = $this->request->query["month"];
             $range = $this->lastDay($month);
@@ -553,8 +555,16 @@ class AdminController extends AppController {
                 $range[0] = date('Y-m-d', strtotime(date('Y') . '-' . $nicemonth . '-' . $limit));
             }
 
+            if(!isset($this->request->query["webview"])){
+                $options = array('Employee' => array('Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
+            } else {
+                $options = array('Employee' => array('Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
+            }
+
+            $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));
+
             $dateRange = $this->dateRange($range[0], $range[1], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
-            $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('day_date >=' => $range[0], 'day_date <=' => $range[1])));
+            $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"]));
             foreach ($dateRange as $date){
                 if(date('D', strtotime(explode('/', $date)[0])) == 'Sat'){
                     $template[$date] = 'ZA';
@@ -590,8 +600,7 @@ class AdminController extends AppController {
                 $data = array_replace_recursive($employeeTemplate, $data);
                 $this->set('data', $data);
             } else {
-                $this->Session->setFlash('Er is geen data om te exporteren');
-                $this->redirect('/admin/export');
+                $this->set('data', $employeeTemplate);
             }
 
 
