@@ -16,7 +16,7 @@
     <div class="col-md-9">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="first">Vandaag</h2>
+                <h2 class="first">Vandaag <small>op Westtoer afwezig</small></h2>
                 <ul class="list-group">
                 <?php
                 if(!empty($absences)){
@@ -28,7 +28,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h2 class="first">Volgende afwezigheid</h2>
+                <h2 class="first">Mijn volgende afwezigheid</h2>
                 <div class="well flat">
                     <?php if($nextRequest){;?>
                         <p>Uw volgende afwezigheid die is goedgekeurd valt op <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["start_date"])) . ' ' . $nextRequest["Request"]["start_time"];?></strong> en duurt tot <strong><?php echo date('d-m-Y', strtotime($nextRequest["Request"]["end_date"])) . ' ' . $nextRequest["Request"]["end_time"];?></strong></p>
