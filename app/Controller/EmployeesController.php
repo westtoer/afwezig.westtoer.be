@@ -127,12 +127,17 @@ class EmployeesController extends AppController {
                     unset($employee);
 
                 }
-                if($this->Employee->saveMany($data)){
-                    $this->Session->setFlash('Het importeren is geslaagd');
 
+                if(!empty($cleanData)){
+                    if($this->Employee->saveMany($cleanData)){
+                        $this->Session->setFlash('Het importeren is geslaagd');
+                    } else {
+                        $this ->Session->setFlash('Er is iets misgelopen. Waarschijnlijk heb je dubbele werknemers of werknemers die al in het systeem zitten proberen toevoegen.');
+                    }
                 } else {
-                    $this ->Session->setFlash('Er is iets misgelopen. Waarschijnlijk heb je dubbele werknemers of werknemers die al in het systeem zitten proberen toevoegen.');
+                    $this->Session->setFlash('Er was geen data om te importeren.');
                 }
+
                 $this->redirect($this->here);
             }
         } else {
