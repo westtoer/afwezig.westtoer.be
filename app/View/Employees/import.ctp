@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-6">
         <div class="alert alert-info" role="alert">
-            <strong>Import stramien  - CSV:</strong>
+            <strong>Import sjabloon  - CSV:</strong>
             <p>Om werknemers te importeren, moet je een sjabloon invullen. <a href="<?php echo $this->base;?>/files/employee.csv">Klik hier om dat sjabloon te downloaden.</a></p>
         </div>
     </div>
