@@ -24,6 +24,7 @@
                             <li><a href="<?php echo $this->base;?>/Admin/viewRegistrations">Nieuwe registraties goedkeuren</a></li>
                             <li><a href="<?php echo $this->base;?>/Admin/viewUsers">Alle gebruikers</a></li>
                             <li><a href="<?php echo $this->base;?>/Admin/editCalendarDays">Ingrijpen op kalender</a></li>
+                            <li><a href="<?php echo $this->base;?>/Admin/departments">Afdelingen</a></li>
                         </ul>
                 </div>
             </div>
