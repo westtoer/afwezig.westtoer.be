@@ -2,7 +2,7 @@
 
 ##Contribute to Afwezig
 
-If you want to contribute to Afwezig, you can add an issue to the Issue Tracker on westtoer/afwezig.westtoer.be. Please l
+If you want to contribute to Afwezig, you can add an issue to the Issue Tracker on westtoer/afwezig.westtoer.be. Please
 keep in mind to keep titles concise and clear. Also, if you find a bug, please tell us how we can reproduce the bug.
 
 ##Contribute to CakePHP
