@@ -21,9 +21,9 @@ class RequestsController extends AppController {
         $supervisor = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
         if($access["allow"] == true){
             if($supervisor["Role"]["name"] == 'admin'){
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Request.start_date >=' => date('Y-m-d'));
+                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null);
             } else {
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"], 'Request.start_date >=' => date('Y-m-d'));
+                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"]);
             }
             $this->set('requests', $this->RequestToCalendarDay->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
         }
