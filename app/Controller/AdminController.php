@@ -3,7 +3,7 @@ App::uses('ConnectionManager', 'Model');
 App::uses('CakeEmail', 'Network/Email');
 class AdminController extends AppController {
 
-    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType');
+    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export');
     public $helpers = array('Employee', 'Request', 'CalendarDay', 'CalendarItemType', 'Xls');
     public $components = array('RequestHandler');
 
@@ -59,7 +59,7 @@ class AdminController extends AppController {
         } else {
             if($id !== null){
                 $this->set('employee', $this->Employee->findById($id));
-                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id' => '-1', 'Employee.status' => 1))));
+                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1))));
                 $this->set('departments', $this->EmployeeDepartment->find('all'));
             } else {
                 $this->Session->setFlash('Je hebt geen geldige gebruiker geselecteerd.');
@@ -545,34 +545,42 @@ class AdminController extends AppController {
         //Define month
         if(isset($this->request->query["month"])){
             $month = $this->request->query["month"];
-            $range = $this->lastDay($month);
-
-            //Remove limit
-            if(isset($this->request->query["limit"])){
-                $limit = $this->request->query["limit"];
-                $nicemonth = $month;
-                if($month < 10){
-                    $niceMonth = '0' . $month ;
-                } else {
-                    $niceMonth = $month;
+            $niceMonth = $month;
+            if($month < 10){
+                if(substr($month, 0 ,1) != '0'){
+                    $niceMonth = '0' . $month;
                 }
+            }
+            $range["end"] = $this->lastDay($month);
+            $range["templateStart"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
 
-                $range[0] = date('Y-m-d', strtotime(date('Y') . '-' . $nicemonth . '-' . $limit));
+            //Get previous export date (that isn't ignored) and get all record from before.
+            $prevExport = $this->Export->find('first', array('conditions' => array('Export.ignored' => false), 'order' => 'Export.timestamp DESC'));
+            if(!empty($prevExport)){
+                $limit = $prevExport["Export"]["timestamp"];
+                $range["start"] = date('Y-m-d H:i:s', strtotime($limit));
+                $niceMonth = $month;
+
+                if($range["start"] > $range["templateStart"]){
+                    $this->Session->setFlash('Je kan geen tweede geldige export doen van een maand. Wil je dit toch, moet je de vorige ongeldig verklaren');
+                    $this->redirect('/Admin/export');
+                }
+            } else {
+                $range["start"] = '2012-01-01';
             }
 
 
             //Webview still shows employees that aren't indexed on Schaubroeck
             if(!isset($this->request->query["webview"])){
-                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
+                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('OR' => array(array('last_update >=' => $range["start"]), array('last_update' => '0000-00-00 00:00:00')), 'day_date <=' => $range["end"], 'Employee.indexed_on_schaubroeck' => 1));
             } else {
-                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
+                $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range["start"], 'day_date <=' => $range["end"]));
             }
 
             //Data dependancies
             $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));
-            $dateRange = $this->dateRange($range[0], $range[1], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
-            $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"]));
-
+            $dateRange = $this->dateRange($range["templateStart"], $range["end"], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
+            $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"], 'order' => 'day_date ASC'));
 
 
             //Create a template month with no off days
@@ -600,31 +608,8 @@ class AdminController extends AppController {
                 if(isset($this->request->query["type"])){
                     $data[$calendarDay["Employee"]["name"]  . ' ' . $calendarDay["Employee"]["surname"] . '/' . $calendarDay["Employee"]["id"]][$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay;
                 } else {
-
                     $data[$calendarDay["Employee"]["name"]  . ' ' . $calendarDay["Employee"]["surname"]][$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay["CalendarItemType"]["code"];
                 }
-            }
-
-            //Write the calendarDays to a JSON file and create an export record (if this isn't a webview)
-            if(!isset($this->request->query["webview"])){
-                //Get the export dir path
-                $exportPathcd = Configure::read('Administrator.export_dir') . '/json/' . date('Y-m-d H:i:s') . '-calendardays.json';
-                $exportPath = Configure::read('Administrator.export_dir') . '/json/' . date('Y-m-d H:i:s') . '-complete.json';
-
-                //Write a json file with only the calendar days (not working days)
-                $JSONcd = json_encode($calendarDays);
-                $file = new File($exportPathcd, true);
-                $file->write($JSONcd);
-
-                //Write a json file with only the calendar days (not working days)
-                if(!empty($data)){
-                    $JSON = json_encode($data);
-                } else {
-                    $JSON = json_encode($employeeTemplate);
-                }
-
-                $file = new File($exportPath, true);
-                $file->write($JSON);
             }
 
             //Give the GUI access to the date range
@@ -639,7 +624,38 @@ class AdminController extends AppController {
             }
 
 
+
+            //Write the calendarDays to a JSON file and create an export record (if this isn't a webview)
+            if(!isset($this->request->query["webview"])){
+                //Get the export dir path
+                $date = date('Y-m-d') . 'T' . date('H:i:s');
+                $exportPath = Configure::read('Administrator.export_dir') . '/json/' . $date . '.json';
+
+                //Create a database record for exports
+                $this->Export->create();
+                $export = array('Export' => array('timestamp' => $date, 'json_path' => $exportPath, 'xls_path' => 'null', 'ignored' => false, 'start_date' => $range["templateStart"], 'end_date' => $range["end"], 'employee_id' => $this->Session->read('Auth.Employee.id')));
+                $this->Export->save($export);
+
+                //Write a json file with only the calendar days (not working days)
+                if(!empty($data)){
+                    $JSON = json_encode(array($export, array('data' => $data)));
+                } else {
+                    $JSON = json_encode(array($export, array('data' => $employeeTemplate)));
+                }
+
+                $file = new File($exportPath, true);
+                $file->write($JSON);
+            }
+
             if(isset($this->request->query["type"])){
+
+                foreach($this->CalendarItemType->find('all') as $calendarType){
+                    $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
+                }
+                $exportCsv = Configure::read('Administrator.export_dir') . '/csv/' . $date . '.csv';
+                $file = new File($exportCsv, true);
+
+
                 foreach($data as $employeeQuery => $days){
                     $employee = $this->Employee->findById(explode('/', $employeeQuery)[1]);
 
@@ -652,22 +668,71 @@ class AdminController extends AppController {
                     }
                 }
 
-                $this->set('daysFull', $daysFull);
+                $header = array('westtoernummer,', 'NummerPersoneelslid,', 'Datum,', 'aard_schaubroeck,', 'code_schaubroeck,', 'extensie_schaubroeck,', 'uur');
+                $x = '';
+                foreach($header as $element){
+                    $x .= $element;
+                }
+                $x .= "\n";
+
+                foreach($daysFull as $day  => $daycontent){
+                    foreach($daycontent as $employee => $employeecontents){
+                        if($employeecontents[0]["type"] != "ZA" and $employeecontents[0]["type"] != "ZO" and $employeecontents[1]["type"] != "ZA" and $employeecontents[1]["type"] != "ZO"){
+                            if($employeecontents[0]["type"] == $employeecontents[1]["type"]){
+                                $value = 7.6;
+                                $x .= '752,';
+                                $x .= explode('/', $employee)[2] . ',';
+                                $x .= $day . ',';
+                                $x .= $calendarTypes[$employeecontents[0]["type"]]["CalendarItemType"]["aard_schaubroek"] . ',';
+                                $x .= $calendarTypes[$employeecontents[0]["type"]]["CalendarItemType"]["code_schaubroek"] . ',';
+                                $x .= $calendarTypes[$employeecontents[0]["type"]]["CalendarItemType"]["ext_schaubroek"] . ',';
+                                $x .= $value;
+                                $x .= "\n";
+                            } else {
+                                $value = 3.8;
+                                foreach($employeecontents as $content){
+                                    $x .= '752,';
+                                    $x .= explode('/', $employee)[2] . ',';
+                                    $x .= $day . ',';
+                                    $x .= $calendarTypes[$content["type"]]["CalendarItemType"]["aard_schaubroek"] . ',';
+                                    $x .= $calendarTypes[$content["type"]]["CalendarItemType"]["code_schaubroek"] . ',';
+                                    $x .= $calendarTypes[$content["type"]]["CalendarItemType"]["ext_schaubroek"] . ',';
+                                    $x .= $value;
+                                    $x .= "\n";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $file->write($x);
+                $export["xls_path"] = $exportCsv;
+                $this->Export->save($export);
+                $this->Session->setFlash('Export opgeslagen op ' . $exportPath . ' en '. $exportCsv);
+                $this->redirect('/Admin/export');
+
             }
 
             //Add Calendar Types for GUI
-            foreach($this->CalendarItemType->find('all') as $calendarType){
-                $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
-            }
+
             $this->set('calendarTypes', $calendarTypes);
         }
     }
 
-    public function exportWebView(){
-        if(isset($this->request->query["month"])){
-            $month = $this->request->query["month"];
-            $range = $this->lastDay($month);
-
+    public function ignoreExports(){
+        if(isset($this->request->query["id"])){
+            if(isset($this->request->query["ignore"])){
+                $export = $this->Export->findById($this->request->query["id"]);
+                $export["Export"]["ignored"] = true;
+                if($this->Export->save($export)){
+                    $this->Session->setFlash('Export wordt vanaf nu genegeerd');
+                } else {
+                    $this->Session->setFlash('Negeren van export mislukt');
+                }
+                $this->redirect('/Admin/ignoreExports');
+            }
+        } else {
+            $this->set('exports', $this->Export->find('all', array('conditions' => array('Export.ignored' => false))));
         }
     }
 
@@ -1069,7 +1134,7 @@ class AdminController extends AppController {
 
     private function lastDay($month){
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
-        $range = array(date('Y-m-d', strtotime(date('Y') .'-' . $month .'-01')), date('Y-m-d', strtotime(date('Y') .'-' . $month .'-' . $daysInMonth)));
+        $range = date('Y-m-d', strtotime(date('Y') .'-' . $month .'-' . $daysInMonth));
         return $range;
     }
 

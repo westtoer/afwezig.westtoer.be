@@ -1,73 +1,9 @@
 <?php
 if(isset($this->request->query["month"])){
     //input the export file name
-    $this->xls->setHeader('Schaubroeck_export_'.date('Y_m_d'));
-    $this->xls->addXmlHeader();
-    $this->xls->setWorkSheetName('Data');
 
         if(isset($this->request->query["type"])){
-            $exportElements = array();
-            $this->xls->openRow();
-            $this->xls->writeString('westtoernummer');
-            $this->xls->writeString('NummerPersoneelslidSchaubroeck');
-            $this->xls->writeString('Datum');
-            $this->xls->writeString('aard_schaubroeck');
-            $this->xls->writeString('code_schaubroeck');
-            $this->xls->writeString('extensie_schaubroeck');
-            $this->xls->writeString('uur');
-            $this->xls->writeString('totaal');
-            $this->xls->closeRow();
 
-            foreach($daysFull as $date => $days){
-               foreach($days as $employee => $day){
-                   if($day[0]["type"] == $day[1]["type"]){
-                       $value = 7.6;
-                       $type = $day[0]["type"];
-                       $this->xls->openRow();
-                       $this->xls->writeString(752);
-                       $this->xls->writeString(explode('/', $employee)[2]);
-                       $this->xls->writeString($date);
-                       if($type != 'ZO' and $type != 'ZA'){
-                           echo $type;
-                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"]);
-                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["code_schaubroek"]);
-                           $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"]);
-                       } else {
-                           $this->xls->writeString("Weekend");
-                           $this->xls->writeString("Weekend");
-                           $this->xls->writeString("Weekend");
-                       }
-
-                       $this->xls->writeString($value);
-                       if($type != 'ZO' and $type != 'ZA'){
-                           $this->xls->writeString(752 . ';' . explode('/', $employee)[2] . ';' . $date . ';' . $calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["code_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"] . ';' . $value);
-                       } else {
-                           $this->xls->writeString("Weekend");
-                       }
-                       $this->xls->closeRow();
-                   } else {
-                        foreach($day as $dateObject){
-                            $value = 3.8;
-                            $type = $dateObject["type"];
-                            $this->xls->openRow();
-                            $this->xls->writeString(752);
-                            $this->xls->writeString(explode('/', $employee)[2]);
-                            $this->xls->writeString($date);
-                            $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"]);
-                            $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["code_schaubroek"]);
-                            $this->xls->writeString($calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"]);
-                            $this->xls->writeString($value);
-                            $this->xls->writeString(752 . ';' . explode('/', $employee)[2] . ';' . $date . ';' . $calendarTypes[$type]["CalendarItemType"]["aard_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["code_schaubroek"] . ';' . $calendarTypes[$type]["CalendarItemType"]["ext_schaubroek"] . ';' . $value);
-                            $this->xls->closeRow();
-                        }
-                   }
-
-
-               }
-            }
-
-            $this->xls->addXmlFooter();
-            exit();
 
         } else {
             if(isset($this->request->query["webview"])){
@@ -208,6 +144,15 @@ if(isset($this->request->query["month"])){
                 <div class="col-md-6">
                     <h4 class="first">Andere maand Schaubroeck</h4>
                     <p>Deze export doet net hetzelfde als Andere maand, maar dan voor het toekomstig Schaubroeck-systeem.</p>
+                </div>
+            </div><hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-danger fullwidth" href="/Admin/ignoreExports">Exports negeren</a>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="first">Exports negeren</h4>
+                    <p>Als je een export wilt ongedaan maken in het systeem, dan moet je deze negeren. De bestanden worden dan niet verwijderd, maar het systeem houdt geen rekening met de voorgaande.</p>
                 </div>
             </div><hr />
         </div>
