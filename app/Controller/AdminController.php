@@ -561,10 +561,9 @@ class AdminController extends AppController {
             }
 
 
-            //If request isn't a webview, it is a file export, which results in an export-record to be created.
+            //Webview still shows employees that aren't indexed on Schaubroeck
             if(!isset($this->request->query["webview"])){
                 $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
-
             } else {
                 $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
             }
@@ -573,6 +572,8 @@ class AdminController extends AppController {
             $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));
             $dateRange = $this->dateRange($range[0], $range[1], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
             $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"]));
+
+
 
             //Create a template month with no off days
             foreach ($dateRange as $date){
@@ -602,6 +603,28 @@ class AdminController extends AppController {
 
                     $data[$calendarDay["Employee"]["name"]  . ' ' . $calendarDay["Employee"]["surname"]][$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay["CalendarItemType"]["code"];
                 }
+            }
+
+            //Write the calendarDays to a JSON file and create an export record (if this isn't a webview)
+            if(!isset($this->request->query["webview"])){
+                //Get the export dir path
+                $exportPathcd = Configure::read('Administrator.export_dir') . '/json/' . date('Y-m-d H:i:s') . '-calendardays.json';
+                $exportPath = Configure::read('Administrator.export_dir') . '/json/' . date('Y-m-d H:i:s') . '-complete.json';
+
+                //Write a json file with only the calendar days (not working days)
+                $JSONcd = json_encode($calendarDays);
+                $file = new File($exportPathcd, true);
+                $file->write($JSONcd);
+
+                //Write a json file with only the calendar days (not working days)
+                if(!empty($data)){
+                    $JSON = json_encode($data);
+                } else {
+                    $JSON = json_encode($employeeTemplate);
+                }
+
+                $file = new File($exportPath, true);
+                $file->write($JSON);
             }
 
             //Give the GUI access to the date range
@@ -898,7 +921,7 @@ class AdminController extends AppController {
 
     private function sendSqlAndMail($sql, $body){
 
-        $filename = '/var/www/html/afwezig.westtoer.be/exports/backup/' . date('Y-m-d H:i:s');
+        $filename = Configure::read('Administrator.export_dir') . '/backup/' . date('Y-m-d H:i:s');
         file_put_contents($filename, $sql);
 
         // Send the email to the admin
