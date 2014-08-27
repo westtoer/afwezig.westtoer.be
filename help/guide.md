@@ -35,4 +35,5 @@ see which calls CakePHP sends to the MySQL server.
 
 ##PDF
 Some pages can be viewed as PDF. These however, use different views than the normal webpages. They have a different layout, found in
-(app/View/Layouts/pdf/default.ctp) and will have different Views depending on the controller, e.g. (app/View/Admin/pdf).
+(app/View/Layouts/pdf/default.ctp) and will have different Views depending on the controller, e.g. (app/View/Admin/pdf). Our PDF's are
+generated with the CakePdf library (found in the /app/Plugin/CakePdf). For more on CakePdf, you can view the [Github repo](https://github.com/ceeram/CakePdf)
