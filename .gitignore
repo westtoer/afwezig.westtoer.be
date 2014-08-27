@@ -9,7 +9,7 @@
 /build
 /dist
 /tags
-/database_exports/*
+/exports/*
 /.idea
 
 # OS generated files #
