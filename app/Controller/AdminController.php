@@ -542,10 +542,12 @@ class AdminController extends AppController {
     }
 
     public function export() {
+        //Define month
         if(isset($this->request->query["month"])){
             $month = $this->request->query["month"];
             $range = $this->lastDay($month);
 
+            //Remove limit
             if(isset($this->request->query["limit"])){
                 $limit = $this->request->query["limit"];
                 $nicemonth = $month;
@@ -558,16 +560,21 @@ class AdminController extends AppController {
                 $range[0] = date('Y-m-d', strtotime(date('Y') . '-' . $nicemonth . '-' . $limit));
             }
 
+
+            //If request isn't a webview, it is a file export, which results in an export-record to be created.
             if(!isset($this->request->query["webview"])){
                 $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1', 'Employee.indexed_on_schaubroeck' => true), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1], 'Employee.indexed_on_schaubroeck' => 1));
+
             } else {
                 $options = array('Employee' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'CalendarDay' => array('day_date >=' => $range[0], 'day_date <=' => $range[1]));
             }
 
+            //Data dependancies
             $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));
-
             $dateRange = $this->dateRange($range[0], $range[1], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
             $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"]));
+
+            //Create a template month with no off days
             foreach ($dateRange as $date){
                 if(date('D', strtotime(explode('/', $date)[0])) == 'Sat'){
                     $template[$date] = 'ZA';
@@ -578,6 +585,7 @@ class AdminController extends AppController {
                 }
             }
 
+            //Apply the template to each employee
             foreach($employees as $employee){
                 if(isset($this->request->query["type"])){
                     $employeeTemplate[$employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '/' . $employee["Employee"]["id"]] = $template;
@@ -586,6 +594,7 @@ class AdminController extends AppController {
                 }
             }
 
+            //Create the actual roster
             foreach($calendarDays as $calendarDay){
                 if(isset($this->request->query["type"])){
                     $data[$calendarDay["Employee"]["name"]  . ' ' . $calendarDay["Employee"]["surname"] . '/' . $calendarDay["Employee"]["id"]][$calendarDay["CalendarDay"]["day_date"] . '/' . $calendarDay["CalendarDay"]["day_time"]] = $calendarDay;
@@ -595,15 +604,15 @@ class AdminController extends AppController {
                 }
             }
 
-
-
-
+            //Give the GUI access to the date range
             $this->set('dateRange', $dateRange);
+
+            //Merge the template with the actual roster
             if(!empty($data)){
                 $data = array_replace_recursive($employeeTemplate, $data);
                 $this->set('data', $data);
             } else {
-                $this->set('data', $employeeTemplate);
+                $this->set('data', $employeeTemplate); // If no roster was found, output the template
             }
 
 
@@ -623,13 +632,10 @@ class AdminController extends AppController {
                 $this->set('daysFull', $daysFull);
             }
 
-
+            //Add Calendar Types for GUI
             foreach($this->CalendarItemType->find('all') as $calendarType){
                 $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
             }
-
-
-
             $this->set('calendarTypes', $calendarTypes);
         }
     }
@@ -892,7 +898,7 @@ class AdminController extends AppController {
 
     private function sendSqlAndMail($sql, $body){
 
-        $filename = '/var/www/html/afwezig.westtoer.be/database_exports/' . date('Y-m-d H:i:s');
+        $filename = '/var/www/html/afwezig.westtoer.be/exports/backup/' . date('Y-m-d H:i:s');
         file_put_contents($filename, $sql);
 
         // Send the email to the admin
