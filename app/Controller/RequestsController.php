@@ -256,11 +256,17 @@ class RequestsController extends AppController {
                         }
                     }
                     $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
+                    $supervisor = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $cr["Employee"]["supervisor_id"], "Employee.internal_id" => '-1')));
+                    $body = $cr["Employee"]["surname"] . ' ' . $cr["Employee"]["name"] . ' heeft een nieuwe aanvraag ingediend. Om deze te bekijken, ga je naar ' . Configure::read('Administrator.base_fallback_url') . '/Requests/view/' . $cr["Request"]["id"];
                     if(empty($cd)){
                         $this->sendMailToHR("new", $cr);
+                        if(!empty($supervisor)){
+                            $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
+                        }
                     } else {
                         if($this->CalendarDay->saveMany($cd)){
                             $this->sendMailToHR("new", $cr);
+                            $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
                         } else {
                             $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
                         }
