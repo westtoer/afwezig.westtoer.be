@@ -13,6 +13,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="http://intranet.westtoer.be/themes/bootstrap/favicon.ico" type="image/vnd.microsoft.icon">
     <?php echo $this->Html->script('bootstrap');?>
     <?php echo $this->Html->script('tablefilter.js');?>
 </head>
