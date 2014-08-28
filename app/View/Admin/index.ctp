@@ -12,31 +12,20 @@
                     <li><a href="<?php echo $this->base;?>/Employees/import">Werknemers importeren via CSV</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/viewRegistrations">Nieuwe registraties goedkeuren</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/viewUsers">Alle gebruikers</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/editCalendarDays">Ingrijpen op kalender</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/departments">Afdelingen</a></li>
                 </ul>
             </div>
         </div> <hr />
 
         <div class="row">
-            <div class="col-md-6"><h2 class="first">Afwezigheidsaanvragen</h2></div>
+            <div class="col-md-6"><h2 class="first">Kalender</h2></div>
             <div class="col-md-6">
                 <ul class="nulled">
-                    <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Goedkeuren</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/export">Overzicht/Export</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Aanvragen goedkeuren</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/addManyCalendarItems">Aanvragen in opdracht</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/editCalendarDays">Ingrijpen op kalender</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/export">Overzicht/Export naar Schaubroeck</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/dinnerCheques">Maaltijdcheques</a></li>
-                </ul>
-            </div>
-        </div> <hr />
-
-        <div class="row">
-            <div class="col-md-6"><h2 class="first">Algemene instellingen</h2></div>
-            <div class="col-md-6">
-                <ul class="nulled">
-                    <li><a href="<?php echo $this->base;?>/Admin/GeneralCalendarItems">Algemene feestdagen beheren</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/endOfYear">Einde van het jaar boeken</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/lockApp">Applicatie openen/sluiten</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/editCalendarTypes">Dagcodes wijzigen</a></li>
                 </ul>
             </div>
         </div> <hr />
@@ -45,11 +34,25 @@
             <div class="col-md-6"><h2 class="first">Stramienen</h2></div>
             <div class="col-md-6">
                 <ul class="nulled">
-                    <li><a href="<?php echo $this->base;?>/Admin/addStream">Toevoegen</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/viewStreams">Alle Stramienen</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/viewStreams">Overzicht</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/addStream">Voeg stramien toe</a></li>
                 </ul>
             </div>
         </div> <hr />
+
+        <div class="row">
+            <div class="col-md-6"><h2 class="first">Beheer</h2></div>
+            <div class="col-md-6">
+                <ul class="nulled">
+                    <li><a href="<?php echo $this->base;?>/Admin/GeneralCalendarItems">Algemene feestdagen</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/endOfYear">Einde van het jaar</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/lockApp">Applicatie openen/sluiten</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/editCalendarTypes">Dagcodes wijzigen</a></li>
+                </ul>
+            </div>
+        </div> <hr />
+
+
 
         </div>
     </div>
