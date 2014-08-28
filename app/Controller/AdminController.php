@@ -937,7 +937,7 @@ class AdminController extends AppController {
 
     public function addManyCalendarDays(){
         $this->set('types', $this->CalendarItemType->find('all'));
-        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1))));
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1), 'order' => 'Employee.name ASC')));
 
         if($this->request->is('post')){
             $ir = $this->request->data; //Incoming Request
@@ -951,6 +951,29 @@ class AdminController extends AppController {
             $this->Session->setFlash('Succesvol gewijzigd.');
             $this->redirect($this->here);
 
+        }
+    }
+
+    public function changeSupervisor(){
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.status' => 1))));
+        if($this->request->is('post')){
+            $data = $this->request->data;
+            $employees = $this->Employee->find('all', array('conditions' => array('Employee.supervisor_id' => $data["Supervisor"])));
+            if($data["Replacement"] != '-1'){
+                if(!empty($employees)){
+                    foreach($employees as $key => $employee){
+                        $employees[$key]["Employee"]["supervisor_id"] = $data["Replacement"];
+                    }
+                }
+
+                if($this->Employee->saveMany($employees)){
+                    $this->Session->setFlash('Verantwoordelijke succesvol gewijzigd.');
+                } else {
+                    $this->Session->setFlash('Opslaan mislukt.');
+                }
+
+                $this->redirect($this->here);
+            }
         }
     }
 

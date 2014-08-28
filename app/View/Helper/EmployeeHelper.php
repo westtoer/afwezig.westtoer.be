@@ -46,6 +46,8 @@ class EmployeeHelper extends AppHelper {
                 $employeesOptions[] = '<option value="0">voor</option>';
             } elseif($placement == 3) {
                 $employeesOptions[] = '<option value="0">Gebruiker</option>';
+            } elseif(is_string($placement)){
+                $employeesOptions[] = '<option value="0">' . $placement .'</option>';
             } else {
                 $employeesOptions[] = '<option value="4">Kies een vervanger</option>';
             }
