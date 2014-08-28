@@ -132,141 +132,150 @@ class RequestsController extends AppController {
         //If the request is sent
         if(($this->request->is('post'))){
             $request = $this->request->data;
-            //Validation
-            $validation = $this->insertValidation($request);
+            $this->addRequest($request);
+        }
+    }
 
-            if($validation == ''){
-                //Create a compliant request by adding a timestamp, employee_id
-                $cr = $this->completeRequest($request);
+    private function addRequest($request){
+        //Validation
+        $validation = $this->insertValidation($request);
 
-                //Create the request in the database
-                $this->Request->create();
-                $cr = $this->Request->save($cr);
+        if($validation == ''){
+            //Create a compliant request by adding a timestamp, employee_id
+            $cr = $this->completeRequest($request);
 
-                if(!empty($cr)){
+            //Create the request in the database
+            $this->Request->create();
+            $cr = $this->Request->save($cr);
 
-                    //Allow us to access the users data
-                    $cr["Employee"] = $this->Employee->findById($cr["Request"]["employee_id"])["Employee"];
+            if(!empty($cr)){
 
-                    //Get all the workdays that are inside the requested range by the employee
-                    $requestRange = $this->dateRange($cr["Request"]["start_date"], $cr["Request"]["end_date"], $cr["Request"]["start_time"], $cr["Request"]["end_time"]);
+                //Allow us to access the users data
+                $cr["Employee"] = $this->Employee->findById($cr["Request"]["employee_id"])["Employee"];
 
-                    //Get all the records in the database that could overlap with the range requested by the employee
-                    $existingInRange = $this->CalendarDay->find('all', array('conditions' => array(
-                        'CalendarDay.day_date >=' => (string)$cr["Request"]["start_date"],
-                        'CalendarDay.day_date <=' => (string)$cr["Request"]["end_date"],
-                        'CalendarDay.employee_id' => $cr["Request"]["employee_id"]
-                    )));
+                //Get all the workdays that are inside the requested range by the employee
+                $requestRange = $this->dateRange($cr["Request"]["start_date"], $cr["Request"]["end_date"], $cr["Request"]["start_time"], $cr["Request"]["end_time"]);
 
-                    //Convert the array to an associative array
-                    if(!empty($existingInRange)){
-                        $hashInRange = $this->convertToHashTable($existingInRange);
-                    } else {
-                        $hashInRange = array();
-                    }
+                //Get all the records in the database that could overlap with the range requested by the employee
+                $existingInRange = $this->CalendarDay->find('all', array('conditions' => array(
+                    'CalendarDay.day_date >=' => (string)$cr["Request"]["start_date"],
+                    'CalendarDay.day_date <=' => (string)$cr["Request"]["end_date"],
+                    'CalendarDay.employee_id' => $cr["Request"]["employee_id"]
+                )));
 
-                    //Check where the CalendarDays overlap with the requested range
-                    foreach($requestRange as $requestDate){
-                        if(array_key_exists($requestDate, $hashInRange)){
-                            //The CalendarDay already exists
-                            $exists[] = $hashInRange[$requestDate];
-                        } else {
-                            //The CalendarDay doesn't exist
-                            $notexist[] = $requestDate;
-                        }
-                    }
-
-                    //Create an Auth Item to authenticate against
-                    $this->AuthItem->create();
-                    $preAuthItem = array('request_id' => $cr["Request"]["id"], 'supervisor_id' => $cr["Employee"]["supervisor_id"], 'authorized' => 0);
-                    $ai = $this->AuthItem->save($preAuthItem);
-
-                    //Update the request with the new AuthItem
-                    $request = $this->Request->findById($cr["Request"]["id"]);
-                    $request["Request"]["auth_item_id"] = $ai["AuthItem"]["id"];
-                    $this->Request->save($request);
-
-
-                    //All the dates that don't exist may be created
-                    if(!empty($notexist)){
-                        foreach($notexist as $ne){
-
-                            //Creating an Request To Calendar Days-record
-                            $this->RequestToCalendarDay->create();
-                            $rtcd = array(
-                                'RequestToCalendarDay' => array(
-                                    'request_id' => $cr["Request"]["id"],
-                                    'calendar_day_id' => $ne . '/' . $cr["Employee"]["id"],
-                                    'auth_item_id' => $cr["Employee"]["id"]
-                                )
-                            );
-                            $rtcd = $this->RequestToCalendarDay->save($rtcd);
-
-                            //Add the calendar days to one array to later be added to the db
-                            $cd[] = array('CalendarDay' =>
-                                array(
-                                    'employee_id' => $cr["Request"]["employee_id"],
-                                    'day_date' => explode('/', $ne)[0],
-                                    'day_time' => explode('/', $ne)[1],
-                                    'calendar_item_type_id' => 9,
-                                    'replacement_id' => $cr["Request"]["replacement_id"],
-                                    'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
-                                    'auth_item_id' => $ai["AuthItem"]["id"]
-                                )
-                            );
-
-                        }
-                    }
-
-                    if(!empty($exists)){
-                        foreach($exists as $e){
-
-                            //Creating an Request To Calendar Days-record
-                            $this->RequestToCalendarDay->create();
-                            $rtcd = array(
-                                'RequestToCalendarDay' => array(
-                                    'request_id' => $cr["Request"]["id"],
-                                    'calendar_day_id' => $e["CalendarDay"]["day_date"] . '/' . $e["CalendarDay"]["day_time"] . '/' . $cr["Employee"]["id"],
-                                    'auth_item_id' => $cr["Employee"]["id"]
-                                )
-                            );
-                            $rtcd = $this->RequestToCalendarDay->save($rtcd);
-
-                            //Add the calendar days to one array to later be added to the db
-                            $cd[] = array('CalendarDay' =>
-                                array(
-                                    'id' => $e["CalendarDay"]["id"],
-                                    'employee_id' => $cr["Request"]["employee_id"],
-                                    'day_date' => $e["CalendarDay"]["day_date"],
-                                    'day_time' => $e["CalendarDay"]["day_time"],
-                                    'calendar_item_type_id' => $e["CalendarDay"]["calendar_item_type_id"],
-                                    'replacement_id' => $cr["Request"]["replacement_id"],
-                                    'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
-                                    'auth_item_id' => $ai["AuthItem"]["id"]
-                                )
-                            );
-                        }
-                    }
-                    $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
-                    if(empty($cd)){
-                        $this->sendMailToHR("new", $cr);
-                    } else {
-                        if($this->CalendarDay->saveMany($cd)){
-                            $this->sendMailToHR("new", $cr);
-                            $this->redirect($this->here);
-                        } else {
-                            $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
-                        }
-                    }
-                    if(isset($request["Request"]["origin"])){
-                        $this->redirect('/Admin/');
-                    }
-                    $this->redirect($this->here);
+                //Convert the array to an associative array
+                if(!empty($existingInRange)){
+                    $hashInRange = $this->convertToHashTable($existingInRange);
+                } else {
+                    $hashInRange = array();
                 }
-            } else {
-                $this->Session->setFlash($validation);
+
+                //Check where the CalendarDays overlap with the requested range
+                foreach($requestRange as $requestDate){
+                    if(array_key_exists($requestDate, $hashInRange)){
+                        //The CalendarDay already exists
+                        $exists[] = $hashInRange[$requestDate];
+                    } else {
+                        //The CalendarDay doesn't exist
+                        $notexist[] = $requestDate;
+                    }
+                }
+
+                //Create an Auth Item to authenticate against
+                $this->AuthItem->create();
+                $preAuthItem = array('request_id' => $cr["Request"]["id"], 'supervisor_id' => $cr["Employee"]["supervisor_id"], 'authorized' => 0);
+                $ai = $this->AuthItem->save($preAuthItem);
+
+                //Update the request with the new AuthItem
+                $request = $this->Request->findById($cr["Request"]["id"]);
+                $request["Request"]["auth_item_id"] = $ai["AuthItem"]["id"];
+                $this->Request->save($request);
+
+
+                //All the dates that don't exist may be created
+                if(!empty($notexist)){
+                    foreach($notexist as $ne){
+
+                        //Creating an Request To Calendar Days-record
+                        $this->RequestToCalendarDay->create();
+                        $rtcd = array(
+                            'RequestToCalendarDay' => array(
+                                'request_id' => $cr["Request"]["id"],
+                                'calendar_day_id' => $ne . '/' . $cr["Employee"]["id"],
+                                'auth_item_id' => $cr["Employee"]["id"]
+                            )
+                        );
+                        $rtcd = $this->RequestToCalendarDay->save($rtcd);
+
+                        //Add the calendar days to one array to later be added to the db
+                        $cd[] = array('CalendarDay' =>
+                            array(
+                                'employee_id' => $cr["Request"]["employee_id"],
+                                'day_date' => explode('/', $ne)[0],
+                                'day_time' => explode('/', $ne)[1],
+                                'calendar_item_type_id' => 9,
+                                'replacement_id' => $cr["Request"]["replacement_id"],
+                                'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
+                                'auth_item_id' => $ai["AuthItem"]["id"]
+                            )
+                        );
+
+                    }
+                }
+
+                if(!empty($exists)){
+                    foreach($exists as $e){
+
+                        //Creating an Request To Calendar Days-record
+                        $this->RequestToCalendarDay->create();
+                        $rtcd = array(
+                            'RequestToCalendarDay' => array(
+                                'request_id' => $cr["Request"]["id"],
+                                'calendar_day_id' => $e["CalendarDay"]["day_date"] . '/' . $e["CalendarDay"]["day_time"] . '/' . $cr["Employee"]["id"],
+                                'auth_item_id' => $cr["Employee"]["id"]
+                            )
+                        );
+                        $rtcd = $this->RequestToCalendarDay->save($rtcd);
+
+                        //Add the calendar days to one array to later be added to the db
+                        $cd[] = array('CalendarDay' =>
+                            array(
+                                'id' => $e["CalendarDay"]["id"],
+                                'employee_id' => $cr["Request"]["employee_id"],
+                                'day_date' => $e["CalendarDay"]["day_date"],
+                                'day_time' => $e["CalendarDay"]["day_time"],
+                                'calendar_item_type_id' => $e["CalendarDay"]["calendar_item_type_id"],
+                                'replacement_id' => $cr["Request"]["replacement_id"],
+                                'request_to_calendar_days_id' => $rtcd["RequestToCalendarDay"]["id"],
+                                'auth_item_id' => $ai["AuthItem"]["id"]
+                            )
+                        );
+                    }
+                }
+                $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
+                if(empty($cd)){
+                    $this->sendMailToHR("new", $cr);
+                } else {
+                    if($this->CalendarDay->saveMany($cd)){
+                        $this->sendMailToHR("new", $cr);
+                        $this->redirect($this->here);
+                    } else {
+                        $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
+                    }
+                }
+                if(isset($request["Request"]["origin"])){
+                    if(isset($request["Request"]["destination"])){
+                        if($request["Request"]["destination"] == "allow"){
+                            $this->redirect('/Requests/allow/' . $cr["Request"]["id"]);
+                        }
+                    }
+                    $this->redirect('/Admin/');
+                }
                 $this->redirect($this->here);
             }
+        } else {
+            $this->Session->setFlash($validation);
+            $this->redirect($this->here);
         }
     }
 
