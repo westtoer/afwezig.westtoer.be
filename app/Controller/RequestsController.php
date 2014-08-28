@@ -431,7 +431,7 @@ class RequestsController extends AppController {
     private function insertValidation($request){
         //Validation
         $nulldate = '1970-01-01';
-        $request["Employee"] = $this->Employee->findById($this->Session->read('Auth.Employee.id'))["Employee"];
+        $request["Employee"] = $this->Employee->findById($request["Employee"]["id"])["Employee"];
         $dateRange = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
             $error = '';
             /*
@@ -451,7 +451,7 @@ class RequestsController extends AppController {
                 $error .= 'U hebt één of beide datums verkeerd ingegeven <br />';
             }
 
-            if($request["Request"]["replacement_id"] == $this->Session->read("Auth.Employee.id")){
+            if($request["Request"]["replacement_id"] == $request["Employee"]["id"]){
                 $error .= 'Je kunt jezelf niet als vervanger opgeven. <br />';
             }
 
@@ -467,21 +467,35 @@ class RequestsController extends AppController {
             }
 
             if($request["Request"]["calendar_item_type_id"] == 23){
-                $count = 0;
-                if(($request["Employee"]["daysleft"] - count($dateRange)) < 0){
-                    foreach($dateRange as $date){
-                        $conditions["OR"] = array('day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
-                    }
-                    foreach($this->CalendarDay->find("all", array('conditions' => $conditions)) as $calendarDay){
-                        if($calendarDay["CalendarDay"]["calendar_item_type_id"] == 9){
-                            $count++;
-                        }
-                    }
+                $prevCost = $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $request["Employee"]["id"])));
+                $balance = $request["Employee"]["daysleft"] - $prevCost;
+                $price = count($this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]));
 
-                    if($count > $request["Employee"]["daysleft"]){
-                        $error .="Je hebt te weinig verlofdagen om deze aanvraag in te dienen. Om dit toch in te dienen, neem je contact op met HR.";
+                //Calculate how many days are already vacation
+                $discount = array(
+                    'start' => $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.day_date >=' => $request["Request"]["start_date"],'CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $request["Employee"]["id"]))),
+                    'between' => $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.day_date >=' => date('Y-m-d', strtotime($request["Request"]["start_date"] . ' + 1 Day')), 'CalendarDay.day_date <=' => date('Y-m-d', strtotime($request["Request"]["end_date"] . ' - 1 Day')),'CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $request["Employee"]["id"]))),
+                    'end' => $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.day_date >=' => $request["Request"]["end_date"],'CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $request["Employee"]["id"])))
+
+                );
+                if($discount["start"] == 2){
+                    if($request["Request"]["start_time"] == 'PM'){
+                        $discount["start"]--;
                     }
                 }
+
+                if($discount["end"] == 2){
+                    if($request["Request"]["end_time"] == "AM"){
+                        $discount["end"]--;
+                    }
+                }
+
+                $price = $price - $discount;
+
+                if($price > $balance){
+                    $error .= "Je hebt niet genoeg vakantiedagen over. <br />";
+                }
+
             }
         return $error;
     }
