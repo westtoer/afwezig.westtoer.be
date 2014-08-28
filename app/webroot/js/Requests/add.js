@@ -53,4 +53,6 @@ $(function(){
     });
 });
 
-$(document).ready();
+$(document).ready(function(){
+        $('#RequestCalendarItemTypeId').val(23);
+});
