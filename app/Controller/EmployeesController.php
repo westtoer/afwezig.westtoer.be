@@ -2,7 +2,7 @@
 App::uses('CakeEmail', 'Network/Email');
 class EmployeesController extends AppController {
     public $helpers = array('Request');
-    public $uses = array('Employee', 'User', 'Request');
+    public $uses = array('Employee', 'User', 'Request', 'CalendarDay');
     public $components = array('Csv');
 
     public function beforeFilter() {
@@ -23,9 +23,22 @@ class EmployeesController extends AppController {
             $id = $this->request->params["named"]["id"];
         }
 
+
+
        if($id !== null){
+           $employee = $this->Employee->findById($id);
            $this->set('requests', $this->Request->find('all', array('conditions' => array('employee_id' => $id), 'order' => 'Request.timestamp DESC')));
-           $this->set('employee', $this->Employee->findById($id));
+           $this->set('employee', $employee);
+
+           if($id == $this->Session->read('Auth.Employee.id')){
+               $show = true;
+               $daysleft = ($employee["Employee"]["daysleft"] - $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarDay.calendar_item_type_id' => 23)))) / 2;
+               $this->set('daysleft', $daysleft);
+           } else {
+               $show = false;
+           }
+
+           $this->set('show', $show);
 
            if($this->Session->read('Auth.Employee.Role.edituser') == true){
 

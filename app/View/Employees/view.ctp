@@ -19,8 +19,13 @@
             <h3 class="first">Notitie</h3>
             <p><?php echo $employee["Employee"]["note"];?></p>
         </div>
-        <?php if($employee["Employee"]["id"] == $this->Session->read('Auth.Employee.id')){?>
+
+        <?php if($show == true){;?>
+            <div class="daysleft">
+                <h2><?php echo $daysleft ;?></h2>
+                <p>Dagen over</p>
+            </div>
             <?php echo $this->Html->link('Aanpassen', array('controller' => 'users', 'action' => 'management'));?>
-        <?php }?>
+        <?php } ?>
     </div>
 </div>
