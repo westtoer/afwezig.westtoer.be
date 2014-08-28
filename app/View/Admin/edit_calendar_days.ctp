@@ -14,6 +14,12 @@
             <p>Als er iets niet zou kloppen in de database, kun je dit manueel overschrijven, zodat de export naar Schaubroeck klopt.</p>
             <div class="well flat">
                 <div class="row">
+                    <div class="col-md-8">Ingrijpen op de kalender gebeurd één dag per keer. Om alle dagen tussen een selectie te wijzigen, gebruik je het 'Aanvraag in opdracht'-formulier.</div>
+                    <div class="col-md-4"><a href="<?php echo $this->base;?>/Admin/addManyCalendarDays" class="btn btn-success fullwidth">Selectie wijzigen</a></div>
+                </div>
+            </div>
+            <div class="well flat">
+                <div class="row">
                     <div class="col-md-3 formspaced-left">
                         <select class="form-control" id="employee">
                             <?php foreach($this->Employee->selectorAllEmployees($employees, 'html', 3) as $option){
