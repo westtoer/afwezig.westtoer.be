@@ -5,7 +5,7 @@ aanmeldt, dan is er een ander probleem. Neem dan contact op met Marc Portier.</p
 <p>Je wordt automatisch doorverwezen naar de aanmeldpagina in 10 seconden.</p>
 
 <script>
-    function onbodyload(){
-        window.setTimeout(location.href = "<?php echo $this->base;?>/users/login",5000)
-    }
+    $(document).ready(function(){
+        window.setTimeout(location.href = "<?php echo $this->base;?>/users/login",5000);
+    });
 </script>

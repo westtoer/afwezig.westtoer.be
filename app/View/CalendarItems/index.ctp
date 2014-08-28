@@ -11,11 +11,11 @@
     }
 ;?>
 <script>
-    function onbodyload(){
+    $(document).ready(function(){
         <?php foreach($onload as $item){
             echo $item;
         };?>
-    }
+    })
 </script>
 <div class="grip">
     <div id="button">Sluiten</div>

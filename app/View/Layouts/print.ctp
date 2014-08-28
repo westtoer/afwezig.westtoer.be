@@ -13,7 +13,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
     <?php echo $this->Html->script('bootstrap');?>
 </head>
-<body onload="onbodyload()">
+<body>
     <div class="container">
 
         <?php echo $this->fetch('content'); ?>

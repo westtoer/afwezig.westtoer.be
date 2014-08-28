@@ -15,7 +15,7 @@
     <?php echo $this->Html->script('bootstrap');?>
     <?php echo $this->Html->script('tablefilter.js');?>
 </head>
-<body onload="onbodyload()">
+<body>
 
 <header>
     <div class="container">

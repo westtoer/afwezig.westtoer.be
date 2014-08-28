@@ -52,3 +52,5 @@ $(function(){
         weekHeader: 'Wk'
     });
 });
+
+$(document).ready();
