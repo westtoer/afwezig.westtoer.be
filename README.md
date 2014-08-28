@@ -24,7 +24,9 @@ Installation is pretty straightforward. You can just download this, import the S
 
 Keep in mind you'll need an UiTID to login! You can patch this out fairly easily, by removing the UiTID and callback actions, among others, and implementing the vanilla CakePHP UsersController, and you should be able to run this without the need of an external UiTID. However, the spec demanded UiTID so I created it in this manner.
 
-Can we use this?
+For more on how we did this and some arbitrary choices, view the [help/guide.md](https://github.com/westtoer/afwezig.westtoer.be/edit/master/help/guide.md), where we try to clarify choices and usage of CakePHP.
+
+Can I use this?
 ================
 
 We encourage the use of this code, and therefore we are releasing the code under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). 
