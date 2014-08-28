@@ -247,16 +247,21 @@ class RequestsController extends AppController {
                             );
                         }
                     }
-
+                    $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
                     if(empty($cd)){
                         $this->sendMailToHR("new", $cr);
-                        $this->redirect($this->here);
                     } else {
                         if($this->CalendarDay->saveMany($cd)){
                             $this->sendMailToHR("new", $cr);
                             $this->redirect($this->here);
+                        } else {
+                            $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
                         }
                     }
+                    if(isset($request["Request"]["origin"])){
+                        $this->redirect('/Admin/');
+                    }
+                    $this->redirect($this->here);
                 }
             } else {
                 $this->Session->setFlash($validation);
@@ -498,7 +503,16 @@ class RequestsController extends AppController {
 
     private function completeRequest($request){
         $compliantRequest = $request;
-        $compliantRequest["Request"]["employee_id"] = $this->Session->read('Auth.Employee.id');
+        if(isset($request["Request"]["origin"])){
+            if($request["Request"]["origin"] == 'AdminPanel'){
+                if($this->Session->read('Auth.Role.adminpanel') == true){
+                    $compliantRequest["Request"]["employee_id"] = $request["Request"]["employee_id"];
+                }
+            }
+        } else {
+            $compliantRequest["Request"]["employee_id"] = $this->Session->read('Auth.Employee.id');
+        }
+
         $compliantRequest["Request"]["timestamp"] = date('Y-m-d H:i:s');
         $compliantRequest["Request"]["timestamp"] = date('Y-m-d H:i:s');
 
