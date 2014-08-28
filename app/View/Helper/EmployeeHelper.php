@@ -57,6 +57,8 @@ class EmployeeHelper extends AppHelper {
             //Give a standard null option
             if($placement == 1){
                 $employeesOptions[] = array('name' => 'Verantwoordelijke', 'value' => 0);
+            }  elseif($placement == 3) {
+                $employeesOptions[] = array('name' => 'Werknemer', 'value' => 0);
             } else {
                 $employeesOptions[] = array('name' => 'Kies uw vervanger (optioneel)', 'value' => -1);
             }
