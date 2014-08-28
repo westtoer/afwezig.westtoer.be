@@ -1,6 +1,7 @@
 <?php
 App::uses('ConnectionManager', 'Model');
 App::uses('CakeEmail', 'Network/Email');
+App::import('Controller', 'Requests');
 class AdminController extends AppController {
 
     public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export');
@@ -463,7 +464,7 @@ class AdminController extends AppController {
                     }
 
                     if($size != $finished){
-                        $this->Session->setFlash('Niet alle kalendardagen konden worden opgeslagen');
+                        $this->Session->setFlash('Niet alle kalenderdagen konden worden opgeslagen');
                     }
 
                     $this->redirect('/Admin/viewStreams');
@@ -929,6 +930,25 @@ class AdminController extends AppController {
 
                 }
             }
+        }
+    }
+
+    public function addManyCalendarDays(){
+        $this->set('types', $this->CalendarItemType->find('all'));
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1))));
+
+        if($this->request->is('post')){
+            $ir = $this->request->data; //Incoming Request
+            $Request = new RequestsController;
+            $Request->constructClasses();
+
+            $sr = $Request->addRequest($ir); //Saved Request
+            if($ir["Request"]["destination"] == true){
+                $Request->authorize($sr["Request"]["id"], 'allow');
+            }
+            $this->Session->setFlash('Succesvol gewijzigd.');
+            $this->redirect($this->here);
+
         }
     }
 
