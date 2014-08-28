@@ -36,4 +36,10 @@ see which calls CakePHP sends to the MySQL server.
 ##PDF
 Some pages can be viewed as PDF. These however, use different views than the normal webpages. They have a different layout, found in
 (app/View/Layouts/pdf/default.ctp) and will have different Views depending on the controller, e.g. (app/View/Admin/pdf). Our PDF's are
-generated with the CakePdf library (found in the /app/Plugin/CakePdf). For more on CakePdf, you can view the [Github repo](https://github.com/ceeram/CakePdf)
+generated with the CakePdf library (found in the /app/Plugin/CakePdf). For more on CakePdf, you can view the [Github repo](https://github.com/ceeram/CakePdf).
+
+##Ambiguous usage of Request
+In the code, you'll see the usage of a Model Request which we created and an object request introduced by CakePHP. Mind the capitalisation. Our
+version of Request is used to manage actual requests where a users asks permission to his supervisor. CakePHP uses request to access GET and POST
+variables. It also has a few function to check which type of request is sent ($this->request->is('post') checks if the current request is a post request).
+[For more on CakePHP's request handling](http://book.cakephp.org/2.0/en/controllers/request-response.html).
