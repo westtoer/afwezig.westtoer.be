@@ -2,7 +2,7 @@
 App::import('Vendor', 'OAuth/OAuthClient', 'DryXML/DryXML.php');
 App::uses('CakeEmail', 'Network/Email');
 class UsersController extends AppController {
-    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment');
+    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'CalendarDay');
     public $helpers = array('Request');
     public function beforeFilter() {
         parent::beforeFilter();
@@ -308,6 +308,7 @@ class UsersController extends AppController {
             'Request.employee_id' => $this->Session->read('Auth.Employee.id'),
             'Request.end_date >=' => date('Y-m-d', strtotime($currentYear . '01-01'))
         ))));
+        $this->set('prevCost', $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $this->Session->read('Auth.Employee.id')))));
     }
 
     public function claimAdmin(){
@@ -426,7 +427,7 @@ class UsersController extends AppController {
     }
 
     private function sendMailToHR($type = "newuser"){
-        $allHR = $this->Employee->find('all', array('conditions' => array('Employee.role_id <' => 3)));
+        $allHR = $this->Employee->find('all', array('conditions' => array('Employee.role_id' => 2)));
         foreach($allHR as $HR){
             $Email = new CakeEmail('westtoer');
             $Email->to($this->trigramToMail($HR["Employee"]["3gram"]));

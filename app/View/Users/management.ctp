@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <?php echo $this->element('user_sidebar');?>
         <div class="daysleft">
-            <h2><?php echo $employee["Employee"]["daysleft"] / 2?></h2>
+            <h2><?php echo ($employee["Employee"]["daysleft"] - $prevCost) / 2?></h2>
             <p>Verlofdagen over</p>
         </div>
     </div>
