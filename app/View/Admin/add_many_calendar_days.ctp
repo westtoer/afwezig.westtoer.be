@@ -17,8 +17,8 @@
                     <?php echo $this->Form->hidden('origin', array('value' => 'AdminPanel'));?>
                     <?php echo $this->Form->hidden('destination', array('value' => 'true'));?>
                     <select id="inflow" OnChange="setInFlow()" class="form-control">
-                        <option value="0">Niet in flow</option>
-                        <option value="1">In flow</option>
+                        <option value="0">Meteen goedkeuren</option>
+                        <option value="1">Laten goedkeuren door verantwoordelijke</option>
                     </select>
                 </div>
                 <?php echo $this->Form->submit('Opslaan', array('class' => 'btn btn-primary fullwidth', 'id' => 'SubmitButton'));?>
