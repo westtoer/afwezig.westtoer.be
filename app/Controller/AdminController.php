@@ -59,9 +59,11 @@ class AdminController extends AppController {
             $this->redirect(array('action' => 'viewEmployees'));
         } else {
             if($id !== null){
-                $this->set('employee', $this->Employee->findById($id));
+                $employee = $this->Employee->findById($id);
+                $this->set('employee', $employee);
                 $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1))));
                 $this->set('departments', $this->EmployeeDepartment->find('all'));
+                $this->set('prevCost', $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarDay.calendar_item_type_id' => 23))));
             } else {
                 $this->Session->setFlash('Je hebt geen geldige gebruiker geselecteerd.');
             }
