@@ -49,47 +49,4 @@
 </div>
 
 
-<script>
-    $(function(){
-        $.datepicker.setDefaults(
-            $.extend($.datepicker.regional['nl'])
-        );
-        $('#RequestStartDate').datepicker({
-            minDate: '-0',
-            dateFormat: 'yy-mm-dd',
-            closeText: 'Sluiten',
-            prevText: '←',
-            nextText: '→',
-            currentText: 'Vandaag',
-            monthNames: ['januari', 'februari', 'maart', 'april', 'mei', 'juni',
-                'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
-            monthNamesShort: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun',
-                'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
-            dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
-            dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
-            dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-            weekHeader: 'Wk'
-        });
-    });
-    $(function(){
-        $.datepicker.setDefaults(
-            $.extend($.datepicker.regional['nl'])
-        );
-        $('#RequestEndDate').datepicker({
-            minDate: '-0',
-            dateFormat: 'yy-mm-dd',
-            closeText: 'Sluiten',
-            prevText: '←',
-            nextText: '→',
-            currentText: 'Vandaag',
-            monthNames: ['januari', 'februari', 'maart', 'april', 'mei', 'juni',
-                'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
-            monthNamesShort: ['jan', 'feb', 'maa', 'apr', 'mei', 'jun',
-                'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
-            dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
-            dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
-            dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-            weekHeader: 'Wk'
-        });
-    });
-</script>
+<?php echo $this->Html->script('Requests/add.js');?>
