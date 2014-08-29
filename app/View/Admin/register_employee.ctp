@@ -15,7 +15,7 @@
         <?php echo $this->Form->input('supervisor_id', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Verantwoordelijke', 'options' => $this->Employee->selectorAllEmployees($employees, 'array', 1)));?>
         <hr />
         <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), )));?>
-        <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal verlofdagen'));?>
+        <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal halve verlofdagen'));?>
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer'));?>
         <hr />
         <?php echo $this->Form->input('indexed_on_schaubroeck', array('options' => array(array('value' => 1, 'name' => 'Wordt verstuurd naar Schaubroeck'), array('value' => 0, 'name' => 'Wordt niet verstuurd naar Schaubroeck')), 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
