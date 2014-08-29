@@ -22,7 +22,7 @@
             <div class="col-md-6">
                 <ul class="nulled">
                     <li><a href="<?php echo $this->base;?>/Admin/viewPendingCalendarItems">Aanvragen goedkeuren</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/addManyCalendarItems">Aanvragen in opdracht</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/addManyCalendarDays">Aanvragen in opdracht</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/editCalendarDays">Ingrijpen op kalender</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/export">Overzicht/Export naar Schaubroeck</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/dinnerCheques">Maaltijdcheques</a></li>
