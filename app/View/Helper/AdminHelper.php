@@ -107,14 +107,14 @@ class AdminHelper extends AppHelper {
         $html .= '<table class="table">';
         $html .= '<tr><th width="200px">Naam</th><th>Code</th><th width="20px">Zichtbaar</th><th width="20px">Maaltijdcheque</th><th>Schaubroek Code</th><th>Schaubroek aard</th><th>Schaubroek Extensie</th></tr>';
         foreach($calendarTypes as $key => $calendarType){
-            $html .= '<tr><td><input type="text" name="data['.$key.'][CalendarItemType][name]" value="' . $calendarType["CalendarItemType"]["name"] .'" class="form-control"></td>';
-            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][code]" value="' . $calendarType["CalendarItemType"]["code"] .'" class="form-control"></td>';
-            $html .= '<td width="20px"><select name="data['.$key.'][CalendarItemType][user_allowed]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["user_allowed"]) .'</select></td>';
-            $html .= '<td><select name="data['.$key.'][CalendarItemType][dinner_cheque]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["dinner_cheque"]) .'</select></td>';
-            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][code_schaubroek]" value="' . $calendarType["CalendarItemType"]["code_schaubroek"] .'" class="form-control"></td>';
-            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][aard_schaubroek]" value="' . $calendarType["CalendarItemType"]["aard_schaubroek"] .'" class="form-control"></td>';
-            $html .= '<input type="hidden" name="data['.$key.'][CalendarItemType][id]" value="'.  $calendarType["CalendarItemType"]["id"]  .'">';
-            $html .= '<td><input type="text" name="data['.$key.'][CalendarItemType][ext_schaubroek]" value="' . $calendarType["CalendarItemType"]["ext_schaubroek"] .'" class="form-control"></td></tr>';
+            $html .= '<tr><td><input type="text" name="data[existing]['.$key.'][CalendarItemType][name]" value="' . $calendarType["CalendarItemType"]["name"] .'" class="form-control"></td>';
+            $html .= '<td><input type="text" name="data[existing]['.$key.'][CalendarItemType][code]" value="' . $calendarType["CalendarItemType"]["code"] .'" class="form-control"></td>';
+            $html .= '<td width="20px"><select name="data[existing]['.$key.'][CalendarItemType][user_allowed]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["user_allowed"]) .'</select></td>';
+            $html .= '<td><select name="data[existing]['.$key.'][CalendarItemType][dinner_cheque]" class="form-control">'. $this->currentlySelected($calendarType["CalendarItemType"]["dinner_cheque"]) .'</select></td>';
+            $html .= '<td><input type="text" name="data[existing]['.$key.'][CalendarItemType][code_schaubroek]" value="' . $calendarType["CalendarItemType"]["code_schaubroek"] .'" class="form-control"></td>';
+            $html .= '<td><input type="text" name="data[existing]['.$key.'][CalendarItemType][aard_schaubroek]" value="' . $calendarType["CalendarItemType"]["aard_schaubroek"] .'" class="form-control"></td>';
+            $html .= '<input type="hidden" name="data[existing]['.$key.'][CalendarItemType][id]" value="'.  $calendarType["CalendarItemType"]["id"]  .'">';
+            $html .= '<td><input type="text" name="data[existing]['.$key.'][CalendarItemType][ext_schaubroek]" value="' . $calendarType["CalendarItemType"]["ext_schaubroek"] .'" class="form-control"></td></tr>';
         }
         $html .= '</table>';
         $html .= $this->Form->submit("Dagcodes opslaan", array('class' => 'btn btn-primary fullwidth'));

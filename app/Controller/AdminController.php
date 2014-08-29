@@ -838,12 +838,16 @@ class AdminController extends AppController {
 
         if($this->request->is('post')){
             $calendarTypes = $this->request->data;
-            if($this->CalendarItemType->saveMany($calendarTypes)){
-                $this->redirect($this->here);
+            if($this->CalendarItemType->saveMany($calendarTypes["existing"])){
+                if(isset($calendarTypes["new"])){
+                    if($this->CalendarItemType->saveMany($calendarTypes["new"])){
+
+                    }
+                }
             } else{
                 $this->Session->setFlash("Het opslaan is mislukt");
-                $this->redirect($this->here);
             }
+            $this->redirect($this->here);
         }
     }
 
