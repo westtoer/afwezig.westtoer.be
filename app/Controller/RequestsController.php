@@ -17,23 +17,27 @@ class RequestsController extends AppController {
 
     //page functions
     public function index() {
-        $access = $this->Session->read('Auth.Role');
         $supervisor = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
-        if($access["allow"] == true){
-            if($supervisor["Role"]["name"] == 'admin'){
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null);
-            } else {
-                $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["id"]);
-            }
-            $this->set('requests', $this->RequestToCalendarDay->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
-        }
+        $conditions = array('AuthItem.authorized' => false, 'AuthItem.authorization_date' => null, 'Employee.supervisor_id' => $supervisor["Employee"]["internal_id"]);
+        $this->set('requests', $this->RequestToCalendarDay->Request->find('all', array('conditions' => $conditions, 'order' => 'Request.timestamp ASC')));
     }
 
     public function view($id = null) {
         if($id !== null){
-            $access = $this->Session->read('Auth.Role.allow');
+            $query = $this->Request->findById($id);
+            $requestor = $this->Employee->findById($query["Employee"]["id"]);
+            $author = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
+            $access = false;
+
+            //Check if users is allowed to view this page
+            if($this->Session->read('Auth.Role.allow') == true){
+                $access = true;
+            } elseif($requestor["Employee"]["supervisor_id"] == $author["Employee"]["internal_id"]){
+                $access = true;
+            }
+
             if($access == true){
-                $query = $this->Request->findById($id);
+
                 if($query["AuthItem"]["authorization_date"] == null){
                     if($query["AuthItem"]["authorized"] !== true){
                         if($query["Request"]["start_date"] >= date('Y-m-d')){
@@ -258,7 +262,7 @@ class RequestsController extends AppController {
                     }
                     $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
                     $supervisor = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $cr["Employee"]["supervisor_id"], "Employee.internal_id <>" => '-1')));
-                    $body = $cr["Employee"]["surname"] . ' ' . $cr["Employee"]["name"] . ' heeft een nieuwe aanvraag ingediend. Om deze te bekijken, ga je naar ' . Configure::read('Administrator.base_fallback_url') . '/Requests/view/' . $cr["Request"]["id"];
+                    $body = $cr["Employee"]["surname"] . ' ' . $cr["Employee"]["name"] . ' heeft een nieuwe aanvraag ingediend. Om deze te bekijken, ga je naar ' . Configure::read('Administrator.base_fallback_url') . '/users/login?router=' . Configure::read('Administrator.base_fallback_url') . '/Requests/view/' . $cr["Request"]["id"];
                     if(empty($cd)){
                         $this->sendMailToHR("new", $cr);
                         if(!empty($supervisor)){
@@ -295,12 +299,20 @@ class RequestsController extends AppController {
         if(isset($id) and isset($type)){
             $author = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
             $request = $this->Request->findById($id);
+            $requestor = $this->Employee->findById($request["Employee"]["id"]);
+            $access = false;
 
             $genericBody = 'Je aanvraag voor ' . $request["CalendarItemType"]["name"] . ' vanaf '
                 . $request["Request"]["start_date"] . '-' . $request["Request"]["start_time"] .
                 ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"];
 
             if($author["Role"]["allow"] == true){
+                $access = true;
+            } elseif($requestor["Employee"]["supervisor_id"] == $author["Employee"]["internal_id"]){
+                $access = true;
+            }
+
+            if($access == true){
 
                 if($author["Role"]["name"] !== "admin"){
                     if($request["Employee"]["supervisor_id"] !== $author["Employee"]["internal_id"]){
@@ -310,11 +322,15 @@ class RequestsController extends AppController {
 
                 if($type == 'allow'){
                     if($this->AuthItemUpdate($request)){
-                        $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is goedgekeurd', 'Je afwezigheid is goedgekeurd');
+                        if(isset($request["Employee"]["3gram"])){
+                            $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is goedgekeurd', 'Je afwezigheid is goedgekeurd');
+                        }
                         $this->sendMailToHR('allowed', $request);
                     }
                 } else {
-                    $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is geweigerd', 'Je afwezigheid is geweigerd');
+                    if(isset($request["Employee"]["3gram"])){
+                        $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is geweigerd', 'Je afwezigheid is geweigerd');
+                    }
                     $this->sendMailToHR('denied', $request);
                 }
 
@@ -398,10 +414,6 @@ class RequestsController extends AppController {
                     $datestime[] = $first . '/AM';
                 }
 
-                $datestime[] = $first . '/PM';
-
-
-
                 while( $current <= $last ) {
                     if(date('D', $current) == 'Sat' or date('D', $current) == 'Sun'){
                         $current = strtotime( $step, $current );
@@ -428,14 +440,11 @@ class RequestsController extends AppController {
                     }
                 }
 
-                $datestime[] = date('Y-m-d', $last) . '/AM';
-                if($endtime !== 'AM'){
-                    $datestime[] = date('Y-m-d', $last) . '/PM';
-                }
 
-                if($datestime[0] == $datestime[2]){
-                    unset($datestime[2]);
-                    unset($datestime[3]);
+                if(isset($datestime[2])){
+                    if($datestime[0] == $datestime[2]){
+                        $datestime = $datestime[0];
+                    }
                 }
             }
             return $datestime;
