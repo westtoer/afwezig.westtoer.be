@@ -119,35 +119,6 @@ if(isset($this->request->query["month"])){
             </div><hr />
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6 formspaced-left">
-                            <input type="number" class="form-control spaced" placeholder="Dag van de maand" id="daynumber-5">
-                        </div>
-                        <div class="col-md-6 formspaced-right">
-                            <select class="form-control spaced" id="month-5">
-                                <option value="1">Januari</option>
-                                <option value="2">Februari</option>
-                                <option value="3">Maart</option>
-                                <option value="4">April</option>
-                                <option value="5">Mei</option>
-                                <option value="6">Juni</option>
-                                <option value="7">Juli</option>
-                                <option value="8">Augustus</option>
-                                <option value="9">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a class="btn btn-primary fullwidth" onClick="exportMonthSchaubroeck(5)">Genereer specifieke export</a></div>
-                <div class="col-md-6">
-                    <h4 class="first">Andere maand Schaubroeck</h4>
-                    <p>Deze export doet net hetzelfde als Andere maand, maar dan voor het toekomstig Schaubroeck-systeem.</p>
-                </div>
-            </div><hr />
-            <div class="row">
-                <div class="col-md-6">
                     <a class="btn btn-danger fullwidth" href="/Admin/ignoreExports">Exports negeren</a>
                 </div>
                 <div class="col-md-6">
