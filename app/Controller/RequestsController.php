@@ -134,6 +134,7 @@ class RequestsController extends AppController {
                 $this->Session->setFlash('Je aanvraag is succesvol ingediend');
                 $this->redirect($this->here);
             }
+            $this->redirect('/');
         }
     }
 
@@ -256,17 +257,23 @@ class RequestsController extends AppController {
                         }
                     }
                     $this->Session->setFlash('Aanvraag succesvol opgeslagen.');
-                    $supervisor = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $cr["Employee"]["supervisor_id"], "Employee.internal_id" => '-1')));
+                    $supervisor = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $cr["Employee"]["supervisor_id"], "Employee.internal_id <>" => '-1')));
                     $body = $cr["Employee"]["surname"] . ' ' . $cr["Employee"]["name"] . ' heeft een nieuwe aanvraag ingediend. Om deze te bekijken, ga je naar ' . Configure::read('Administrator.base_fallback_url') . '/Requests/view/' . $cr["Request"]["id"];
                     if(empty($cd)){
                         $this->sendMailToHR("new", $cr);
                         if(!empty($supervisor)){
-                            $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
+                            if(isset($supervisor["Employee"]["3gram"])){
+                                $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
+                            }
                         }
                     } else {
                         if($this->CalendarDay->saveMany($cd)){
                             $this->sendMailToHR("new", $cr);
-                            $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
+                            if(!empty($supervisor)){
+                                if(isset($supervisor["Employee"]["3gram"])){
+                                    $this->sendMail($this->trigramToMail($supervisor["Employee"]["3gram"]), $body, 'Nieuwe aanvraag');
+                                }
+                            }
                         } else {
                             $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
                         }
@@ -437,6 +444,9 @@ class RequestsController extends AppController {
     private function insertValidation($request){
         //Validation
         $nulldate = '1970-01-01';
+        if(empty($request["Employee"])){
+            $request["Employee"]["id"] = $this->Session->read('Auth.Employee.id');
+        }
         $request["Employee"] = $this->Employee->findById($request["Employee"]["id"])["Employee"];
         $dateRange = $this->dateRange($request["Request"]["start_date"], $request["Request"]["end_date"], $request["Request"]["start_time"], $request["Request"]["end_time"]);
             $error = '';
@@ -496,6 +506,8 @@ class RequestsController extends AppController {
                     }
                 }
 
+
+                $discount = array_sum($discount);
                 $price = $price - $discount;
 
                 if($price > $balance){
