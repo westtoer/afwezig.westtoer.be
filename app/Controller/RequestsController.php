@@ -92,11 +92,11 @@ class RequestsController extends AppController {
             if(!empty($request)){
                 $this->authorize($id, 'deny');
                 $this->Session->setFlash('Deze aanvraag is geweigerd');
-                $this->redirect('/');
+                $this->redirect('/Request');
             }
         } else {
             $this->Session->setFlash('Dit is een ongeldig request.');
-            $this->redirect('/');
+            $this->redirect('/Request');
         }
     }
 
@@ -405,14 +405,12 @@ class RequestsController extends AppController {
             $dates = array();
             $current = strtotime( $first );
             $last = strtotime( $last );
+            $first = strtotime( $first );
             $datestime = array();
 
-            if(strtotime($first) == $last AND $starttime == $endtime){
+            if(date('Y-m-d', $first) == date('Y-m-d', $last) AND $starttime == $endtime){
                 $datestime[] = $first . '/' . $starttime;
             } else {
-                if($starttime !== 'PM'){
-                    $datestime[] = $first . '/AM';
-                }
 
                 while( $current <= $last ) {
                     if(date('D', $current) == 'Sat' or date('D', $current) == 'Sun'){
@@ -428,22 +426,20 @@ class RequestsController extends AppController {
                     if($date == $first){
                         if($starttime == 'PM'){
                             $datestime[] = $date . '/PM';
-
+                        } else {
+                            $datestime[] = $date . '/AM';
+                            $datestime[] = $date . '/PM';
                         }
                     } elseif(strtotime($date) == $last){
                         if($endtime == 'AM'){
                             $datestime[] = $date . '/AM';
+                        } else {
+                            $datestime[] = $date . '/AM';
+                            $datestime[] = $date . '/PM';
                         }
                     } else{
                         $datestime[] = $date . '/AM';
                         $datestime[] = $date . '/PM';
-                    }
-                }
-
-
-                if(isset($datestime[2])){
-                    if($datestime[0] == $datestime[2]){
-                        $datestime = $datestime[0];
                     }
                 }
             }

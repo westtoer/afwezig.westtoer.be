@@ -545,6 +545,13 @@ class AdminController extends AppController {
     }
 
     public function export() {
+        //Iterate over calendarTypes
+        foreach($this->CalendarItemType->find('all') as $calendarType){
+            $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
+        }
+
+
+
         //Define month
         if(isset($this->request->query["month"])){
             $month = $this->request->query["month"];
@@ -557,21 +564,30 @@ class AdminController extends AppController {
             $range["end"] = $this->lastDay($month);
             $range["templateStart"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
 
-            //Get previous export date (that isn't ignored) and get all record from before.
-            $prevExport = $this->Export->find('first', array('conditions' => array('Export.ignored' => false), 'order' => 'Export.timestamp DESC'));
-            if(!empty($prevExport)){
-                $limit = $prevExport["Export"]["timestamp"];
-                $range["start"] = date('Y-m-d H:i:s', strtotime($limit));
-                $niceMonth = $month;
-
-                if($range["start"] > $range["templateStart"]){
-                    $this->Session->setFlash('Je kan geen tweede geldige export doen van een maand. Wil je dit toch, moet je de vorige ongeldig verklaren');
-                    $this->redirect('/Admin/export');
+            if(!isset($this->request->query["type"])){
+                if(isset($this->request->query["limit"])){
+                    date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-' . $limit ));
+                } else {
+                    $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
                 }
-            } else {
-                $range["start"] = '2012-01-01';
             }
 
+            //Get previous export date (that isn't ignored) and get all record from before.
+            $prevExport = $this->Export->find('first', array('conditions' => array('Export.ignored' => false), 'order' => 'Export.timestamp DESC'));
+            if(isset($this->request->query["type"])){
+                if(!empty($prevExport)){
+                    $limit = $prevExport["Export"]["timestamp"];
+                    $range["start"] = date('Y-m-d H:i:s', strtotime($limit));
+                    $niceMonth = $month;
+
+                    if($range["start"] > $range["templateStart"]){
+                        $this->Session->setFlash('Je kan geen tweede geldige export doen van een maand. Wil je dit toch, moet je de vorige ongeldig verklaren');
+                        $this->redirect('/Admin/export');
+                    }
+                } else {
+                    $range["start"] = '2012-01-01';
+                }
+            }
 
             //Webview still shows employees that aren't indexed on Schaubroeck
             if(!isset($this->request->query["webview"])){
@@ -629,7 +645,7 @@ class AdminController extends AppController {
 
 
             //Write the calendarDays to a JSON file and create an export record (if this isn't a webview)
-            if(!isset($this->request->query["webview"])){
+            if(isset($this->request->query["type"])){
                 //Get the export dir path
                 $date = date('Y-m-d') . 'T' . date('H:i:s');
                 $exportPath = Configure::read('Administrator.export_dir') . '/json/' . $date . '.json';
@@ -650,11 +666,8 @@ class AdminController extends AppController {
                 $file->write($JSON);
             }
 
+            //Gather data and write CSV
             if(isset($this->request->query["type"])){
-
-                foreach($this->CalendarItemType->find('all') as $calendarType){
-                    $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
-                }
                 $exportCsv = Configure::read('Administrator.export_dir') . '/csv/' . $date . '.csv';
                 $file = new File($exportCsv, true);
 
@@ -897,6 +910,7 @@ class AdminController extends AppController {
                         $year = date('Y');
                     }
                     $employee = $this->request->query['employee'];
+                    $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $employee, 'Employee.internal_id <>' => '-1')));
                     $this->set('crud', true);
 
                     $date = array('start' => $year . '-' . $niceMonth .'-01', 'end' => $year . '-' . $niceMonth  . '-' . $daysInMonth);
@@ -911,12 +925,17 @@ class AdminController extends AppController {
                         $date["end"] = date('Y-m-d', strtotime('last Friday of ' . $months[$month] . ' ' . date('Y')));
                     }
 
-                    $ucd = $this->CalendarDay->find('all', array('conditions' => array(
-                        'day_date >=' => date('Y-m-d', strtotime($date["start"])),
-                        'day_date <=' => date('Y-m-d', strtotime($date["end"])),
-                        'employee_id' => $employee),
-                        'order' => 'day_date ASC'
-                    ));
+                    if(!empty($employee)){
+                        $ucd = $this->CalendarDay->find('all', array('conditions' => array(
+                            'day_date >=' => date('Y-m-d', strtotime($date["start"])),
+                            'day_date <=' => date('Y-m-d', strtotime($date["end"])),
+                            'employee_id' => $employee["Employee"]["id"]),
+                            'order' => 'day_date ASC'
+                        ));
+                    } else {
+                        $this->Session->setFlash('Ongeldige gebruiker geselecteerd.');
+                        $this->redirect('/Admin');
+                    }
 
                     $template = $this->dateRange($date["start"], $date["end"]);
 
