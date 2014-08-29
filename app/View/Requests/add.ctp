@@ -33,9 +33,10 @@
 
             <?php echo $this->Form->input('calendar_item_type_id', array('label' => false, 'class' => 'form-control spaced', 'options' => array($this->Request->selectorAllTypes($types, 'array'))));?>
             <?php echo $this->Form->input('replacement_id', array('label' => false, 'class' => 'form-control spaced', 'options' => array($this->Employee->selectorAllEmployees($employees, 'array'))));?>
-            <?php echo $this->Form->submit('Verstuur', array('class' => 'btn btn-primary fullwidth'));?>
-            <?php echo $this->Form->end();?>
 
+            <?php //echo $this->Form->submit('Verstuur', array('class' => 'btn btn-primary fullwidth', 'onClick' => 'initiated()', 'id' => 'RequestSubmitButton'));?>
+            <?php echo $this->Form->end();?>
+            <button id="RequestSubmitButton" class="btn btn-primary fullwidth" onClick="initiated()">Verstuur</button>
 
         </div>
         <div class="alert alert-info alert-dismissible" role="alert">
