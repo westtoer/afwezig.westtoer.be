@@ -106,11 +106,11 @@ class RequestsController extends AppController {
             if(!empty($request)){
                 $this->authorize($id, 'allow');
                 $this->Session->setFlash('Deze aanvraag is goedgekeurd');
-                $this->redirect('/');
+                $this->redirect('/Requests');
             }
         } else {
             $this->Session->setFlash('Dit is een ongeldig request.');
-            $this->redirect('/');
+            $this->redirect('/Requests');
         }
     }
 
