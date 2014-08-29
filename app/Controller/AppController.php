@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller', 'CakeEmail', 'Network/Email');
  */
 class AppController extends Controller {
 
-    public $uses = array('AdminVariable');
+    public $uses = array('AdminVariable', 'Employee');
 
     public $components = array(
         'Session',
@@ -52,6 +52,15 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         $this->set('title_for_layout', 'Westtoer Afwezig');
+        $session = $this->Session->read('Auth.Employee');
+        $isSupervisor = false;
+        if(!empty($session)){
+            if($this->Employee->find('count', array('conditions' => array('Employee.supervisor_id' => $session["internal_id"]))) > 0){
+                $isSupervisor = true;
+            }
+        }
+
+        $this->set('isSupervisor', $isSupervisor);
         //$this->Auth->allow('index', 'view');
         if($this->admin_variable('lockApp') == 'true'){
             if($this->Session->read('Auth.Role.adminpanel') == false){

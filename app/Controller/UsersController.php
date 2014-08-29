@@ -124,7 +124,7 @@ class UsersController extends AppController {
                 if($user["User"]["status"] == 'active'){
                     $employee = $this->Employee->find('first',
                         array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
-                            'fields' => array('Employee.id', 'Employee.status', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
+                            'fields' => array('Employee.id', 'Employee.status', 'Employee.internal_id', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
                         ));
                     if(!empty($employee)){
                         if($employee["Employee"]["status"] == true){
@@ -417,10 +417,7 @@ class UsersController extends AppController {
     }
 
     public function checkAuth(){
-        echo '<pre>';
-        var_dump($this->Employee->find('all'));
-        echo '</pre>';
-        var_dump($this->Employee->findById("1"));
+        var_dump($this->Session->read('Auth'));
     }
     public function locked(){
         $this->layout = 'login';

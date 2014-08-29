@@ -23,7 +23,7 @@
                             if($this->Session->read('Auth.Role.id') == 1 OR  $this->Session->read('Auth.Role.id') == 2){
                                 echo '<li>' . $this->Html->link('Administratie', array('controller' => 'Admin', 'action' => 'index')) . '</li>';
                             }
-                            if($this->Session->read('Auth.Role.allow') == 'true'){
+                            if($isSupervisor == true){
                                 echo '<li>' . $this->Html->link('Verlof Goedkeuren', array('controller' => 'Requests', 'action' => 'index')) . '</li>';
                             }
                             ?>
