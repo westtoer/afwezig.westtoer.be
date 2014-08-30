@@ -882,14 +882,12 @@ class AdminController extends AppController {
 
     public function editCalendarDays(){
         $this->set('crud', false);
-        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1' ))));
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1' ), 'order' => 'Employee.surname ASC')));
         $this->set('cit', $this->CalendarItemType->find('all'));
+        $vcd = array();
+        $ncd = array();
         if($this->request->is('post')){
             $icd = $this->request->data["items"]; // Incoming Calendar Days
-
-            var_dump($icd);
-
-
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $this->request->data["Crud"]["employee_id"])));
 
             foreach($icd as $date => $cd){
@@ -908,15 +906,22 @@ class AdminController extends AppController {
                 }
             }
 
-            if($this->CalendarDay->saveMany($vcd)){
-                if($this->CalendarDay->saveMany($ncd)){
-                    $this->Session->setFlash('Het opslaan van de kalender is geslaagd.');
+            $this->Session->setFlash('Het opslaan van de kalender is geslaagd.');
+            if(!empty($vcd)){
+                if($this->CalendarDay->saveMany($vcd)){
+
                 } else {
-                    $this->Session->setFlash('Het opslaan van de nieuwe kalenderdagen is mislukt.');
+                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
                 }
-            } else {
-                $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
             }
+            if(!empty($ncd)){
+                if($this->CalendarDay->saveMany($ncd)){
+
+                } else {
+                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
+                }
+            }
+
             $this->redirect($this->here);
         } else {
             if(isset($this->request->query['month'])){
