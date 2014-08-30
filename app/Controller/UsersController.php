@@ -238,11 +238,11 @@ class UsersController extends AppController {
                                 }
                             }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.','default', array('class' => 'alert-warning')));
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.','default', array('class' => 'alert-warning'));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger')));
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             }
@@ -270,11 +270,11 @@ class UsersController extends AppController {
                             $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                         }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.''default', array('class' => 'alert-warning')));
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.', 'default', array('class' => 'alert-warning'));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger')));
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             }
