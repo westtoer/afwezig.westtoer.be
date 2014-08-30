@@ -1,0 +1,4 @@
+<?php
+    $config["Uitid"]["public"] = '76163fc774cb42246d9de37cadeece8a';
+    $config["Uitid"]["private"] = 'fff975c5a8c7ba19ce92969c1879b211';
+    $config["Uitid"]["server"] = 'http://www.uitid.be/uitid/rest';

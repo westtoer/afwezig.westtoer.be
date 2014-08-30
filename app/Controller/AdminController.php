@@ -1021,6 +1021,15 @@ class AdminController extends AppController {
         }
     }
 
+    public function viewAuthorisations(){
+        if(isset($this->request->query["employee"])){
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $this->request->query["employee"])));
+            $this->set('aiAccepted', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorized' => 1, 'Request.employee_id' => $employee["Employee"]["id"]))));
+            $this->set('aiDenied', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorized' => 0, 'AuthItem.authorization_date <>' => null, 'Request.employee_id' => $employee["Employee"]["id"]))));
+            $this->set('aiDenied', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorization_date' => null, 'Request.employee_id' => $employee["Employee"]["id"]))));
+        }
+    }
+
     private function admin_variable($name, $type = 'write', $value = null){
         $adminVar = $this->AdminVariable->find('first', array('conditions' => array('name' => $name)));
         if($type == 'write'){

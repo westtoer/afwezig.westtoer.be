@@ -101,70 +101,6 @@ class UsersController extends AppController {
         }
     }
 
-    public function uitid() {
-        if(isset($this->request->query['router'])){
-            $this->Session->write('router', $this->request->query['router']);
-        }
-
-        $client = $this->createClient();
-        $requestToken = $client->getRequestToken(Configure::read('UiTID.server') . '/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
-        if (!empty($requestToken)) {
-            $this->Session->write('uitid_request_token', $requestToken);
-            $this->redirect(Configure::read('UiTID.server') . '/auth/authorize?oauth_token=' . $requestToken->key);
-        } else {
-
-        }
-    }
-
-    public function callback() {
-        $requestToken = $this->Session->read('uitid_request_token');
-        $client = $this->createClient();
-        $accessToken = $client->getAccessToken(Configure::read('UiTID.server') .'/accessToken', $requestToken);
-        if ($accessToken) {
-            $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
-            if(!empty($user)){
-                if($user["User"]["status"] == 'active'){
-                    $employee = $this->Employee->find('first',
-                        array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
-                            'fields' => array('Employee.id', 'Employee.status', 'Employee.internal_id', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
-                        ));
-                    if(!empty($employee)){
-                        if($employee["Employee"]["status"] == true){
-                            $this->Auth->login($user['User']['id']);
-                            $this->Session->write('Auth', $employee);
-                            $this->Session->write('Auth.User', $user);
-
-                            if($this->Session->read('router') == null){
-                                $this->redirect('/');
-
-                            } else {
-                                $this->redirect($this->Session->read('router'));
-                            }
-                        } else {
-                            $this->redirect(array('action' => 'deactivatedEmployee'));
-                        }
-                    }
-
-                } else {
-                    if($user["User"]["status"] == 'deactivated'){
-                        $this->redirect(array('action' => 'deactivatedUser'));
-                    }
-                    $this->redirect(array('action' => 'error'));
-                }
-            } else {
-                $result = $client->request($accessToken->key, $accessToken->secret, $accessToken->userId, array('method' => 'GET', 'uri' =>  Configure::read('UiTID.server')  .'/user/' . $accessToken->userId . '?private=true'));
-                $resultToArray = simplexml_load_string($result["body"]);
-                $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
-                //$result = $client->processResult($resultToArray);
-                if($this->Employee->find('count') > 1){
-                    $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
-                } else {
-                    $this->redirect(array("controller" => "Employees", "action" => "claimAdmin", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
-                }
-            }
-        }
-    }
-
     public function error(){
         $this->layout = 'login';
     }
@@ -175,12 +111,6 @@ class UsersController extends AppController {
 
     public function deactivatedEmployee(){
         $this->layout = 'login';
-    }
-
-
-    private function createClient() {
-        var_dump(Configure::read('UiTID.private'));
-        return new OAuthClient(Configure::read('UiTID.public'), Configure::read('UiTID.private'));
     }
 
     public function associate(){
