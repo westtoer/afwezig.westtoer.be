@@ -15,7 +15,7 @@ class AdminHelper extends AppHelper {
             } else if ($type == 'pending'){
                 $html .= '<td>' . '<a href="' . $this->base . '/users/approve/' . $user["User"]["id"] .'">Goedkeuren</a> | '   . '<a href="' . $this->base . '/users/deny/' . $user["User"]["id"] .'">Weigeren</a></td></tr>';
             } else if ($type == 'denied'){
-                $html .= '<td></td></tr>';
+                $html .= '<td><a href="' . $this->base . '/users/delete/' . $user["User"]["id"] .'">Verwijder</a></td></tr>';
             }
         }
         $html .= '</table>';

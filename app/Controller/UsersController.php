@@ -10,6 +10,7 @@ class UsersController extends AppController {
         $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin', 'locked');
     }
 
+
     public function login() {
             $this->layout = 'login';
             if(isset($this->request->query['router'])){
@@ -40,6 +41,7 @@ class UsersController extends AppController {
 
     public function index() {
         $this->set('users', $this->User->find('all'));
+        $this->redirect('/');
     }
 
     public function view($id = null) {
@@ -85,18 +87,18 @@ class UsersController extends AppController {
     }
 
     public function delete($id = null) {
-        $this->request->onlyAllow('post');
-
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+        if($this->Session->read('Auth.Role.adminpanel') == true){
+            $this->User->id = $id;
+            if (!$this->User->exists()) {
+                throw new NotFoundException(__('Invalid user'));
+            }
+            if ($this->User->delete()) {
+                $this->Session->setFlash(__('User deleted'));
+                return $this->redirect('/Admin');
+            }
+            $this->Session->setFlash(__('User was not deleted'));
+            return $this->redirect('/Admin');
         }
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
-            return $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('User was not deleted'));
-        return $this->redirect(array('action' => 'index'));
     }
 
     public function uitid() {
