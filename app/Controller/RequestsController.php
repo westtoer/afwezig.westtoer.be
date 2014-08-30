@@ -304,7 +304,7 @@ class RequestsController extends AppController {
 
             $genericBody = 'Je aanvraag voor ' . $request["CalendarItemType"]["name"] . ' vanaf '
                 . $request["Request"]["start_date"] . '-' . $request["Request"]["start_time"] .
-                ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"];
+                ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"] . ' ';
 
             if($author["Role"]["allow"] == true){
                 $access = true;
