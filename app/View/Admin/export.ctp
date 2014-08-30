@@ -119,7 +119,7 @@ if(isset($this->request->query["month"])){
             </div><hr />
             <div class="row">
                 <div class="col-md-6">
-                    <a class="btn btn-danger fullwidth" href="/Admin/ignoreExports">Exports negeren</a>
+                    <a class="btn btn-danger fullwidth" href="<?php echo $this->base;?>/Admin/ignoreExports">Exports negeren</a>
                 </div>
                 <div class="col-md-6">
                     <h4 class="first">Exports negeren</h4>

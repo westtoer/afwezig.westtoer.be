@@ -749,6 +749,7 @@ class AdminController extends AppController {
             }
         } else {
             $this->set('exports', $this->Export->find('all', array('conditions' => array('Export.ignored' => false))));
+            $this->set('exportsIgnored', $this->Export->find('all', array('conditions' => array('Export.ignored' => true))));
         }
     }
 
