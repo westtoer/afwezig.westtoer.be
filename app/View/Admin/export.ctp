@@ -11,6 +11,12 @@ if(isset($this->request->query["month"])){
                 echo $this->Admin->webview($data);
                 echo '</div>';
             } else {
+
+                //Parse XML headers
+                $this->xls->setHeader('Schaubroeck_export_'.date('Y_m_d'));
+                $this->xls->addXmlHeader();
+                $this->xls->setWorkSheetName('Data');
+                
                 //1st row for columns name
                 $this->xls->openRow();
                 $this->xls->writeString('Naam');
