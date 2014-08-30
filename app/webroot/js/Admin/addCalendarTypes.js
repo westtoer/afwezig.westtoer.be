@@ -14,6 +14,6 @@ function newType(){
     html += '<td><input type="text" name="data[new][' + count + '][CalendarItemType][code_schaubroek]" class="form-control"></td>';
     html += '<td><input type="text" name="data[new][' + count + '][CalendarItemType][aard_schaubroek]" class="form-control"></td>';
     html += '<td><input type="text" name="data[new][' + count + '][CalendarItemType][ext_schaubroek]" class="form-control"></td>';
-    $('.table tr:last').after(html);
+    $('.table tr:first').after(html);
     count++;
 }
