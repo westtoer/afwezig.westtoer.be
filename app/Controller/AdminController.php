@@ -566,6 +566,7 @@ class AdminController extends AppController {
 
             if(!isset($this->request->query["type"])){
                 if(isset($this->request->query["limit"])){
+                    $limit = $this->request->query["limit"];
                     date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-' . $limit ));
                 } else {
                     $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
@@ -640,6 +641,7 @@ class AdminController extends AppController {
                 $this->set('data', $data);
             } else {
                 $this->set('data', $employeeTemplate); // If no roster was found, output the template
+                $data = $employeeTemplate;
             }
 
 
@@ -653,7 +655,7 @@ class AdminController extends AppController {
                 //Create a database record for exports
                 $this->Export->create();
                 $export = array('Export' => array('timestamp' => $date, 'json_path' => $exportPath, 'xls_path' => 'null', 'ignored' => false, 'start_date' => $range["templateStart"], 'end_date' => $range["end"], 'employee_id' => $this->Session->read('Auth.Employee.id')));
-                $this->Export->save($export);
+                $export = $this->Export->save($export);
 
                 //Write a json file with only the calendar days (not working days)
                 if(!empty($data)){
@@ -722,10 +724,14 @@ class AdminController extends AppController {
                 }
 
                 $file->write($x);
-                $export["xls_path"] = $exportCsv;
-                $this->Export->save($export);
-                $this->Session->setFlash('Export opgeslagen op ' . $exportPath . ' en '. $exportCsv);
+                $export["Export"]["xls_path"] = $exportCsv;
+                if($this->Export->save($export)){
+                    $this->Session->setFlash('Export opgeslagen op ' . $exportPath . ' en '. $exportCsv);
+                } else {
+                    $this->Session->setFlash('De export kon niet goed worden verwerkt.');
+                }
                 $this->redirect('/Admin/export');
+
 
             }
 
