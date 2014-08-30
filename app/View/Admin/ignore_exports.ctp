@@ -16,8 +16,9 @@
                     <tr><th>Datum</th><th>Maand</th><th>Jaar</th><th>JSON</th><th>CSV</th><th>Acties</th></tr>
 
                     <?php
+                    $html = '';
                     foreach($exports as $export){
-                        $html = '<tr>';
+                        $html .= '<tr>';
                         $html .= '<td>' . $export["Export"]["timestamp"] . '</td>';
                         $html .= '<td>' . date('m', strtotime($export["Export"]["start_date"])) . '</td>';
                         $html .= '<td>' . date('Y', strtotime($export["Export"]["start_date"])) . '</td>';
@@ -38,8 +39,9 @@
                     <tr><th>Datum</th><th>Maand</th><th>Jaar</th><th>JSON</th><th>CSV</th></tr>
 
                     <?php
+                    $html = '';
                     foreach($exportsIgnored as $export){
-                        $html = '<tr>';
+                        $html .= '<tr>';
                         $html .= '<td>' . $export["Export"]["timestamp"] . '</td>';
                         $html .= '<td>' . date('m', strtotime($export["Export"]["start_date"])) . '</td>';
                         $html .= '<td>' . date('Y', strtotime($export["Export"]["start_date"])) . '</td>';
