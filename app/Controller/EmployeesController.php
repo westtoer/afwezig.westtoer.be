@@ -58,7 +58,7 @@ class EmployeesController extends AppController {
             $this->Employee->delete($employee["Employee"]["id"]);
 
         } else{
-            $this->Session->setFlash('Je hebt geen rechten om gebruikers te verwijderen');
+            $this->Session->setFlash('Je hebt geen rechten om gebruikers te verwijderen', 'default', array('class' => 'alert-danger'));
             //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
         }
     }
@@ -81,7 +81,7 @@ class EmployeesController extends AppController {
                 $this->redirect(array('controller' => 'users', 'action' => 'error'));
             }
         } else {
-            $this->Session->setFlash('Je bent al gelinkt met een account');
+            $this->Session->setFlash('Je bent al gelinkt met een account', 'default', array('class' => 'alert-danger'));
             //$this->redirect(array('controller' => 'CalendarItems', 'action' => 'index'));
         }
     }
@@ -102,7 +102,7 @@ class EmployeesController extends AppController {
                 if($this->Session->read('Auth.Role.adminpanel') !== true){
 
                 } else {
-                    $this->Session->setFlash('Je mag een andere gebruiker niet aanpassen! Alle illegale activiteit wordt gerapporteerd.');
+                    $this->Session->setFlash('Je mag een andere gebruiker niet aanpassen.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             } else { // The user is updating his information
@@ -145,10 +145,10 @@ class EmployeesController extends AppController {
                     if($this->Employee->saveMany($cleanData)){
                         $this->Session->setFlash('Het importeren is geslaagd');
                     } else {
-                        $this ->Session->setFlash('Er is iets misgelopen. Waarschijnlijk heb je dubbele werknemers of werknemers die al in het systeem zitten proberen toevoegen.');
+                        $this ->Session->setFlash('Er is iets misgelopen. Waarschijnlijk heb je dubbele werknemers of werknemers die al in het systeem zitten proberen toevoegen.', 'default', array('class' => 'alert-danger'));
                     }
                 } else {
-                    $this->Session->setFlash('Er was geen data om te importeren.');
+                    $this->Session->setFlash('Er was geen data om te importeren.', 'default', array('class' => 'alert-danger'));
                 }
 
                 $this->redirect($this->here);

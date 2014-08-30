@@ -193,7 +193,7 @@ class UsersController extends AppController {
                 $newAssociation["User"]["status"] = "requested";
                 $existingUser = $this->User->find('first', array('conditions' => array('email' => $newAssociation["User"]["email"])));
                 if(!empty($existingUser)){
-                    $this->Session->setFlash('Iemand heeft zich al met dit email adres aangemeld');
+                    $this->Session->setFlash('Iemand heeft zich al met dit email adres aangemeld', 'default', array('class' => 'alert-danger'));
                     $this->redirect(array('action' => 'error','error' => 1));
                 } else {
                     $this->User->save($newAssociation);
@@ -238,11 +238,11 @@ class UsersController extends AppController {
                                 }
                             }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.','default', array('class' => 'alert-warning')));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger')));
                     $this->redirect('/');
                 }
             }
@@ -270,11 +270,11 @@ class UsersController extends AppController {
                             $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                         }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.''default', array('class' => 'alert-warning')));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger')));
                     $this->redirect('/');
                 }
             }

@@ -12,7 +12,7 @@ class AdminController extends AppController {
         parent::beforeFilter();
         if($this->Session->read('Auth.Role.id') !== '1'){
             if($this->Session->read('Auth.Role.id') !== '2'){
-                $this->Session->setFlash('Je hebt geen rechten in het administratiepaneel.');
+                $this->Session->setFlash('Je hebt geen rechten in het administratiepaneel.', 'default', array('class' => 'alert-danger'));
                 $this->redirect('/');
             }
         }
@@ -37,10 +37,10 @@ class AdminController extends AppController {
                 if($this->Employee->save($employee)){
                     $this->Session->setFlash('Gebruiker is opgeslagen.');
                 } else {
-                    $this->Session->setFlash('Het opslaan van de gebruiker is mislukt.');
+                    $this->Session->setFlash('Het opslaan van de gebruiker is mislukt.', 'default', array('class' => 'alert-danger'));
                 }
             } else {
-                $this->Session->setFlash("Er bestaat al een gebruiker met dezelfde naam en telefoonnummer");
+                $this->Session->setFlash("Er bestaat al een gebruiker met dezelfde naam en personeelsnummer", 'default', array('class' => 'alert-danger'));
             }
             $this->redirect('/Admin/viewEmployees');
         }
@@ -65,7 +65,7 @@ class AdminController extends AppController {
                 $this->set('departments', $this->EmployeeDepartment->find('all'));
                 $this->set('prevCost', $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarDay.calendar_item_type_id' => 23))));
             } else {
-                $this->Session->setFlash('Je hebt geen geldige gebruiker geselecteerd.');
+                $this->Session->setFlash('Je hebt geen geldige gebruiker geselecteerd.', 'default', array('class' => 'alert-danger'));
             }
         }
     }
@@ -119,7 +119,7 @@ class AdminController extends AppController {
                 if($request["Request"]["start_date"] < date('Y-m-d', strtotime(date('Y') . '-12-31'))){
                     $savedRequest = $this->Request->save($request);
                 } else {
-                    $this->Session->setFlash("Je kan enkel Feestdagen voor dit jaar ingegeven");
+                    $this->Session->setFlash("Je kan enkel Feestdagen voor dit jaar ingegeven", 'default', array('class' => 'alert-danger'));
                     $this->redirect($this->here);
                 }
             $this->AuthItem->create();
@@ -306,15 +306,15 @@ class AdminController extends AppController {
                         $this->Session->setFlash('Stramien opgeslagen.');
                         $this->redirect($this->here);
                     } else {
-                        $this->Session->setFlash('Het stramien kon niet worden opgeslagen.');
+                        $this->Session->setFlash('Het stramien kon niet worden opgeslagen.', 'default', array('class' => 'alert-danger'));
                         $this->redirect($this->here);
                     }
                 } else {
-                    $this->Session->setFlash('Deze gebruiker heeft al een stramien.');
+                    $this->Session->setFlash('Deze gebruiker heeft al een stramien.', 'default', array('class' => 'alert-danger'));
                     $this->redirect($this->here);
                 }
             } else {
-                $this->Session->setFlash('Je moet een geldige gebruiker opgeven.');
+                $this->Session->setFlash('Je moet een geldige gebruiker opgeven.', 'default', array('class' => 'alert-danger'));
                 $this->redirect($this->here);
             }
 
@@ -340,14 +340,14 @@ class AdminController extends AppController {
                     $this->Session->setFlash('Stramien succesvol verwijderd. De kalenderdagen zijn echter niet gewijzigd. Wilt u dat doen, maakt u een nieuw stramien op.');
                     $this->redirect('/Admin/viewStreams');
                 } else {
-                    $this->Session->setFlash('Verwijderen van stramien mislukt.');
+                    $this->Session->setFlash('Verwijderen van stramien mislukt.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/Admin/viewStreams');
                 }
 
             }
 
         } else {
-            $this->Session->setFlash('Je moet een geldig stramien opgeven');
+            $this->Session->setFlash('Je moet een geldig stramien opgeven', 'default', array('class' => 'alert-danger'));
             $this->redirect('/Admin/viewStreams');
         }
     }
@@ -387,7 +387,7 @@ class AdminController extends AppController {
                     }
 
                 } else {
-                    $this->Session->setFlash('Je moet een geldige gebruiker opgeven.');
+                    $this->Session->setFlash('Je moet een geldige gebruiker opgeven.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/Admin/viewStreams');
                 }
 
@@ -413,7 +413,7 @@ class AdminController extends AppController {
 
     public function cancelEndOfYear(){
         $this->admin_variable('lockApp', 'write', 'false');
-        $this->Session->setFlash('Gelieve Marc Portier te contacteren om de database te herstellen, indien dat nodig zou zijn.');
+        $this->Session->setFlash('Gelieve Marc Portier te contacteren om de database te herstellen, indien dat nodig zou zijn.', 'default', array('class' => 'alert-danger'));
         $this->redirect('/Admin');
     }
 
@@ -466,7 +466,7 @@ class AdminController extends AppController {
                     }
 
                     if($size != $finished){
-                        $this->Session->setFlash('Niet alle kalenderdagen konden worden opgeslagen');
+                        $this->Session->setFlash('Niet alle kalenderdagen konden worden opgeslagen', 'default', array('class' => 'alert-danger'));
                     }
 
                     $this->redirect('/Admin/viewStreams');
@@ -483,7 +483,7 @@ class AdminController extends AppController {
         if($id !== null){
 
             if($id == 0){
-                $this->Session->setFlash("Er was geen geldige gebruiker geselecteerd.");
+                $this->Session->setFlash("Er was geen geldige gebruiker geselecteerd.", 'default', array('class' => 'alert-danger'));
                 $this->redirect('/admin/viewEmployees');
             }
 
@@ -539,7 +539,7 @@ class AdminController extends AppController {
         );
 
         } else {
-            $this->Session->setFlash('Er was geen geldige Employee Id opgegeven om een rapport over op te kunnen stellen');
+            $this->Session->setFlash('Er was geen geldige Employee Id opgegeven om een rapport over op te kunnen stellen', 'default', array('class' => 'alert-danger'));
             $this->redirect(array('controller' => 'admin', 'action' => 'index'));
         }
     }
@@ -587,7 +587,7 @@ class AdminController extends AppController {
                     $niceMonth = $month;
 
                     if($range["start"] > $range["templateStart"]){
-                        $this->Session->setFlash('Je kan geen tweede geldige export doen van een maand. Wil je dit toch, moet je de vorige ongeldig verklaren');
+                        $this->Session->setFlash('Je kan geen tweede geldige export doen van een maand. Wil je dit toch, moet je de vorige ongeldig verklaren', 'default', array('class' => 'alert-danger'));
                         $this->redirect('/Admin/export');
                     }
                 } else {
@@ -733,7 +733,7 @@ class AdminController extends AppController {
                 if($this->Export->save($export)){
                     $this->Session->setFlash('Export opgeslagen op ' . $exportPath . ' en '. $exportCsv);
                 } else {
-                    $this->Session->setFlash('De export kon niet goed worden verwerkt.');
+                    $this->Session->setFlash('De export kon niet worden verwerkt.', 'default', array('class' => 'alert-danger'));
                 }
                 $this->redirect('/Admin/export');
 
@@ -754,7 +754,7 @@ class AdminController extends AppController {
                 if($this->Export->save($export)){
                     $this->Session->setFlash('Export wordt vanaf nu genegeerd');
                 } else {
-                    $this->Session->setFlash('Negeren van export mislukt');
+                    $this->Session->setFlash('Negeren van export mislukt', 'default', array('class' => 'alert-danger'));
                 }
                 $this->redirect('/Admin/ignoreExports');
             }
@@ -775,7 +775,7 @@ class AdminController extends AppController {
             $this->set('link', 'open');
             if($this->request->query["action"] == 'open'){
                 $this->admin_variable('lockApp', 'write', 'false');
-                $this->Session->setFlash('Je hebt de applicatie gesloten. Gebruikers kunnen nu niet meer aanmelden.');
+                $this->Session->setFlash('Je hebt de applicatie gesloten. Gebruikers kunnen nu niet meer aanmelden.', 'default', array('class' => 'alert-danger'));
                 $this->redirect($this->here);
             }
         }
@@ -819,7 +819,7 @@ class AdminController extends AppController {
                     $this->Session->setFlash('De dienst ' . $savedDepartment["Department"]["name"] . ' is succesvol opgeslagen.');
                     $this->redirect($this->here);
                 } else {
-                    $this->Session->setFlash('Er liep iets mis bij het opslaan van een nieuwe dienst.');
+                    $this->Session->setFlash('Er liep iets mis bij het opslaan van een nieuwe dienst.', 'default', array('class' => 'alert-danger'));
                     $this->redirect($this->here);
                 }
             }
@@ -836,11 +836,11 @@ class AdminController extends AppController {
                                 $this->Session->setFlash('De dienst ' . $department["EmployeeDepartment"]["name"] . ' is succesvol verwijderd.');
                                 $this->redirect($this->here);
                             } else {
-                                $this->Session->setFlash('Er liep iets mis bij het verwijderen een dienst.');
+                                $this->Session->setFlash('Er liep iets mis bij het verwijderen een dienst.', 'default', array('class' => 'alert-danger'));
                                 $this->redirect($this->here);
                             }
                         } else {
-                            $this->Session->setFlash("Dit departement bestaat niet.");
+                            $this->Session->setFlash("Dit departement bestaat niet.", 'default', array('class' => 'alert-danger'));
                             $this->redirect($this->here);
                         }
                     }
@@ -856,7 +856,7 @@ class AdminController extends AppController {
             if($this->CalendarItemType->save($calendarType)){
                 $this->redirect($this->here);
             } else {
-                $this->Session->setFlash("Het opslaan is mislukt");
+                $this->Session->setFlash("Het opslaan is mislukt", 'default', array('class' => 'alert-danger'));
                 $this->redirect($this->here);
             }
         }
@@ -874,7 +874,7 @@ class AdminController extends AppController {
                     }
                 }
             } else{
-                $this->Session->setFlash("Het opslaan is mislukt");
+                $this->Session->setFlash("Het opslaan is mislukt", 'default', array('class' => 'alert-danger'));
             }
             $this->redirect($this->here);
         }
@@ -911,14 +911,14 @@ class AdminController extends AppController {
                 if($this->CalendarDay->saveMany($vcd)){
 
                 } else {
-                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
+                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.', 'default', array('class' => 'alert-danger'));
                 }
             }
             if(!empty($ncd)){
                 if($this->CalendarDay->saveMany($ncd)){
 
                 } else {
-                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.');
+                    $this->Session->setFlash('Het opslaan van de kalender is mislukt.', 'default', array('class' => 'alert-danger'));
                 }
             }
 
@@ -948,7 +948,7 @@ class AdminController extends AppController {
                             'order' => 'day_date ASC'
                         ));
                     } else {
-                        $this->Session->setFlash('Ongeldige gebruiker geselecteerd.');
+                        $this->Session->setFlash('Ongeldige gebruiker geselecteerd.', 'default', array('class' => 'alert-danger'));
                         $this->redirect('/Admin');
                     }
 
@@ -1013,7 +1013,7 @@ class AdminController extends AppController {
                 if($this->Employee->saveMany($employees)){
                     $this->Session->setFlash('Verantwoordelijke succesvol gewijzigd.');
                 } else {
-                    $this->Session->setFlash('Opslaan mislukt.');
+                    $this->Session->setFlash('Opslaan mislukt.', 'default', array('class' => 'alert-danger'));
                 }
 
                 $this->redirect($this->here);
