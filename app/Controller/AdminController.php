@@ -99,7 +99,7 @@ class AdminController extends AppController {
             )
         )));
         $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1')));
-        $authorizer = $this->Session->read('Auth.Employee.id');
+        $authorizer = $this->Employee->findById($this->Session->read('Auth.Employee.id'));
 
         if($this->request->is('post')){
             $request = $this->request->data;
@@ -123,7 +123,7 @@ class AdminController extends AppController {
                     $this->redirect($this->here);
                 }
             $this->AuthItem->create();
-            $authItem = array('request_id' => $savedRequest["Request"]["id"], 'supervisor_id' => $authorizer, 'authorization_date' => date('Y-m-d H:i:s'), 'message' => "Holiday at request " . $savedRequest["Request"]["id"]);
+            $authItem = array('request_id' => $savedRequest["Request"]["id"], 'supervisor_id' => $authorizer["Employee"]["internal_id"], 'authorization_date' => date('Y-m-d H:i:s'), 'message' => "Holiday at request " . $savedRequest["Request"]["id"]);
             $authItem = $this->AuthItem->save($authItem);
             $savedRequest["Request"]["auth_item_id"] = $authItem["AuthItem"]["id"];
             $savedRequest = $this->Request->save($savedRequest);
@@ -561,14 +561,20 @@ class AdminController extends AppController {
                     $niceMonth = '0' . $month;
                 }
             }
-            $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
+
             $range["end"] = $this->lastDay($month);
             $range["templateStart"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
 
             if(!isset($this->request->query["type"])){
                 if(isset($this->request->query["limit"])){
                     $limit = $this->request->query["limit"];
-                    date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-' . $limit ));
+                    if($limit < 10){
+                        $limit = '0' . $limit;
+                    }
+                   $range["start"] =  date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-' . $limit ));
+                   $range["templateStart"] = $range["start"];
+                } else {
+                    $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
                 }
             }
 
