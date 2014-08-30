@@ -14,7 +14,7 @@
         <?php echo $this->Form->input('telephone', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Intern telefoonnummer'));?>
         <?php echo $this->Form->input('supervisor_id', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Verantwoordelijke', 'options' => $this->Employee->selectorAllEmployees($employees, 'array', 1)));?>
         <hr />
-        <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), )));?>
+        <?php echo $this->Form->input('role_id', array('label' => false, 'placeholder' => 'Rol', 'class' => 'form-control spaced', 'options' => array(array("name" => "Standaardgebruiker", "value" => 3), array("name" => "HR", "value" => 2), array("name" => "Administrator", "value" => 1))));?>
         <?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal halve verlofdagen'));?>
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer'));?>
         <hr />
