@@ -763,12 +763,16 @@ class AdminController extends AppController {
             $this->set('link', 'open');
             if($this->request->query["action"] == 'open'){
                 $this->admin_variable('lockApp', 'write', 'false');
+                $this->Session->setFlash('Je hebt de applicatie gesloten. Gebruikers kunnen nu niet meer aanmelden.');
+                $this->redirect($this->here);
             }
         }
         else{
             $this->set('link', 'close');
             if($this->request->query["action"] == 'close'){
                 $this->admin_variable('lockApp', 'write', 'true');
+                $this->Session->setFlash('De applicatie is terug klaar voor gebruik.');
+                $this->redirect($this->here);
             }
         }
 
