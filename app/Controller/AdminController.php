@@ -561,6 +561,7 @@ class AdminController extends AppController {
                     $niceMonth = '0' . $month;
                 }
             }
+            $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
             $range["end"] = $this->lastDay($month);
             $range["templateStart"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
 
@@ -568,8 +569,6 @@ class AdminController extends AppController {
                 if(isset($this->request->query["limit"])){
                     $limit = $this->request->query["limit"];
                     date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-' . $limit ));
-                } else {
-                    $range["start"] = date('Y-m-d', strtotime(date('Y') . '-' . $niceMonth . '-01' ));
                 }
             }
 
@@ -881,7 +880,11 @@ class AdminController extends AppController {
         $this->set('cit', $this->CalendarItemType->find('all'));
         if($this->request->is('post')){
             $icd = $this->request->data["items"]; // Incoming Calendar Days
-            $employee = $this->Employee->findById($this->request->data["Crud"]["employee_id"]);
+
+            var_dump($icd);
+
+
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $this->request->data["Crud"]["employee_id"])));
 
             foreach($icd as $date => $cd){
                 foreach($cd as $hour => $type){
