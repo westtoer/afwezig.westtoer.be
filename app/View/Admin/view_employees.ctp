@@ -25,6 +25,16 @@
     </div>
     <div class="col-md-9">
         <h2 class="first">Medewerkers</h2>
+        <div class="well flat">
+            <div class="row">
+                <div class="col-md-8">
+                    Nieuwe werknemers toevoegen kan je doen met het formulier in het administratiepaneel. Gebruikers kunnen zelf geen werknemers toevoegen.
+                </div>
+                <div class="col-md-4">
+                    <a href="<?php echo $this->base;?>/Admin/registerEmployee" class="btn btn-success fullwidth">Nieuwe werknemer toevoegen</a>
+                </div>
+            </div>
+        </div>
         <?php echo $this->Employee->tableEmployees($employees, "filtertable");?></div>
 </div>
 <script language="javascript" type="text/javascript">

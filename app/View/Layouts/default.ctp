@@ -36,9 +36,14 @@
 <div class="container">
     <?php
     if($this->Session->check('Message.flash')):?>
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <?php if(null !== $this->Session->read('Message.flash.params.class')){
+            $alertType = $this->Session->read('Message.flash.params.class');
+        } else {
+            $alertType = 'alert-info';
+        };?>
+    <div class="alert <?php echo $alertType;?> alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Session->flash(); ?>
     </div>
 
 

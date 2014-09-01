@@ -14,6 +14,7 @@ class CalendarItemTypeHelper extends AppHelper{
 
         //Fill with all CalendarItemTypes
         if($datatype == 'mixed'){
+            $CITOptions[] = array('id' => '9', 'html' =>'<option value="9">Gewerkt</option>');
             foreach($calendaritemtypes as $calendaritemtype){
                 if($calendaritemtype["CalendarItemType"]["id"] != 9){
                     $CITOptions[] = array('id' => $calendaritemtype["CalendarItemType"]["id"], 'html' =>'<option value="' .$calendaritemtype["CalendarItemType"]["id"] . '">' . $calendaritemtype["CalendarItemType"]["name"] . '</option>');

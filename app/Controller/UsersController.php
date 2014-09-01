@@ -10,6 +10,7 @@ class UsersController extends AppController {
         $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin', 'locked');
     }
 
+
     public function login() {
             $this->layout = 'login';
             if(isset($this->request->query['router'])){
@@ -40,6 +41,7 @@ class UsersController extends AppController {
 
     public function index() {
         $this->set('users', $this->User->find('all'));
+        $this->redirect('/');
     }
 
     public function view($id = null) {
@@ -85,81 +87,17 @@ class UsersController extends AppController {
     }
 
     public function delete($id = null) {
-        $this->request->onlyAllow('post');
-
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
-            return $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('User was not deleted'));
-        return $this->redirect(array('action' => 'index'));
-    }
-
-    public function uitid() {
-        if(isset($this->request->query['router'])){
-            $this->Session->write('router', $this->request->query['router']);
-        }
-
-        $client = $this->createClient();
-        $requestToken = $client->getRequestToken(Configure::read('UiTID.server') . '/requestToken', 'http://' . $_SERVER["HTTP_HOST"] . $this->base .'/users/callback');
-        if (!empty($requestToken)) {
-            $this->Session->write('uitid_request_token', $requestToken);
-            $this->redirect(Configure::read('UiTID.server') . '/auth/authorize?oauth_token=' . $requestToken->key);
-        } else {
-
-        }
-    }
-
-    public function callback() {
-        $requestToken = $this->Session->read('uitid_request_token');
-        $client = $this->createClient();
-        $accessToken = $client->getAccessToken(Configure::read('UiTID.server') .'/accessToken', $requestToken);
-        if ($accessToken) {
-            $user = $this->User->find('first', array('conditions' => array('User.uitid' => $accessToken->userId)));
-            if(!empty($user)){
-                if($user["User"]["status"] == 'active'){
-                    $employee = $this->Employee->find('first',
-                        array('conditions' => array('Employee.id' => $user["User"]["employee_id"]),
-                            'fields' => array('Employee.id', 'Employee.status', 'Employee.internal_id', 'Employee.employee_department_id', 'Employee.Name', 'Employee.surname', 'Role.id', 'Role.name', 'Role.adminpanel', 'Role.allow', 'Role.verifyuser', 'Role.edituser', 'Role.removeuser', 'Role.editcalendaritem')
-                        ));
-                    if(!empty($employee)){
-                        if($employee["Employee"]["status"] == true){
-                            $this->Auth->login($user['User']['id']);
-                            $this->Session->write('Auth', $employee);
-                            $this->Session->write('Auth.User', $user);
-
-                            if($this->Session->read('router') == null){
-                                $this->redirect('/');
-
-                            } else {
-                                $this->redirect($this->Session->read('router'));
-                            }
-                        } else {
-                            $this->redirect(array('action' => 'deactivatedEmployee'));
-                        }
-                    }
-
-                } else {
-                    if($user["User"]["status"] == 'deactivated'){
-                        $this->redirect(array('action' => 'deactivatedUser'));
-                    }
-                    $this->redirect(array('action' => 'error'));
-                }
-            } else {
-                $result = $client->request($accessToken->key, $accessToken->secret, $accessToken->userId, array('method' => 'GET', 'uri' =>  Configure::read('UiTID.server')  .'/user/' . $accessToken->userId . '?private=true'));
-                $resultToArray = simplexml_load_string($result["body"]);
-                $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
-                //$result = $client->processResult($resultToArray);
-                if($this->Employee->find('count') > 1){
-                    $this->redirect(array("controller" => "Employees", "action" => "associate", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
-                } else {
-                    $this->redirect(array("controller" => "Employees", "action" => "claimAdmin", 'uitid' => base64_encode($accessToken->userId), 'email' => base64_encode($resultToArray["person"]["foaf:mbox"])));
-                }
+        if($this->Session->read('Auth.Role.adminpanel') == true){
+            $this->User->id = $id;
+            if (!$this->User->exists()) {
+                throw new NotFoundException(__('Invalid user'));
             }
+            if ($this->User->delete()) {
+                $this->Session->setFlash(__('User deleted'));
+                return $this->redirect('/Admin');
+            }
+            $this->Session->setFlash(__('User was not deleted'));
+            return $this->redirect('/Admin');
         }
     }
 
@@ -175,12 +113,6 @@ class UsersController extends AppController {
         $this->layout = 'login';
     }
 
-
-    private function createClient() {
-        var_dump(Configure::read('UiTID.private'));
-        return new OAuthClient(Configure::read('UiTID.public'), Configure::read('UiTID.private'));
-    }
-
     public function associate(){
         if($this->request->is('post')){
             $this->User->create();
@@ -191,7 +123,7 @@ class UsersController extends AppController {
                 $newAssociation["User"]["status"] = "requested";
                 $existingUser = $this->User->find('first', array('conditions' => array('email' => $newAssociation["User"]["email"])));
                 if(!empty($existingUser)){
-                    $this->Session->setFlash('Iemand heeft zich al met dit email adres aangemeld');
+                    $this->Session->setFlash('Iemand heeft zich al met dit email adres aangemeld', 'default', array('class' => 'alert-danger'));
                     $this->redirect(array('action' => 'error','error' => 1));
                 } else {
                     $this->User->save($newAssociation);
@@ -236,11 +168,11 @@ class UsersController extends AppController {
                                 }
                             }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.','default', array('class' => 'alert-warning'));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             }
@@ -268,11 +200,11 @@ class UsersController extends AppController {
                             $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                         }
                     } else {
-                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.');
+                        $this->Session->setFlash('Deze gebruiker is al goedgekeurd.', 'default', array('class' => 'alert-warning'));
                         $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                     }
                 } else {
-                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.');
+                    $this->Session->setFlash('Je hebt geen rechten om mensen toe te laten in het systeem.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             }

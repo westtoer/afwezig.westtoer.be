@@ -65,23 +65,23 @@ class RequestsController extends AppController {
                                 $this->set('overlap', $oo);
                             }
                         } else {
-                            $this->Session->setFlash('Deze request is al voorbij');
+                            $this->Session->setFlash('Deze request is al voorbij', 'default', array('class' => 'alert-danger'));
                             $this->redirect('/');
                         }
                     } else {
-                        $this->Session->setFlash('Er is een fout in de database. Er is geen timestamp bij de authorisatie van dit verlof. <br /> RequestId:' . $query["Request"]["id"] .', AuthId:' . $query["AuthItem"]["id"]);
+                        $this->Session->setFlash('Er is een fout in de database. Er is geen timestamp bij de authorisatie van dit verlof. <br /> RequestId:' . $query["Request"]["id"] .', AuthId:' . $query["AuthItem"]["id"], 'default', array('class' => 'alert-danger'));
                         $this->redirect('/');
                     }
                 } else {
-                    $this->Session->setFlash('Deze request is al goedgekeurd.');
+                    $this->Session->setFlash('Deze request is al goedgekeurd.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
                 }
             } else {
-                $this->Session->setFlash('U hebt geen rechten om deze pagina te bekijken');
+                $this->Session->setFlash('U hebt geen rechten om deze pagina te bekijken', 'default', array('class' => 'alert-danger'));
                 $this->redirect('/');
             }
         } else {
-            $this->Session->setFlash('Dit is geen geldig request');
+            $this->Session->setFlash('Dit is geen geldig request', 'default', array('class' => 'alert-danger'));
             $this->redirect('/');
         }
     }
@@ -95,7 +95,7 @@ class RequestsController extends AppController {
                 $this->redirect('/Request');
             }
         } else {
-            $this->Session->setFlash('Dit is een ongeldig request.');
+            $this->Session->setFlash('Dit is een ongeldig request.', 'default', array('class' => 'alert-danger'));
             $this->redirect('/Request');
         }
     }
@@ -109,7 +109,7 @@ class RequestsController extends AppController {
                 $this->redirect('/Requests');
             }
         } else {
-            $this->Session->setFlash('Dit is een ongeldig request.');
+            $this->Session->setFlash('Dit is een ongeldig request.', 'default', array('class' => 'alert-danger'));
             $this->redirect('/Requests');
         }
     }
@@ -279,14 +279,14 @@ class RequestsController extends AppController {
                                 }
                             }
                         } else {
-                            $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.');
+                            $this->Session->setFlash('Aanvraag kon niet worden opgeslagen.', 'default', array('class' => 'alert-danger'));
                         }
                     }
 
                     return $cr;
                 }
             } else {
-                $this->Session->setFlash($validation);
+                $this->Session->setFlash($validation, 'default', array('class' => 'alert-danger'));
                 $this->redirect($this->here);
             }
         } else {
@@ -304,7 +304,7 @@ class RequestsController extends AppController {
 
             $genericBody = 'Je aanvraag voor ' . $request["CalendarItemType"]["name"] . ' vanaf '
                 . $request["Request"]["start_date"] . '-' . $request["Request"]["start_time"] .
-                ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"];
+                ' tot ' . $request["Request"]["end_date"] . '-' . $request["Request"]["end_time"] . ' ';
 
             if($author["Role"]["allow"] == true){
                 $access = true;
@@ -316,7 +316,7 @@ class RequestsController extends AppController {
 
                 if($author["Role"]["name"] !== "admin"){
                     if($request["Employee"]["supervisor_id"] !== $author["Employee"]["internal_id"]){
-                        $this->Session->setFlash('Voor deze gebruiker kan je geen verlof goedkeuren.');
+                        $this->Session->setFlash('Voor deze gebruiker kan je geen verlof goedkeuren.', 'default', array('class' => 'alert-danger'));
                     }
                 }
 
@@ -366,7 +366,7 @@ class RequestsController extends AppController {
             if($balance > 0 ){
                 $gateKeeper = true;
             } else {
-                $this->Session->setFlash('Deze gebruiker heeft onvoldoende dagen over om dit goed te keuren.');
+                $this->Session->setFlash('Deze gebruiker heeft onvoldoende dagen over om dit goed te keuren.', 'default', array('class' => 'alert-danger'));
                 return false;
             }
         } else {
