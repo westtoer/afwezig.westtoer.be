@@ -800,7 +800,7 @@ class AdminController extends AppController {
         //Show the monthcount if month is set.
         if(isset($this->request->query['month'])){
             $month = $this->request->query['month'];
-            $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'), 'order' => 'Employee.name ASC'));
+            $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
             $range[0] = $this->firstDay($month);
             $range[1] = $this->lastDay($month);
 
