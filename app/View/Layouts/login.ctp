@@ -7,6 +7,7 @@
     echo $this->Html->css('custom');
     echo $this->Html->css('spec/login');
     ?>
+    <?php echo $this->Html->script('css3-mediaqueries')?>
 </head>
 <body>
 <div class="container zi-top">

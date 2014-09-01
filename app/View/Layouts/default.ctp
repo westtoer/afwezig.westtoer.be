@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="http://intranet.westtoer.be/themes/bootstrap/favicon.ico" type="image/vnd.microsoft.icon">
     <?php echo $this->Html->script('bootstrap');?>
     <?php echo $this->Html->script('tablefilter.js');?>
+    <?php echo $this->Html->script('css3-mediaqueries');?>
 </head>
 <body>
 
