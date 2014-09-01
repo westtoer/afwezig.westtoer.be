@@ -136,7 +136,7 @@ class RequestsController extends AppController {
             $request = $this->addRequest($request);
             if(!empty($request)){
                 $this->Session->setFlash('Je aanvraag is succesvol ingediend');
-                $this->redirect($this->here);
+                $this->redirect($this->here, 302, true);
             }
             $this->redirect('/');
         }
