@@ -286,7 +286,7 @@ tr .date{
 
 .scroll-container{
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 

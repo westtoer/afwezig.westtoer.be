@@ -56,3 +56,9 @@ $(function(){
 $(document).ready(function(){
         $('#RequestCalendarItemTypeId').val(23);
 });
+
+function initiated(){
+    $("#RequestAddForm").submit();
+    $("#RequestSubmitButton").attr('disabled', 'disabled');
+    $("#RequestSubmitButton").html('Bezig met verwerken...');
+}

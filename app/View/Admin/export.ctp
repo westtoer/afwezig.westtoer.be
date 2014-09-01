@@ -7,9 +7,7 @@ if(isset($this->request->query["month"])){
 
         } else {
             if(isset($this->request->query["webview"])){
-                echo '<div class="scrollblock">';
                 echo $this->Admin->webview($data);
-                echo '</div>';
             } else {
                 //1st row for columns name
                 $this->xls->openRow();

@@ -135,6 +135,7 @@ class AdminHelper extends AppHelper {
 
     $html = '';
         foreach($data as $employee => $dateObjects){
+            $html .= '<div class="scroll-container">';
             $html .= '<h3 class="first">' . $employee . '</h3>';
             foreach($dateObjects as $dateObject => $type){
                 $dates[explode('/', $dateObject)[0]][explode('/', $dateObject)[1]] = $type;
@@ -165,6 +166,7 @@ class AdminHelper extends AppHelper {
                 }
             }
             $html .= '</tr></table>';
+            $html .= '</div>';
         }
 
 
