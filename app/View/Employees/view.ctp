@@ -11,7 +11,7 @@
             <ul class="nulled">
                 <li>Dienst: <?php echo $employee["EmployeeDepartment"]["name"];?></li>
                 <li>Telefoon: <?php echo $employee["Employee"]["telephone"];?></li>
-                <li>Telefoon: <?php echo $employee["Employee"]["gsm"];?></li>
+                <li>GSM: <?php echo $employee["Employee"]["gsm"];?></li>
                 <li>Email: <?php if(strpos($employee["Employee"]["3gram"], "@") !== false){echo $employee["Employee"]["3gram"];} else {echo $employee["Employee"]["3gram"] . '@westtoer.be';}?></li>
             </ul>
         </div>
