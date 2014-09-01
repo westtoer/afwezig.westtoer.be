@@ -12,7 +12,7 @@
             <p>Verlofdagen gebruikt</p>
         </div>
         <div class="daysleft">
-            <h2><?php echo $workingDays - ($notDinnerCheque/2);?></h2>
+            <h2><?php echo $dinnerCheques;?></h2>
             <p>Maaltijdcheques verdiend</p>
         </div>
         <a href="<?php $this->base?>/Admin/generateReportEmployee/<?php echo $id;?>.pdf?<?php if(isset($this->request->query["month"])){ echo '&month=' . $this->request->query["month"] ;}?><?php if(isset($this->request->query["type"])){ echo '&type=' . $this->request->query["type"];}?>">Download als Pdf</a>

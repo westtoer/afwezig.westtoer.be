@@ -11,7 +11,7 @@
                 <p>Verlofdagen gebruikt</p>
             </td>
             <td width="33%">
-                <h2><?php echo $workingDays - ($notDinnerCheque/2);?></h2>
+                <h2><?php echo $dinnerCheques;?></h2>
                 <p>Maaltijdcheques verdiend</p>
             </td>
         </tr>
@@ -19,7 +19,7 @@
 <hr />
     <div class="pdf-page">
         <?php echo $x["html"];?>
-        <a href="<?php echo Configure::read('Administrator.base_fallback_url');?>/Admin/generateReportEmployee/<?php echo $id;?><?php if(isset($this->request->query["month"])){ echo '?month=' . $this->request->query["month"];}?>">Bekijk op Afwezig</a>
+        <a href="<?php echo Configure::read('Administrator.base_fallback_url');?>/Admin/generateReportEmployee/<?php echo $id;?><?php if(isset($this->request->query["month"])){ echo '?month=' . $this->request->query["month"];}?>">Bekijk op Afwezig</a>  |  Pdf gemaakt op <?php echo date('Y-m-d');?>
     </div>
 
 

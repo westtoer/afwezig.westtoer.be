@@ -2,9 +2,10 @@
 App::uses('ConnectionManager', 'Model');
 App::uses('CakeEmail', 'Network/Email');
 App::import('Controller', 'Requests');
+
 class AdminController extends AppController {
 
-    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export');
+    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export','EmployeeCount');
     public $helpers = array('Employee', 'Request', 'CalendarDay', 'CalendarItemType', 'Xls');
     public $components = array('RequestHandler');
 
@@ -480,16 +481,16 @@ class AdminController extends AppController {
 
     //Admin section for Reports
     public function generateReportEmployee($id = null){
-        if($id !== null){
+        if($id != null){
 
-            if($id == 0){
-                $this->Session->setFlash("Er was geen geldige gebruiker geselecteerd.", 'default', array('class' => 'alert-danger'));
-                $this->redirect('/admin/viewEmployees');
-            }
-
+            //We don't need all fields for the report, let's strip some out on the Query
             $this->CalendarDay->unBindModel(array('belongsTo' => array('RequestToCalendarDays', 'AuthItem', 'Replacement')));
+
+            //If a month is set, narrow a the range.
             if(isset($this->request->query["month"])){
+
                 $month = $this->request->query["month"];
+
                 if($month < 10){
                     $niceMonth = '0' . $month . '-' .date('Y');
                 } else {
@@ -515,29 +516,35 @@ class AdminController extends AppController {
                 $this->set('range', $range);
                 $niceMonth = date('Y');
             }
+
+            //Find every object needed for the report
+            $employee = $this->Employee->findById($id);
             $this->set('calendarDays', $this->CalendarDay->find('all', array('conditions' => $conditions, 'order' => 'day_date ASC')));
             $mergedConditions = array_merge($conditions, array('calendar_item_type_id' => 23));
             $this->set('offDays', $this->CalendarDay->find('count', array('conditions' => $mergedConditions, 'order' => 'day_date ASC')));
-            $mergedConditions = array_merge($conditions, array('CalendarItemType.dinner_cheque' => 0));
-            $this->set('notDinnerCheque', $this->CalendarDay->find('count', array('conditions' => $mergedConditions)));
-
             $holidayCount = 0;
+
             if(!empty($holidays)){
                 foreach($holidays as $holiday){
                     $holidayCount = $holidayCount + (count($this->dateRange($holiday["Request"]["start_date"], $holiday["Request"]["end_date"], $holiday["Request"]["start_time"], $holiday["Request"]["end_time"]))/2);
                 var_dump($holidayCount);
                 }
             }
+
+            //Calculate how many days employees have worked.
             $workingDays = (count($this->dateRange($range["start"], $range["end"]))/2 - $holidayCount);
             $this->set('workingDays', $workingDays);
-            $employee = $this->Employee->findById($id);
+
+            //Expose the employee to the view
             $this->set('employee', $employee);
             $this->set('id', $id);
+
+            //Allow the pdf to be created.
             $this->pdfConfig = array(
                 'orientation' => 'portrait',
                 'filename' => 'Werkstaat_' . $employee["Employee"]["name"] . '_' . $employee["Employee"]["surname"] . '_' . $niceMonth
         );
-
+            $this->set('dinnerCheques', $this->calculateDinnerCheques($employee, $range["start"], $this->lastDay(date('m'))));
         } else {
             $this->Session->setFlash('Er was geen geldige Employee Id opgegeven om een rapport over op te kunnen stellen', 'default', array('class' => 'alert-danger'));
             $this->redirect(array('controller' => 'admin', 'action' => 'index'));
@@ -549,8 +556,6 @@ class AdminController extends AppController {
         foreach($this->CalendarItemType->find('all') as $calendarType){
             $calendarTypes[$calendarType["CalendarItemType"]["code"]] = $calendarType;
         }
-
-
 
         //Define month
         if(isset($this->request->query["month"])){
@@ -791,14 +796,66 @@ class AdminController extends AppController {
     }
 
     public function dinnerCheques(){
+
+        //Show the monthcount if month is set.
         if(isset($this->request->query['month'])){
             $month = $this->request->query['month'];
             $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'), 'order' => 'Employee.name ASC'));
-            $range = $this->lastDay($month);
+            $range[0] = $this->firstDay($month);
+            $range[1] = $this->lastDay($month);
+
+            //Calculate how many dinner cheques an employee gets this month
             foreach($employees as $employee){
-                $eo[] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1])));
+                $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1])));
             }
+
+            //Expose it to the view
             $this->set('employees', $eo);
+
+            //Check if we can show the Persist in Database button
+            $lastPersist = $this->admin_variable('lastPersist', 'find');
+            $showPersist = true;
+
+            if(date('Y-m', strtotime($lastPersist)) > date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
+                $showPersist = false;
+            }
+
+            //Tell the view
+            $this->set('showPersist', $showPersist);
+
+            //The user initatiated a persist in the database.
+            if(isset($this->request->query["persist"])){
+                if($this->request->query["persist"] == true){
+
+                    //Check if this month is the correct month to persist
+                    if($month > date('m')){
+                        $this->Session->setFlash('Je kan geen data persisteren voor maanden die nog moeten komen');
+                        $this->redirect($this->here);
+                    }
+
+                    //Change the count for every user
+                    //Every user has a count, because if calculateDinnerCheques doesn't find a record, it creates one.
+                    foreach($employees as $employee){
+                        $counter = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' =>$employee["Employee"]["id"])));
+                        $counter["EmployeeCount"]["dinner_cheques"] = $counter["EmployeeCount"]["dinner_cheques"] + $eo[$employee["Employee"]["id"]]["Employee"]["dinner_cheques"];
+                        $counters[] = $counter;
+                    }
+
+                    //Save all counters
+                    if($this->EmployeeCount->saveMany($counters)){
+
+                        //Let the system know there a new lastPersist in town
+                        $this->admin_variable('lastPersist','write', date('Y-m'));
+
+                        //Notify and redirect
+                        $this->Session->setFlash('Data opgeslagen in de database');
+                    } else {
+                        $this->Session->setFlash('Opslaan mislukt');
+                    }
+
+                    $this->redirect($this->here);
+                }
+            }
         }
 
 
@@ -1142,31 +1199,72 @@ class AdminController extends AppController {
 
     }
 
-    private function calculateDinnerCheques($employee, $start, $end){
-        $offDays = array();
-        $workDays = count($this->dateRange($start, $end))/2;
-        $result = (int)$workDays;
-        $substract = $this->CalendarDay->find('all', array('conditions' =>
-            array(
-                'CalendarItemType.dinner_cheque' => 0,
-                'Employee.id' => $employee["Employee"]["id"],
-                'CalendarDay.day_date >=' => date('Y-m-d', strtotime($start)),
-                'CalendarDay.day_date <=' => date('Y-m-d', strtotime($end))
-            )
-            )
-        );
-
-
-
-        foreach($substract as $date){
-            $offDays[$date["CalendarDay"]["day_date"]][$date["CalendarDay"]["day_time"]] = true;
+    private function calculateDinnerCheques($employee, $start, $end, $year = null){
+        if($year == null){
+            $year = date('Y');
         }
-        foreach($offDays as $offDay){
-            if(count($offDay) == 2){
-                $result--;
+
+        //Lookup the employee's stats
+        $employeeCount = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' => $employee["Employee"]["id"], 'year' => date('Y'))));
+
+        //If no stats a present, create a new record
+        if(empty($employeeCount)){
+            $this->EmployeeCount->create();
+            $employeeCount = array('EmployeeCount' => array('employee_id' => $employee["Employee"]["id"], 'year' => date('Y'), 'dinner_cheques' => 0));
+            $employeeCount = $this->EmployeeCount->save($employeeCount);
+        }
+
+        //Find the datespan of this month
+        $datesMonth = $this->dateRange($start, $end);
+        foreach($datesMonth as $key => $date){
+            if(date('D', strtotime(explode('/', $date)[0])) == 'Sat' or date('D', strtotime(explode('/', $date)[0])) == 'Sun'){
+                unset($datesMonth[$key]);
             }
         }
-        return $result;
+
+        //Find out how many Dinner Cheques should be given this month
+        $substr = $this->CalendarDay->find('count', array('conditions' => array('day_date >=' => $start, 'day_date <=' => $end, 'CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarItemType.dinner_cheque' => 0)));
+        $template = count($datesMonth) / 2;
+        $add = $template - $substr;
+
+        unset($substr, $template);
+
+        //Find the datespan of this month
+        $datesYear= $this->dateRange($year . '-01-01', $end);
+        foreach($datesYear as $key => $date){
+            if(date('D', strtotime(explode('/', $date)[0])) == 'Sat' or date('D', strtotime(explode('/', $date)[0])) == 'Sun'){
+                unset($datesYear[$key]);
+            }
+        }
+
+        //Find out how many Dinner Cheques an employee should have
+        $substr = $this->CalendarDay->find('all', array('conditions' => array('day_date >=' => $year . '01-01', 'day_date <=' => $year . '-12-31', 'CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarItemType.dinner_cheque' => 0)));
+        foreach($substr as $calendarDay){
+            $valid[$calendarDay["CalendarDay"]["day_date"]][] = $calendarDay;
+        }
+
+        $substr = 0;
+
+        if(!empty($valid)){
+            foreach($valid as $day){
+                if(count($day) > 1){
+                    $substr++;
+                }
+            }
+        }
+
+        $template = count($datesYear) / 2;
+        $should = $template - $substr;
+
+        //Check if the persisted data is equal to what it should be
+        $penalty = 0;
+        if($should  < $employeeCount["EmployeeCount"]["dinner_cheques"]){
+            $penalty = $employeeCount["EmployeeCount"]["dinner_cheques"] - $should;
+        }
+
+        $add = $add - $penalty;
+
+        return $add;
     }
 
     private function dateRange( $first, $last, $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = false){
@@ -1228,6 +1326,11 @@ class AdminController extends AppController {
             }
         }
         return $datestime;
+    }
+
+    private function firstDay($month){
+        $range = date('Y-m-d', strtotime(date('Y') .'-' . $month .'-01'));
+        return $range;
     }
 
     private function lastDay($month){
