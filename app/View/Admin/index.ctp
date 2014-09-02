@@ -45,7 +45,7 @@
             <div class="col-md-6">
                 <ul class="nulled">
                     <li><a href="<?php echo $this->base;?>/Admin/GeneralCalendarItems">Algemene feestdagen</a></li>
-                    <li><a href="<?php echo $this->base;?>/Admin/endOfYear">Einde van het jaar</a></li>
+                    <li><a href="<?php echo $this->base;?>/Admin/endOfYear">Afsluiten van het jaar</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/lockApp">Applicatie openen/sluiten</a></li>
                     <li><a href="<?php echo $this->base;?>/Admin/editCalendarTypes">Dagcodes wijzigen</a></li>
                 </ul>
