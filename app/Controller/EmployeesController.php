@@ -128,7 +128,7 @@ class EmployeesController extends AppController {
                 $data = $this->Csv->import($this->request->data["Employee"]["CsvFile"]["tmp_name"]);
                 $this->Employee->create();
                 foreach($data as $key => $datarecord){
-                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["name"], 'Employee.surname' => $datarecord["surname"], 'Employee.internal_id' => $datarecord["internal_id"])));
+                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["Employee"]["name"], 'Employee.surname' => $datarecord["Employee"]["surname"], 'Employee.internal_id' => $datarecord["Employee"]["internal_id"])));
                     if(!empty($employee)){
                         unset($data[$key]);
                     } else {
