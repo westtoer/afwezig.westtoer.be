@@ -113,6 +113,7 @@ class EmployeesController extends AppController {
                 $employee["Employee"]["note"] = $employeeRequested["Employee"]["note"];
                 $employee["Employee"]["telephone"] = $employeeRequested["Employee"]["telephone"];
                 $employee["Employee"]["gsm"] = $employeeRequested["Employee"]["gsm"];
+                $employee["Employee"]["employee_department_id"] = $employeeRequested["Employee"]["employee_department_id"];
                 $this->Employee->save($employee);
                 $this->Session->setFlash('Je hebt je gegevens aangepast.');
                 $this->redirect(array('controller' => 'users', 'action' => 'management'));
