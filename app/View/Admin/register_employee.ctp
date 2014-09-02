@@ -20,8 +20,9 @@
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer'));?>
         <hr />
         <?php echo $this->Form->input('indexed_on_schaubroeck', array('options' => array(array('value' => 1, 'name' => 'Wordt verstuurd naar Schaubroeck'), array('value' => 0, 'name' => 'Wordt niet verstuurd naar Schaubroeck')), 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
+        <?php echo $this->Form->input('dinner_cheques', array('options' => array(array('value' => 1, 'name' => 'Recht op maaltijdcheques'), array('value' => 0, 'name' => 'Geen recht op maaltijdcheques')), 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Recht op maaltijdcheques?'));?>
         <?php echo $this->Form->input('status', array('label' => false, 'class' => 'form-control', 'options' => array(array('value' => 1, 'name' => 'Actief'), array('value' => 0, 'name' => 'Niet actief'))));?>
-        <?php echo $this->Form->submit('Aanmaken', array('class' => 'btn btn-primary fullwidth'));?>
+        <?php echo $this->Form->submit('Aanmaken', array('class' => 'btn btn-primary fullwidth spaced'));?>
         <?php echo $this->Form->end();?>
 
     </div>

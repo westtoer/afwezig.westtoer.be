@@ -14,6 +14,12 @@
             } else {
                 $options["status"] = array(array('value' => 1, 'name' => 'Actief'), array('value' => 0, 'name' => 'Niet actief'));
             }
+
+        if($employee["Employee"]["dinner_cheques"] == 0){
+            $options["status"] = array(array('value' => 0, 'name' => 'Geen recht op maaltijdcheques'), array('value' => 1, 'name' => 'Recht op maaltijdcheques'));
+        } else {
+            $options["status"] = array(array('value' => 1, 'name' => 'Recht op maaltijdcheques'), array('value' => 0, 'name' => 'Geen recht op maaltijdcheques'));
+        }
         ?>
 
 
@@ -35,6 +41,7 @@
         <div class="row"><div class="col-md-8"><h4>Aantal halve dagen verbruikt: <?php echo $prevCost;?>(<?php echo $employee["Employee"]["daysleft"];?> - <?php echo $prevCost;?> = <?php echo $employee["Employee"]["daysleft"] - $prevCost;?> <small>resterend</small>)</h4></div><div class="col-md-4"><?php echo $this->Form->input('daysleft', array('label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Aantal halve verlofdagen per jaar ', 'value' => $employee["Employee"]["daysleft"]));?></div></div>
         <?php echo $this->Form->input('internal_id', array('type' => 'text', 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Personeelsnummer', 'value' => $employee["Employee"]["internal_id"]));?>
         <hr />
+        <?php echo $this->Form->input('dinner_cheques', array('options' => $options["indexed_on_schaubroeck"], 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
         <?php echo $this->Form->input('indexed_on_schaubroeck', array('options' => $options["indexed_on_schaubroeck"], 'label' => false, 'class' => 'form-control spaced', 'placeholder' => 'Versturen naar Schaubroeck?'));?>
         <?php echo $this->Form->input('status', array('label' => false, 'class' => 'form-control', 'options' => $options["status"]));?>
         <?php echo $this->Form->submit('Opslaan', array('class' => 'btn btn-primary fullwidth spaced'));?>
