@@ -845,7 +845,9 @@ class AdminController extends AppController {
 
                     //Save all counters
                     if($this->EmployeeCount->saveMany($counters)){
-
+                        $exportCsv = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
+                        $file = new File($exportCsv, true);
+                        $file->write($counters);
                         //Let the system know there a new lastPersist in town
                         $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
 
