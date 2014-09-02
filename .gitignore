@@ -1,6 +1,7 @@
 # User specific & automatically generated files #
 #################################################
 /app/Config/database.php
+/app/Config/Administrator.php
 /app/Config/UiTID.php
 /app/tmp
 /app/Plugin/Uitid/Config
