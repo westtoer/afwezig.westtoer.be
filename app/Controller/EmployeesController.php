@@ -8,7 +8,7 @@ class EmployeesController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('associate', 'confirmEmail');
+        $this->Auth->allow('associate', 'confirmEmail', 'claimAdmin');
         $this->set('title_for_layout', 'Westtoer Afwezig - Werknemers');
     }
 
@@ -91,6 +91,10 @@ class EmployeesController extends AppController {
     }
 
     public function calendar(){
+
+    }
+
+    public function claimAdmin(){
 
     }
 

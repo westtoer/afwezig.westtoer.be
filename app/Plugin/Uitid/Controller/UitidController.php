@@ -70,10 +70,11 @@ class UitidController extends UitidAppController{
                     $resultToArray = simplexml_load_string($result["body"]);
                     $resultToArray = json_decode(json_encode($this->xmlToArray($resultToArray)), 1);
                     //$result = $client->processResult($resultToArray);
+                    var_dump('http://' . $_SERVER["HTTP_HOST"] . $this->base . '/Employees/associate/uitid:' . base64_encode($accessToken->userId) . '/email:' . base64_encode($resultToArray["person"]["foaf:mbox"]));
                     if($this->Employee->find('count') > 1){
-                        $this->redirect($this->base . '/Employees/associate/uitid:' . base64_encode($accessToken->userId) . '/email:' . base64_encode($resultToArray["person"]["foaf:mbox"]));
+                       $this->redirect('http://' . $_SERVER["HTTP_HOST"] . $this->base . '/Employees/associate/uitid:' . base64_encode($accessToken->userId) . '/email:' . base64_encode($resultToArray["person"]["foaf:mbox"]));
                     } else {
-                        $this->redirect($this->base . '/Employees/claimAdmin/uitid:' . base64_encode($accessToken->userId) . '/email:' . base64_encode($resultToArray["person"]["foaf:mbox"]));
+                       $this->redirect('http://' . $_SERVER["HTTP_HOST"] . $this->base . '/Employees/claimAdmin/uitid:' . base64_encode($accessToken->userId) . '/email:' . base64_encode($resultToArray["person"]["foaf:mbox"]));
                     }
                 }
             }

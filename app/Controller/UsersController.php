@@ -7,7 +7,7 @@ class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         // Allow users to register and logout.
-        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin', 'locked');
+        $this->Auth->allow('login', 'logout', 'uitid', 'callback', 'error', 'associate', 'requestHandled', 'emergencyLogin', 'locked', 'claimAdmin');
     }
 
 
@@ -244,20 +244,23 @@ class UsersController extends AppController {
     }
 
     public function claimAdmin(){
-        if($this->Employee->find('count') > 1){
-            if($this->User->find('count') > 0){
+        if($this->Employee->find('count') <= 1){
+            if($this->User->find('count') == 0){
                 if($this->request->is('post')){
-
                     $this->Employee->create();
                     $incomingData = $this->request->data;
-                    $employeeTemplate = array('Employee' => array('role_id' => 1, 'telephone' => '0000', 'note' => '', 'daysleft' => 4, 'status' => '1', 'supervisor_id' => '-1', 'gsm' => '0'));
-                    $employee = array_merge($incomingData, $employeeTemplate);
+                    $employeeTemplate = array('Employee' => array('role_id' => 1, 'telephone' => '0000', 'note' => '', 'daysleft' => 4, 'status' => '1', 'supervisor_id' => '-1', 'gsm' => '0', 'indexed_on_schaubroeck' => true));
+                    $employee = array_merge_recursive($incomingData, $employeeTemplate);
                     $employee = $this->Employee->save($employee);
 
                     $this->User->create();
-                    $userTemplate = array('User' => array('employee_id' => $employee["Employee"]["id"], 'email' => base64_decode($this->request->query['email'])), 'uitid' => base64_decode($this->request->query['uitid']), 'status' => 'active');
-                    $this->User->save($userTemplate);
-
+                    $userTemplate = array('User' => array('employee_id' => $employee["Employee"]["id"], 'email' => base64_decode($incomingData["User"]["email"]), 'uitid' => base64_decode($incomingData["User"]["uitid"]), 'status' => 'active'));
+                    if($this->User->save($userTemplate)){
+                        $this->Session->setFlash('Uw installatie is afgerond. Log in om het systeem te beginnen gebruiken.');
+                    } else {
+                        $this->Employee->delete($employee);
+                        $this->Session->setFlash('De installatie is mislukt. Probeer het opnieuw');
+                    }
                     $this->redirect(array('controller' => 'users', 'action' => 'login'));
 
                 } else {
