@@ -104,7 +104,6 @@ class EmployeesController extends AppController {
             var_dump($employeeRequested);
             if($this->Session->read('Auth.Employee.id') !== $employeeRequested["Employee"]["id"]){
                 if($this->Session->read('Auth.Role.adminpanel') !== true){
-
                 } else {
                     $this->Session->setFlash('Je mag een andere gebruiker niet aanpassen.', 'default', array('class' => 'alert-danger'));
                     $this->redirect('/');
@@ -127,7 +126,7 @@ class EmployeesController extends AppController {
                 $data = $this->Csv->import($this->request->data["Employee"]["CsvFile"]["tmp_name"]);
                 $this->Employee->create();
                 foreach($data as $key => $datarecord){
-                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["Employee"]["name"], 'Employee.surname' => $datarecord["Employee"]["surname"], 'Employee.internal_id' => $datarecord["Employee"]["internal_id"])));
+                    $employee = $this->Employee->find('all', array('conditions' => array('Employee.name' => $datarecord["name"], 'Employee.surname' => $datarecord["surname"], 'Employee.internal_id' => $datarecord["internal_id"])));
                     if(!empty($employee)){
                         unset($data[$key]);
                     } else {
