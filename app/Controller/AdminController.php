@@ -181,7 +181,9 @@ class AdminController extends AppController {
                 } elseif($step == '3'){
                     $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1'))));
                     if($this->request->is('post')){
-                        $this->updateDaysLeft($this->request->data);
+                        if(!empty($this->request->data)){
+                            $this->updateDaysLeft($this->request->data);
+                        }
                         $this->redirect('/admin/endOfYear?step=4');
                     }
                 } elseif($step == '5'){
@@ -799,70 +801,82 @@ class AdminController extends AppController {
 
     public function dinnerCheques(){
 
+        $month = date('m');
+        if($month <= 10){
+            $month = substr($month, 1,1);
+        }
+        $this->set('month', $month);
+
         //Show the monthcount if month is set.
         if(isset($this->request->query['month'])){
             $month = $this->request->query['month'];
-            $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
-            $range[0] = $this->firstDay($month);
-            $range[1] = $this->lastDay($month);
+        }
 
-            //Check if we can show the Persist in Database button
-            $lastPersist = $this->admin_variable('lastPersist', 'find');
-            $showPersist = true;
-            $type = 'calc';
+        $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
+        if(empty($employees)){
+            $this->Session->setFlash('Er zijn geen mensen gevonden die recht hebben op maaltijdcheques');
+            $this->redirect('/Admin');
+        }
+        $range[0] = $this->firstDay($month);
+        $range[1] = $this->lastDay($month);
 
-            if(date('Y-m', strtotime($lastPersist)) >= date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
-                $showPersist = false;
-                $type = 'display';
-            }
+        //Check if we can show the Persist in Database button
+        $lastPersist = $this->admin_variable('lastPersist', 'find');
+        $showPersist = true;
+        $type = 'calc';
 
-            //Tell the view
-            $this->set('showPersist', $showPersist);
+        if(date('Y-m', strtotime($lastPersist)) >= date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
+            $showPersist = false;
+            $type = 'display';
+        }
 
-            //Calculate how many dinner cheques an employee gets this month
-            foreach($employees as $employee){
-                $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1], $type)));
-            }
+        //Tell the view
+        $this->set('showPersist', $showPersist);
 
-            //Expose it to the view
-            $this->set('employees', $eo);
+        //Calculate how many dinner cheques an employee gets this month
+        foreach($employees as $employee){
+            $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1], $type)));
+        }
 
-            //The user initatiated a persist in the database.
-            if(isset($this->request->query["persist"])){
-                if($this->request->query["persist"] == true){
+        //Expose it to the view
+        $this->set('employees', $eo);
 
-                    //Check if this month is the correct month to persist
-                    if($month > date('m')){
-                        $this->Session->setFlash('Je kan geen data persisteren voor maanden die nog moeten komen');
-                        $this->redirect($this->here);
-                    }
+        //The user initatiated a persist in the database.
+        if(isset($this->request->query["persist"])){
+            if($this->request->query["persist"] == true){
 
-                    //Change the count for every user
-                    //Every user has a count, because if calculateDinnerCheques doesn't find a record, it creates one.
-                    foreach($employees as $employee){
-                        $counter = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' =>$employee["Employee"]["id"])));
-                        $counter["EmployeeCount"]["dinner_cheques"] = $counter["EmployeeCount"]["dinner_cheques"] + $eo[$employee["Employee"]["id"]]["Employee"]["dinner_cheques"];
-                        $counters[] = $counter;
-                    }
-
-                    //Save all counters
-                    if($this->EmployeeCount->saveMany($counters)){
-                        $export = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
-                        $file = new File($export, true);
-                        $file->write(json_encode($counters));
-                        //Let the system know there a new lastPersist in town
-                        $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
-
-                        //Notify and redirect
-                        $this->Session->setFlash('Data opgeslagen in de database');
-                    } else {
-                        $this->Session->setFlash('Opslaan mislukt');
-                    }
-
+                //Check if this month is the correct month to persist
+                if($month > date('m')){
+                    $this->Session->setFlash('Je kan geen data persisteren voor maanden die nog moeten komen');
                     $this->redirect($this->here);
                 }
+
+                //Change the count for every user
+                //Every user has a count, because if calculateDinnerCheques doesn't find a record, it creates one.
+                foreach($employees as $employee){
+                    $counter = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' =>$employee["Employee"]["id"])));
+                    $counter["EmployeeCount"]["dinner_cheques"] = $counter["EmployeeCount"]["dinner_cheques"] + $eo[$employee["Employee"]["id"]]["Employee"]["dinner_cheques"];
+                    $counters[] = $counter;
+                }
+
+                //Save all counters
+                if($this->EmployeeCount->saveMany($counters)){
+                    $export = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
+                    $file = new File($export, true);
+                    $file->write(json_encode($counters));
+                    //Let the system know there a new lastPersist in town
+                    $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
+
+                    //Notify and redirect
+                    $this->Session->setFlash('Data opgeslagen in de database');
+                } else {
+                    $this->Session->setFlash('Opslaan mislukt');
+                }
+
+                $this->redirect($this->here);
             }
         }
+
 
 
     }
@@ -1263,9 +1277,7 @@ class AdminController extends AppController {
 
         //Check if the persisted data is equal to what it should be
         $penalty = 0;
-        if($should  < $employeeCount["EmployeeCount"]["dinner_cheques"]){
-            $penalty = $employeeCount["EmployeeCount"]["dinner_cheques"] - $should;
-        }
+        $penalty = $employeeCount["EmployeeCount"]["dinner_cheques"] - $should;
 
         if($type == 'calc'){
             $add = $add - $penalty;
