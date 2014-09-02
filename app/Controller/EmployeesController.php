@@ -133,6 +133,8 @@ class EmployeesController extends AppController {
                         unset($data[$key]);
                     } else {
                         $datarecord["Employee"]["role_id"] = 3;
+                        $datarecord["Employee"]["indexed_on_schaubroeck"] = 1;
+                        $datarecord["Employee"]["dinner_cheques"] = 1;
                         if(!isset($datarecord["Employee"]["department_id"])){
                             $datarecord["Employee"]["department_id"] = 1;
                         }
