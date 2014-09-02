@@ -10,10 +10,6 @@
                 <h2><?php echo ($offDays/2);?></h2>
                 <p>Verlofdagen gebruikt</p>
             </td>
-            <td width="33%">
-                <h2><?php echo $dinnerCheques;?></h2>
-                <p>Maaltijdcheques verdiend</p>
-            </td>
         </tr>
     </table>
 <hr />
