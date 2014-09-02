@@ -218,4 +218,8 @@ class AdminHelper extends AppHelper {
 
         return $html;
     }
+
+    public function tableAuthorisations(){
+
+    }
 }

@@ -136,7 +136,7 @@ class EmployeeHelper extends AppHelper {
             $html .= '<th>Aantal halve dagen dit jaar</th></tr>';
             $html .= '<tr><td></td><td></td><td><input id="director" type="text" class="form-control" placeholder="Standaard aantal halve dagen" onChange="updateFields()"></td>';
         } else {
-            $html .= '<th>Mutatie</th></tr>';
+            $html .= '<th>Aangepast saldo halve dagen</th></tr>';
         }
         foreach($employees as $key => $employee){
             $html .= '<tr>';
