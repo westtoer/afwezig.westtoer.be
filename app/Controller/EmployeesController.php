@@ -117,6 +117,8 @@ class EmployeesController extends AppController {
                 $this->Session->setFlash('Je hebt je gegevens aangepast.');
                 $this->redirect(array('controller' => 'users', 'action' => 'management'));
             }
+        } else {
+            $this->redirect(array('controller' => 'users', 'action' => 'management'));
         }
     }
 
