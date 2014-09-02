@@ -816,7 +816,7 @@ class AdminController extends AppController {
             $lastPersist = $this->admin_variable('lastPersist', 'find');
             $showPersist = true;
 
-            if(date('Y-m', strtotime($lastPersist)) > date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
+            if(date('Y-m', strtotime($lastPersist)) >= date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
                 $showPersist = false;
             }
 
@@ -845,7 +845,7 @@ class AdminController extends AppController {
                     if($this->EmployeeCount->saveMany($counters)){
 
                         //Let the system know there a new lastPersist in town
-                        $this->admin_variable('lastPersist','write', date('Y-m'));
+                        $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
 
                         //Notify and redirect
                         $this->Session->setFlash('Data opgeslagen in de database');
@@ -1081,9 +1081,8 @@ class AdminController extends AppController {
     public function viewAuthorisations(){
         if(isset($this->request->query["employee"])){
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $this->request->query["employee"])));
-            $this->set('aiAccepted', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorized' => 1, 'Request.employee_id' => $employee["Employee"]["id"]))));
+            $this->set('aiAllowed', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorized' => 1, 'Request.employee_id' => $employee["Employee"]["id"]))));
             $this->set('aiDenied', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorized' => 0, 'AuthItem.authorization_date <>' => null, 'Request.employee_id' => $employee["Employee"]["id"]))));
-            $this->set('aiDenied', $this->AuthItem->find('all', array('conditions' => array('AuthItem.authorization_date' => null, 'Request.employee_id' => $employee["Employee"]["id"]))));
         }
     }
 
