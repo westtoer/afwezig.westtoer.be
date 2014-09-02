@@ -3,6 +3,7 @@
 /app/Config/database.php
 /app/Config/UiTID.php
 /app/tmp
+/app/Plugin/Uitid/Config
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
