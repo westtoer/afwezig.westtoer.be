@@ -546,7 +546,7 @@ class AdminController extends AppController {
                 'orientation' => 'portrait',
                 'filename' => 'Werkstaat_' . $employee["Employee"]["name"] . '_' . $employee["Employee"]["surname"] . '_' . $niceMonth
         );
-            $this->set('dinnerCheques', $this->calculateDinnerCheques($employee, $range["start"], $this->lastDay(date('m'))));
+            $this->set('dinnerCheques', $this->calculateDinnerCheques($employee, $range["start"], $this->lastDay(date('m')), 'display'));
         } else {
             $this->Session->setFlash('Er was geen geldige Employee Id opgegeven om een rapport over op te kunnen stellen', 'default', array('class' => 'alert-danger'));
             $this->redirect(array('controller' => 'admin', 'action' => 'index'));

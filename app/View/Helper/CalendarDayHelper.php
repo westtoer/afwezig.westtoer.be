@@ -159,6 +159,11 @@ class CalendarDayHelper extends AppHelper{
 
     private function generateReportStructure($calendarDays, $start, $end){
         $dateRange = $this->dateRange($start, $end);
+        foreach($dateRange as $key => $date){
+            if(date('D', strtotime(explode('/', $date)[0])) == 'Sat' or date('D', strtotime(explode('/',$date)[0])) == 'Sun'){
+                unset($dateRange[$key]);
+            }
+        }
         $convertedCalendar = array();
         $structure = array();
         $size = sizeof($calendarDays);
