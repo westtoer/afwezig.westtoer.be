@@ -804,24 +804,26 @@ class AdminController extends AppController {
             $range[0] = $this->firstDay($month);
             $range[1] = $this->lastDay($month);
 
-            //Calculate how many dinner cheques an employee gets this month
-            foreach($employees as $employee){
-                $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1])));
-            }
-
-            //Expose it to the view
-            $this->set('employees', $eo);
-
             //Check if we can show the Persist in Database button
             $lastPersist = $this->admin_variable('lastPersist', 'find');
             $showPersist = true;
+            $type = 'calc';
 
             if(date('Y-m', strtotime($lastPersist)) >= date('Y-m', strtotime(date('Y') . '-' . $month . '-01'))){
                 $showPersist = false;
+                $type = 'display';
             }
 
             //Tell the view
             $this->set('showPersist', $showPersist);
+
+            //Calculate how many dinner cheques an employee gets this month
+            foreach($employees as $employee){
+                $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1], $type)));
+            }
+
+            //Expose it to the view
+            $this->set('employees', $eo);
 
             //The user initatiated a persist in the database.
             if(isset($this->request->query["persist"])){
@@ -1198,7 +1200,7 @@ class AdminController extends AppController {
 
     }
 
-    private function calculateDinnerCheques($employee, $start, $end, $year = null){
+    private function calculateDinnerCheques($employee, $start, $end, $type = 'calc', $year = null){
         if($year == null){
             $year = date('Y');
         }
@@ -1261,7 +1263,9 @@ class AdminController extends AppController {
             $penalty = $employeeCount["EmployeeCount"]["dinner_cheques"] - $should;
         }
 
-        $add = $add - $penalty;
+        if($type == 'calc'){
+            $add = $add - $penalty;
+        }
 
         return $add;
     }
