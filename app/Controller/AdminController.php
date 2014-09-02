@@ -249,6 +249,8 @@ class AdminController extends AppController {
                                 }
                             }
                         }
+                    } else{
+                        $this->redirect('/Admin/endOfYear?step=10');
                     }
                 } elseif($step == '10'){
                     $this->layout = 'default';
@@ -423,11 +425,11 @@ class AdminController extends AppController {
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
             $streams = $this->Stream->find('all', array('conditions' => array('Employee_id' => $employee["Employee"]["internal_id"])));
             $this->set('employee', $employee);
-                if(isset($this->request->query["start"])){
-                    $departDate = date('Y-m-d', strtotime($this->request->query["start"]));
-                } else {
-                    $departDate = date('Y-m-d');
-                }
+            if(isset($this->request->query["start"])){
+                $departDate = date('Y-m-d', strtotime($this->request->query["start"]));
+            } else {
+                $departDate = date('Y-m-d');
+            }
 
             if(!empty($employee)){
                 if(isset($this->request->query['apply'])){
@@ -845,9 +847,9 @@ class AdminController extends AppController {
 
                     //Save all counters
                     if($this->EmployeeCount->saveMany($counters)){
-                        $exportCsv = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
-                        $file = new File($exportCsv, true);
-                        $file->write($counters);
+                        $export = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
+                        $file = new File($export, true);
+                        $file->write(json_encode($counters));
                         //Let the system know there a new lastPersist in town
                         $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
 
