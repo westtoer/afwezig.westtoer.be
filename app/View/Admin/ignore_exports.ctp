@@ -22,8 +22,8 @@
                         $html .= '<td>' . $export["Export"]["timestamp"] . '</td>';
                         $html .= '<td>' . date('m', strtotime($export["Export"]["start_date"])) . '</td>';
                         $html .= '<td>' . date('Y', strtotime($export["Export"]["start_date"])) . '</td>';
-                        $html .= '<td>' . str_replace('/var/www/html/afwezig.westtoer.be/', '', $export["Export"]["json_path"]) . '</td>';
-                        $html .= '<td>' . str_replace('/var/www/html/afwezig.westtoer.be/', '', $export["Export"]["xls_path"]) . '</td>';
+                        $html .= '<td><a href="' . $export["Export"]["json_path"] . '">JSON (verificatie)</a></td>';
+                        $html .= '<td><a href="' . $export["Export"]["xls_path"] . '">Bestand voor Schaubroeck</a></td>';
                         $html .= '<td><a href="' . $this->here . '?ignore=1&id=' . $export["Export"]["id"] . '">Negeer</a></td>';
                         $html .= '</tr>';
                     }
