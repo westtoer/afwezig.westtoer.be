@@ -2,6 +2,7 @@
     <div class="col-md-3">
         <?php echo $this->element('admin/base_admin_menu');?>
         <div class="alert alert-info" role="alert"><p><strong>Als je meerdere gebruikers wilt aanmaken</strong>, kun je dat beter met de importeertoepassing doen. Hiermee kun je een Excel-bestand(csv,;) uploaden en door het systeem laten interpreteren.</p><p><a href="<?php echo $this->base;?>/Employees/import">Klik hier om meerdere gebruikers toe te voegen</a></p></div>
+        <div class="alert alert-warning" role="alert"><p><strong>Een trigram moet altijd uniek zijn!</strong> Als je een jobstudent wilt toevoegen, gebruik dan zijn westtoer e-mail adres in plaats van het hergebruikte trigram.</p></div>
     </div>
     <div class="col-md-9">
         <h2 class="first">Een werknemer aanmaken</h2>
