@@ -27,7 +27,7 @@ class AdminController extends AppController {
     //Admin section for Employees
     public function registerEmployee(){
         $this->set('departments', $this->EmployeeDepartment->find('all'));
-        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'))));
+        $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.status' => 1, 'Employee.internal_id <>' => '-1'), 'order' => 'Employee.name ASC')));
         $this->set('');
         if($this->request->is('post')){
 
@@ -62,7 +62,7 @@ class AdminController extends AppController {
             if($id !== null){
                 $employee = $this->Employee->findById($id);
                 $this->set('employee', $employee);
-                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1))));
+                $this->set('employees', $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.status' => 1), 'order' => 'Employee.name ASC')));
                 $this->set('departments', $this->EmployeeDepartment->find('all'));
                 $this->set('prevCost', $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.employee_id' => $employee["Employee"]["id"], 'CalendarDay.calendar_item_type_id' => 23))));
             } else {
@@ -610,7 +610,7 @@ class AdminController extends AppController {
             }
 
             //Data dependancies
-            $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.name ASC'));
+            $employees = $this->Employee->find('all', array('conditions' => $options["Employee"], 'order' => 'Employee.surname ASC'));
             $dateRange = $this->dateRange($range["templateStart"], $range["end"], $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d', $includeWeekend = true);
             $calendarDays = $this->CalendarDay->find('all', array('conditions' => $options["CalendarDay"], 'order' => 'day_date ASC'));
 
