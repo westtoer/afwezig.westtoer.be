@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9">
         <h2 class="first">Een nieuw stramien toevoegen</h2>
-        <?php echo $this->Form->create('Stream', array('url' => $this->here));?>
+        <?php echo $this->Form->create('Stream', array('url' => '/Admin/addStream'));?>
         <!-- Controls -->
         <div class="well flat">
             <div class="row">

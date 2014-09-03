@@ -261,7 +261,7 @@ class AdminController extends AppController {
                 } elseif($step == '11'){
                     $this->Session->setFlash('De wizard is voltooid.');
                     $this->admin_variable('lockApp', 'write', 'false');
-                    $this->redirect("/");
+                    $this->redirect("/Admin/GeneralCalendarItems");
                 }
             } else {
                 $x = $this->createBackup();
@@ -309,7 +309,7 @@ class AdminController extends AppController {
 
                     if($this->Stream->saveMany($streamObjects)){
                         $this->Session->setFlash('Stramien opgeslagen.');
-                        $this->redirect($this->here);
+                        $this->redirect('/Admin');
                     } else {
                         $this->Session->setFlash('Het stramien kon niet worden opgeslagen.', 'default', array('class' => 'alert-danger'));
                         $this->redirect($this->here);
@@ -424,60 +424,72 @@ class AdminController extends AppController {
 
     public function applyStream($id = null){
         if($id != null){
-            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id)));
-            $streams = $this->Stream->find('all', array('conditions' => array('Employee_id' => $employee["Employee"]["internal_id"])));
-            $this->set('employee', $employee);
-            if(isset($this->request->query["start"])){
-                $departDate = date('Y-m-d', strtotime($this->request->query["start"]));
-            } else {
-                $departDate = date('Y-m-d');
+            $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $id)));
+            $single = true;
+            $departDate = date('Y-m-d');
+            //Check if we have a dual week stream or a single week stream
+            foreach($streams as $stream){
+                $comp[$stream["Stream"]["day_nr"] . '/' . $stream["Stream"]["day_time"]][] = $stream["Stream"]["calendar_item_type_id"];
             }
 
-            if(!empty($employee)){
-                if(isset($this->request->query['apply'])){
-                    foreach($streams as $key =>$stream){
-                        if($stream["Stream"]["calendar_item_type_id"] == 9){
-                            unset($streams[$key]);
-                        }
-                    }
-
-                    foreach($streams as $stream){
-                        if($stream["Stream"]["relative_nr"] > 5){
-                            if(isset($count)){
-                                $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
-                            }
-                        } else {
-                            $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
-
-                        }
-
-                        foreach($dateArray as $key => $date){
-                            if($date < $departDate){
-                                unset($dateArray[$key]);
-                            }
-                        }
-
-                        $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $employee["Employee"]["internal_id"], $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
-
-                    }
-
-                    $finished = 0;
-                    $size = count($inserts);
-
-                    foreach($inserts as $insert){
-                        if($this->CalendarDay->saveMany($insert)){
-                            $finished++;
-                        }
-                    }
-
-                    if($size != $finished){
-                        $this->Session->setFlash('Niet alle kalenderdagen konden worden opgeslagen', 'default', array('class' => 'alert-danger'));
-                    }
-
-                    $this->redirect('/Admin/viewStreams');
-
+            foreach($comp as $date){
+                if($date[0] != $date[1]){
+                    $single = false;
                 }
             }
+
+            $sD = array('Mon' => 1, 'Tue' => 2, 'Wed' => 3, 'Thu' => 4, 'Fri' => 5);
+
+           if($single){
+               $x = 'w';
+               foreach($streams as $stream){
+                   $desc[$stream["Stream"]["day_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
+               }
+           } else {
+               $x = 'w';
+               foreach($streams as $stream){
+                   $desc[$stream["Stream"]["relative_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
+               }
+           }
+
+
+           foreach($desc as $key => $date){
+               var_dump($key);
+               foreach($date as $hour){
+                   if($key > 5){
+                       $even = true;
+                       $offset = $key - 6;
+                   } else {
+                       $even = false;
+                       $offset = $key - 1;
+                   }
+                    if($offset == 0){
+                        $startDay = $sD[date('D', strtotime($key))];
+                    }
+                   $range = $this->getRange(date('Y-m-d', strtotime($departDate . ' + ' . $offset . ' Day')), date('Y-m-d', strtotime(date('Y') . '-12-31')), $x);
+                   echo '<pre>';
+                   var_dump($range);
+                   echo '</pre>';
+                   foreach($range as $rKey => $date){
+                        if(strtotime($date) > strtotime(date('Y') . '-12-31')){
+                            unset($range[$rKey]);
+                        }
+                       if(strtotime($date) == strtotime(date('Y') . '-12-31')){
+                           $endDay = $offset;
+                       }
+                       if($even){
+                           if($rKey % 2 !== 0){
+                                unset($range[$rKey]);
+                           }
+                       } else {
+                            if($rKey % 2 == 0){
+                                unset($range[$rKey]);
+                            }
+                       }
+                   }
+               }
+           }
+
         }
     }
 
@@ -1224,12 +1236,12 @@ class AdminController extends AppController {
         }
 
         //Lookup the employee's stats
-        $employeeCount = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' => $employee["Employee"]["id"], 'year' => date('Y'))));
+        $employeeCount = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' => $employee["Employee"]["internal_id"], 'year' => date('Y'))));
 
         //If no stats a present, create a new record
         if(empty($employeeCount)){
             $this->EmployeeCount->create();
-            $employeeCount = array('EmployeeCount' => array('employee_id' => $employee["Employee"]["id"], 'year' => date('Y'), 'dinner_cheques' => 0));
+            $employeeCount = array('EmployeeCount' => array('employee_id' => $employee["Employee"]["internal_id"], 'year' => date('Y'), 'dinner_cheques' => 0));
             $employeeCount = $this->EmployeeCount->save($employeeCount);
         }
 
