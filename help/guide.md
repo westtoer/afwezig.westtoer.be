@@ -43,3 +43,12 @@ In the code, you'll see the usage of a Model Request which we created and an obj
 version of Request is used to manage actual requests where a users asks permission to his supervisor. CakePHP uses request to access GET and POST
 variables. It also has a few function to check which type of request is sent ($this->request->is('post') checks if the current request is a post request).
 [For more on CakePHP's request handling](http://book.cakephp.org/2.0/en/controllers/request-response.html).
+
+##Mixed usage of internal_id and id
+The Employee record has an internal_id and an id column. Both are used for referencing records in the database. This can be weird, as some of the joins happen on employee_id of a
+different table, but actually hold the internal_id.
+
+Here's a list of where internal_id is used in the database (Model.Join):
+- Employee.Supervisor
+- Request.Replacement
+- Stream.Employee
