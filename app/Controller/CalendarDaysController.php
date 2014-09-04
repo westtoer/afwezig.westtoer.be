@@ -15,8 +15,7 @@ class CalendarDaysController extends AppController{
                 array(
                     'conditions' => array(
                         'CalendarDay.day_date' => $day,
-                        'CalendarDay.calendar_item_type_id <>'  => 9,
-                        'AuthItem.authorized' => 1
+                        'CalendarDay.calendar_item_type_id <>'  => 9  // 9 == code for 'Gewerkt'
                     )
                 ));
             $absences = $this->setAbsences($absences, 'today');
