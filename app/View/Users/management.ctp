@@ -29,12 +29,12 @@
         <?php echo $this->Form->hidden('id', array('value' => $this->Session->read('Auth.Employee.id')));?>
         <div class="row">
             <div class="col-md-7 formspaced-left">
-                <?php echo $this->Form->textarea('note', array('value' => $employee["Employee"]["note"], 'class' => 'form-control spaced', 'style' => 'height: 107px;'));?>
+                <?php echo $this->Form->textarea('note', array('value' => $employee["Employee"]["note"], 'class' => 'form-control spaced', 'style' => 'height: 107px;', 'label' => 'Notitie'));?>
             </div>
             <div class="col-md-5 formspaced-right">
-                <?php echo $this->Form->input('telephone', array('label' => false,'value' => $employee["Employee"]["telephone"], 'class' => 'form-control spaced', 'placeholder' => 'Uw telefoonnummer'));?>
-                <?php echo $this->Form->input('gsm', array('label' => false, 'value' => $employee["Employee"]["gsm"], 'class' => 'form-control spaced', 'placeholder' => 'Uw gsm nummer'));?>
-                <?php echo $this->Form->input('employee_department_id', array('label' => false, 'value' => $employee["EmployeeDepartment"]["id"], 'class' => 'form-control spaced', 'placeholder' => 'Uw departement', 'options' => $this->Employee->selectorAllEmployeeDepartments($departments, 'array')));?>
+                <?php echo $this->Form->input('telephone', array('label' => 'Intern telefoonnummer','value' => $employee["Employee"]["telephone"], 'class' => 'form-control spaced', 'placeholder' => 'Uw telefoonnummer'));?>
+                <?php echo $this->Form->input('gsm', array('label' => 'GSM-nummer', 'value' => $employee["Employee"]["gsm"], 'class' => 'form-control spaced', 'placeholder' => 'Uw gsm nummer'));?>
+                <?php echo $this->Form->input('employee_department_id', array('label' => 'Dienst', 'value' => $employee["EmployeeDepartment"]["id"], 'class' => 'form-control spaced', 'placeholder' => 'Uw departement', 'options' => $this->Employee->selectorAllEmployeeDepartments($departments, 'array')));?>
             </div>
         </div>
 

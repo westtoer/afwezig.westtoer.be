@@ -29,6 +29,19 @@
     padding-bottom: 12px;
 }
 
+.input{
+    position: relative;
+}
+
+.input label{
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    right: 12px;
+    padding: 0px 6px;
+    color: #928C8C;
+}
+
 
 
 .glyphcontrol{
