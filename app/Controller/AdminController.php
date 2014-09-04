@@ -5,7 +5,7 @@ App::import('Controller', 'Requests');
 
 class AdminController extends AppController {
 
-    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export','EmployeeCount');
+    public $uses = array('User', 'Employee', 'Request', 'EmployeeDepartment', 'RequestToCalendarDay', 'CalendarDay', 'AdminVariable', 'AuthItem', 'Stream', 'CalendarItemType', 'Export','EmployeeCount', 'StreamExecution');
     public $helpers = array('Employee', 'Request', 'CalendarDay', 'CalendarItemType', 'Xls');
     public $components = array('RequestHandler');
 
@@ -424,72 +424,118 @@ class AdminController extends AppController {
 
     public function applyStream($id = null){
         if($id != null){
-            $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $id)));
-            $single = true;
-            $departDate = date('Y-m-d');
-            //Check if we have a dual week stream or a single week stream
-            foreach($streams as $stream){
-                $comp[$stream["Stream"]["day_nr"] . '/' . $stream["Stream"]["day_time"]][] = $stream["Stream"]["calendar_item_type_id"];
-            }
+            //Find if this employee exists
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $id, 'Employee.internal_id <>' => '-1')));
+            if(!empty($employee)){
 
-            foreach($comp as $date){
-                if($date[0] != $date[1]){
-                    $single = false;
+                //Find this employees stream
+                $streams = $this->Stream->find('all', array('conditions' => array('employee_id' => $id)));
+                if(!empty($streams)){
+                    $single = true;
+                    $initDate = date('Y-m-d');
+                    $sD = array('Mon' => 1, 'Tue' => 2, 'Wed' => 3, 'Thu' => 4, 'Fri' => 5, 'Sat' => 6, 'Sun' => 7);
+
+                    //Find the first monday of the departDate
+                    $departDate = date('Y-m-d', strtotime($initDate . ' - ' . ($sD[date('D', strtotime($initDate))] - 1) . ' Day'));
+
+                    //Check if we have a dual week stream or a single week stream
+                    foreach($streams as $stream){
+                        $comp[$stream["Stream"]["day_nr"] . '/' . $stream["Stream"]["day_time"]][] = $stream["Stream"]["calendar_item_type_id"];
+                    }
+
+                    foreach($comp as $dKey =>$date){
+                        if($date[0] != $date[1]){
+                            $single = false;
+                        }
+                    }
+
+
+                    //Set the streams and types
+                    foreach($streams as $stream){
+
+                        //If we have synced weeks, just find 5 streams;
+                        if($single){
+                            $desc[$stream["Stream"]["day_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
+                        } else {
+                            $desc[$stream["Stream"]["relative_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
+                        }
+
+                    }
+
+                    foreach($desc as $key => $date){
+
+                        //If we have async weeks, make sure their ranges are as well
+                        if(!$single){
+                            if($key > 5){
+                                $even = false;
+                            } else{
+                                $even = true;
+                            }
+                        }
+
+                        foreach($date as $hour => $type){
+
+
+
+                            // Make sure the key for async weeks can acess the day notation from $sD
+                            if($key > 5){$offset = $key - 6;} else {$offset = $key - 1;}
+
+                            //Access $sD
+                            if($offset == 0){$startDay = $sD[date('D', strtotime($key))];}
+
+                            //Find the occurences of each weekday
+                            $range = $this->getRange(date('Y-m-d', strtotime($departDate . ' + ' . $offset . ' Day')), date('Y-m-d', strtotime(date('Y') . '-12-31')), 'w');
+
+                            //Do a bit of cleanup
+                            foreach($range as $rKey => $date){
+
+                                if(strtotime($date) > strtotime(date('Y') . '-12-31')){
+                                    unset($range[$rKey]);
+                                }
+
+                                if(strtotime($date) == strtotime(date('Y') . '-12-31')){
+                                    $endDay = $offset;
+                                }
+
+                                if(strtotime($date) < strtotime($initDate)){
+                                    unset($range[$rKey]);
+                                }
+
+                                if(date('D', strtotime($date)) == 'Sat' or date('D', strtotime($date)) == 'Sun'){
+                                    unset($range[$rKey]);
+                                }
+
+                                //Make sure the async weeks do not write about the same days
+                                if($even){
+                                    if($rKey % 2 != 0){
+                                        unset($range[$rKey]);
+                                    }
+                                } else {
+                                    if($rKey % 2 == 0){
+                                        unset($range[$rKey]);
+                                    }
+                                }
+                            }
+
+                            //Create an array with for the database commit
+                            foreach($range as $rKey => $date){
+                                $inserts[] = array('CalendarDay' => array('employee_id' => $employee["Employee"]["id"], 'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $type, 'replacement_id' => '-1'));
+                            }
+                        }
+                    }
+
+                    if(date('D', strtotime(date('Y') . '-12-31')) == 'Sat' or date('D', strtotime(date('Y') . '-12-31' == 'Sun'))){
+                        $endDay =
+                    }
+
+                    $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay);
+                    if($this->StreamExecution->save($exec)){
+
+                    }
+                    var_dump($exec);
+                    echo '<br />';
                 }
             }
-
-            $sD = array('Mon' => 1, 'Tue' => 2, 'Wed' => 3, 'Thu' => 4, 'Fri' => 5);
-
-           if($single){
-               $x = 'w';
-               foreach($streams as $stream){
-                   $desc[$stream["Stream"]["day_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
-               }
-           } else {
-               $x = 'w';
-               foreach($streams as $stream){
-                   $desc[$stream["Stream"]["relative_nr"]][$stream["Stream"]["day_time"]] = $stream["Stream"]["calendar_item_type_id"];
-               }
-           }
-
-
-           foreach($desc as $key => $date){
-               var_dump($key);
-               foreach($date as $hour){
-                   if($key > 5){
-                       $even = true;
-                       $offset = $key - 6;
-                   } else {
-                       $even = false;
-                       $offset = $key - 1;
-                   }
-                    if($offset == 0){
-                        $startDay = $sD[date('D', strtotime($key))];
-                    }
-                   $range = $this->getRange(date('Y-m-d', strtotime($departDate . ' + ' . $offset . ' Day')), date('Y-m-d', strtotime(date('Y') . '-12-31')), $x);
-                   echo '<pre>';
-                   var_dump($range);
-                   echo '</pre>';
-                   foreach($range as $rKey => $date){
-                        if(strtotime($date) > strtotime(date('Y') . '-12-31')){
-                            unset($range[$rKey]);
-                        }
-                       if(strtotime($date) == strtotime(date('Y') . '-12-31')){
-                           $endDay = $offset;
-                       }
-                       if($even){
-                           if($rKey % 2 !== 0){
-                                unset($range[$rKey]);
-                           }
-                       } else {
-                            if($rKey % 2 == 0){
-                                unset($range[$rKey]);
-                            }
-                       }
-                   }
-               }
-           }
-
         }
     }
 
