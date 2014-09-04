@@ -107,7 +107,7 @@ class CalendarDayHelper extends AppHelper{
                 }
 
                 if(isset($day)){
-                    $html .= '<div class="calendarline red"><a href="' . $this->base .'/CalendarDays/absences/' . $day .'">Bekijk alle</a></div>';
+                    $html .= '<div class="calendarline red"><a href="' . $this->base .'/CalendarDays/absences/' . $day .'">Bekijk alle ' . $section . '</a></div>';
                 }
             }
             $html .= '</div>';
