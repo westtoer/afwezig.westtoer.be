@@ -480,7 +480,7 @@ class AdminController extends AppController {
                             // Make sure the key for async weeks can acess the day notation from $sD
                             if($key > 5){$offset = $key - 6;} else {$offset = $key - 1;}
 
-                            //Access $sD
+                            //Acces $sD
                             if($offset == 0){$startDay = $sD[date('D', strtotime($key))];}
 
                             //Find the occurences of each weekday
@@ -488,22 +488,6 @@ class AdminController extends AppController {
 
                             //Do a bit of cleanup
                             foreach($range as $rKey => $date){
-
-                                if(strtotime($date) > strtotime(date('Y') . '-12-31')){
-                                    unset($range[$rKey]);
-                                }
-
-                                if(strtotime($date) == strtotime(date('Y') . '-12-31')){
-                                    $endDay = $offset;
-                                }
-
-                                if(strtotime($date) < strtotime($initDate)){
-                                    unset($range[$rKey]);
-                                }
-
-                                if(date('D', strtotime($date)) == 'Sat' or date('D', strtotime($date)) == 'Sun'){
-                                    unset($range[$rKey]);
-                                }
 
                                 //Make sure the async weeks do not write about the same days
                                 if($even){
@@ -515,24 +499,60 @@ class AdminController extends AppController {
                                         unset($range[$rKey]);
                                     }
                                 }
+
+                                if(strtotime($date) > strtotime(date('Y') . '-12-31')){
+                                    unset($range[$rKey]);
+                                }
+
+                                if(strtotime($date) == strtotime(date('Y') . '-12-31')){
+                                    $endDay = $key;
+                                }
+
+                                if(strtotime($date) < strtotime($initDate)){
+                                    unset($range[$rKey]);
+                                }
+
+                                if(date('D', strtotime($date)) == 'Sat' or date('D', strtotime($date)) == 'Sun'){
+                                    unset($range[$rKey]);
+                                }
                             }
 
-                            //Create an array with for the database commit
+                            //Reset the array keys
+                            $range = array_merge($range);
+
                             foreach($range as $rKey => $date){
+
+                                //Keep all the last records closest to 31 December
+                                if($rKey == (count($range) - 1)){
+                                    $rangeBounds[$key] = $date;
+                                }
+
+                                //Create an array with for the database commit
                                 $inserts[] = array('CalendarDay' => array('employee_id' => $employee["Employee"]["id"], 'day_date' => $date, 'day_time' => $hour, 'calendar_item_type_id' => $type, 'replacement_id' => '-1'));
                             }
                         }
                     }
 
-                    if(date('D', strtotime(date('Y') . '-12-31')) == 'Sat' or date('D', strtotime(date('Y') . '-12-31' == 'Sun'))){
-                        $endDay =
+                    //If the $endDay isn't set due to falling on a saturday or sunday, find the closest friday
+                    if(!isset($endDay)){
+                        $endDay = '10';
+                        if(strtotime($rangeBounds[5]) > strtotime($rangeBounds[10])){
+                            $endDay = '5';
+                        }
                     }
 
-                    $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay);
-                    if($this->StreamExecution->save($exec)){
-
+                    $nextDay = $endDay + 1;
+                    if($nextDay > 10){
+                        $nextDay = 1;
                     }
-                    var_dump($exec);
+
+
+                    $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay, 'day_next' => $nextDay);
+                    /*if($this->StreamExecution->save($exec)){
+
+                    }*/
+
+                    var_dump($rangeBounds);
                     echo '<br />';
                 }
             }
