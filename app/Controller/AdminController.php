@@ -85,8 +85,7 @@ class AdminController extends AppController {
     public function viewPendingCalendarItems(){
        $this->set('toBeAllowed', $this->Request->find('all', array('conditions' => array(
             'AuthItem.authorized' => 0,
-            'AuthItem.authorization_date' => null,
-            'Request.start_date >=' => date('Y-m-d')
+            'AuthItem.authorization_date' => null
         ))));
     }
 
