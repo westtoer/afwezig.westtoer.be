@@ -466,6 +466,10 @@ class RequestsController extends AppController {
 
             if(date('Y-m-d', strtotime($request["Request"]["start_date"])) > date('Y-m-d', strtotime($request["Request"]["end_date"]))){
                 $error .= 'De einddatum kan niet voor de begindatum komen. <br />';
+            } elseif(date('Y-m-d', strtotime($request["Request"]["start_date"])) == date('Y-m-d', strtotime($request["Request"]["end_date"]))){
+                if($request["Request"]["start_time"] == 'PM' and $request["Request"]["end_time"] == "AM"){
+                    $error .= 'De einddatum kan niet voor de begindatum komen. <br />';
+                }
             }
 
             if(date('Y-m-d', strtotime($request["Request"]["start_date"])) == date('Y-m-d', strtotime($nulldate)) or date('Y-m-d', strtotime($request["Request"]["end_date"])) == date('Y-m-d', strtotime($nulldate))){
