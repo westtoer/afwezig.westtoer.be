@@ -15,7 +15,7 @@ The first time you will log on, Afwezig will detect that there isn't a Administr
 
 Troubleshooting
 ===============
-- If you have problems, make sure that your directories (especialy the tmps of cake) have sufficient right access. You can test this by chmodding your
-complete dir to 777.
+- If you have problems, make sure that your directories (especialy the tmps of cake) have sufficient right access. You can test this by chmodding your complete dir to 777.
+Advise: you should be ok by making exports/ and app/tmp writable, be sure to add the stoicky bit so that created subdirs inherit the access rights.  chmod -R o+rwx exports/; chmod -R +s exports; ...
 - If you are not able to login with UiTID, make sure the production server is set to www.uitid.be/uitid/rest and not uitid.be/uitid/rest. This setting can be
 found in the app/Config/UiTID.php file
