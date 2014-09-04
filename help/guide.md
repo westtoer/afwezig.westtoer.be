@@ -52,3 +52,19 @@ Here's a list of where internal_id is used in the database (Model.Join):
 - Employee.Supervisor
 - Request.Replacement
 - Stream.Employee
+
+#CakePHP and saving data
+You'll see throughout the code that the following code is being used
+```
+$this->ModelName->save();
+```
+You'll notice that the param the save method uses, is almost always a nested array with the name of the Model
+
+```
+$saveThis = array('ModelName' => array('field1' => 'value1');
+```
+
+This however, is not possible when your model does not join. If this is the case, you don't have to create a nested array:
+```
+$saveThis = array('field1' => 'value1');
+```
