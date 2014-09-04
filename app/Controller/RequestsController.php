@@ -524,6 +524,11 @@ class RequestsController extends AppController {
                 }
 
             }
+
+            $supervisor = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $request["Employee"]["supervisor_id"], 'Employee.internal_id <>' => '-1')));
+            if(empty($supervisor)){
+                $error .= "Je hebt nog geen verantwoordelijke. Contacteer HR en vraag om dit te corrigeren. <br />";
+            }
         return $error;
     }
 
