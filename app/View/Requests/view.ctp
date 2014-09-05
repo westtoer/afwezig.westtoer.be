@@ -33,3 +33,10 @@
 <div class="scroll-container">
     <?php echo $this->Request->tableOverlap($overlap, $queryRange);?>
 </div>
+<p>Hebben in deze periode ook een verlofaanvraag gedaan die nog niet is goedgekeurd:
+    <?php
+        foreach($overlapRequests as $overlapRequest){
+            echo '<a href="/Requests/view/' . $overlapRequest["Request"]["id"] . '">' .$overlapRequest["Employee"]["name"] . ' ' . $overlapRequest["Employee"]["surname"] . '</a>';
+        }
+    ;?>
+</p>
