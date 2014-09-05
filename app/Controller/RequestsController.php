@@ -57,6 +57,19 @@ class RequestsController extends AppController {
                                 ), 'order' => 'day_date ASC'
                             ));
 
+                            //Find all requests that overlap that aren't authorised yet.
+                            $overlapRequests = $this->Request->find('all', array(
+                                'conditions' => array(
+                                    'AuthItem.authorised' => 0,
+                                    array('OR' =>
+                                        array('start_date >= ' => date('Y-m-d', strtotime($query["Request"]["start_date"] . ' - 1 Day'))),
+                                        array('end_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' + 1 Day')))
+                                        )
+                                    )
+                                )
+                            );
+
+
                             $this->set('previous', $previous);
                             foreach($overlap as $key => $overlapitem){
                                 $oo[$overlapitem["CalendarDay"]["day_time"]][$overlapitem["CalendarDay"]["day_date"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
