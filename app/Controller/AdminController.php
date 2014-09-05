@@ -545,14 +545,12 @@ class AdminController extends AppController {
                         $nextDay = 1;
                     }
 
-
-                    $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay, 'day_next' => $nextDay);
-                    /*if($this->StreamExecution->save($exec)){
-
-                    }*/
-
-                    var_dump($rangeBounds);
-                    echo '<br />';
+                    if($this->CalendarDay->saveMany($inserts)){
+                        $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay, 'day_next' => $nextDay);
+                        if($this->StreamExecution->save($exec)){
+                            $this->Session->setFlash('Het uitvoeren van het stramien is gelukt');
+                        }
+                    }
                 }
             }
         }
