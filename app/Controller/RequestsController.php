@@ -71,6 +71,7 @@ class RequestsController extends AppController {
 
 
                             $this->set('previous', $previous);
+                            $this->set('overlapRequests', $overlapRequests);
                             foreach($overlap as $key => $overlapitem){
                                 $oo[$overlapitem["CalendarDay"]["day_time"]][$overlapitem["CalendarDay"]["day_date"]][$overlapitem["Employee"]["name"] . ' ' . $overlapitem["Employee"]["surname"]] = $overlapitem;
                             }
