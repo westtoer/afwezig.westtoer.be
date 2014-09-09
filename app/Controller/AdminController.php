@@ -211,7 +211,9 @@ class AdminController extends AppController {
                     }
                     $this->redirect('/admin/endOfYear?step=8');
                 } elseif($step == '8'){
-                    $this->set('streams', $this->Stream->find('all', array('group' => 'employee_id')));
+                    $streams = $this->Stream->find('all', array('group' => 'employee_id'));
+
+                    //$this->set('streams');
                 } elseif($step == '9'){
                    $incomingStreams = $this->request->data;
                     if(!empty($incomingStreams)){
@@ -549,6 +551,7 @@ class AdminController extends AppController {
                         $exec = array('employee_id' => $employee["Employee"]["id"], 'day_relative' => $endDay, 'day_next' => $nextDay);
                         if($this->StreamExecution->save($exec)){
                             $this->Session->setFlash('Het uitvoeren van het stramien is gelukt');
+                            $this->redirect('/Admin');
                         }
                     }
                 }
