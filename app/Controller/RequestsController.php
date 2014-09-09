@@ -338,14 +338,22 @@ class RequestsController extends AppController {
                     if($this->AuthItemUpdate($request)){
                         if(isset($request["Employee"]["3gram"])){
                             $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is goedgekeurd', 'Je afwezigheid is goedgekeurd');
+                            $this->redirect('/');
                         }
                         $this->sendMailToHR('allowed', $request);
                     }
                 } else {
                     if(isset($request["Employee"]["3gram"])){
-                        $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is geweigerd', 'Je afwezigheid is geweigerd');
+                        $authorization["AuthItem"] = $request["AuthItem"];
+                        $authorization["AuthItem"]["authorized"] = 1;
+                        $authorization["AuthItem"]["authorization_date"] = date('Y-m-d H:i:s');
+                        if($this->AuthItem->save($authorization)){
+                            $this->sendMail($this->trigramToMail($request["Employee"]["3gram"]), $genericBody . 'is geweigerd', 'Je afwezigheid is geweigerd');
+
+                        }
                     }
                     $this->sendMailToHR('denied', $request);
+                    $this->redirect('/');
                 }
 
             } else {
