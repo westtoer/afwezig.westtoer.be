@@ -12,14 +12,15 @@ class GeneralController extends AppController{
     public $uses = array('Employee', 'Request', 'CalendarDay', 'RequestToCalendarDay');
     public function index(){
 
+        //All holidays
         $this->set('holidays', $this->Request->find('all', array(
             'conditions' => array(
-                'AuthItem.authorized' => 1,
                 'Request.start_date >=' => date('Y-m-d'),
                 'Request.calendar_item_type_id' => 3,
                 'Request.employee_id' => 4
             ), 'limit' => 5, 'order' => 'Request.start_date ASC'
         )));
+
         $absences = $this->CalendarDay->find('all', array(
             'conditions' => array(
                 'CalendarDay.day_date' => date('Y-m-d'),
