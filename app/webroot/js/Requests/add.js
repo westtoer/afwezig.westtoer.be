@@ -60,7 +60,16 @@ $(document).ready(function(){
 });
 
 function initiated(){
-    $("#RequestAddForm").submit();
-    $("#RequestSubmitButton").attr('disabled', 'disabled');
-    $("#RequestSubmitButton").html('Bezig met verwerken...');
+    var start = $('#RequestStartDate').val();
+    var end = $('#RequestEndDate').val();
+    if(start.indexOf('-') == 5 && end.indexOf('-') == 5){
+        $("#RequestAddForm").submit();
+        $("#RequestSubmitButton").attr('disabled', 'disabled');
+        $("#RequestSubmitButton").html('Bezig met verwerken...');
+    } else {
+        alert('Your dateformat is wrong');
+    }
+
+
+
 }
