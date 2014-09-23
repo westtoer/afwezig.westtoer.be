@@ -60,7 +60,7 @@ class RequestsController extends AppController {
                             //Find all requests that overlap that aren't authorised yet.
                             $overlapRequests = $this->Request->find('all', array(
                                 'conditions' => array(
-                                    'AuthItem.authorised' => 0,
+                                    'AuthItem.authorized' => 0,
                                     array('OR' =>
                                         array('start_date >= ' => date('Y-m-d', strtotime($query["Request"]["start_date"] . ' - 1 Day'))),
                                         array('end_date <= ' => date('Y-m-d', strtotime($query["Request"]["end_date"] . ' + 1 Day')))
