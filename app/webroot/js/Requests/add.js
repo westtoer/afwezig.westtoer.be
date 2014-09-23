@@ -27,7 +27,8 @@ $(function(){
         dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
         dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
         dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-        weekHeader: 'Wk'
+        weekHeader: 'Wk',
+        firstDay: 1
     });
 });
 
@@ -49,7 +50,8 @@ $(function(){
         dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
         dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
         dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-        weekHeader: 'Wk'
+        weekHeader: 'Wk',
+        firstDay: 1
     });
 });
 
