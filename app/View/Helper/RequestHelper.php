@@ -9,7 +9,7 @@ class RequestHelper extends AppHelper {
                 $x = 'Dit verlof is nog niet goedgekeurd';
             }
         } else{
-            if($value == 0){
+            if($value == 0 or $value == null){
                 if($short == true){
                     $x = "Nee";
                 } else {
@@ -23,8 +23,6 @@ class RequestHelper extends AppHelper {
                 }
             }
         }
-
-
         return $x;
     }
 
