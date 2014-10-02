@@ -57,17 +57,19 @@ $(function(){
 
 $(document).ready(function(){
         $('#RequestCalendarItemTypeId').val(23);
+        $('#error').hide();
 });
 
 function initiated(){
     var start = $('#RequestStartDate').val();
     var end = $('#RequestEndDate').val();
-    if(start.indexOf('-') == 5 && end.indexOf('-') == 5){
+    if(start.indexOf('-') == 4 && end.indexOf('-') == 4){
         $("#RequestAddForm").submit();
         $("#RequestSubmitButton").attr('disabled', 'disabled');
         $("#RequestSubmitButton").html('Bezig met verwerken...');
     } else {
-        alert('Your dateformat is wrong');
+        $('#error').html('Het formaat van uw datum is verkeerd. Gebruik de volgende notatie: 2014-09-09');
+        $('#error').show();
     }
 
 

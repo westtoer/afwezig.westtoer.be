@@ -2,6 +2,7 @@
     <div class="col-md-4">
         <div class="well flat">
             <h2 class="first">Verlof aanvragen</h2>
+            <div id="error"></div>
             <?php echo $this->Form->create('Request');?>
             <?php echo $this->Form->hidden('employee_id', array('value' => 0));?>
             <?php echo $this->Form->hidden('auth_item_id', array('value' => 0));?>
