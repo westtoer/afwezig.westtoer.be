@@ -296,7 +296,7 @@ class AdminController extends AppController {
             if($incomingStream["Stream"]["employee_id"] != '-1'){
                 $employee = $this->Employee->find('first', array('conditions' => array('Employee.internal_id' => $incomingStream["Stream"]["employee_id"])));
                 $streams = $this->Stream->find('first', array('conditions' => array('employee_id' => $employee["Employee"]["internal_id"])));
-                if(empty($stream)){
+                if(empty($streams)){
                     foreach($incomingStream["Stream"]["elements"] as $date => $element){
                         $date = explode('-', $date);
                         $streamObjects[] = array('Stream' => array(
@@ -408,11 +408,13 @@ class AdminController extends AppController {
                         $streamsSorted[strtolower($this->intToDay($stream["Stream"]["day_nr"])) . '-' . $stream["Stream"]["relative_nr"] . '-' . $stream["Stream"]["day_time"]] = array('id' => $stream["Stream"]["id"], 'calendar_item_type_id' => $stream["Stream"]["calendar_item_type_id"], 'element' => strtolower($this->intToDay($stream["Stream"]["day_nr"])) . '-' . $stream["Stream"]["relative_nr"] . '-' . $stream["Stream"]["day_time"]);
                     }
 
-                    $this->set('streams', $streamsSorted);
+                    if(!empty($streamsSorted)){
+                        $this->set('streams', $streamsSorted);
+                    }
                 }
             } else {
                 $this->Session->setFlash('Je moet een geldig stramien opgeven');
-                $this->redirect($this->here);
+                $this->redirect('/Admin/viewStreams');
             }
         }
     }
