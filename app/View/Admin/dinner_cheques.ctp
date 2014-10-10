@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-3">
         <?php echo $this->element('admin/base_admin_menu');?>
-        <a href="">Downloaden als PDF</a>
+        <a href="<?php echo $this->base;?>/Admin/dinnerCheques.pdf?month=<?php echo $month;?>">Downloaden als PDF</a>
     </div>
     <div class="col-md-9">
 

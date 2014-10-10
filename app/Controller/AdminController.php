@@ -882,7 +882,7 @@ class AdminController extends AppController {
     public function dinnerCheques(){
 
         $month = date('m');
-        if($month <= 10){
+        if($month < 10){
             $month = substr($month, 1,1);
         }
         $this->set('month', $month);
@@ -893,10 +893,12 @@ class AdminController extends AppController {
         }
 
         $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
+
         if(empty($employees)){
             $this->Session->setFlash('Er zijn geen mensen gevonden die recht hebben op maaltijdcheques');
             $this->redirect('/Admin');
         }
+
         $range[0] = $this->firstDay($month);
         $range[1] = $this->lastDay($month);
 
