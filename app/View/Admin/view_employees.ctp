@@ -59,6 +59,11 @@
             }
         });
 
+        if(count == 0){
+            alert('Je moet een medewerker selecteren');
+            return;
+        }
+
         if(type == 'off'){
             var typeSet = ('&type=off');
         } else {
