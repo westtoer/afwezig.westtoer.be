@@ -958,9 +958,16 @@ class AdminController extends AppController {
                 $this->redirect($this->here);
             }
         }
+    }
 
+    public function editDinnerCheques(){
+        $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
 
+        foreach($employees as $employee){
+            $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1], $type)));
+        }
 
+        $this->set('employees', $eo);
     }
 
     public function departments(){
