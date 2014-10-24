@@ -27,7 +27,8 @@ $(function(){
         dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
         dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
         dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-        weekHeader: 'Wk'
+        weekHeader: 'Wk',
+        firstDay: 1
     });
 });
 
@@ -49,16 +50,28 @@ $(function(){
         dayNames: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
         dayNamesShort: ['zon', 'maa', 'din', 'woe', 'don', 'vri', 'zat'],
         dayNamesMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
-        weekHeader: 'Wk'
+        weekHeader: 'Wk',
+        firstDay: 1
     });
 });
 
 $(document).ready(function(){
         $('#RequestCalendarItemTypeId').val(23);
+        $('#error').hide();
 });
 
 function initiated(){
-    $("#RequestAddForm").submit();
-    $("#RequestSubmitButton").attr('disabled', 'disabled');
-    $("#RequestSubmitButton").html('Bezig met verwerken...');
+    var start = $('#RequestStartDate').val();
+    var end = $('#RequestEndDate').val();
+    if(start.indexOf('-') == 4 && end.indexOf('-') == 4){
+        $("#RequestAddForm").submit();
+        $("#RequestSubmitButton").attr('disabled', 'disabled');
+        $("#RequestSubmitButton").html('Bezig met verwerken...');
+    } else {
+        $('#error').html('Het formaat van uw datum is verkeerd. Gebruik de volgende notatie: 2014-09-09');
+        $('#error').show();
+    }
+
+
+
 }

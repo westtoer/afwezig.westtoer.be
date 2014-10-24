@@ -290,3 +290,8 @@ tr .date{
     overflow-y: hidden;
 }
 
+#error{
+    padding: 12px;
+    text-align: center;
+}
+

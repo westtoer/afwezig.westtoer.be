@@ -165,8 +165,7 @@ class AdminController extends AppController {
     }
 
     public function endOfYear(){
-        $webroot = '/var/www/html/afwezig.westtoer.be/app/webroot';
-        //if(date('m') > '11'){
+         //if(date('m') > '11'){
             $this->layout = 'wizard';
             if(!empty($this->request->query["step"])){
                 $this->set('step', $this->request->query["step"]);
@@ -211,49 +210,20 @@ class AdminController extends AppController {
                     }
                     $this->redirect('/admin/endOfYear?step=8');
                 } elseif($step == '8'){
-                    $streams = $this->Stream->find('all', array('group' => 'employee_id'));
 
-                    //$this->set('streams');
                 } elseif($step == '9'){
-                   $incomingStreams = $this->request->data;
-                    if(!empty($incomingStreams)){
-
-                        foreach($incomingStreams as $employee => $stream){
-                            if($stream == 'on'){
-                                $streams[$employee][] = $this->Stream->find('all', array('conditions' => array('employee_id' => $employee)));
-                            }
+                    $streams = $this->Stream->find('all', array('group' => 'employee_id'));
+                    $next = date('D', strtotime('01-01' . (date('Y') + 1)));
+                    $days = array(1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri');
+                    foreach($streams as $stream){
+                        $exec = $this->StreamExecution->find('first', array('conditions' => array('employee_id' => $stream["Stream"]["employee_id"])));
+                        if($exec["StreamExecution"]["day_next"] > 5){
+                            $exec["StreamExecution"]["day_next"] = $exec["StreamExecution"]["day_next"] - 5;
                         }
 
-                        foreach($streams as $employees){
-                            foreach($employees as $key =>$stream){
-                                if($stream["Stream"]["calendar_item_type_id"] == 9){
-                                    unset($employees[$key]);
-                                }
-                            }
-
-                            foreach($employees as $stream){
-                                if($stream["Stream"]["relative_nr"] > 5){
-                                    $dateArray = $this->getRange(date('Y-m-d', strtotime($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0) . ' + 7 Days')), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
-                                } else {
-                                    $dateArray = $this->getRange($this->getNofYear($stream["Stream"]["day_nr"], 'first', 0), $this->getNofYear($stream["Stream"]["day_nr"], 'last', 0), 'ww');
-
-                                }
-
-                                $inserts[] = $this->createManyCalendarDays($dateArray, $stream["Stream"]["calendar_item_type_id"], $key, $this->Session->read('Auth.Employee.id'), $stream["Stream"]["day_time"]);
-
-                            }
-
-                            $finished = 0;
-                            $size = count($inserts);
-
-                            foreach($inserts as $insert){
-                                if($this->CalendarDay->saveMany($insert)){
-                                    $finished++;
-                                }
-                            }
+                        if($next == $days[$exec["StreamExecution"]["day_next"]]){
+                            $this->applyStream($streams["Stream"]["id"]);
                         }
-                    } else{
-                        $this->redirect('/Admin/endOfYear?step=10');
                     }
                 } elseif($step == '10'){
                     $this->layout = 'default';
