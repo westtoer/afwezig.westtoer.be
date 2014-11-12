@@ -566,7 +566,7 @@ class RequestsController extends AppController {
     }
 
     private function trigramToMail($trigram){
-        if(strpos($trigram, '@')){
+        if(filter_var($trigram, FILTER_VALIDATE_EMAIL)){
             return $trigram;
         } else {
             return $trigram . '@westtoer.be';
