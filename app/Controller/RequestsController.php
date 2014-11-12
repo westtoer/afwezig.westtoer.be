@@ -119,8 +119,8 @@ class RequestsController extends AppController {
             $request = $this->Request->findById($id);
             if(!empty($request)){
                 $this->authorize($id, 'allow');
-                $this->Session->setFlash('Deze aanvraag is goedgekeurd');
-                $this->redirect('/Requests');
+                //$this->Session->setFlash('Deze aanvraag is goedgekeurd');
+                //$this->redirect('/Requests');
             }
         } else {
             $this->Session->setFlash('Dit is een ongeldig request.', 'default', array('class' => 'alert-danger'));
@@ -326,11 +326,13 @@ class RequestsController extends AppController {
                 $access = true;
             }
 
+
             if($access == true){
 
-                if($author["Role"]["name"] !== "admin"){
+                if($author["Role"]["adminpanel"] !== true){
                     if($request["Employee"]["supervisor_id"] !== $author["Employee"]["internal_id"]){
                         $this->Session->setFlash('Voor deze gebruiker kan je geen verlof goedkeuren.', 'default', array('class' => 'alert-danger'));
+                        $this->redirect('/');
                     }
                 }
 
@@ -374,27 +376,26 @@ class RequestsController extends AppController {
         $cp = array();
         $gateKeeper = false;
 
+
         //Find all calendar days between range
         foreach($range as $date){
             $conditions[] = array('employee_id' => $employee["Employee"]["id"], 'day_date' => explode('/', $date)[0], 'day_time' => explode('/', $date)[1]);
         }
 
         $calendarDays = $this->CalendarDay->find('all', array('conditions' => array('OR' => $conditions)));
-
         //Check if the users balance is applicable and if so, if it is high enough
         if($request["Request"]["calendar_item_type_id"] == 23){
-            $prevCost = $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.calendar_item_type_id' => 23), 'CalendarDay.employee_id' => $request["Employee"]["id"]));
+            $prevCost = $this->CalendarDay->find('count', array('conditions' => array('CalendarDay.calendar_item_type_id' => 23, 'CalendarDay.employee_id' => $request["Employee"]["id"])));
             $balance = $employee["Employee"]["daysleft"] - $prevCost;
-            if($balance > 0 ){
+            if($balance >= 0 ){
                 $gateKeeper = true;
             } else {
                 $this->Session->setFlash('Deze gebruiker heeft onvoldoende dagen over om dit goed te keuren.', 'default', array('class' => 'alert-danger'));
-                return false;
+                $this->redirect('/Requests');
             }
         } else {
             $gateKeeper = true;
         }
-
         //Save the AuthItem and check if we may overwrite the days
         if($this->AuthItem->save($authorization)){
             if($request["Request"]["calendar_item_type_id"] <> 9){
@@ -410,6 +411,9 @@ class RequestsController extends AppController {
                         $cp[$key]["CalendarDay"]["calendar_item_type_id"] = $request["Request"]["calendar_item_type_id"];
                 }
             }
+            echo 'This is saved';
+        } else {
+            echo 'This isnt saved';
         }
 
         //Execute the save
@@ -418,9 +422,7 @@ class RequestsController extends AppController {
                 $this->Session->setFlash('De aanvraag is goedgekeurd.');
             }
         }
-
         return true;
-
     }
 
     private function dateRange( $first, $last, $starttime = 'AM', $endtime = 'PM', $step = '+1 day', $format = 'Y-m-d' ){
