@@ -556,7 +556,8 @@ class AdminController extends AppController {
                 $conditions = array(
                     'CalendarDay.day_date >=' => $range["start"],
                     'CalendarDay.day_date <' => $range["end"],
-                    'Employee.id' => $id
+                    'Employee.id' => $id,
+                    'Request.calendar_item_type_id' <> 9
                     );
                 $conditionsHolidays = array(
                     'Request.start_date >=' => $range["start"],
