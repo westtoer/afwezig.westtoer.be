@@ -906,7 +906,8 @@ class AdminController extends AppController {
                 //Change the count for every user
                 //Every user has a count, because if calculateDinnerCheques doesn't find a record, it creates one.
                 foreach($employees as $employee){
-                    $counter = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' =>$employee["Employee"]["id"])));
+                    $counter = $this->EmployeeCount->find('first', array('conditions' => array('EmployeeCount.employee_id' =>$employee["Employee"]["internal_id"])));
+                    var_dump($counter);
                     $counter["EmployeeCount"]["dinner_cheques"] = $counter["EmployeeCount"]["dinner_cheques"] + $eo[$employee["Employee"]["id"]]["Employee"]["dinner_cheques"];
                     $counters[] = $counter;
                 }
@@ -916,6 +917,7 @@ class AdminController extends AppController {
                     $export = Configure::read('Administrator.export_dir') . '/csv/maaltijdcheques-' . date('Y-m-d H:is') . '.csv';
                     $file = new File($export, true);
                     $file->write(json_encode($counters));
+
                     //Let the system know there a new lastPersist in town
                     $this->admin_variable('lastPersist','write', date('Y-m', strtotime(date('Y') . '-' . $month . '-01')));
 
@@ -932,12 +934,20 @@ class AdminController extends AppController {
 
     public function editDinnerCheques(){
         $employees = $this->Employee->find('all', array('conditions' => array('Employee.internal_id <>' => '-1', 'Employee.dinner_cheques' => 1), 'order' => 'Employee.name ASC'));
+        $this->set('employees', $employees);
 
-        foreach($employees as $employee){
-            $eo[$employee["Employee"]["id"]] = array('Employee' => array('name' => $employee["Employee"]["name"], 'surname' => $employee["Employee"]["surname"], 'dinner_cheques' => $this->calculateDinnerCheques($employee, $range[0], $range[1], $type)));
+        if($this->request->is('post')){
+            $newDinnerCheques = $this->request->data;
+
+            if($this->EmployeeCount->saveMany($newDinnerCheques["EmployeeCounts"])){
+                $this->Session->setFlash('Het opslaan van de maaltijdcheques is geslaagd');
+                $this->redirect($this->here);
+            } else {
+                $this->Session->setFlash('Het opslaan van de maaltijdcheques is niet geslaagd');
+                $this->redirect($this->here);
+            }
+
         }
-
-        $this->set('employees', $eo);
     }
 
     public function departments(){
@@ -1408,6 +1418,7 @@ class AdminController extends AppController {
 
     private function firstDay($month){
         $range = date('Y-m-d', strtotime(date('Y') .'-' . $month .'-01'));
+        return $range;
         return $range;
     }
 

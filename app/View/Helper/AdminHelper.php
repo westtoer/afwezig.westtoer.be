@@ -46,12 +46,18 @@ class AdminHelper extends AppHelper {
         return $html;
     }
 
-    public function tableDinnerCheques($employees){
+    public function tableDinnerCheques($employees, $type = 0){
         $html = '<table class="table">';
         $html .= '<tr><th>Naam</th><th>Maaltijdcheques</th></tr>';
         foreach($employees as $employee){
             $html .= '<tr><td>' . $employee["Employee"]["name"] . ' ' . $employee["Employee"]["surname"] . '</td>';
-            $html .= '<td>' . $employee["Employee"]["dinner_cheques"] . '</td></tr>';
+            if($type == 0){
+                $html .= '<td>' . $employee["EmployeeCount"]["dinner_cheques"] . '</td>';
+            } else {
+                $html .= '<input class="form-control" type="hidden" name="data[EmployeeCounts][' . $employee["EmployeeCount"]["id"] . '][id]" id="Employee' . $employee["Employee"]["id"] .'id" value="' . $employee["EmployeeCount"]["id"] . '">';
+                $html .= '<td><input class="form-control" type="text" name="data[EmployeeCounts][' . $employee["EmployeeCount"]["id"] . '][dinner_cheques]" id="Employee' . $employee["Employee"]["id"] .'dinner_cheques" value="' . $employee["EmployeeCount"]["dinner_cheques"] . '"></td>';
+            }
+            $html .= '</tr>';
         }
         $html .= '</table>';
         return $html;
